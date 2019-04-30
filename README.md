@@ -9,5 +9,5 @@
 
 ## Linkliste
 
-- [SVG Playing Cards](https://github.com/htdebeer/SVG-cards)
-- ...
+- [Playing Cards SVG](https://github.com/htdebeer/SVG-cards)
+- [TUM Logo SVG](https://de.wikipedia.org/wiki/Datei:Logo_of_the_Technical_University_of_Munich.svg)
