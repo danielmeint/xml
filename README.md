@@ -1,6 +1,6 @@
 # Praktikum XML-Technologie
 
-![TUM Logo](https://de.wikipedia.org/wiki/Datei:Logo_of_the_Technical_University_of_Munich.svg)
+![TUM Logo](./resources/tum_logo.svg)
 
 ## Gruppenmitglieder
 
