@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+
+<!DOCTYPE movies [
+<!ELEMENT movies (movie+)>
+<!ELEMENT movie (title, release, country, genre, director, rating)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT release (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT director (first_name, last_name)>
+<!ELEMENT first_name (#PCDATA)>
+<!ELEMENT last_name (#PCDATA)>
+<!ELEMENT rating (#PCDATA)>
+]>
+
+<movies>
+    <movie>
+        <title>Heat</title>
+        <release>1995</release>
+        <country>USA</country>
+        <genre>Crime</genre>
+        <director>
+            <first_name>Michael</first_name>
+            <last_name>Mann</last_name>
+        </director>
+        <rating>10</rating>
+    </movie>
+    <movie>
+        <title>Scarface</title>
+        <release>1983</release>
+        <country>USA</country>
+        <genre>Crime</genre>
+        <director>
+            <first_name>Brian</first_name>
+            <last_name>De Palma</last_name>
+        </director>
+        <rating>9</rating>
+    </movie>
+    <movie>
+        <title>The Perks of Being a Wallflower</title>
+        <release>2012</release>
+        <country>USA</country>
+        <genre>Drama</genre>
+        <director>
+            <first_name>Stephen</first_name>
+            <last_name>Chbosky</last_name>
+        </director>
+        <rating>10</rating>
+    </movie>
+    <movie>
+        <title>Bienvenue chez les Ch'tis</title>
+        <release>2008</release>
+        <country>France</country>
+        <genre>Comedy</genre>
+        <director>
+            <first_name>Dany</first_name>
+            <last_name>Boon</last_name>
+        </director>
+        <rating>9</rating>
+    </movie>
+    <movie>
+        <title>Kimi no na wa.</title>
+        <release>2016</release>
+        <country>Japan</country>
+        <genre>Animation</genre>
+        <director>
+            <first_name>Makoto</first_name>
+            <last_name>Shinkai</last_name>
+        </director>
+        <rating>10</rating>
+    </movie>
+    <movie>
+        <title>Die Hard</title>
+        <release>1988</release>
+        <country>USA</country>
+        <genre>Action</genre>
+        <director>
+            <first_name>John</first_name>
+            <last_name>McTiernan</last_name>
+        </director>
+        <rating>9</rating>
+    </movie>
+    <movie>
+        <title>The Departed</title>
+        <release>2006</release>
+        <country>USA</country>
+        <genre>Crime</genre>
+        <director>
+            <first_name>Martin</first_name>
+            <last_name>Scorsese</last_name>
+        </director>
+        <rating>10</rating>
+    </movie>
+    <movie>
+        <title>Ferris Bueller's Day Off</title>
+        <release>1986</release>
+        <country>USA</country>
+        <genre>Comedy</genre>
+        <director>
+            <first_name>John</first_name>
+            <last_name>Hughes</last_name>
+        </director>
+        <rating>8</rating>
+    </movie>
+</movies>
