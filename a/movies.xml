@@ -103,4 +103,48 @@
         </director>
         <rating>8</rating>
     </movie>
+    <movie>
+        <title>Alien</title>
+        <release>1979</release>
+        <country>UK</country>
+        <genre>Horror</genre>
+        <director>
+            <first_name>Ridley</first_name>
+            <last_name>Scott</last_name>
+        </director>
+        <rating>9</rating>
+    </movie>
+    <movie>
+        <title>The Lion King</title>
+        <release>1994</release>
+        <country>USA</country>
+        <genre>Animation</genre>
+        <director>
+            <first_name>Roger</first_name>
+            <last_name>Allers</last_name>
+        </director>
+        <rating>10</rating>
+    </movie>
+    <movie>
+        <title>Deadpool</title>
+        <release>2016</release>
+        <country>USA</country>
+        <genre>Action</genre>
+        <director>
+            <first_name>Tim</first_name>
+            <last_name>Miller</last_name>
+        </director>
+        <rating>8</rating>
+    </movie>
+    <movie>
+        <title>Room</title>
+        <release>2015</release>
+        <country>Ireland</country>
+        <genre>Drama</genre>
+        <director>
+            <first_name>Lenny</first_name>
+            <last_name>Abrahamson</last_name>
+        </director>
+        <rating>10</rating>
+    </movie>
 </movies>
