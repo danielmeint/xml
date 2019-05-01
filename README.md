@@ -4,10 +4,12 @@
 
 ## 👥 Gruppenmitglieder
 
-- Karpfinger, Maximilian (+49 157 78848647)
-- Hennerkes, Felix (+49 152 23948870)
-- Schnellbach, Janik (+49 176 47730788)
-- Meint, Daniel (+49 157 71976169)
+| 👤                    | 📨                           | 📞               |
+|-----------------------|------------------------------|------------------|
+| Maximilian Karpfinger | maximilian.karpfinger@tum.de | +49 157 78848647 |
+| Felix Hennerkes       | ga38hom@mytum.de             | +49 152 23948870 |
+| Janik Schnellbach     | janik.schnellbach@tum.de     | +49 176 47730788 |
+| Daniel Meint          | d.meint@tum.de               | +49 157 71976169 |
 
 ## 🔗 Linkliste
 
