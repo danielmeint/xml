@@ -1,3 +1,9 @@
+:root {
+    --TUMBlue: #3070b3;
+    --primary-color: var(--TUMBlue);
+    --secondary-color: #ffffff;
+}
+
 movies {
     padding: 3rem 5rem;
     display: -ms-grid;
@@ -8,10 +14,10 @@ movies {
     font-family: Helvetica, Arial, sans-serif;
     color: #333;
 
-    background: -webkit-gradient(linear, right top, left top, from(#ffffff), to(#3070b3));
-    background: -webkit-linear-gradient(right, #ffffff, #3070b3);
-    background:      -o-linear-gradient(right, #ffffff, #3070b3);
-    background:         linear-gradient(270deg, #ffffff, #3070b3);
+    background: -webkit-gradient(linear, right top, left top, from(var(--secondary-color)), to(var(--primary-color)));
+    background: -webkit-linear-gradient(right, var(--secondary-color), var(--primary-color));
+    background:      -o-linear-gradient(right, var(--secondary-color), var(--primary-color));
+    background:         linear-gradient(270deg, var(--secondary-color), var(--primary-color));
     background-size: 400% 400%;
     
     -webkit-animation: TUMcolorsBackground 30s ease infinite;
@@ -46,19 +52,19 @@ country {
 }
 
 title {
-    color: #3070b3;
+    color: var(--primary-color);
     display: inline;
     font-weight: bold;
 }
 
 release {
-    color: #3070b3;
+    color: var(--primary-color);
     display: inline;
     font-style: italic;
 }
 
 rating {
-    color: #3070b3;
+    color: var(--primary-color);
     text-align: end;
 }
 
