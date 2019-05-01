@@ -4,6 +4,7 @@
 <!DOCTYPE movies [
 <!ELEMENT movies (movie+)>
 <!ELEMENT movie (title, release, country, genre, director, rating)>
+<!ATTLIST movie availability CDATA "none">
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT release (#PCDATA)>
 <!ELEMENT country (#PCDATA)>
@@ -15,7 +16,7 @@
 ]>
 
 <movies>
-    <movie>
+    <movie availability="prime">
         <title>Heat</title>
         <release>1995</release>
         <country>USA</country>
@@ -26,7 +27,7 @@
         </director>
         <rating>10</rating>
     </movie>
-    <movie>
+    <movie availability="prime">
         <title>Scarface</title>
         <release>1983</release>
         <country>USA</country>
@@ -37,7 +38,7 @@
         </director>
         <rating>9</rating>
     </movie>
-    <movie>
+    <movie availability="netflix">
         <title>The Perks of Being a Wallflower</title>
         <release>2012</release>
         <country>USA</country>
@@ -59,7 +60,7 @@
         </director>
         <rating>9</rating>
     </movie>
-    <movie>
+    <movie availability="netflix">
         <title>Kimi no na wa.</title>
         <release>2016</release>
         <country>Japan</country>
@@ -70,7 +71,7 @@
         </director>
         <rating>10</rating>
     </movie>
-    <movie>
+    <movie availability="netflix">
         <title>Die Hard</title>
         <release>1988</release>
         <country>USA</country>
@@ -81,7 +82,7 @@
         </director>
         <rating>9</rating>
     </movie>
-    <movie>
+    <movie availability="netflix">
         <title>The Departed</title>
         <release>2006</release>
         <country>USA</country>
@@ -92,7 +93,7 @@
         </director>
         <rating>10</rating>
     </movie>
-    <movie>
+    <movie availability="netflix">
         <title>Ferris Bueller's Day Off</title>
         <release>1986</release>
         <country>USA</country>
@@ -125,7 +126,7 @@
         </director>
         <rating>10</rating>
     </movie>
-    <movie>
+    <movie availability="netflix">
         <title>Deadpool</title>
         <release>2016</release>
         <country>USA</country>

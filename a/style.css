@@ -42,6 +42,25 @@ movie:hover {
             box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+movie[availability]::before {
+    float: right;
+    content: "";
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: 1.5rem 1.5rem;
+}
+
+movie[availability~="netflix"]::before {
+    background-image: url("./netflix.png");
+
+}
+
+/*
+movie[availability~="prime"]::before {
+    background-image: url("./prime.png");
+}
+*/
+
 movie > * {
     display: block;
     margin-top: 4px;
