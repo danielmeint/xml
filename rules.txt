@@ -1,0 +1,33 @@
+Blackjack
+
+game rules:
+-each player places their (stake?)
+-at first each player gets 2 cards and the dealer gets 1 card
+-starting from rightmost player repeatedly ask player if action stand or hit is requested
+-until each player stands
+-dealer gets another card until he gets 17 or more points, he then has to stand, else keep hitting
+-if player scored more (or equal) than the dealer but didnt bust (less than 22) he gets double his (stake) else loses
+-ace is either value 1 or 11, always favoring the player
+-cards 2-9 represent their value
+-card 10 and all picture cards have value 10
+-goal is to get closest to 21 points as possible
+
+table:
+-1-5 players and a dealer
+-placed starting from right 
+-for each player display money and players cards
+-display dealer's cards
+-maybe a round counter?
+
+functionality:
+-database for highscores(name and money)
+-lobby: 
+	+button for highscore database
+	+button to add new player->input field->again button to add player until 5 players
+	+button to start new game after 1 player is added (or always visible but prints error message when no player was added)
+	+option to load saved game
+-save game: after a round possibility to save game or play new round
+-save file: 
+	+contains names and money for each player 
+	+(and round counter)
+	+date of safe
