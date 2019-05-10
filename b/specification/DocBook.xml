@@ -38,8 +38,8 @@
                 <title>Table</title>
                 <para>The table shows the actual table of the game BlackJack. Just like the real
                     game, from a bird's perspective, a dealer is placed on the top, while the
-                    players are situated at the bottom of the table. For each player, there are
-                    several informations/buttons displayed. <itemizedlist>
+                    players are situated at the bottom of the table. For each player, there is
+                    several information/buttons displayed. <itemizedlist>
                         <title>Information</title>
                         <listitem>
                             <para><emphasis>CARDS</emphasis>: Their current hand</para>
@@ -69,6 +69,9 @@
                                 prior a new round.</para>
                         </listitem>
                         <listitem>
+                            <para><emphasis role="bold">-</emphasis>: Optional Button, that offers the Player to remove money from his stake. Might be realised as a RadioButton.</para>
+                        </listitem>
+                        <listitem>
                             <para><emphasis role="bold">SUBMIT</emphasis>: Button to submit the next
                                 stake. Only possible/visible prior a new round.</para>
                         </listitem>
@@ -81,9 +84,9 @@
                                 reload it later in the lobby.</para>
                         </listitem>
                         <listitem>
-                            <para><emphasis role="bold">END</emphasis>: Button to end your game. The
-                                game won't be saved. The players and there corresponding cash will
-                                be featured in the highscore(if they were good enough)</para>
+                            <para><emphasis role="bold">QUIT</emphasis>: Button to end your game.
+                                The game won't be saved. The players and there corresponding cash
+                                will be featured in the highscore(if they were good enough)</para>
                         </listitem>
                     </itemizedlist>
                 </para>
