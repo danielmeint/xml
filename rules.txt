@@ -1,12 +1,16 @@
 Blackjack
 
 game rules:
--each player places their (stake?)
--at first each player gets 2 cards and the dealer gets 1 card
--starting from rightmost player repeatedly ask player if action stand or hit is requested
+-each player places their stake
+-at first each player gets 2 cards open and the dealer gets 1 card open + 1 card hidden
+-starting from rightmost player(bird’s perspective on our table) repeatedly ask player if action stand or hit is requested
+-other (rather complex) options for player: split, double, insurance. For now, we only plan to implement double of those.
+
+
 -until each player stands
 -dealer gets another card until he gets 17 or more points, he then has to stand, else keep hitting
 -if player scored more (or equal) than the dealer but didnt bust (less than 22) he gets double his (stake) else loses
+-special cases: triple seven and black jack(ace & ten/picture)
 -standard card set (56 cards)
 -ace is either value 1 or 11, always favoring the player
 -cards 2-9 represent their value
@@ -34,7 +38,6 @@ functionality:
 	+date of safe
 
 open questions:
--when does the game end?
 -what happens when one of the player has no money left?
 
 
