@@ -210,27 +210,27 @@
             <title>Lobby</title>
             <para><inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="MockUp/Lobby.png" width="300"/>
+                        <imagedata fileref="MockUp/Lobby/Lobby.png" width="300"/>
                     </imageobject>
                 </inlinemediaobject>
                 <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="MockUp/NumberOfPlayers.png" width="300"/>
+                        <imagedata fileref="MockUp/Lobby/NumberOfPlayers.png" width="300"/>
                     </imageobject>
                     </inlinemediaobject>
                     <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="MockUp/PlayerNames.png" width="300"/>
+                        <imagedata fileref="MockUp/Lobby/PlayerNames.png" width="300"/>
                     </imageobject>
                         </inlinemediaobject>
                         <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="MockUp/LoadGame.png" width="300"/>
+                        <imagedata fileref="MockUp/Lobby/LoadGame.png" width="300"/>
                     </imageobject>
                             </inlinemediaobject>
                             <inlinemediaobject>
                     <imageobject>
-                        <imagedata fileref="MockUp/Highscore.png" width="300"/>
+                        <imagedata fileref="MockUp/Lobby/Highscore.png" width="300"/>
                     </imageobject>
                 </inlinemediaobject>
             </para>
@@ -238,7 +238,17 @@
         <sect2>
             <title>Table</title>
 
-            <para>tbd</para>
+            <para><inlinemediaobject>
+                <imageobject>
+                    <imagedata fileref="MockUp/Table/Table.png" width="300"/>
+                </imageobject>
+            </inlinemediaobject>
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Table/SaveGame.png" width="300"/>
+                    </imageobject>
+                </inlinemediaobject>
+            </para>
         </sect2>
 
     </sect1>
