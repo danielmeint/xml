@@ -175,9 +175,10 @@
                 </para>
             </step>
             <step>
-                <para>
-                    After every player has finished his round, the game is evaluated according to the rules of the game.
-                </para>
+                <para> After every player has finished his round, the dealer's turn starts. He must
+                        take the action HIT until his score is greater or equal 17. Afterwards the
+                        round is finished and the game is evaluated according to the rules of the
+                        game. If the dealer busts, every player that didn't bust wins. </para>
             </step>
         </procedure>
         </sect2>
