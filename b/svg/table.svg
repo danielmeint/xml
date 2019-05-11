@@ -1,30 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="style.css" type="text/css"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"[
     <!ENTITY boxRadius "10">
-<!ENTITY tableColor "#5e995e">
-<!ENTITY secondaryColor "#c5ebc5">
+    <!ENTITY tableColor "#5e995e">
+    <!ENTITY secondaryColor "#c5ebc5">
 ]>
 <svg width="800" height="450" 
     xmlns="http://www.w3.org/2000/svg" 
     xmlns:xlink="http://www.w3.org/1999/xlink">
-    <desc>BlackJack Tisch Skizze</desc>
-    <style>
-        text { 
-            font-family: Helvetica, sans-serif;
-            fill: &secondaryColor;;
-            text-transform: uppercase;
-            font-size: 32px;
-        }
-        .heavy { 
-            font-weight: bold;
-            font-size: 50px;
-        }
-        .small {
-            font-size: 24px;
-        }
-    </style>
+    <desc>BlackJack Tisch</desc>
     <defs>
-        <rect id="box" x="360" y="320" width="80" height="80" rx="50" ry="50" fill="transparent" stroke="&secondaryColor;" stroke-width="5"/>
+        <rect id="box" class="bettingBox" x="360" y="320" width="80" height="80" rx="50" ry="50" fill="transparent" stroke-width="5"/>
         <path id="curve" d="M 150 150
                 Q 400 380, 650 150" />
         <g id="boxgroup">
@@ -35,7 +21,7 @@
             <use xlink:href="#box" transform="rotate(-40, 400, -80)"/>
         </g>
 
-        <path id="tableBase" fill="&tableColor;" d="M 0 0
+        <path id="tableBase" d="M 0 0
         V 225
         A 400 225 0 0 0 800 225 
         V 0
