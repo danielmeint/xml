@@ -67,6 +67,10 @@ g[id*='spades'] text, g[id*='clubs'] text, #spades, #clubs {
     fill: darkred;
 }
 
+#back > rect:nth-child(2) {
+    fill: url(cards.svg#pattern-checkers);
+}
+
 /* chips */
 .chip text {
     dominant-baseline: central;
@@ -107,8 +111,4 @@ g[id*='spades'] text, g[id*='clubs'] text, #spades, #clubs {
     font-size: 24px;
     font-family: sans-serif;
     text-transform: uppercase;
-}
-
-.btn:hover {
-    fill: orangered;
 }

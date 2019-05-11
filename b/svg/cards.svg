@@ -259,7 +259,7 @@
         </pattern>
         <g id="back">
             <use xlink:href="#card_base"/>
-            <rect x="5" y="5" width="70" height="102" rx="5" ry="5" fill="url(cards.svg#pattern-checkers)" stroke-width="3"/>
+            <rect x="5" y="5" width="70" height="102" rx="5" ry="5" stroke-width="3"/>
         </g>
     </defs>
     <!-- Beispiel -->
