@@ -10,10 +10,12 @@
         <title>The Game</title>
         <sect2>
             <title>Game environment</title>
-            <para>Our Game consists of a Lobby as entry point and a Table as the actual game environment.</para>
+            <para>Our Game consists of a Lobby as entry point and a Table as the actual game
+                environment.</para>
             <sect3>
                 <title>Lobby</title>
-                <para>The Lobby represents the entry point of the game. It includes 3 buttons with different functionalities:</para>
+                <para>The Lobby represents the entry point of the game. It includes 3 buttons with
+                    different functionalities:</para>
                 <itemizedlist>
                     <listitem>
                         <para><emphasis role="bold">START GAME</emphasis>: An input field opens, to
@@ -26,16 +28,18 @@
                     </listitem>
                     <listitem>
                         <para><emphasis role="bold">HIGHSCORE</emphasis>: An overview of the best
-                            players, which ended the game. Includes their corresponding cash. 10 players can be displayed.</para>
+                            players, which ended the game. Includes their corresponding cash. 10
+                            players can be displayed.</para>
                     </listitem>
                 </itemizedlist>
-                
+
             </sect3>
             <sect3>
                 <title>Table</title>
-                <para>The table shows the actual table of the game BlackJack. Just like the real game, from a bird's perspective, a dealer is placed on the top, while the players are situated at the bottom of the table.
-                    For each player, there are several informations/buttons displayed. 
-                    <itemizedlist>
+                <para>The table shows the actual table of the game BlackJack. Just like the real
+                    game, from a bird's perspective, a dealer is placed on the top, while the
+                    players are situated at the bottom of the table. For each player, there is
+                    several information/buttons displayed. <itemizedlist>
                         <title>Information</title>
                         <listitem>
                             <para><emphasis>CARDS</emphasis>: Their current hand</para>
@@ -50,18 +54,22 @@
                     </itemizedlist>
                     <itemizedlist>
                         <title>Buttons</title>
-                        <para>Depending on the game situation, each player has different buttons to press</para>
+                        <para>Depending on the game situation, each player has different buttons to
+                            press</para>
                         <listitem>
                             <para>ACTION BUTTONS(<emphasis role="bold">HIT</emphasis>, <emphasis
-                                role="bold">HOLD</emphasis>, <emphasis role="bold"
+                                    role="bold">HOLD</emphasis>, <emphasis role="bold"
                                     >DOUBLE</emphasis>, ...): According to the game situation, the
                                 player can choose among the options he has.</para>
                         </listitem>
                         <listitem>
                             <para><emphasis role="bold">1</emphasis>, <emphasis role="bold"
-                                >10</emphasis>, <emphasis role="bold">100</emphasis>: 3 buttons
+                                    >10</emphasis>, <emphasis role="bold">100</emphasis>: 3 buttons
                                 to add money to the stake for the next round. Only possible/visible
                                 prior a new round.</para>
+                        </listitem>
+                        <listitem>
+                            <para><emphasis role="bold">-</emphasis>: Optional Button, that offers the Player to remove money from his stake. Might be realised as a RadioButton.</para>
                         </listitem>
                         <listitem>
                             <para><emphasis role="bold">SUBMIT</emphasis>: Button to submit the next
@@ -71,10 +79,14 @@
                     <itemizedlist>
                         <para>Next to the player buttons, there are 2 global buttons.</para>
                         <listitem>
-                            <para><emphasis role="bold">SAVE</emphasis>: Buttons to save the current round. Once pressed, you can enter a name for your game. You can reload it later in the lobby.</para>
+                            <para><emphasis role="bold">SAVE</emphasis>: Buttons to save the current
+                                round. Once pressed, you can enter a name for your game. You can
+                                reload it later in the lobby.</para>
                         </listitem>
                         <listitem>
-                            <para><emphasis role="bold">END</emphasis>: Button to end your game. The game won't be saved. The players and there corresponding cash will be featured in the highscore(if they were good enough)</para>
+                            <para><emphasis role="bold">QUIT</emphasis>: Button to end your game.
+                                The game won't be saved. The players and there corresponding cash
+                                will be featured in the highscore(if they were good enough)</para>
                         </listitem>
                     </itemizedlist>
                 </para>
@@ -101,29 +113,30 @@
             <sect3>
                 <title>End of a round</title>
                 <para><itemizedlist>
-                    <listitem>
-                        <para>After the players finished, the dealer receives cards as long as his score is below 17.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Player scored more or equal than the dealer, he gets double of his
-                            stake, otherwise he loses.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Players which score >21 get a BUST and lose.</para>
-                    </listitem>
-                </itemizedlist> Special cases: <itemizedlist>
-                    <listitem>
-                        <para>The best possible outcome is a triple seven, if a player achieves
-                            that, he wins.</para>
-                    </listitem>
-                    <listitem>
-                        <para>The second best possible outcome is a blackjack, a combination of
-                            one ace and either one 10 or one picture.</para>
-                    </listitem>
-                    <listitem>
-                        <para>If a player ties with the dealer, he gets his stake back</para>
-                    </listitem>
-                </itemizedlist>
+                        <listitem>
+                            <para>After the players finished, the dealer receives cards as long as
+                                his score is below 17.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Player scored more or equal than the dealer, he gets double of his
+                                stake, otherwise he loses.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Players which score >21 get a BUST and lose.</para>
+                        </listitem>
+                    </itemizedlist> Special cases: <itemizedlist>
+                        <listitem>
+                            <para>The best possible outcome is a triple seven, if a player achieves
+                                that, he wins.</para>
+                        </listitem>
+                        <listitem>
+                            <para>The second best possible outcome is a blackjack, a combination of
+                                one ace and either one 10 or one picture.</para>
+                        </listitem>
+                        <listitem>
+                            <para>If a player ties with the dealer, he gets his stake back</para>
+                        </listitem>
+                    </itemizedlist>
                 </para>
             </sect3>
         </sect2>
@@ -131,71 +144,121 @@
             <title>Course of the Game</title>
             <procedure>
                 <step>
-                    <para>
-                        The players pay their stake.
-                    </para>
+                    <para> The players pay their stake. </para>
                 </step>
                 <step>
-                    <para>
-                        Each player receives 2 cards open.
-                        The dealer receives 1 card open and 1 card covered.
-                    </para>
+                    <para> Each player receives 2 cards open. The dealer receives 1 card open and 1
+                        card covered. </para>
                 </step>
                 <step>
                     <para> Starting from rightmost player(bird's perspective on our table) ask the
                         players for their actions. They have several options: <itemizedlist>
                             <listitem>
-                                <para>HIT: If a player has less than 21 points, he can hit and another card will be withdrawed.</para>
+                                <para>HIT: If a player has less than 21 points, he can hit and
+                                    another card will be withdrawed.</para>
                             </listitem>
                             <listitem>
                                 <para>STAND: The player keeps his hand and it's the next player's
                                     turn</para>
                             </listitem>
                             <listitem>
-                                <para>DOUBLE: If a player has a hand value from 9-11, the player can double his wager and receives exactly one more
-                                    card</para>
+                                <para>DOUBLE: If a player has a hand value from 9-11, the player can
+                                    double his wager and receives exactly one more card</para>
                             </listitem>
                             <listitem>
-                                <para>SPLIT: If a player receives two cards with the same value, he can
-                                    split his hand and continue to play with two hands. However he has
-                                    to pay a second wager, exactly as high as his previous wager has
-                                    been.</para>
+                                <para>SPLIT: If a player receives two cards with the same value, he
+                                    can split his hand and continue to play with two hands. However
+                                    he has to pay a second wager, exactly as high as his previous
+                                    wager has been.</para>
                             </listitem>
                             <listitem>
-                                <para>INSURANCE: If the first card of the dealer is an ace, the players
-                                    can start a side-bet, whether the dealer will get a BlackJack or
-                                    not.</para>
+                                <para>INSURANCE: If the first card of the dealer is an ace, the
+                                    players can start a side-bet, whether the dealer will get a
+                                    BlackJack or not.</para>
                             </listitem>
                         </itemizedlist>
                     </para>
                 </step>
                 <step>
-                    <para>
-                        If a player stands, it's the next player's turn until every player is finished.
-                    </para>
+                    <para> If a player stands, it's the next player's turn until every player is
+                        finished. </para>
                 </step>
                 <step>
-                    <para> After every player has finished his round, the dealer's turn starts. He must
-                        take the action HIT until his score is greater or equal 17. Afterwards the
-                        round is finished and the game is evaluated according to the rules of the
-                        game. If the dealer busts, every player that didn't bust wins. </para>
+                    <para> After every player has finished his round, the dealer's turn starts. He
+                        must take the action HIT until his score is greater or equal 17. Afterwards
+                        the round is finished and the game is evaluated according to the rules of
+                        the game. If the dealer busts, every player that didn't bust wins. </para>
                 </step>
             </procedure>
         </sect2>
+        <sect2>
+            <title>Open Questions</title>
+            <itemizedlist>
+                <listitem>
+                    <para>Save Games: Should we have unlimited storage? Should you be able to delete
+                        old games?</para>
+                </listitem>
+                <listitem>
+                    <para>???</para>
+                </listitem>
+                <listitem>
+                    <para>???</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
     </sect1>
     <sect1>
-        <title>Open Questions</title>
-        <itemizedlist>
-            <listitem>
-                <para>Save Games: Should we have unlimited storage? Should you be able to delete old games?</para>
-            </listitem>
-            <listitem>
-                <para>???</para>
-            </listitem>
-            <listitem>
-                <para>???</para>
-            </listitem>
-        </itemizedlist>
-        
+        <title>MockUps</title>
+        <sect2>
+            <title>Lobby</title>
+            <para><inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Lobby/Lobby.png" width="300"/>
+                    </imageobject>
+                </inlinemediaobject>
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Lobby/NumberOfPlayers.png" width="300"/>
+                    </imageobject>
+                    </inlinemediaobject>
+                    <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Lobby/PlayerNames.png" width="300"/>
+                    </imageobject>
+                        </inlinemediaobject>
+                        <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Lobby/LoadGame.png" width="300"/>
+                    </imageobject>
+                            </inlinemediaobject>
+                            <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Lobby/Highscore.png" width="300"/>
+                    </imageobject>
+                </inlinemediaobject>
+            </para>
+        </sect2>
+        <sect2>
+            <title>Table</title>
+
+            <para><inlinemediaobject>
+                <imageobject>
+                    <imagedata fileref="MockUp/Table/Table.png" width="300"/>
+                </imageobject>
+            </inlinemediaobject>
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Table/SubmitMoney.png" width="300"/>
+                    </imageobject>
+                </inlinemediaobject>
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata fileref="MockUp/Table/SaveGame.png" width="300"/>
+                    </imageobject>
+                </inlinemediaobject>
+                
+            </para>
+        </sect2>
+
     </sect1>
 </article>
