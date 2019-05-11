@@ -10,7 +10,7 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <desc>BlackJack Tisch</desc>
     <defs>
-        <rect id="box" class="bettingBox" x="360" y="320" width="80" height="80" rx="50" ry="50" fill="transparent" stroke-width="5"/>
+        <rect id="box" x="360" y="320" width="80" height="80" rx="50" ry="50" fill="transparent" stroke-width="5"/>
         <path id="curve" d="M 150 150
                 Q 400 380, 650 150" />
         <g id="boxgroup">
@@ -20,17 +20,14 @@
             <use xlink:href="#box" transform="rotate(-20, 400, -80)"/>
             <use xlink:href="#box" transform="rotate(-40, 400, -80)"/>
         </g>
-
         <path id="tableBase" d="M 0 0
-        V 225
-        A 400 225 0 0 0 800 225 
-        V 0
-        Z"/>
-
+                V 225
+                A 400 225 0 0 0 800 225 
+                V 0
+                Z"/>
         <g id="table">
             <use xlink:href="#tableBase"/>
             <use xlink:href="#boxgroup"/>
-
             <text x="400" y="100" class="heavy" text-anchor="middle">Blackjack</text>
             <text x="400" y="125" class="small" text-anchor="middle">pays 3 to 2</text>
             <text class="normal">
@@ -40,6 +37,6 @@
             </text>
         </g>
     </defs>
-
+    <!-- Beispiel -->
     <use xlink:href="#table"/>
 </svg>

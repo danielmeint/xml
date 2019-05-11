@@ -48,7 +48,7 @@ svg {
 }
 
 g[id*='hearts'] text, g[id*='diamonds'] text, g[id*='spades'] text, g[id*='clubs'] text, #hearts, #diamonds, #spades, #clubs {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 g[id*='hearts'] text, g[id*='diamonds'] text, #diamonds, #hearts {
@@ -69,6 +69,7 @@ g[id*='spades'] text, g[id*='clubs'] text, #spades, #clubs {
 
 /* chips */
 .chip text {
+    dominant-baseline: central;
     fill: white;
     font-size: 32px;
     text-anchor: middle;
@@ -83,7 +84,7 @@ g[id*='spades'] text, g[id*='clubs'] text, #spades, #clubs {
 }
 
 .chip-10 {
-    fill: lightblue;
+    fill: rgb(134, 180, 241);
 }
 
 .chip-25 {
@@ -96,11 +97,12 @@ g[id*='spades'] text, g[id*='clubs'] text, #spades, #clubs {
 
 /* buttons */
 .btn {
-    fill: url(#gradient-orange);
+    fill: darkorange;
     cursor: pointer;
 }
 
 .btn text {
+    dominant-baseline: central;
     fill: white;
     font-size: 24px;
     font-family: sans-serif;
@@ -108,5 +110,5 @@ g[id*='spades'] text, g[id*='clubs'] text, #spades, #clubs {
 }
 
 .btn:hover {
-    transform: scale(1.1);
+    fill: orangered;
 }
