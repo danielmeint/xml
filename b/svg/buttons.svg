@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="style.css" type="text/css"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"[
-    <!ENTITY backColor "darkred">
-<!ENTITY tableColor "#5e995e">
-<!ENTITY secondaryColor "#c5ebc5">
-]>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 
+Erstellt von der Gruppe "XForms":
+Felix Hennerkes,
+Maximilian Karpfinger,
+Janik Schnellbach,
+Daniel Meint
+
+optimiert für Firefox
+-->
 <svg xmlns="http://www.w3.org/2000/svg" 
     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="400">
     <defs>

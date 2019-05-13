@@ -3,6 +3,15 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"[
     <!ENTITY backColor "darkred">
 ]>
+<!-- 
+Erstellt von der Gruppe "XForms":
+Felix Hennerkes,
+Maximilian Karpfinger,
+Janik Schnellbach,
+Daniel Meint
+
+optimiert für Firefox
+-->
 <svg xmlns="http://www.w3.org/2000/svg" 
     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="400">
     <defs>
@@ -262,7 +271,7 @@
             <rect x="5" y="5" width="70" height="102" rx="5" ry="5" stroke-width="3"/>
         </g>
     </defs>
-    <!-- Beispiel -->
+    <!-- Beispielverwendung -->
     <use xlink:href="#A_hearts" x="20" y="20"/>
     <use xlink:href="#K_clubs" x="60" y="30"/>
     <use xlink:href="#back" x="100" y="40"/>

@@ -5,6 +5,15 @@
     <!ENTITY tableColor "#5e995e">
     <!ENTITY secondaryColor "#c5ebc5">
 ]>
+<!-- 
+Erstellt von der Gruppe "XForms":
+Felix Hennerkes,
+Maximilian Karpfinger,
+Janik Schnellbach,
+Daniel Meint
+
+optimiert für Firefox
+-->
 <svg width="800" height="450" 
     xmlns="http://www.w3.org/2000/svg" 
     xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -37,6 +46,6 @@
             </text>
         </g>
     </defs>
-    <!-- Beispiel -->
+    <!-- Beispielverwendung -->
     <use xlink:href="#table"/>
 </svg>
