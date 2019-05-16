@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE BLACKJACK [
+<!ELEMENT BLACKJACK (TABLE)>
+<!ELEMENT TABLE (PLAYER+,DEALER,ROUNDCOUNTER,TURN)>
+
+<!--points to player who is playing-->
+<!ELEMENT TURN (NAME)>
+<!ELEMENT PLAYER (NAME,CARD+,MONEY)>
+<!ELEMENT DEALER (CARD+)>
+<!ELEMENT MONEY (COIN*)>
+
+<!ELEMENT NAME (#PCDATA)>
+<!ELEMENT CARD (#PCDATA)>
+<!ELEMENT COIN (#PCDATA)> 
+
+<!--optional-->
+<!ELEMENT ROUNDCOUNTER (#PCDATA)>
+
+<!ATTLIST BLACKJACK GAMESTATE (dealing|bidding|playersTurn|dealerTurn|evaluation) #IMPLIED>
+<!ATTLIST PLAYER PLAYERSTATE (playing|done|busted|waiting|oom) #IMPLIED>
+<!ATTLIST DEALER DEALERSTATE (playing|done|busted|waiting|oom) #IMPLIED>
+]>
+
+<BLACKJACK>
+    <TABLE>
+        <PLAYER>
+            <NAME></NAME>
+            <CARD></CARD>
+            <MONEY></MONEY>
+        </PLAYER>
+        <DEALER>
+            <CARD></CARD>
+        </DEALER>
+        <ROUNDCOUNTER></ROUNDCOUNTER>
+        <TURN>
+            <NAME></NAME>
+        </TURN>
+    </TABLE>
+</BLACKJACK>
