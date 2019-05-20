@@ -2,7 +2,7 @@
 
 <!DOCTYPE BLACKJACK [
 <!ELEMENT BLACKJACK (TABLE)>
-<!ELEMENT TABLE (PLAYER+,DEALER,ROUNDCOUNTER,TURN)>
+<!ELEMENT TABLE (DECK,PLAYER+,DEALER,ROUNDCOUNTER,TURN)>
 
 <!--points to player who is playing-->
 <!ELEMENT TURN (NAME)>
@@ -10,6 +10,7 @@
 <!ELEMENT DEALER (CARD+)>
 <!ELEMENT MONEY (COIN*)>
 <!ELEMENT BET (COIN+)>
+<!ELEMENT DECK (CARD+)>
 
 <!ELEMENT NAME (#PCDATA)>
 <!ELEMENT CARD (#PCDATA)>
@@ -18,20 +19,29 @@
 <!--optional-->
 <!ELEMENT ROUNDCOUNTER (#PCDATA)>
 
-<!ATTLIST BLACKJACK GAMESTATE (dealing|bidding|playersTurn|dealerTurn|evaluation) #IMPLIED>
-<!ATTLIST PLAYER PLAYERSTATE (playing|done|busted|waiting|oom) #IMPLIED>
-<!ATTLIST DEALER DEALERSTATE (playing|done|busted|waiting|oom) #IMPLIED>
+
+<!ATTLIST CARD VALUE (1|2|3|4|5|6|7|8|9|10|11) #REQUIRED
+                COLOR (HEART|DIAMOND|SPADE|CLUBS) #REQUIRED>
+<!ATTLIST BLACKJACK GAMESTATE (dealing|bidding|playersTurn|dealerTurn|evaluation) #REQUIRED>
+<!ATTLIST PLAYER PLAYERSTATE (playing|done|busted|waiting|oom) #REQUIRED>
+<!ATTLIST DEALER DEALERSTATE (playing|done|busted|waiting) #REQUIRED>
 ]>
 
-<BLACKJACK>
+<BLACKJACK GAMESTATE="dealerTurn">
     <TABLE>
-        <PLAYER>
+        <DECK>
+            <CARD COLOR="HEART" VALUE="2"></CARD>
+        </DECK>
+        <PLAYER PLAYERSTATE="waiting">
             <NAME></NAME>
-            <CARD></CARD>
+            <CARD COLOR="SPADE" VALUE="4"></CARD>
             <MONEY></MONEY>
+            <BET>
+                <COIN></COIN>
+            </BET>
         </PLAYER>
-        <DEALER>
-            <CARD></CARD>
+        <DEALER DEALERSTATE="playing">
+            <CARD COLOR="DIAMOND" VALUE="9"></CARD>
         </DEALER>
         <ROUNDCOUNTER></ROUNDCOUNTER>
         <TURN>
