@@ -157,13 +157,18 @@ declare
 %updating
 function api:draw_cards_rng($game as xs:integer){
      let $gameNode := $api:db/games/game[$game]
-     for $player in $gameNode/player
-     let $result1 := card:randomCard()
-     let $result2 := card:randomCard()
-     let $playerHand := $player/hand
-     return (
-        insert node $result1 into $playerHand,
-        insert node $result2 into $playerHand,
-        update:output(web:redirect("/blackjack/show"))
+     let $dealerCard := card:randomCard()
+     let $dealerHand := $gameNode/dealer/hand
+     return(
+        insert node $dealerCard into $dealerHand,
+        for $player in $gameNode/player
+        let $result1 := card:randomCard()
+        let $result2 := card:randomCard()
+        let $playerHand := $player/hand
+        return (
+           insert node $result1 into $playerHand,
+           insert node $result2 into $playerHand,
+           update:output(web:redirect("/blackjack/show"))
+        )
      )
 };
