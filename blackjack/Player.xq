@@ -21,6 +21,10 @@ declare function player:newPlayer() {
   player:newPlayer($player:defaultId, $player:defaultName, $player:defaultState, $player:defaultBalance, $player:defaultBet, $player:defaultHand)
 };
 
+declare function player:newPlayer($id){
+  player:newPlayer($id, $player:defaultName, $player:defaultState, $player:defaultBalance, $player:defaultBet, $player:defaultHand)
+};
+
 declare function player:setId($self, $id) {
   let $name := $self/@name
   let $state := $self/@state

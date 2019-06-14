@@ -48,9 +48,9 @@ declare
 %updating
 function api:play($player1, $player2, $player3, $player4, $player5) {
   let $players := (
-    for $name in ($player1, $player2, $player3, $player4, $player5)
+    for $name at $pos in ($player1, $player2, $player3, $player4, $player5)
     where not($name eq "")
-    return player:setName(player:newPlayer(), $name)
+    return player:setName(player:newPlayer($pos), $name)
   )
   let $game := game:setPlayers(game:newGame(), $players)
   return (
@@ -90,4 +90,80 @@ function api:hit($game as xs:integer, $player as xs:integer) {
     replace node $deck with $newDeck,
     update:output(web:redirect("/blackjack/show"))
   )
+};
+
+declare
+%rest:path("blackjack/{$game}/update_bet/{$player}/{$bet_amount}")
+%rest:GET
+%updating
+function api:update_bet($game as xs:integer, $player as xs:integer, $bet_amount as xs:int){
+  let $gameNode := $api:db/games/game[$game]
+  let $playerNode := $gameNode/player[$player]
+  let $old_balance := $playerNode/balance
+  let $new_balance := $old_balance - $bet_amount
+  let $new_playerNode := player:setBet($playerNode,$bet_amount)
+  let $new_playerNode := player:setBalance($new_playerNode,$new_balance)
+  return (
+    if ($new_balance >= 0) then
+    (   replace node $playerNode with $new_playerNode, 
+	    update:output(web:redirect("/blackjack/show"))
+    )else 
+        (: show error message and ask for new input :)
+        update:output(web:redirect("/blackjack/show"))
+  )
+};
+
+(:declare
+%rest:path("blackjack/{$game}/draw_cards")
+%rest:GET
+%updating
+function api:draw_cards($game as xs:integer){
+    let $gameNode := $api:db/games/game[$game]
+    let $deck := $gameNode/dealer/deck
+    return (
+        let $newDeck:=api:draw_cards_helper($game,1,$deck)
+        return(
+            replace node $deck with $newDeck,
+            update:output(web:redirect("/blackjack/show"))
+    ))
+};
+
+declare function api:draw_cards_helper($game as xs:integer,$count as xs:integer,$deck ){
+    let $gameNode := $api:db/games/game[$game]
+    let $playerNode := $gameNode/player[$count]
+    let $playerHand := $playerNode/hand
+    return( 
+        if ( $count < count ($gameNode/player)) 
+        then(
+            let $resultTuple := deck:drawCard($deck)
+            let $newCard := $resultTuple/card
+            let $newDeck := $resultTuple/deck
+            let $x := api:draw_cards_helper($game,$count + 1, $newDeck)
+            return(
+                $newDeck
+            )
+        )else(
+        
+            return ($deck)
+        )
+    
+      )
+      
+};:)
+
+declare 
+%rest:path("blackjack/{$game}/draw_cards_rng")
+%rest:GET
+%updating
+function api:draw_cards_rng($game as xs:integer){
+     let $gameNode := $api:db/games/game[$game]
+     for $player in $gameNode/player
+     let $result1 := card:randomCard()
+     let $result2 := card:randomCard()
+     let $playerHand := $player/hand
+     return (
+        insert node $result1 into $playerHand,
+        insert node $result2 into $playerHand,
+        update:output(web:redirect("/blackjack/show"))
+     )
 };
