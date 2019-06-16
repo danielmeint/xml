@@ -14,6 +14,10 @@ declare function game:newGame($id, $state, $dealer, $players) {
   </game>
 };
 
+declare function game:newGame($id) {
+ game:newGame($id, $game:defaultState, $game:defaultDealer, $game:defaultPlayers)
+};
+
 declare function game:newGame() {
   game:newGame($game:defaultId, $game:defaultState, $game:defaultDealer, $game:defaultPlayers)
 };
