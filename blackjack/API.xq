@@ -46,13 +46,16 @@ declare
 %rest:form-param("player4", "{$player4}")
 %rest:form-param("player5", "{$player5}")
 %updating
+
 function api:play($player1, $player2, $player3, $player4, $player5) {
   let $players := (
     for $name at $pos in ($player1, $player2, $player3, $player4, $player5)
     where not($name eq "")
     return player:setName(player:newPlayer($pos), $name)
   )
-  let $game := game:setPlayers(game:newGame(), $players)
+  let $id := count($api:db/games/game) +1
+  
+  let $game := game:setPlayers(game:newGame($id), $players)
   return (
     insert node $game into $api:db/games,
     update:output(web:redirect("/blackjack/show"))
@@ -70,7 +73,7 @@ declare
 %rest:path("/blackjack/{$game}/show")
 %rest:GET
 function api:show($game as xs:integer) {
-    $api:db/games/game[$game]
+   $api:db/games/game[$game] 
 };
 
 declare

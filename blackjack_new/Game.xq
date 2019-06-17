@@ -1,6 +1,8 @@
 module namespace game="gruppe_xforms/blackjack/game";
 
 import module namespace dealer="gruppe_xforms/blackjack/dealer" at 'Dealer.xq';
+import module namespace player="gruppe_xforms/blackjack/player" at 'Player.xq';
+
 
 declare variable $game:defaultId := "undefined";
 declare variable $game:defaultState := "undefined";
@@ -14,12 +16,16 @@ declare function game:newGame($id, $state, $dealer, $players) {
   </game>
 };
 
-declare function game:newGame($id) {
- game:newGame($id, $game:defaultState, $game:defaultDealer, $game:defaultPlayers)
-};
-
 declare function game:newGame() {
   game:newGame($game:defaultId, $game:defaultState, $game:defaultDealer, $game:defaultPlayers)
+};
+
+declare function game:reset($self) {
+  let $id := $self/@id
+  let $state := "init"
+  let $dealer := $game:defaultDealer
+  let $players := $self/player ! player:reset(.)
+  return game:newGame($id, $state, $dealer, $players)
 };
 
 declare function game:setId($self, $id) {
