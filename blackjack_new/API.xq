@@ -275,6 +275,22 @@ function api:stand($gameId as xs:integer, $playerId as xs:integer) {
 };
 
 declare
+%rest:path("blackjack/{$gameId=[0-9]+}/insurance/{$playerId=[0-5]}")
+%rest:GET
+%updating
+function api:insurance($gameId as xs:integer, $playerId as xs:integer){
+  let $game := $api:db/games/game[@id=$gameId]
+  let $currPlayer := $game/player[$playerId]
+  let $oldBet := $currPlayer/bet
+  let $newBet := $oldBet * 2
+  return (
+    replace value of node $oldBet with $newBet,
+    replace value of node $currPlayer/@insurance with 'true',
+    update:output(helper:showGame($gameId))
+  )
+};
+
+declare
 %rest:path("blackjack/{$gameId=[0-9]+}/double/{$playerId=[0-5]}")
 %rest:GET
 %updating

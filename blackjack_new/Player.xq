@@ -7,10 +7,11 @@ declare variable $player:defaultName := "undefined";
 declare variable $player:defaultState := "inactive";
 declare variable $player:defaultBalance := 100;
 declare variable $player:defaultBet := 0;
+declare variable $player:defaultInsurance := "false";
 declare variable $player:defaultHand := hand:newHand();
 
-declare function player:newPlayer($id, $name, $state, $balance, $bet, $hand) {
-  <player id="{$id}" name="{$name}" state="{$state}">
+declare function player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance) {
+  <player id="{$id}" name="{$name}" state="{$state}" insurance="{$insurance}">
     <balance>{$balance}</balance>
     <bet>{$bet}</bet>
     {$hand}
@@ -18,7 +19,7 @@ declare function player:newPlayer($id, $name, $state, $balance, $bet, $hand) {
 };
 
 declare function player:newPlayer() {
-  player:newPlayer($player:defaultId, $player:defaultName, $player:defaultState, $player:defaultBalance, $player:defaultBet, $player:defaultHand)
+  player:newPlayer($player:defaultId, $player:defaultName, $player:defaultState, $player:defaultBalance, $player:defaultBet, $player:defaultHand,$player:defaultInsurance)
 };
 
 declare function player:reset($self) {
@@ -28,7 +29,8 @@ declare function player:reset($self) {
   let $balance := $self/balance/text()
   let $bet := $player:defaultBet
   let $hand := $player:defaultHand
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand)
+  let $insurance := "default"
+  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
 
 declare function player:setId($self, $id) {
@@ -37,7 +39,8 @@ declare function player:setId($self, $id) {
   let $balance := $self/balance/text()
   let $bet := $self/bet/text()
   let $hand := $self/hand
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand)
+  let $insurance := $self/@insurance
+  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
 
 declare function player:setName($self, $name) {
@@ -46,7 +49,8 @@ declare function player:setName($self, $name) {
   let $balance := $self/balance/text()
   let $bet := $self/bet/text()
   let $hand := $self/hand
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand)
+  let $insurance := $self/@insurance
+  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
 
 declare function player:setState($self, $state) {
@@ -55,7 +59,8 @@ declare function player:setState($self, $state) {
   let $balance := $self/balance/text()
   let $bet := $self/bet/text()
   let $hand := $self/hand
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand)
+  let $insurance := $self/@insurance
+  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
 
 
@@ -65,7 +70,8 @@ declare function player:setBalance($self, $balance) {
   let $state := $self/@state
   let $bet := $self/bet/text()
   let $hand := $self/hand
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand)
+  let $insurance := $self/@insurance
+  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
 
 declare function player:setBet($self, $bet) {
@@ -74,7 +80,8 @@ declare function player:setBet($self, $bet) {
   let $state := $self/@state
   let $balance := $self/balance/text()
   let $hand := $self/hand
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand)
+  let $insurance := $self/@insurance
+  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
 
 declare function player:setHand($self, $hand) {
@@ -83,5 +90,6 @@ declare function player:setHand($self, $hand) {
   let $state := $self/@state
   let $balance := $self/balance/text()
   let $bet := $self/bet/text()
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand)
+  let $insurance := $self/@insurance
+  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };

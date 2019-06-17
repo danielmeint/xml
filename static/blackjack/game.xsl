@@ -9,6 +9,7 @@
   <xsl:variable name="activePlayerHandCardCount" select="count(/game/player[@state = 'active']/hand/card)"/>
   <xsl:variable name="activePlayerBet" select="/game/player[@state = 'active']/bet"/>
   <xsl:variable name="activePlayerBalance" select="/game/player[@state = 'active']/balance"/>
+  <xsl:variable name="dealerCard" select="/game/dealer/hand/card[1]/@value"/>
 
   <xsl:template match="/">
     <html>
@@ -82,11 +83,20 @@
                   </xsl:choose>
                   <xsl:choose>
                     <xsl:when test="$activePlayerHandCardCount &gt; 2 or $activePlayerBet * 2 &gt; $activePlayerBalance">
-                      <a class="btn btn-disabled btn-busted">Double</a>
+                      <a class="btn btn-disabled">Double</a>
                     </xsl:when>
                     <xsl:otherwise>
                       <a href="/blackjack/{game/@id}/double/{game/player[@state='active']/@id}"
                         class="btn btn-double">Double</a>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                  <xsl:choose>
+                    <xsl:when test="$activePlayerHandCardCount &gt; 2 or $activePlayerBet * 2 &gt; $activePlayerBalance or $dealerCard!=11">
+                      <a class="btn btn-disabled">Insurance</a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <a href="/blackjack/{game/@id}/insurance/{game/player[@state='active']/@id}"
+                        class="btn btn-insurance">Insurance</a>
                     </xsl:otherwise>
                   </xsl:choose>
                 </div>
