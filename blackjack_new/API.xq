@@ -274,6 +274,60 @@ function api:stand($gameId as xs:integer, $playerId as xs:integer) {
   )
 };
 
+declare
+%rest:path("blackjack/{$gameId=[0-9]+}/double/{$playerId=[0-5]}")
+%rest:GET
+%updating
+function api:double ($gameId as xs:integer, $playerId as xs:integer){
+  let $game := $api:db/games/game[@id=$gameId]
+  let $currPlayer := $game/player[$playerId]
+  let $nextPlayer := $game/player[$playerId + 1]
+  let $oldBet := $currPlayer/bet
+  let $newBet := $oldBet * 2
+  return (
+    if (exists($nextPlayer)) then(
+        replace value of node $oldBet with $newBet,
+        api:hit($gameId,$playerId),
+        api:stand($gameId,$playerId),
+        update:output(helper:showGame($gameId))
+        )
+     else(
+        api:playDealerDouble($gameId,$currPlayer/@id),
+        replace value of node $currPlayer/@state with 'inactive',
+        replace value of node $oldBet with $newBet,
+        replace value of node $game/@state with 'toEvaluate',
+        update:output(helper:showGame($gameId))
+     )
+  )
+};
+
+declare
+%updating
+function api:playDealerDouble($gameId as xs:integer,$playerId as xs:integer){
+  let $game := $api:db/games/game[@id=$gameId]
+  let $dealer := $game/dealer
+  let $oldDealerHand := $dealer/hand
+  let $oldDeck := $dealer/deck
+  
+  let $player := $game/player[$playerId]
+  let $oldPlayerHand := $player/hand
+  let $resultTuple := deck:drawCard($oldDeck)
+  let $newCard := $resultTuple/card
+  let $newDeck := $resultTuple/deck
+  let $newPlayerHand := hand:addCard($oldPlayerHand, $newCard)
+  
+  let $result := helper:drawTo17($oldDealerHand, $newDeck)
+  let $newDealerHand := $result/hand
+  let $newDealerDeck := $result/deck
+  
+  return(
+    replace node $oldPlayerHand with $newPlayerHand,
+    replace node $oldDeck with $newDealerDeck,
+    replace node $oldDealerHand with $newPlayerHand
+  )
+};
+
+
 declare 
 %updating
 function api:playDealer($gameId as xs:integer) {

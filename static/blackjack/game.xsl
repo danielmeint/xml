@@ -6,6 +6,9 @@
   <xsl:output method="xml" omit-xml-declaration="yes"/>
 
   <xsl:variable name="activePlayerHandValue" select="/game/player[@state = 'active']/hand/@value"/>
+  <xsl:variable name="activePlayerHandCardCount" select="count(/game/player[@state = 'active']/hand/card)"/>
+  <xsl:variable name="activePlayerBet" select="/game/player[@state = 'active']/bet"/>
+  <xsl:variable name="activePlayerBalance" select="/game/player[@state = 'active']/balance"/>
 
   <xsl:template match="/">
     <html>
@@ -75,6 +78,15 @@
                     <xsl:otherwise>
                       <a href="/blackjack/{game/@id}/hit/{game/player[@state='active']/@id}"
                         class="btn btn-small btn-hit">Hit</a>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                  <xsl:choose>
+                    <xsl:when test="$activePlayerHandCardCount &gt; 2 or $activePlayerBet * 2 &gt; $activePlayerBalance">
+                      <a class="btn btn-disabled btn-busted">Double</a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <a href="/blackjack/{game/@id}/double/{game/player[@state='active']/@id}"
+                        class="btn btn-double">Double</a>
                     </xsl:otherwise>
                   </xsl:choose>
                 </div>
