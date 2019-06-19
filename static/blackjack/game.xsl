@@ -53,7 +53,7 @@
                   <g class="card_group">
                     <xsl:for-each select="hand/card">
                       <use href="/static/blackjack/cards.svg#{@value}_{@suit}"
-                        style="transform: translate({(position() - 1) * 40}px, {(position() - 1) * 4}px)"
+                        style="transform: translate({(position() - 1) * 32}px, {(position() - 1) * 4}px)"
                       />
                     </xsl:for-each>
                   </g>
@@ -132,10 +132,10 @@
                   <xsl:for-each select="game/player">
                     <div>
                       <label for="">
-                        <xsl:value-of select="@name"/>
+                        Player: <xsl:value-of select="@name"/>
                       </label>
                       <input type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="0"
-                        max="{balance}"/>
+                        max="{balance}" required=""/>
                     </div>
                   </xsl:for-each>
                   <input type="submit" value="Deal" class="btn"/>

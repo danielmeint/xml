@@ -15,16 +15,18 @@
                 <link rel="stylesheet" type="text/css" href="/static/blackjack/style.css"/>
             </head>
             <body>
-                <h1>XForms' Blackjack</h1>
-
+                <h1 style="font-family: Helvetica, sans-serif;box-sizing: border-box; font-size:32;text-align: center; font-weight:bold;">XForms' Blackjack</h1>
                 <xsl:choose>
                     <xsl:when test="data/screen/text() = 'games'">
                         <table id="games-table" class="table table-hover">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Players</th>
-                                    <th scope="col">State</th>
+                                    <th scope="col">Game ID</th>
+                                    <th scope="col">Player 1 (Balance)</th>
+                                    <th scope="col">Player 2 (Balance)</th>
+                                    <th scope="col">Player 3 (Balance)</th>
+                                    <th scope="col">Player 4 (Balance)</th>
+                                    <th scope="col">Player 5 (Balance)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,17 +35,55 @@
                                         <td>
                                             <a href="/blackjack/{@id}"><xsl:value-of select="@id"/></a>
                                         </td>
+
                                         <td>
                                             <a href="/blackjack/{@id}">
-                                            <xsl:value-of select="player[1]/@name"/>
-                                            <xsl:for-each select="player[position() > 1]">
-                                                /<xsl:value-of select="@name"/>
-                                            </xsl:for-each>
+                                                <xsl:if test="player[1]">
+                                                    <xsl:value-of select="player[1]/@name"/>(<xsl:value-of select="player[1]/balance"/>)
+                                                </xsl:if>
+                                                <xsl:if test="not(player[1])">
+                                                    -
+                                                </xsl:if>  
                                             </a>
                                         </td>
                                         <td>
                                             <a href="/blackjack/{@id}">
-                                            <xsl:value-of select="player[@state='active']/@name"/>=<xsl:value-of select="@state"/>
+                                                <xsl:if test="player[2]">
+                                                    <xsl:value-of select="player[2]/@name"/>(<xsl:value-of select="player[2]/balance"/>)
+                                                </xsl:if>
+                                                <xsl:if test="not(player[2])">
+                                                    -
+                                                </xsl:if>  
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/blackjack/{@id}">
+                                                <xsl:if test="player[3]">
+                                                    <xsl:value-of select="player[3]/@name"/>(<xsl:value-of select="player[3]/balance"/>)
+                                                </xsl:if>
+                                                <xsl:if test="not(player[3])">
+                                                    -
+                                                </xsl:if>  
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/blackjack/{@id}">
+                                                <xsl:if test="player[4]">
+                                                    <xsl:value-of select="player[4]/@name"/>(<xsl:value-of select="player[4]/balance"/>)
+                                                </xsl:if>
+                                                <xsl:if test="not(player[4])">
+                                                    -
+                                                </xsl:if>  
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/blackjack/{@id}">
+                                                <xsl:if test="player[5]">
+                                                    <xsl:value-of select="player[5]/@name"/>(<xsl:value-of select="player[5]/balance"/>)
+                                                </xsl:if>
+                                                <xsl:if test="not(player[5])">
+                                                    -
+                                                </xsl:if>  
                                             </a>
                                         </td>
                                     </tr>
@@ -77,8 +117,7 @@
                             </tbody>
                         </table>
                     </xsl:when>
-                </xsl:choose>
-
+                </xsl:choose> 
             </body>
         </html>
     </xsl:template>

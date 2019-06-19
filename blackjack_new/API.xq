@@ -398,17 +398,38 @@ declare
 function api:evaluatePlayer($player, $toBeat as xs:integer) {
    if ($player/hand/@value <= 21 and ($player/hand/@value > $toBeat or $toBeat > 21))
     then (
-      replace value of node $player/@state with "won",
-      replace value of node $player/balance with $player/balance/text() + $player/bet/text()
+      (:insurance + win -> 2 * Einsatz:)
+      if(($player/@insurance = "true") and ($toBeat = 21) )
+      then (
+        replace value of node $player/@state with "won",
+        replace value of node $player/balance with $player/balance/text() + $player/bet/text() + $player/bet/text()
+      )
+      else (
+        replace value of node $player/@state with "won",
+        replace value of node $player/balance with $player/balance/text() + $player/bet/text()
+    )
     )
     else if ($player/hand/@value <= 21 and $player/hand/@value = $toBeat)
     then (
+      (:insurance + tie -> 1 * Einsatz:)
+      if(($player/@insurance = "true") and ($toBeat = 21) ) then (
+        replace value of node $player/@state with "won",
+        replace value of node $player/balance with $player/balance/text() + $player/bet/text()
+      )
+      else (
       replace value of node $player/@state with "tied"
-    )
+    )  
+  )
     else (
+       (:insurance + Lose -> 0 * Einsatz:)
+      if(($player/@insurance = "true") and ($toBeat = 21) ) then (
+        replace value of node $player/@state with "won"
+      )
+      else (
       replace value of node $player/@state with "lost",
       replace value of node $player/balance with $player/balance/text() - $player/bet/text()
-  )
+    )  
+)
 };
 
 declare
