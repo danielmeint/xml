@@ -29,7 +29,7 @@ declare function player:reset($self) {
   let $balance := $self/balance/text()
   let $bet := $player:defaultBet
   let $hand := $player:defaultHand
-  let $insurance := "default"
+  let $insurance := "false"
   return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
 

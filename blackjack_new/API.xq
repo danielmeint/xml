@@ -384,20 +384,51 @@ function api:evaluatePlayers($players, $toBeat) {
 };
 
 declare
+function api:isDealersCardAce($gameId as xs:integer) {
+  let $game := $api:db/games/game[@id=$gameId]
+  return (
+    if($game/dealer/hand/card[1]/@value = 'A')
+    then "true"
+    else "false"
+  )
+};
+
+declare
 %updating
 function api:evaluatePlayer($player, $toBeat as xs:integer) {
-  if ($player/hand/@value <= 21 and ($player/hand/@value > $toBeat or $toBeat > 21))
-  then (
-    replace value of node $player/@state with "won",
-    replace value of node $player/balance with $player/balance/text() + $player/bet/text()
-  )
-  else if ($player/hand/@value <= 21 and $player/hand/@value = $toBeat)
-  then (
-    replace value of node $player/@state with "tied"
-  )
+  if($player/hand/@insurance = 'false') then (
+    if ($player/hand/@value <= 21 and ($player/hand/@value > $toBeat or $toBeat > 21))
+    then (
+      replace value of node $player/@state with "won",
+      replace value of node $player/balance with $player/balance/text() + $player/bet/text()
+    )
+    else if ($player/hand/@value <= 21 and $player/hand/@value = $toBeat)
+    then (
+      replace value of node $player/@state with "tied"
+    )
+    else (
+      replace value of node $player/@state with "lost",
+      replace value of node $player/balance with $player/balance/text() - $player/bet/text()
+  ))
   else (
-    replace value of node $player/@state with "lost",
-    replace value of node $player/balance with $player/balance/text() - $player/bet/text()
+    if(api:isDealersCardAce(1)="true")
+    then(
+       if ($player/hand/@value <= 21 and ($player/hand/@value > $toBeat or $toBeat > 21))
+      then (
+        replace value of node $player/@state with "won",
+        replace value of node $player/balance with $player/balance/text() + $player/bet/text()
+      )
+      else if ($player/hand/@value <= 21 and $player/hand/@value = $toBeat)
+      then (
+        replace value of node $player/@state with "tied"
+      )
+      else (
+        replace value of node $player/@state with "lost",
+        replace value of node $player/balance with $player/balance/text() - $player/bet/text()
+    ))
+    else(
+        
+    )
   )
 };
 
