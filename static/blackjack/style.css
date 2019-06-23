@@ -83,6 +83,26 @@ svg {
   color: inherit;
 }
 
+svg .label {
+    fill: white;
+    stroke: black;
+}
+
+svg .label > text {
+    fill: black;
+
+}
+
+svg .label > text.name {
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+svg .label > text.hand_value {
+    font-size: 32px;
+    font-style: italic;
+}
+
 /* table */
 #table text {
     font-family: Helvetica, sans-serif;

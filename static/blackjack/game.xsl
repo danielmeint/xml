@@ -57,6 +57,17 @@
                       />
                     </xsl:for-each>
                   </g>
+                  <xsl:if test="/game/@state = 'playing'">
+                    <g class="label label-hand">
+                      <rect x="-50px" y="70px" rx="25" ry="25" width="80" height="50"/>
+                      <text class="name" x="-30px" y="85px">
+                        <xsl:value-of select="@name"/>
+                      </text>
+                      <text class="hand_value" x="-30px" y="115px" xmlns="http://www.w3.org/2000/svg">
+                        <xsl:value-of select="hand/@value"/>
+                      </text>
+                    </g>
+                  </xsl:if>
                 </g>
               </xsl:for-each>
             </g>
