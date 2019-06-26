@@ -1,6 +1,9 @@
 module namespace player="gruppe_xforms/blackjack/player";
 
 import module namespace hand="gruppe_xforms/blackjack/hand" at 'Hand.xq';
+import module namespace deck="gruppe_xforms/blackjack/deck" at 'Deck.xq';
+import module namespace helper="gruppe_xforms/blackjack/helper" at 'Helper.xq';
+import module namespace dealer="gruppe_xforms/blackjack/dealer" at 'Dealer.xq';
 
 declare variable $player:defaultId := "undefined";
 declare variable $player:defaultName := "undefined";
@@ -93,3 +96,46 @@ declare function player:setHand($self, $hand) {
   let $insurance := $self/@insurance
   return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
 };
+
+declare 
+%updating
+function player:insurance($self){
+  let $oldBet := $self/bet
+  let $newBet := $oldBet * 2
+  return (
+    replace value of node $oldBet with $newBet,
+    replace value of node $self/@insurance with 'true'
+  )
+};
+
+declare 
+%updating
+function player:double($self){
+  let $game := $self/..
+  let $deck := $game/dealer/deck
+  let $nextPlayer := $game/player[$self/@id + 1]
+  let $oldBet := $self/bet
+  let $newBet := $oldBet * 2
+  let $oldHand := $self/hand
+  let $newHand := hand:addCard($oldHand, $deck/card[1])
+
+  return (
+    if(exists($nextPlayer))
+    then(
+        helper:hit($self),
+        helper:stand($self,$nextPlayer),
+        replace value of node $oldBet with $newBet
+    )
+    else(
+        replace value of node $oldBet with $newBet,
+        replace value of node $oldHand with $newHand,
+        replace value of node $self/@state with 'inactive',
+        dealer:play($game,1),
+        replace value of node $game/@state with 'toEvaluate'
+    )
+  )
+};
+
+
+
+
