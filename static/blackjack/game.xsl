@@ -83,7 +83,7 @@
                 </p>
                 <div class="button_group">
                   <a href="/blackjack/{game/@id}/stand/{game/player[@state='active']/@id}"
-                    class="btn btn-small btn-stand">Stand</a>
+                    class="btn btn-red btn-small btn-stand">Stand</a>
                   <xsl:choose>
                     <xsl:when test="$activePlayerHandValue &gt; 21">
                       <a class="btn btn-disabled btn-busted">Busted</a>
@@ -99,7 +99,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                       <a href="/blackjack/{game/@id}/double/{game/player[@state='active']/@id}"
-                        class="btn btn-double">Double</a>
+                        class="btn btn-blue btn-double">Double</a>
                     </xsl:otherwise>
                   </xsl:choose>
                   <xsl:choose>
@@ -108,7 +108,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                       <a href="/blackjack/{game/@id}/insurance/{game/player[@state='active']/@id}"
-                        class="btn btn-insurance">Insurance</a>
+                        class="btn btn-purple btn-insurance">Insurance</a>
                     </xsl:otherwise>
                   </xsl:choose>
                 </div>

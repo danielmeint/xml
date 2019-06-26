@@ -239,6 +239,31 @@ g[id *= 'clubs'] text,
   opacity: 0.5;
 }
 
+.btn-red:hover {
+    background-color :red;
+}
+.btn-red{
+    background-color :#f45c42;
+}
+
+
+.btn-purple{
+    background-color: #f243ef;
+}
+
+.btn-purple:hover{
+    background-color :purple;
+}
+
+
+.btn-blue {
+    background-color:#2bd6e2;
+}
+
+.btn-blue:hover{
+    background-color :blue;
+}
+
 #exit-button {
     position: absolute;
 }
