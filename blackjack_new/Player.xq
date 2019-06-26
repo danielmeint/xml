@@ -33,7 +33,13 @@ declare function player:reset($self) {
   let $bet := $player:defaultBet
   let $hand := $player:defaultHand
   let $insurance := "false"
-  return player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
+  return( 
+    if($balance='0')
+    then()
+    else(
+        player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
+    )
+  )
 };
 
 declare function player:setId($self, $id) {
