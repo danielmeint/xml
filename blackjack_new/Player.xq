@@ -105,37 +105,40 @@ declare function player:setHand($self, $hand) {
 
 declare 
 %updating
-function player:insurance($self){
-  let $oldBet := $self/bet
+function player:insurance($game){
+  let $currPlayer := $game/player[@state='active']
+  let $oldBet := $currPlayer/bet
   let $newBet := $oldBet * 2
   return (
     replace value of node $oldBet with $newBet,
-    replace value of node $self/@insurance with 'true'
+    replace value of node $currPlayer/@insurance with 'true'
   )
 };
 
 declare 
 %updating
-function player:double($self){
-  let $game := $self/..
+function player:double($game){
+  let $currPlayer := $game/player[@state='active']
+  let $position := index-of($game/player/@id , $game/player[@state='active']/@id)
+  let $nextPosition := $position +1
+  let $nextPlayer := $game/player[$nextPosition]
   let $deck := $game/dealer/deck
-  let $nextPlayer := $game/player[$self/@id + 1]
-  let $oldBet := $self/bet
+  let $oldBet := $currPlayer/bet
   let $newBet := $oldBet * 2
-  let $oldHand := $self/hand
-  let $newHand := hand:addCard($oldHand, $deck/card[1])
+  let $oldHand := $currPlayer/hand
+  let $newHand := hand:addCard($oldHand, head($deck))
 
   return (
     if(exists($nextPlayer))
     then(
-        helper:hit($self),
-        helper:stand($self,$nextPlayer),
+        helper:hit($currPlayer),
+        helper:stand($game),
         replace value of node $oldBet with $newBet
     )
     else(
         replace value of node $oldBet with $newBet,
         replace value of node $oldHand with $newHand,
-        replace value of node $self/@state with 'inactive',
+        replace value of node $currPlayer/@state with 'inactive',
         dealer:play($game,1),
         replace value of node $game/@state with 'toEvaluate'
     )
