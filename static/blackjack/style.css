@@ -23,6 +23,7 @@ Daniel Meint
 * {
     font-family: Helvetica, sans-serif;
     box-sizing: border-box;
+    outline: none;
 }
 
 .flex-container {
@@ -31,6 +32,7 @@ Daniel Meint
 
 body {
   margin: 0;
+  background-color: var(--background-color-light);
 }
 
 h1, h2, h3 {
@@ -184,7 +186,7 @@ g[id *= 'clubs'] text,
 }
 
 .btn:hover {
-    background-color: darkolivegreen;
+    opacity: 0.6;
 }
 
 .btn-small {
