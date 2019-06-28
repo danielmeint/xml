@@ -20,7 +20,7 @@
       <body>
         <a id="exit-button" class="btn" href="/blackjack">&lt; Menu</a>
         <div class="container flex-container">
-          <svg viewBox="0 0 800 520">
+          <svg viewBox="0 0 800 620">
             <!-- table dimensions: 800 x 450 -->
             <use href="/static/blackjack/table.svg#table" x="0" y="0"/>
             <g class="card_group" id="dealer">
@@ -53,18 +53,22 @@
                   <g class="card_group">
                     <xsl:for-each select="hand/card">
                       <use href="/static/blackjack/cards.svg#{@value}_{@suit}"
-                        style="transform: translate({(position() - 1) * 32}px, {(position() - 1) * 4}px)"
+                        style="transform: translate({(position() - 1) * 20}px, {(position() - 1) * 4}px)"
                       />
                     </xsl:for-each>
                   </g>
                   <xsl:if test="/game/@state = 'playing'">
                     <g class="label label-hand">
-                      <rect x="-50px" y="70px" rx="25" ry="25" width="80" height="50"/>
-                      <text class="name" x="-30px" y="85px">
-                        <xsl:value-of select="@name"/>
+					<rect x="10px" y="110px" rx="15" ry="15" width="{string-length(@name)*5 + 60}px"  height="65"/>
+                     <!-- <rect x="10px" y="110px" rx="15" ry="15" width="75" height="65"/> -->
+                      <text class="name" x="27px" y="125px">
+                        &#127183;<xsl:value-of select="@name"/>
                       </text>
-                      <text class="hand_value" x="-30px" y="115px" xmlns="http://www.w3.org/2000/svg">
+                      <text class="hand_value" x="27px" y="170px" xmlns="http://www.w3.org/2000/svg">
                         <xsl:value-of select="hand/@value"/>
+                      </text>
+					  <text class="balance" x="27px" y="142px" xmlns="http://www.w3.org/2000/svg">
+						&#128176;<xsl:value-of select="balance - bet"/>
                       </text>
                     </g>
                   </xsl:if>
@@ -75,7 +79,6 @@
 
           <div id="info">
             <xsl:choose>
-
               <xsl:when test="game/@state = 'playing'">
                 <p><xsl:value-of select="game/player[@state = 'active']/@name"/>'s turn</p>
                 <p id="hand_value">
