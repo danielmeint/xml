@@ -28,6 +28,7 @@ function dealer:play($game,$deckOffset){
   let $oldDeck := $dealer/deck
   return (
     if($deckOffset=1)then(
+    (: use tail of deck :)
       let $result := helper:drawTo17($oldHand, $oldDeck)
       let $newHand := $result/hand
       let $newDeck := $result/deck

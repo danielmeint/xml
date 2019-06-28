@@ -67,10 +67,13 @@ function helper:hit($self){
 
 declare
 %updating
-function helper:stand($self,$nextPlayer){
-  let $game := $self/..
+function helper:stand($game){
+  let $currPlayer := $game/player[@state='active']
+  let $position := index-of($game/player/@id , $game/player[@state='active']/@id)
+  let $nextPosition := $position +1
+  let $nextPlayer := $game/player[$nextPosition]
   return (
-    replace value of node $self/@state with 'inactive',
+    replace value of node $currPlayer/@state with 'inactive',
     if (exists($nextPlayer))
     then (
       replace value of node $nextPlayer/@state with 'active'
@@ -147,7 +150,7 @@ function helper:play($game,$bets){
   return (
     replace value of node $game/@state with 'playing',
     helper:replaceAll($oldPlayers/bet/text(), $bets),
-    replace value of node $game/player[@id='1']/@state with 'active',
+    replace value of node $game/head(player)/@state with 'active',
     helper:deal($game) 
   )
 };

@@ -168,14 +168,14 @@ function api:play($gameId, $p1_bet, $p2_bet, $p3_bet, $p4_bet, $p5_bet) {
 };
 
 declare
-%rest:path("blackjack/{$gameId=[0-9]+}/hit/{$playerId=[0-5]}")
+%rest:path("blackjack/{$gameId=[0-9]+}/hit")
 %rest:GET
 %updating
-function api:hit($gameId as xs:integer, $playerId as xs:integer){
+function api:hit($gameId as xs:integer){
   let $game := $api:db/games/game[@id = $gameId]
-  let $player := $game/player[@id=$playerId]
+  let $currPlayer := $game/player[@state='active']
   return (
-    helper:hit($player),
+    helper:hit($currPlayer),
     update:output(helper:showGame($gameId))
   )
     
@@ -186,50 +186,45 @@ declare
 %rest:GET
 %updating
 function api:hitDealer($gameId as xs:integer) {
-  let $game := $api:db/games/game[@id=$gameId]
-  let $dealer := $game/dealer
+  let $game :=$api:db/games/game[@id=$gameId]
   return (
-    helper:hit($dealer),
+    helper:hit($game/dealer),
     update:output(helper:showGame($gameId))
   )
 };
 
 declare
-%rest:path("blackjack/{$gameId=[0-9]+}/stand/{$playerId=[0-5]}")
+%rest:path("blackjack/{$gameId=[0-9]+}/stand")
 %rest:GET
 %updating
-function api:stand($gameId as xs:integer, $playerId as xs:integer) {
+function api:stand($gameId as xs:integer) {
   let $game := $api:db/games/game[@id=$gameId]
-  let $currPlayer := $game/player[$playerId]
-  let $nextPlayer := $game/player[$playerId + 1]
   return (
-    helper:stand($currPlayer,$nextPlayer),
+    helper:stand($game),
     update:output(helper:showGame($gameId))
   )
 };
 
 declare
-%rest:path("blackjack/{$gameId=[0-9]+}/insurance/{$playerId=[0-5]}")
+%rest:path("blackjack/{$gameId=[0-9]+}/insurance")
 %rest:GET
 %updating
-function api:insurance($gameId as xs:integer, $playerId as xs:integer){
+function api:insurance($gameId as xs:integer){
   let $game := $api:db/games/game[@id=$gameId]
-  let $currPlayer := $game/player[$playerId]
   return (
-    player:insurance($currPlayer),
+    player:insurance($game),
     update:output(helper:showGame($gameId))
   )
 };
 
 declare
-%rest:path("blackjack/{$gameId=[0-9]+}/double/{$playerId=[0-5]}")
+%rest:path("blackjack/{$gameId=[0-9]+}/double")
 %rest:GET
 %updating
-function api:double ($gameId as xs:integer, $playerId as xs:integer){
+function api:double ($gameId as xs:integer){
   let $game := $api:db/games/game[@id=$gameId]
-  let $currPlayer := $game/player[$playerId]
   return(
-    player:double($currPlayer),
+    player:double($game),
     update:output(helper:showGame($gameId))
   )
 };
@@ -240,8 +235,6 @@ declare
 %updating
 function api:evaluateGame($gameId as xs:integer) {
   let $game := $api:db/games/game[@id=$gameId]
-  let $players := $game/player
-  let $toBeat := $game/dealer/hand/@value
   return (
     helper:evaluateGame($game),
     update:output(helper:showGame($gameId))

@@ -85,14 +85,14 @@
                   <xsl:value-of select="game/player[@state = 'active']/hand/@value"/>
                 </p>
                 <div class="button_group">
-                  <a href="/blackjack/{game/@id}/stand/{game/player[@state='active']/@id}"
+                  <a href="/blackjack/{game/@id}/stand"
                     class="btn btn-red btn-small btn-stand">Stand</a>
                   <xsl:choose>
                     <xsl:when test="$activePlayerHandValue &gt; 21">
                       <a class="btn btn-disabled btn-busted">Busted</a>
                     </xsl:when>
                     <xsl:otherwise>
-                      <a href="/blackjack/{game/@id}/hit/{game/player[@state='active']/@id}"
+                      <a href="/blackjack/{game/@id}/hit"
                         class="btn btn-small btn-hit">Hit</a>
                     </xsl:otherwise>
                   </xsl:choose>
@@ -101,7 +101,7 @@
                       <a class="btn btn-disabled">Double</a>
                     </xsl:when>
                     <xsl:otherwise>
-                      <a href="/blackjack/{game/@id}/double/{game/player[@state='active']/@id}"
+                      <a href="/blackjack/{game/@id}/double"
                         class="btn btn-blue btn-double">Double</a>
                     </xsl:otherwise>
                   </xsl:choose>
@@ -110,7 +110,7 @@
                       <a class="btn btn-disabled">Insurance</a>
                     </xsl:when>
                     <xsl:otherwise>
-                      <a href="/blackjack/{game/@id}/insurance/{game/player[@state='active']/@id}"
+                      <a href="/blackjack/{game/@id}/insurance"
                         class="btn btn-purple btn-insurance">Insurance</a>
                     </xsl:otherwise>
                   </xsl:choose>
