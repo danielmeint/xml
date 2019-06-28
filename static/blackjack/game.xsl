@@ -15,7 +15,7 @@
   <xsl:template match="/">
     <html>
       <head>
-        <link rel="stylesheet" type="text/css" href="/static/blackjack/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/blackjack/CSS/style.css"/>
       </head>
       <body>
         <a id="exit-button" class="btn" href="/blackjack">&lt; Menu</a>

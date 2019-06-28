@@ -12,7 +12,7 @@
                     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     crossorigin="anonymous"/>
-                <link rel="stylesheet" type="text/css" href="/static/blackjack/style.css"/>
+                <link rel="stylesheet" type="text/css" href="/static/blackjack/CSS/style.css"/>
             </head>
             <body>
                 <h1 style="font-family: Helvetica, sans-serif;box-sizing: border-box; font-size:32;text-align: center; font-weight:bold;">XForms' Blackjack</h1>
