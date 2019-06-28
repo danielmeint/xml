@@ -68,30 +68,6 @@ svg {
   display: table-cell;
 }
 
-#games-table {
-  text-align: left;
-}
-
-#games-table > .list-group-item > div {
-  display: inline-block;
-}
-
-#games-table > .list-group-item > div:nth-child(1) {
-  width: 128px;
-}
-
-#games-table td {
-    padding: 0;
-}
-
-#games-table td a {
-  display: block;
-  padding: 12px;
-
-  text-decoration: none;
-  color: inherit;
-}
-
 svg .label {
     fill: white;
     stroke: black;
@@ -110,31 +86,6 @@ svg .label > text.name {
 svg .label > text.hand_value {
     font-size: 32px;
 
-}
-
-/* table */
-#table text {
-    font-family: Helvetica, sans-serif;
-    fill: var(--table-secondary-color);
-    text-transform: uppercase;
-    font-size: 32px;
-}
-
-#table text.heavy {
-    font-weight: bold;
-    font-size: 50px;
-}
-
-#table text.small {
-    font-size: 24px;
-}
-
-#tableBase {
-    fill: var(--table-primary-color);
-}
-
-#box {
-    stroke: var(--table-secondary-color);
 }
 
 /* cards */
