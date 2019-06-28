@@ -8,18 +8,14 @@
     <xsl:template match="/">
         <html>
             <head>
-                <link rel="stylesheet"
-                    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                    crossorigin="anonymous"/>
                 <link rel="stylesheet" type="text/css" href="/static/blackjack/CSS/style.css"/>
             </head>
             <body>
-                <h1 style="font-family: Helvetica, sans-serif;box-sizing: border-box; font-size:32;text-align: center; font-weight:bold;">XForms' Blackjack</h1>
+                <a style="text-decoration: none; outline: none;" href="/blackjack"><h1 style="font-family: Helvetica, sans-serif;box-sizing: border-box; font-size:32;text-align: center; font-weight:bold; color: black">XForms' Blackjack</h1></a>
                 <xsl:choose>
                     <xsl:when test="data/screen/text() = 'games'">
-                        <table id="games-table" class="table table-hover">
-                            <thead class="thead-light">
+                        <table id="games-table" >
+                            <thead >
                                 <tr>
                                     <th scope="col">Game ID</th>
                                     <th scope="col">Player 1 (Balance)</th>
@@ -92,25 +88,26 @@
                         </table>
                     </xsl:when>
                     <xsl:when test="data/screen/text() = 'highscores'">
-                        <table id="highscores-table" class="table">
-                            <thead class="thead-light">
+                        <table id="highscore-table">
+                            <thead>
                                 <tr>
-                                    <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Balance</th>
+                                    <th scope="col">#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <xsl:for-each select="data/games/game/player">
                                     <xsl:sort select="balance" data-type="number" order="descending"/>
                                     <tr>
-                                        <td><xsl:value-of select="../@id"/>-<xsl:value-of
-                                                select="@id"/></td>
                                         <td>
                                             <xsl:value-of select="@name"/>
                                         </td>
                                         <td>
                                             <xsl:value-of select="balance"/>
+                                        </td>
+                                        <td><xsl:value-of select="../@id"/>-<xsl:value-of
+                                                select="@id"/>
                                         </td>
                                     </tr>
                                 </xsl:for-each>
