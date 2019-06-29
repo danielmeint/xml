@@ -228,15 +228,17 @@
                 </div>
                 <div class="dialog--content">
                 <form action="/blackjack/{game/@id}/play" method="POST">
+                  <div class="dialog--betting">
                   <xsl:for-each select="game/player">
-                    <div>
+                    <div class="input--advanced">
                       <label for="">
-                        Player: <xsl:value-of select="@name"/>
+                        <xsl:value-of select="@name"/>
                       </label>
-                      <input type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="0"
+                      <input class="betting" type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="0"
                         max="{balance}" required=""/>
                     </div>
                   </xsl:for-each>
+                  </div>
                   <button type="submit">Deal</button>
                 </form>
                 </div>

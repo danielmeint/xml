@@ -458,8 +458,14 @@ table tbody tr td a{
     padding-top: 10px;
 }
 
+.dialog--betting{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .dialog button{
     float: right;
+    margin-top: 30px;
 }
 
 .dialog #lose{
@@ -469,6 +475,38 @@ table tbody tr td a{
 
 .dialog #win{
     color: green;
+}
+
+
+/* input */
+.input--advanced { 
+  display: flex; 
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+label {
+  font-size:16px;
+  margin-top: -10px;
+  margin-left: 5px;
+  color:var(--table-primary-color);
+}
+
+input {
+  width:80%;
+  padding:10px 5px;
+  font-size:18px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 2px solid var(--background-color-dark);
+}
+
+input.betting {
+  max-width: 100px;
+}
+
+input:focus {
+  border-bottom: 2px solid var(--table-primary-color); 
 }
 
 @keyframes shadow-pulse
