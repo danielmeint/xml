@@ -46,6 +46,43 @@
             <g id="player_cards">
               <xsl:for-each select="game/player">
                 <g id="player_{position()}_of_{count(/game/player)}">
+                  <xsl:if test="bet > 0">
+                    <g viewBox="0 0 100 100">
+                      <xsl:choose>
+                        <xsl:when test="@state = 'won' or @state='tied'">
+                          <xsl:attribute name="style">animation: chip-won 1s ease-in forwards</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="@state = 'lost'">
+                          <xsl:attribute name="style">animation: chip-lost 1s ease-in forwards</xsl:attribute>
+                        </xsl:when>
+                      </xsl:choose>
+                      
+                      <xsl:choose>
+                        <xsl:when test="bet >= 100">
+                          <xsl:attribute name="class">bet chip chip-100</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="bet >= 25">
+                          <xsl:attribute name="class">bet chip chip-25</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="bet >= 10">
+                          <xsl:attribute name="class">bet chip chip-10</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="bet >= 5">
+                          <xsl:attribute name="class">bet chip chip-5</xsl:attribute>
+                        </xsl:when>
+                        <xsl:when test="bet >= 1">
+                          <xsl:attribute name="class">bet chip chip-1</xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                          <xsl:attribute name="class">bet chip</xsl:attribute>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                      <use href="/static/blackjack/chips.svg#chip" width="50" height="50"/>
+                      <text x="25" y="25" alignment-baseline="central">
+                        <xsl:value-of select="bet"/>
+                      </text>
+                    </g>
+                  </xsl:if>
                   <xsl:if test="@state = 'active'">
                     <use viewBox="0 0 450 450" height="20px" width="20px"
                       href="/static/blackjack/gui.svg#arrow_down"/>

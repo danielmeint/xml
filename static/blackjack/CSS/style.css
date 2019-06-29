@@ -162,7 +162,7 @@ g[id *= 'clubs'] text,
 .chip text {
     dominant-baseline: central;
     fill: white;
-    font-size: 32px;
+    font-size: 1rem;
     text-anchor: middle;
 }
 
@@ -295,37 +295,26 @@ g[id *= 'clubs'] text,
     transform: translate(var(--pos-5-x), var(--pos-5-y));
 }
 
-/*
-/\* player 1 *\/
-#player_cards .card_group:nth-child(1) {
-    transform: translate(340px, 390px);
+/* bets */
+#player_1_of_4 .bet, #player_1_of_5 .bet {
+    transform: translate(-10px, -50px)
 }
 
-/\* player 2 *\/
-#player_cards .card_group:nth-child(2) {
-    transform: translate(520px, 350px);
+#player_1_of_2 .bet, #player_1_of_3 .bet, #player_2_of_4 .bet, #player_2_of_5 .bet {
+    transform: translate(5px, -45px)
 }
 
-/\* player 3 *\/
-#player_cards .card_group:nth-child(3) {
-    transform: translate(160px, 350px);
+#player_1_of_1 .bet, #player_2_of_2 .bet, #player_2_of_3 .bet, #player_3_of_4 .bet, #player_3_of_5 .bet {
+    transform: translate(35px, -55px)
 }
 
-/\* player 4 *\/
-#player_cards .card_group:nth-child(4) {
-    transform: translate(670px, 280px);
+#player_3_of_3 .bet, #player_4_of_4 .bet, #player_4_of_5 .bet {
+    transform: translate(65px, -45px)
 }
 
-/\* player 5 *\/
-#player_cards .card_group:nth-child(5) {
-    transform: translate(10px, 280px);
+#player_5_of_5 .bet {
+    transform: translate(80px, -50px)
 }
-
-.card_group use:nth-child(2) {
-    transform: translate(40px, 10px);
-}
-
-*/
 
 /* table */
 table{ 
@@ -453,5 +442,19 @@ table tbody tr td a{
   }
   100% {
     transform: scale(0.1) translate(0px, -500px)
+  }
+}
+
+@keyframes chip-won
+{
+  100% {
+    transform: scale(0.5) translate(50px, 50px);
+  }
+}
+
+@keyframes chip-lost
+{
+  100% {
+    transform: translate(0px, -1000px);
   }
 }
