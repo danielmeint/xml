@@ -18,7 +18,7 @@
         <link rel="stylesheet" type="text/css" href="/static/blackjack/CSS/style.css"/>
       </head>
       <body>
-        <a id="exit-button" class="btn" href="/blackjack">&lt; Menu</a>
+        <a href="/blackjack"><button class="menu" id="game">&lt; Menu</button></a>
         <div class="container flex-container">
           <svg viewBox="0 0 800 620">
             <!-- table dimensions: 800 x 450 -->
@@ -114,48 +114,65 @@
             </g>
           </svg>
 
-          <div id="info">
             <xsl:choose>
               <xsl:when test="game/@state = 'playing'">
                 <p><xsl:value-of select="game/player[@state = 'active']/@name"/>'s turn</p>
                 <p id="hand_value">
                   <xsl:value-of select="game/player[@state = 'active']/hand/@value"/>
                 </p>
-                <div class="button_group">
-                  <a href="/blackjack/{game/@id}/stand"
-                    class="btn btn-red btn-small btn-stand">Stand</a>
+                <div class="buttongroup">
+                  <div>
+                  <a href="/blackjack/{game/@id}/stand">
+                    <button class="stand">Stand</button></a>
+                  </div>
                   <xsl:choose>
                     <xsl:when test="$activePlayerHandValue &gt; 21">
-                      <a class="btn btn-disabled btn-busted">Busted</a>
+                      <div>
+                    <button class="hit" id="disabled">Busted</button>
+                        </div>
                     </xsl:when>
                     <xsl:otherwise>
-                      <a href="/blackjack/{game/@id}/hit"
-                        class="btn btn-small btn-hit">Hit</a>
+                      <div>
+                      <a href="/blackjack/{game/@id}/hit"><button class="hit">Hit</button></a>
+                        </div>
                     </xsl:otherwise>
                   </xsl:choose>
                   <xsl:choose>
+                    
                     <xsl:when test="$activePlayerHandCardCount &gt; 2 or $activePlayerBet * 2 &gt; $activePlayerBalance">
-                      <a class="btn btn-disabled">Double</a>
+                      <div>
+                      <button class="double" id="disabled">Double</button>
+                        </div>
                     </xsl:when>
                     <xsl:otherwise>
+                      <div>
                       <a href="/blackjack/{game/@id}/double"
-                        class="btn btn-blue btn-double">Double</a>
+                        ><button class="double">Double</button></a>
+                        </div>
                     </xsl:otherwise>
+                      
                   </xsl:choose>
                   <xsl:choose>
                     <xsl:when test="$activePlayerBet * 2 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
-                      <a class="btn btn-disabled">Insurance</a>
+                      <div>
+                      <button class="insurance" id="disabled">Insurance</button>
+                        </div>
                     </xsl:when>
                     <xsl:otherwise>
-                      <a href="/blackjack/{game/@id}/insurance"
-                        class="btn btn-purple btn-insurance">Insurance</a>
+                      <div>
+                      <a href="/blackjack/{game/@id}/insurance">
+                        <button id="insurance">Insurance</button>
+                      </a>
+                        </div>
                     </xsl:otherwise>
                   </xsl:choose>
                 </div>
               </xsl:when>
-
+              </xsl:choose>
+          
+              <xsl:choose>
               <xsl:when test="game/@state = 'toEvaluate'">
-                <a href="/blackjack/{game/@id}/evaluate" class="btn btn-large">Show Results</a>
+                <a href="/blackjack/{game/@id}/evaluate"><button>Show Results</button></a>
               </xsl:when>
 
               <xsl:when test="game/@state = 'evaluated'">

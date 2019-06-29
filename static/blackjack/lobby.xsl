@@ -10,8 +10,10 @@
             <head>
                 <link rel="stylesheet" type="text/css" href="/static/blackjack/CSS/style.css"/>
             </head>
+            <div class="navbar">
+                <a href="/blackjack"><button class="menu">&lt; Menu</button></a>
+            </div>
             <body>
-                <a style="text-decoration: none; outline: none;" href="/blackjack"><h1 style="font-family: Helvetica, sans-serif;box-sizing: border-box; font-size:32;text-align: center; font-weight:bold; color: black">XForms' Blackjack</h1></a>
                 <xsl:choose>
                     <xsl:when test="data/screen/text() = 'games'">
                         <table id="games-table" >

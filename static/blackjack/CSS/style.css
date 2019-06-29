@@ -35,6 +35,19 @@ body {
   background-color: var(--background-color-light);
 }
 
+.navbar {
+    display: flex;
+    align-items: center;
+    height:60px;
+    background-color: var(--table-primary-color);
+    margin-bottom: 20px;
+}
+
+.navbar#game {
+    margin: 0;
+    background-color: #FFFFFF00;
+}
+
 h1, h2, h3 {
   text-align: center;
 }
@@ -42,7 +55,7 @@ h1, h2, h3 {
 .container {
     flex-direction: column;
     align-items: center;
-
+    justify-content: center;
     max-height: 100vh;
 }
 
@@ -56,18 +69,6 @@ svg {
   transform: scale(0.1) translate(0px, -500px);
   fill: red;
   animation: arrow 1s infinite;
-}
-
-#info > form {
-  display: table;
-}
-
-#info > form > div {
-  display: table-row;
-}
-
-#info > form > div > label, #info > form > div > input {
-  display: table-cell;
 }
 
 svg .label {
@@ -187,72 +188,76 @@ g[id *= 'clubs'] text,
 }
 
 /* buttons */
-.btn {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
+button {
     text-decoration: none;
-    
     background-color: var(--table-primary-color);
-    color: var(--table-secondary-color);
-    border-radius: 28px;
+    color: white;
+    border-radius: 4px;
     border: none;
     margin: 8px;
     display: inline-block;
     cursor: pointer;
     
-    padding: 16px 32px;
-    
+    padding: 12px 20px;
     text-align: center;
-    font-weight: bold;
-    font-size: 17px;
+    font-size: 15px;
     text-decoration: none;
+    box-shadow: var(--shadow);
+    text-transform: uppercase;
 }
 
-.btn:hover {
-    opacity: 0.6;
+button:hover {
+    opacity: 0.9;
 }
 
-.btn-small {
-    width: 112px;
+button:active {
+    opacity: 0.8;
 }
 
-.btn-disabled, .btn-disabled:hover {
-  background-color: #6c757d;
-  color: white;
-  
-  cursor: not-allowed;
-  opacity: 0.5;
+button#disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+button.menu {
+    color: var(--table-secondary-color);
+    box-shadow: none;
 }
 
-.btn-red:hover {
-    background-color :red;
+button.menu#game {
+        position: absolute
 }
-.btn-red{
+
+@media (min-width: 850px) {
+    button.menu#game {
+        color: white;
+        box-shadow: var(--shadow);
+    } 
+}
+button.stand{
     background-color :#f45c42;
 }
 
-
-.btn-purple{
+button.hit{
     background-color: #f243ef;
 }
 
-.btn-purple:hover{
-    background-color :purple;
-}
-
-
-.btn-blue {
+button.double{
     background-color:#2bd6e2;
 }
 
-.btn-blue:hover{
-    background-color :blue;
+button.insurance{
+    background-color:#70ae98;
 }
 
-#exit-button {
-    position: absolute;
+.buttongroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.buttongroup a {
+    display: block;
+    width: 1%;
 }
 
 /* placing cards */
@@ -340,7 +345,7 @@ table thead th{
     color: black;
     height: var(--table-height);
     opacity: 0.5;
-    padding: 20px;
+    padding: var(--spacing);
     border-bottom: 1px solid var(--background-color-dark);
 }
 
