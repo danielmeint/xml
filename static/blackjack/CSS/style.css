@@ -422,6 +422,50 @@ table tbody tr td a{
     }
 }
 
+.dialog{
+    flex-grow: 2;
+    background-color: white;
+    border-radius: 5px;
+    padding: var(--spacing);
+    width: 60%;
+    height: auto;
+    box-shadow: var(--shadow);
+    animation: dialog 0.4s;
+}
+
+.dialog:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.dialog--header {
+    font-size: 35px;
+    text-align: left;
+    padding: calc((var(--spacing)) - 10px);
+    border-bottom: 1px solid var(--background-color-dark);
+}
+
+.dialog--content {
+    padding-left: calc((var(--spacing)) - 10px);
+    font-size: 18px;
+}
+
+.dialog--content form div{
+    padding-top: 10px;
+}
+
+.dialog button{
+    float: right;
+}
+
+.dialog #lose{
+    color: red;
+    opacity: 0.5;
+}
+
+.dialog #win{
+    color: green;
+}
+
 @keyframes shadow-pulse
 {
   0% {
@@ -456,5 +500,12 @@ table tbody tr td a{
 {
   100% {
     transform: translate(0px, -1000px);
+  }
+}
+
+@keyframes dialog
+{
+  0% {
+      transform: translate(0%, +200%);
   }
 }

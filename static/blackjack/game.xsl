@@ -159,27 +159,58 @@
               </xsl:when>
 
               <xsl:when test="game/@state = 'evaluated'">
+                <div class="dialog">
+                <div class="dialog--result">
+                  <div class="dialog--header">Results &#x1F4B0;</div>
+                <div class="dialog--content">
                 <xsl:for-each select="game/player">
-                  <p>
-                    <span>
-                      <xsl:value-of select="@name"/>
-                    </span>
-                    <span>
-                      <xsl:value-of select="@state"/>
-                    </span>
-                    <span>
-                      <xsl:value-of select="bet"/>
-                    </span>
-                  </p>
+                  <xsl:choose>
+                    <xsl:when test="@state = 'won' or @state='tied'">
+                      <p id="win">
+                        &#x1F60A; &#xA0;
+                        <span>
+                          <xsl:value-of select="@name"/>
+                        </span>
+                        <span>
+                          &#x2B;
+                        </span>
+                        <span>
+                          <xsl:value-of select="bet"/>
+                        </span>
+                      </p>
+                    </xsl:when>
+                    <xsl:when test="@state = 'lost'">
+                      <p id="lose">
+                        <span>
+                        &#x1F612; &#xA0;
+                        </span>
+                        <span>
+                          <xsl:value-of select="@name"/>
+                        </span>
+                        <span>
+                          &#8722;
+                        </span>
+                        <span>
+                          <xsl:value-of select="bet"/>
+                        </span>
+                      </p>
+                    </xsl:when>
+                  </xsl:choose>
                 </xsl:for-each>
-
-                <a href="/blackjack/{game/@id}/reset" class="btn btn-large">New Round</a>
+                </div>
+                  <a href="/blackjack/{game/@id}/reset"><button>New Round</button></a>
+                </div>
+                </div>
               </xsl:when>
 
 
               <xsl:when test="game/@state = 'betting'">
+                <div class="dialog">
+                <div class="dialog--header">
+                  Place your bets!
+                </div>
+                <div class="dialog--content">
                 <form action="/blackjack/{game/@id}/play" method="POST">
-                  <p>Place your bets!</p>
                   <xsl:for-each select="game/player">
                     <div>
                       <label for="">
@@ -189,12 +220,12 @@
                         max="{balance}" required=""/>
                     </div>
                   </xsl:for-each>
-                  <input type="submit" value="Deal" class="btn"/>
+                  <button type="submit">Deal</button>
                 </form>
+                </div>
+                </div>
               </xsl:when>
-            </xsl:choose>
-
-          </div>
+              </xsl:choose>
         </div>
       </body>
     </html>
