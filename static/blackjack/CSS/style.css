@@ -427,12 +427,13 @@ table tbody tr td a{
     }
 }
 
+/* dialog */
 .dialog{
     flex-grow: 2;
     background-color: white;
     border-radius: 5px;
     padding: var(--spacing);
-    width: 60%;
+    width: 30%;
     height: auto;
     box-shadow: var(--shadow);
     animation: dialog 0.4s;
@@ -446,7 +447,6 @@ table tbody tr td a{
     font-size: 35px;
     text-align: left;
     padding: calc((var(--spacing)) - 10px);
-    border-bottom: 1px solid var(--background-color-dark);
 }
 
 .dialog--content {
