@@ -26,16 +26,15 @@ function dealer:play($game,$deckOffset){
   let $dealer := $game/dealer
   let $oldHand := $dealer/hand
   let $oldDeck := $dealer/deck
+  let $tmpDeck := $oldDeck/card[position()>1]
   return (
     if($deckOffset=1)then(
-    (: use tail of deck :)
-      let $result := helper:drawTo17($oldHand, $oldDeck)
+    (: should use tail of deck instead :)
+      let $result := helper:drawTo17($oldHand,$oldDeck)
       let $newHand := $result/hand
       let $newDeck := $result/deck
       return(
-      replace node $oldHand with $newHand,
-      replace node $oldDeck with $newDeck,
-      delete node $oldDeck/card[1]
+      replace node $oldHand with $newHand
     ))
     else(
       let $result := helper:drawTo17($oldHand, $oldDeck)

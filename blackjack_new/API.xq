@@ -175,22 +175,10 @@ function api:hit($gameId as xs:integer){
   let $game := $api:db/games/game[@id = $gameId]
   let $currPlayer := $game/player[@state='active']
   return (
-    helper:hit($currPlayer),
+    player:hit($currPlayer),
     update:output(helper:showGame($gameId))
   )
     
-};
-
-declare
-%rest:path("blackjack/{$gameId=[0-9]+}/hit/dealer")
-%rest:GET
-%updating
-function api:hitDealer($gameId as xs:integer) {
-  let $game :=$api:db/games/game[@id=$gameId]
-  return (
-    helper:hit($game/dealer),
-    update:output(helper:showGame($gameId))
-  )
 };
 
 declare
@@ -200,7 +188,7 @@ declare
 function api:stand($gameId as xs:integer) {
   let $game := $api:db/games/game[@id=$gameId]
   return (
-    helper:stand($game),
+    player:stand($game),
     update:output(helper:showGame($gameId))
   )
 };

@@ -48,44 +48,6 @@ function helper:replaceAll($oldNodes, $newNodes) {
   )
 };
 
-
-declare 
-%updating
-function helper:hit($self){
-  let $game := $self/..
-  let $oldHand := $self/hand
-  let $oldDeck := $game/dealer/deck
-  let $resultTuple := deck:drawCard($oldDeck)
-  let $newCard := $resultTuple/card
-  let $newDeck := $resultTuple/deck
-  let $newHand := hand:addCard($oldHand, $newCard)
-  return (
-    replace node $oldHand with $newHand,
-    replace node $oldDeck with $newDeck
-  )
-};
-
-declare
-%updating
-function helper:stand($game){
-  let $currPlayer := $game/player[@state='active']
-  let $position := index-of($game/player/@id , $game/player[@state='active']/@id)
-  let $nextPosition := $position +1
-  let $nextPlayer := $game/player[$nextPosition]
-  return (
-    replace value of node $currPlayer/@state with 'inactive',
-    if (exists($nextPlayer))
-    then (
-      replace value of node $nextPlayer/@state with 'active'
-    ) else (
-      (: everybody played :)
-      dealer:play($game,0),
-      replace value of node $game/@state with 'toEvaluate'
-    )
-  )
-};
-
-
 declare
 %updating
 function helper:evaluateGame($game) {

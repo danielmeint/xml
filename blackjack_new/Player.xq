@@ -126,13 +126,18 @@ function player:double($game){
   let $oldBet := $currPlayer/bet
   let $newBet := $oldBet * 2
   let $oldHand := $currPlayer/hand
-  let $newHand := hand:addCard($oldHand, head($deck))
+  (: this is empty for some reason :)
+  let $resultTuple := deck:drawCard($deck)
+  let $newCard := $resultTuple/card
+  let $newDeck := $resultTuple/deck
+  let $newHand := hand:addCard($oldHand, $newCard)
+  let $players := $game/player
 
   return (
     if(exists($nextPlayer))
     then(
-        helper:hit($currPlayer),
-        helper:stand($game),
+        player:hit($currPlayer),
+        player:stand($game),
         replace value of node $oldBet with $newBet
     )
     else(
@@ -145,6 +150,42 @@ function player:double($game){
   )
 };
 
+
+declare 
+%updating
+function player:hit($self){
+  let $game := $self/..
+  let $oldHand := $self/hand
+  let $oldDeck := $game/dealer/deck
+  let $resultTuple := deck:drawCard($oldDeck)
+  let $newCard := $resultTuple/card
+  let $newDeck := $resultTuple/deck
+  let $newHand := hand:addCard($oldHand, $newCard)
+  return (
+    replace node $oldHand with $newHand,
+    replace node $oldDeck with $newDeck
+  )
+};
+
+declare
+%updating
+function player:stand($game){
+  let $currPlayer := $game/player[@state='active']
+  let $position := index-of($game/player/@id , $game/player[@state='active']/@id)
+  let $nextPosition := $position +1
+  let $nextPlayer := $game/player[$nextPosition]
+  return (
+    replace value of node $currPlayer/@state with 'inactive',
+    if (exists($nextPlayer))
+    then (
+      replace value of node $nextPlayer/@state with 'active'
+    ) else (
+      (: everybody played :)
+      dealer:play($game,0),
+      replace value of node $game/@state with 'toEvaluate'
+    )
+  )
+};
 
 
 
