@@ -17,7 +17,7 @@
       <head>
         <link rel="stylesheet" type="text/css" href="/static/blackjack/CSS/style.css"/>
       </head>
-      <body>
+      <body id="game">
         <a href="/blackjack"><button class="menu" id="game">&lt; Menu</button></a>
         <div class="container flex-container">
           <svg viewBox="0 0 800 620">
@@ -116,10 +116,10 @@
 
             <xsl:choose>
               <xsl:when test="game/@state = 'playing'">
-                <p><xsl:value-of select="game/player[@state = 'active']/@name"/>'s turn</p>
-                <p id="hand_value">
-                  <xsl:value-of select="game/player[@state = 'active']/hand/@value"/>
-                </p>
+                <div class="dialog" id="buttongroup">
+                <div class="dialog--header">
+                  <xsl:value-of select="game/player[@state = 'active']/@name"/>
+                </div>
                 <div class="buttongroup">
                   <div>
                   <a href="/blackjack/{game/@id}/stand">
@@ -166,6 +166,7 @@
                         </div>
                     </xsl:otherwise>
                   </xsl:choose>
+                </div>
                 </div>
               </xsl:when>
               </xsl:choose>

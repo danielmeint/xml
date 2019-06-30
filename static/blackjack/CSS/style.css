@@ -35,6 +35,13 @@ body {
   background-color: var(--background-color-light);
 }
 
+body#game {
+  background: #BD1A2E;
+  background: linear-gradient(to top right, #bd1a2e, #4b0a12);
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
 .navbar {
     display: flex;
     align-items: center;
@@ -253,6 +260,7 @@ button.insurance{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .buttongroup a {
@@ -465,6 +473,16 @@ table tbody tr td a{
 .dialog button{
     float: right;
     margin-top: 30px;
+}
+
+.dialog#buttongroup {
+    position: relative;
+    animation: none;
+    box-shadow: var(--shadow);
+}
+
+.dialog#buttongroup button {
+    float:none
 }
 
 .dialog #lose{
