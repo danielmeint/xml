@@ -187,7 +187,7 @@
                 <div class="dialog--content">
                 <xsl:for-each select="game/player">
                   <xsl:choose>
-                    <xsl:when test="@state = 'won' or @state='tied'">
+                    <xsl:when test="@state = 'won'">
                       <p id="win">
                         &#x1F60A; &#xA0;
                         <span>
@@ -214,6 +214,20 @@
                         </span>
                         <span>
                           <xsl:value-of select="bet"/>
+                        </span>
+                      </p>
+                    </xsl:when>
+                    <xsl:when test="@state='tied'">
+                      <p id="tie">
+                        &#x1F60A; &#xA0;
+                        <span>
+                          <xsl:value-of select="@name"/>
+                        </span>
+                        <span>
+                          &#xB1;
+                        </span>
+                        <span>
+                          0
                         </span>
                       </p>
                     </xsl:when>

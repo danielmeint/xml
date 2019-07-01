@@ -489,13 +489,17 @@ table tbody tr td a{
     float:none
 }
 
+.dialog #win{
+    color: green;
+}
+
 .dialog #lose{
     color: red;
     opacity: 0.5;
 }
 
-.dialog #win{
-    color: green;
+.dialog #tie{
+    opacity: 0.5;
 }
 
 
