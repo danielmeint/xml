@@ -176,7 +176,7 @@ function api:play($gameId, $p1_bet, $p2_bet, $p3_bet, $p4_bet, $p5_bet) {
   let $bets := ($p1_bet, $p2_bet, $p3_bet, $p4_bet, $p5_bet)
   let $game := $api:db/games/game[@id=$gameId]
   return (
-    helper:play($game,$bets),
+    game:play($game,$bets),
     update:output(helper:showGame($gameId)) 
   )
 };
@@ -238,7 +238,7 @@ declare
 function api:evaluateGame($gameId as xs:integer) {
   let $game := $api:db/games/game[@id=$gameId]
   return (
-    helper:evaluateGame($game),
+    game:evaluateGame($game),
     update:output(helper:showGame($gameId))
   )
 };

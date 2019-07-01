@@ -34,7 +34,7 @@ declare function player:reset($self) {
   let $hand := $player:defaultHand
   let $insurance := "false"
   return( 
-    if($balance='0')
+    if($balance<'5')
     then()
     else(
         player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)

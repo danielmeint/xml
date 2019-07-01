@@ -2,6 +2,7 @@ module namespace game="gruppe_xforms/blackjack/game";
 
 import module namespace dealer="gruppe_xforms/blackjack/dealer" at 'Dealer.xq';
 import module namespace player="gruppe_xforms/blackjack/player" at 'Player.xq';
+import module namespace helper="gruppe_xforms/blackjack/helper" at 'Helper.xq';
 
 
 declare variable $game:defaultId := "undefined";
@@ -54,4 +55,79 @@ declare function game:setPlayers($self, $players) {
   let $state := $self/@state
   let $dealer := $self/dealer
   return game:newGame($id, $state, $dealer, $players)
+};
+
+
+declare 
+%updating
+function game:play($game,$bets){
+  let $oldPlayers := $game/player
+  let $firstPlayer := $oldPlayers[1]
+  return (
+    if(exists($firstPlayer))then(
+        replace value of node $game/@state with 'playing',
+        helper:replaceAll($oldPlayers/bet/text(), $bets),
+        replace value of node $firstPlayer/@state with 'active',
+        dealer:deal($game) 
+    )else(
+        
+    )
+  )
+};
+
+declare
+%updating
+function game:evaluateGame($game) {
+  let $players := $game/player
+  let $toBeat := $game/dealer/hand/@value
+  return (
+    helper:evaluatePlayers($players, $toBeat),
+    replace value of node $game/@state with 'evaluated'
+  )
+};
+
+declare
+%updating
+function game:evaluatePlayers($players, $toBeat) {
+  for $player in $players
+  return helper:evaluatePlayer($player, $toBeat)
+};
+
+declare
+%updating
+function game:evaluatePlayer($player, $toBeat as xs:integer) {
+   if ($player/hand/@value <= 21 and ($player/hand/@value > $toBeat or $toBeat > 21))
+    then (
+      (:insurance + win -> 2 * Einsatz:)
+      if(($player/@insurance = "true") and ($toBeat = 21) )
+      then (
+        replace value of node $player/@state with "won",
+        replace value of node $player/balance with $player/balance/text() + $player/bet/text() + $player/bet/text()
+      )
+      else (
+        replace value of node $player/@state with "won",
+        replace value of node $player/balance with $player/balance/text() + $player/bet/text()
+    )
+    )
+    else if ($player/hand/@value <= 21 and $player/hand/@value = $toBeat)
+    then (
+      (:insurance + tie -> 1 * Einsatz:)
+      if(($player/@insurance = "true") and ($toBeat = 21) ) then (
+        replace value of node $player/@state with "won",
+        replace value of node $player/balance with $player/balance/text() + $player/bet/text()
+      )
+      else (
+      replace value of node $player/@state with "tied"
+    )  
+  )
+    else (
+       (:insurance + Lose -> 0 * Einsatz:)
+      if(($player/@insurance = "true") and ($toBeat = 21) ) then (
+        replace value of node $player/@state with "won"
+      )
+      else (
+      replace value of node $player/@state with "lost",
+      replace value of node $player/balance with $player/balance/text() - $player/bet/text()
+    )  
+)
 };

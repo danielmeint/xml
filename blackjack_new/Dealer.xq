@@ -22,6 +22,21 @@ declare function dealer:newDealer() {
 
 declare
 %updating
+function dealer:deal($game) {
+  for $player at $index in ($game/player, $game/dealer)
+  let $oldHand := $player/hand
+  let $deck := $game/dealer/deck
+  let $newHand := hand:addCard(hand:addCard($oldHand, $deck/card[$index * 2 - 1]), $deck/card[$index * 2])
+  return (
+    replace node $oldHand with $newHand,
+    delete node $deck/card[$index * 2 - 1],
+    delete node $deck/card[$index * 2]
+  )
+};
+
+
+declare
+%updating
 function dealer:play($game,$deckOffset){
   let $dealer := $game/dealer
   let $oldHand := $dealer/hand
