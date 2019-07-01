@@ -232,6 +232,7 @@ button#disabled {
 button.menu {
     color: var(--table-secondary-color);
     box-shadow: none;
+    z-index: 100;
 }
 
 button.menu#game {
@@ -442,9 +443,10 @@ table tbody tr td a{
 /* dialog */
 .dialog{
     position: absolute;
-    top: 50%;
+    top: 35%;
     width: 40%;
     min-width: 300px;
+    max-width: 500px;
     background-color: white;
     border-radius: 5px;
     padding: var(--spacing);
