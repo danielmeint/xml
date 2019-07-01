@@ -136,6 +136,20 @@ function api:showRaw($gameId) {
     $api:db/games/game[@id=$gameId]
 };
 
+
+declare
+%rest:path("/blackjack/{$gameId=[0-9]+}/delete")
+%rest:GET
+%updating
+function api:delete($gameId) {
+  let $oldGame := $api:db/games/game[@id=$gameId]
+  return (
+     delete node $api:db/games/game[@id=$gameId],
+    update:output(helper:showGames())
+  )
+};
+
+
 declare
 %rest:path("/blackjack/{$gameId=[0-9]+}/reset")
 %rest:GET

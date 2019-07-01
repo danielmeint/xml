@@ -25,6 +25,7 @@
                                     <th scope="col">Player 3 (Balance)</th>
                                     <th scope="col">Player 4 (Balance)</th>
                                     <th scope="col">Player 5 (Balance)</th>
+									<th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,6 +85,12 @@
                                                 </xsl:if>  
                                             </a>
                                         </td>
+										<td>
+										<div>
+											<a href="/blackjack/{@id}/delete">
+											<button class="delete">Delete</button></a>
+										</div>
+										</td>
                                     </tr>
                                 </xsl:for-each>
                             </tbody>

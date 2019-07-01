@@ -10,6 +10,11 @@ declare function helper:showGame($gameId) {
   return web:redirect($redir)
 };
 
+declare function helper:showGames() {
+  let $redir := "/blackjack/all"
+  return web:redirect($redir)
+};
+
 declare function helper:getOptimalSum($values as xs:integer*) {
   if (sum($values) le 21 or not(some $x in $values satisfies $x eq 11))
   then (
