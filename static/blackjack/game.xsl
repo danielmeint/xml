@@ -24,9 +24,7 @@
             <!-- table dimensions: 800 x 450 -->
             <use href="/static/blackjack/table.svg#table" x="0" y="0"/>
             <g class="card_group" id="dealer">
-
               <xsl:choose>
-
                 <xsl:when test="game/@state = 'playing' and count(game/dealer/hand/card) = '2'">
                   <use
                     href="/static/blackjack/cards.svg#{game/dealer/hand/card[1]/@value}_{game/dealer/hand/card[1]/@suit}"/>
@@ -187,7 +185,7 @@
                 <div class="dialog--content">
                 <xsl:for-each select="game/player">
                   <xsl:choose>
-                    <xsl:when test="@state = 'won' or @state='tied'">
+                    <xsl:when test="@state = 'won'">
                       <p id="win">
                         &#x1F60A; &#xA0;
                         <span>
@@ -217,6 +215,20 @@
                         </span>
                       </p>
                     </xsl:when>
+                    <xsl:when test="@state='tied'">
+                      <p id="tie">
+                        &#x1F60A; &#xA0;
+                        <span>
+                          <xsl:value-of select="@name"/>
+                        </span>
+                        <span>
+                          &#xB1;
+                        </span>
+                        <span>
+                          0
+                        </span>
+                      </p>
+                    </xsl:when>
                   </xsl:choose>
                 </xsl:for-each>
                 </div>
@@ -224,8 +236,17 @@
                 </div>
                 </div>
               </xsl:when>
-
-
+              <xsl:when test="count(game/player) = 0">
+                <!-- Game has to be removed here! -->
+                <div class="dialog">
+                  <div class="dialog--header">
+                    No Players left!
+                  </div>
+                  <div class="dialog--content">
+                    <a href="/blackjack"><button>Main Menu</button></a>
+                  </div>
+                </div>
+              </xsl:when>
               <xsl:when test="game/@state = 'betting'">
                 <div class="dialog">
                 <div class="dialog--header">
