@@ -198,6 +198,10 @@ g[id *= 'clubs'] text,
     fill: black;
 }
 
+.chip-insurance {
+    fill: orange;
+}
+
 /* buttons */
 button {
     text-decoration: none;

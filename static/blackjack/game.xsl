@@ -54,7 +54,6 @@
                           <xsl:attribute name="style">animation: chip-lost 1s ease-in forwards</xsl:attribute>
                         </xsl:when>
                       </xsl:choose>
-                      
                       <xsl:choose>
                         <xsl:when test="bet >= 100">
                           <xsl:attribute name="class">bet chip chip-100</xsl:attribute>
@@ -80,6 +79,18 @@
                         <xsl:value-of select="bet"/>
                       </text>
                     </g>
+                    <xsl:if test="@insurance = 'true'">
+                    <g>
+                      <xsl:attribute name="class">bet chip chip-insurance</xsl:attribute>
+                      <xsl:if test="@state = 'won' or @state = 'tied' or @state = 'lost'">
+                        <xsl:attribute name="style">visibility: hidden</xsl:attribute>
+                      </xsl:if>
+                      <use href="/static/blackjack/chips.svg#chip" width="40" height="40" transform="translate(40, -30)"/>
+                      <text x="20" y="20" alignment-baseline="central" transform="translate(40, -30)">
+                        I
+                      </text>
+                    </g>
+                    </xsl:if>
                   </xsl:if>
                   <g class="card_group">
                     <xsl:for-each select="hand/card">
@@ -260,7 +271,7 @@
                       <label for="">
                         <xsl:value-of select="@name"/>
                       </label>
-                      <input class="betting" type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="0"
+                      <input class="betting" type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="5" step="5"
                         max="{balance}" required=""/>
                     </div>
                   </xsl:for-each>
