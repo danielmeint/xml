@@ -20,7 +20,7 @@
       <body id="game">
         <a href="/blackjack"><button class="menu" id="game">&lt; Menu</button></a>
         <div class="container flex-container">
-          <svg viewBox="0 0 800 620">
+          <svg viewBox="-100 0 1000 620">
             <!-- table dimensions: 800 x 450 -->
             <use href="/static/blackjack/table.svg#table" x="0" y="0"/>
             <g class="card_group" id="dealer">
