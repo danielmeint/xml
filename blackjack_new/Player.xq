@@ -142,7 +142,7 @@ function player:double($game){
     )
     else(
         replace value of node $oldBet with $newBet,
-        replace value of node $oldHand with $newHand,
+        replace node $oldHand with $newHand,
         replace value of node $currPlayer/@state with 'inactive',
         dealer:play($game,1),
         replace value of node $game/@state with 'toEvaluate'
