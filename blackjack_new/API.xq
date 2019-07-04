@@ -18,7 +18,7 @@ declare
 %rest:GET
 %output:method("html")
 function api:entry() {
-  doc("../static/blackjack/menu.html")
+  doc("../static/blackjack/html/menu.xhtml")
 };
 
 (: Setup the database and load the model :)
@@ -44,7 +44,7 @@ declare
 %rest:GET
 %output:method("html")
 function api:newGame() {
-    doc("newGame.html")
+    doc("../static/blackjack/html/newGame.xhtml")
 };
 
 declare
