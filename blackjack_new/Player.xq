@@ -125,7 +125,6 @@ function player:double($game){
   let $oldBet := $currPlayer/bet
   let $newBet := $oldBet * 2
   let $oldHand := $currPlayer/hand
-  (: this is empty for some reason :)
   let $resultTuple := deck:drawCard($deck)
   let $newCard := $resultTuple/card
   let $newDeck := $resultTuple/deck
@@ -142,10 +141,8 @@ function player:double($game){
     else(
         replace value of node $oldBet with $newBet,
         replace node $oldHand with $newHand,
-        (:replace value of node $currPlayer/@state with 'inactive',:)
         dealer:play($game,1),
-        (:replace value of node $game/@state with 'toEvaluate':)
-      game:evaluateGame($game)
+        replace value of node $game/@state with 'toEvaluate'
     )
   )
 };

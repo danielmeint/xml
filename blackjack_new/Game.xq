@@ -109,7 +109,7 @@ function game:evaluatePlayer($player, $toBeat as xs:integer) {
        )else(
         replace value of node $player/@state with "won",
         replace value of node $player/balance with $player/balance/text() + $player/bet/text(),
-        replace value of node $player/profit with ceiling(0.5 * $player/bet)
+        replace value of node $player/profit with $player/bet
        )
     )
     else if ($player/hand/@value <= 21 and $player/hand/@value = $toBeat)

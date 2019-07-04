@@ -41,11 +41,11 @@ function dealer:play($game,$deckOffset){
   let $dealer := $game/dealer
   let $oldHand := $dealer/hand
   let $oldDeck := $dealer/deck
-  let $tmpDeck := $oldDeck/card[position()>1]
+  let $newDeck := deck:removeCardAtIndex($oldDeck,1)
   return (
     if($deckOffset=1)then(
     (: should use tail of deck instead :)
-      let $result := helper:drawTo17($oldHand,$oldDeck)
+      let $result := helper:drawTo17($oldHand,$newDeck)
       let $newHand := $result/hand
       let $newDeck := $result/deck
       return(
