@@ -152,7 +152,7 @@
                   </xsl:choose>
                   <xsl:choose>
                     
-                    <xsl:when test="$activePlayerHandCardCount &gt; 2 or $activePlayerBet * 2 &gt; $activePlayerBalance">
+                    <xsl:when test="$activePlayerHandCardCount &gt; 2 or $activePlayerBet * 2 &gt; $activePlayerBalance or $isInsurance='true'">
                       <div>
                       <button class="double" id="disabled">Double</button>
                         </div>
@@ -273,7 +273,7 @@
                         <xsl:value-of select="@name"/>
                         
                       </label>
-                      <input class="betting" type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="5" step="5"
+                      <input class="betting" type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="5" 
                         max="{balance}" required=""/>
                       <label id="balance">
                         &#x1F4B0;
