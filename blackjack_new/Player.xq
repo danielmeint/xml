@@ -4,6 +4,7 @@ import module namespace hand="gruppe_xforms/blackjack/hand" at 'Hand.xq';
 import module namespace deck="gruppe_xforms/blackjack/deck" at 'Deck.xq';
 import module namespace helper="gruppe_xforms/blackjack/helper" at 'Helper.xq';
 import module namespace dealer="gruppe_xforms/blackjack/dealer" at 'Dealer.xq';
+import module namespace game="gruppe_xforms/blackjack/game" at 'Game.xq';
 
 declare variable $player:defaultId := "undefined";
 declare variable $player:defaultName := "undefined";
@@ -34,7 +35,7 @@ declare function player:reset($self) {
   let $hand := $player:defaultHand
   let $insurance := "false"
   return( 
-    if($balance<'5')
+    if($balance='0'or$balance='1'or$balance='2'or$balance='3'or$balance='4')
     then()
     else(
         player:newPlayer($id, $name, $state, $balance, $bet, $hand,$insurance)
@@ -143,9 +144,10 @@ function player:double($game){
     else(
         replace value of node $oldBet with $newBet,
         replace node $oldHand with $newHand,
-        replace value of node $currPlayer/@state with 'inactive',
+        (:replace value of node $currPlayer/@state with 'inactive',:)
         dealer:play($game,1),
-        replace value of node $game/@state with 'toEvaluate'
+        (:replace value of node $game/@state with 'toEvaluate':)
+      game:evaluateGame($game)
     )
   )
 };
@@ -175,17 +177,15 @@ function player:stand($game){
   let $nextPosition := $position +1
   let $nextPlayer := $game/player[$nextPosition]
   return (
-    replace value of node $currPlayer/@state with 'inactive',
     if (exists($nextPlayer))
     then (
+    replace value of node $currPlayer/@state with 'inactive',
       replace value of node $nextPlayer/@state with 'active'
     ) else (
       (: everybody played :)
       dealer:play($game,0),
       replace value of node $game/@state with 'toEvaluate'
+      (:game:evaluateGame($game):)
     )
   )
 };
-
-
-

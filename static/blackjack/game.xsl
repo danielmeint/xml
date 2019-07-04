@@ -254,7 +254,7 @@
                     No Players left!
                   </div>
                   <div class="dialog--content">
-                    <a href="/blackjack"><button>Main Menu</button></a>
+                    <a href="/blackjack/{game/@id}/delete"><button>Main Menu</button></a>
                   </div>
                 </div>
               </xsl:when>

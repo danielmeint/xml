@@ -81,7 +81,7 @@ function game:evaluateGame($game) {
   let $players := $game/player
   let $toBeat := $game/dealer/hand/@value
   return (
-    helper:evaluatePlayers($players, $toBeat),
+    game:evaluatePlayers($players, $toBeat),
     replace value of node $game/@state with 'evaluated'
   )
 };
@@ -90,7 +90,7 @@ declare
 %updating
 function game:evaluatePlayers($players, $toBeat) {
   for $player in $players
-  return helper:evaluatePlayer($player, $toBeat)
+  return game:evaluatePlayer($player, $toBeat)
 };
 
 declare

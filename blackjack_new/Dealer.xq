@@ -56,8 +56,7 @@ function dealer:play($game,$deckOffset){
       let $newHand := $result/hand
       let $newDeck := $result/deck
       return(
-      replace node $oldHand with $newHand,
-      replace node $oldDeck with $newDeck
+      replace node $oldHand with $newHand
     ))
   )
 };
