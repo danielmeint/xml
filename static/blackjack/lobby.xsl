@@ -10,9 +10,19 @@
             <head>
                 <link rel="stylesheet" type="text/css" href="/static/blackjack/CSS/style.css"/>
             </head>
+            <a href="/blackjack">
             <div class="navbar">
-                <a href="/blackjack"><button class="menu">&lt; Menu</button></a>
+                <xsl:choose>
+                    <xsl:when test="data/screen/text() = 'games'">
+                        <button class="menu">&lt; Load Game</button>
+                    </xsl:when>
+                <xsl:otherwise>
+                        <button class="menu">&lt; Highscore</button>
+                </xsl:otherwise>
+                </xsl:choose>
+                    
             </div>
+            </a>
             <body>
                 <xsl:choose>
                     <xsl:when test="data/screen/text() = 'games'">
@@ -88,7 +98,7 @@
 										<td>
 										<div>
 											<a href="/blackjack/{@id}/delete">
-											<button class="delete">Delete</button></a>
+											<button class="delete" style="color: white">Delete</button></a>
 										</div>
 										</td>
                                     </tr>
