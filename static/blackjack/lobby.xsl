@@ -110,6 +110,18 @@
                                     <xsl:sort select="balance" data-type="number" order="descending"/>
                                     <tr>
                                         <td>
+                                            <xsl:choose>
+                                                <xsl:when test="position() = 1">
+                                                    &#x1F947; &#xa0;
+                                                </xsl:when>
+                                                <xsl:when test="position() = 2">
+                                                    &#x1f948; &#xa0;
+                                                </xsl:when>
+                                                <xsl:when test="position() = 3">
+                                                    &#x1f949; &#xa0;
+                                                </xsl:when>
+                                                <xsl:otherwise><xsl:value-of select="concat(position(), '. &#xa0;')" /></xsl:otherwise>
+                                            </xsl:choose>
                                             <xsl:value-of select="@name"/>
                                         </td>
                                         <td>
