@@ -23,11 +23,13 @@ Daniel Meint
 * {
     font-family: Helvetica, sans-serif;
     box-sizing: border-box;
+    text-decoration: none;
     outline: none;
 }
 
 .flex-container {
     display: flex;
+    justify-content: center;
 }
 
 body {
@@ -44,19 +46,29 @@ body#game {
 
 .navbar {
     display: flex;
+    justify-content: flex-start;
     align-items: center;
     height:60px;
     background-color: var(--table-primary-color);
     margin-bottom: 20px;
 }
 
-.navbar#game {
-    margin: 0;
-    background-color: #FFFFFF00;
+.navbar .header {
+    color: white;
+    font-size: 15px;
+    text-transform: upperCase;
 }
 
-h1, h2, h3 {
-  text-align: center;
+.navbar#centered {
+    justify-content: center;
+}
+
+.navbar#centered h1 {
+    font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+h1, h2, h3, h4 {
+  color: white;
 }
 
 .container {
@@ -237,6 +249,10 @@ button.menu {
     color: var(--table-secondary-color);
     box-shadow: none;
     z-index: 100;
+}
+
+button.menu#fixed {
+    position: absolute;
 }
 
 button.menu#game {
@@ -456,7 +472,7 @@ table tbody tr td a{
     padding: var(--spacing);
     height: auto;
     margin-bottom: 20px;
-    box-shadow: var(--shadow), 0 0 0 2000px rgba(0,0,0,0.8);
+    box-shadow: var(--shadow);
     animation: dialog 0.4s;
 }
 
@@ -488,7 +504,15 @@ table tbody tr td a{
 .dialog#buttongroup {
     position: relative;
     animation: none;
-    box-shadow: var(--shadow);
+}
+
+.dialog#newgame {
+    position: relative;
+    margin-top: 40px;
+}
+
+.dialog#shadow {
+    box-shadow: var(--shadow), 0 0 0 2000px rgba(0,0,0,0.8);
 }
 
 .dialog#buttongroup button {
@@ -514,13 +538,19 @@ table tbody tr td a{
   display: flex; 
   flex-direction: column;
   margin-top: 15px;
+  margin-right: 15px;
 }
 
-label {
+label#name {
   font-size:16px;
-  margin-top: -10px;
   margin-left: 5px;
   color:var(--table-primary-color);
+}
+
+label#balance {
+    font-size: 12px;
+    margin-top: 2px;
+    margin-left: 0px;
 }
 
 input {
@@ -533,7 +563,11 @@ input {
 }
 
 input.betting {
-  max-width: 100px;
+  max-width: 120px;
+}
+
+input.name {
+  max-width: 300px;
 }
 
 input:focus {

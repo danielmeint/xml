@@ -190,7 +190,7 @@
               </xsl:when>
 
               <xsl:when test="game/@state = 'evaluated'">
-                <div class="dialog">
+                <div class="dialog" id="shadow">
                 <div class="dialog--result">
                   <div class="dialog--header">Results &#x1F4B0;</div>
                 <div class="dialog--content">
@@ -226,9 +226,11 @@
                         </span>
                       </p>
                     </xsl:when>
-                    <xsl:when test="@state='tied'">
+                    <xsl:when test="@state = 'tied'">
                       <p id="tie">
-                        &#x1F60A; &#xA0;
+                        <span>
+                          &#x1F60A; &#xA0;
+                        </span>
                         <span>
                           <xsl:value-of select="@name"/>
                         </span>
@@ -248,8 +250,7 @@
                 </div>
               </xsl:when>
               <xsl:when test="count(game/player) = 0">
-                <!-- Game has to be removed here! -->
-                <div class="dialog">
+                <div class="dialog" id="shadow">
                   <div class="dialog--header">
                     No Players left!
                   </div>
@@ -259,7 +260,7 @@
                 </div>
               </xsl:when>
               <xsl:when test="game/@state = 'betting'">
-                <div class="dialog">
+                <div class="dialog" id="shadow">
                 <div class="dialog--header">
                   Place your bets!
                 </div>
@@ -268,11 +269,16 @@
                   <div class="dialog--betting">
                   <xsl:for-each select="game/player">
                     <div class="input--advanced">
-                      <label for="">
+                      <label id="name">
                         <xsl:value-of select="@name"/>
+                        
                       </label>
                       <input class="betting" type="number" id="player_{@id}_bet" name="player_{@id}_bet" min="5" step="5"
                         max="{balance}" required=""/>
+                      <label id="balance">
+                        &#x1F4B0;
+                        <xsl:value-of select="balance"/>
+                      </label>
                     </div>
                   </xsl:for-each>
                   </div>
