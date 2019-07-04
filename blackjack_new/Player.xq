@@ -18,6 +18,7 @@ declare function player:newPlayer($id, $name, $state, $balance, $bet, $hand,$ins
   <player id="{$id}" name="{$name}" state="{$state}" insurance="{$insurance}">
     <balance>{$balance}</balance>
     <bet>{$bet}</bet>
+    <profit>0</profit>
     {$hand}
   </player>
 };
@@ -108,10 +109,7 @@ declare
 %updating
 function player:insurance($game){
   let $currPlayer := $game/player[@state='active']
-  let $oldBet := $currPlayer/bet
-  let $newBet := $oldBet * 2
   return (
-    replace value of node $oldBet with $newBet,
     replace value of node $currPlayer/@insurance with 'true'
   )
 };
