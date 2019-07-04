@@ -5,6 +5,11 @@ import module namespace hand="gruppe_xforms/blackjack/hand" at 'Hand.xq';
 import module namespace dealer="gruppe_xforms/blackjack/dealer" at 'Dealer.xq';
 
 
+declare function helper:showMainMenu(){
+  let $redir := "/blackjack"
+  return web:redirect($redir)
+};
+
 declare function helper:showGame($gameId) {
   let $redir := concat("/blackjack/", $gameId)
   return web:redirect($redir)
