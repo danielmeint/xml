@@ -99,7 +99,7 @@
                       />
                     </xsl:for-each>
                   </g>
-                  <xsl:if test="/game/@state = 'playing'">
+                  <xsl:if test="/game/@state = 'playing' or /game/@state = 'toEvaluate'">
                     <g>
                       <xsl:choose>
                         <xsl:when test="@state='active'">
