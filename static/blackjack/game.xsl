@@ -87,7 +87,7 @@
                       </xsl:if>
                       <use href="/static/blackjack/chips.svg#chip" width="40" height="40" transform="translate(40, -30)"/>
                       <text x="20" y="20" alignment-baseline="central" transform="translate(40, -30)">
-                        I
+                        <xsl:value-of select="ceiling(bet div 2)"/>
                       </text>
                     </g>
                     </xsl:if>
