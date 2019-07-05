@@ -206,7 +206,7 @@
                           &#x2B;
                         </span>
                         <span>
-                          <xsl:value-of select="bet"/>
+                          <xsl:value-of select="profit"/>
                         </span>
                       </p>
                     </xsl:when>
@@ -222,7 +222,7 @@
                           &#8722;
                         </span>
                         <span>
-                          <xsl:value-of select="bet"/>
+                          <xsl:value-of select="profit"/>
                         </span>
                       </p>
                     </xsl:when>
