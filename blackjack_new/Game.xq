@@ -124,7 +124,7 @@ function game:evaluatePlayer($player, $toBeat as xs:integer) {
         if(($player/@insurance = "true")) then (
             replace value of node $player/@state with "lost",
             replace value of node $player/balance with $player/balance/text() - ceiling(0.5 * $player/bet/text()),
-            replace value of node $player/profit with ceiling(0.5 * $player/bet)*(-1)
+            replace value of node $player/profit with ceiling(0.5 * $player/bet)
         ) 
         else (
             replace value of node $player/@state with "tied",
@@ -137,16 +137,16 @@ function game:evaluatePlayer($player, $toBeat as xs:integer) {
       replace value of node $player/@state with "lost",
       if(($player/@insurance = "true") and ($toBeat = 21) and (count($dealer/hand/card)=2) ) then (
         replace value of node $player/balance with $player/balance/text() - floor(0.5 * $player/bet/text()),
-        replace value of node $player/profit with ceiling(0.5 * $player/bet)*(-1)
+        replace value of node $player/profit with ceiling(0.5 * $player/bet)
       )
       else (
         if(($player/@insurance = "true")) then (
             replace value of node $player/balance with $player/balance/text() - ceiling(1.5 * $player/bet/text()),
-            replace value of node $player/profit with ceiling(1.5 * $player/bet)*(-1)
+            replace value of node $player/profit with ceiling(1.5 * $player/bet)
         ) 
         else (
             replace value of node $player/balance with $player/balance/text() - $player/bet/text(),
-            replace value of node $player/profit with $player/bet*(-1)
+            replace value of node $player/profit with $player/bet
         )
       )
     )  

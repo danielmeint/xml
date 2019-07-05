@@ -87,7 +87,7 @@
                       </xsl:if>
                       <use href="/static/blackjack/chips.svg#chip" width="40" height="40" transform="translate(40, -30)"/>
                       <text x="20" y="20" alignment-baseline="central" transform="translate(40, -30)">
-                        I
+                        <xsl:value-of select="ceiling(bet div 2)"/>
                       </text>
                     </g>
                     </xsl:if>
@@ -99,7 +99,7 @@
                       />
                     </xsl:for-each>
                   </g>
-                  <xsl:if test="/game/@state = 'playing'">
+                  <xsl:if test="/game/@state = 'playing' or /game/@state = 'toEvaluate'">
                     <g>
                       <xsl:choose>
                         <xsl:when test="@state='active'">
@@ -206,7 +206,7 @@
                           &#x2B;
                         </span>
                         <span>
-                          <xsl:value-of select="bet"/>
+                          <xsl:value-of select="profit"/>
                         </span>
                       </p>
                     </xsl:when>
@@ -222,7 +222,7 @@
                           &#8722;
                         </span>
                         <span>
-                          <xsl:value-of select="bet"/>
+                          <xsl:value-of select="profit"/>
                         </span>
                       </p>
                     </xsl:when>
