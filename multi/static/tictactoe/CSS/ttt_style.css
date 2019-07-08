@@ -1,0 +1,84 @@
+.backgroundStyle {
+    stroke-width: 3;
+    stroke: rgb(29,177,156);
+    fill: rgb(29,177,156);
+    fill-opacity: 1;
+}
+
+.gridLineStyle {
+    stroke: rgb(23,145,128);
+    stroke-width: 15;
+    fill:rgb(29,177,156)
+}
+
+.textLargeStyle{
+    fill: rgb(255,255, 255);  
+    font-family: Myriad Pro, Arial;
+    font-size: 78px;
+}
+
+.textVeryLargeStyle{
+    fill: rgb(255,255, 255);  
+    font-family: Myriad Pro, Arial;
+    font-size: 100px;
+}
+
+
+.textStyle{
+    fill: rgb(255,255,255);  
+    font-family: Myriad Pro, Arial;
+    font-size: 68px;
+}
+
+.textMediumStyle{
+    fill: rgb(255,255,255);  
+    font-family: Myriad Pro, Arial;
+    font-size: 45px;
+}
+
+.textSmallStyle{
+    fill: rgb(255,255,255);  
+    font-family: Myriad Pro, Arial;
+    font-size: 38px;
+}
+
+form{ 
+    padding: 0;
+    margin: 0;
+}
+
+.lobbyButton{ 
+    display: table-cell; 
+    text-align: center; 
+    vertical-align: middle;  
+    width: 30%; 
+    height: 8%;
+    background-color: #ed4a29;
+    border: none; 
+    border-radius:6px;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+}
+
+.newRoundButton{ 
+    display: table-cell; 
+    text-align: center; 
+    vertical-align: middle;  
+    width: 24%; 
+    height: 6%;
+    background-color: #ed4a29;
+    border: none; 
+    border-radius:6px;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+    font-size: 40px;
+}
+
+.hiddenFrame{
+    width: 0;
+    height: 0;
+    border: 0; 
+    border: none;
+}

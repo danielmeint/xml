@@ -1,0 +1,31 @@
+<TicTacToe>
+    <gameID>TicTacToe_01234</gameID>
+    <playerTurn>X</playerTurn>
+    <playerCount>0</playerCount>
+    <winner>none</winner>
+    <Players>
+        <Player id = "X">
+            <score>0</score>
+            <Fields>
+            </Fields>
+        </Player>
+        <Player id = "O">
+            <score>0</score>
+            <Fields>
+            </Fields>
+        </Player>
+    </Players>
+    <Free>
+        <Fields>
+            <Field id = "1"/>
+            <Field id = "2"/> 
+            <Field id = "3"/>
+            <Field id = "4"/>                                   
+            <Field id = "5"/>
+            <Field id = "6"/> 
+            <Field id = "7"/> 
+            <Field id = "8"/>
+            <Field id = "9"/>
+        </Fields>
+    </Free>
+</TicTacToe>

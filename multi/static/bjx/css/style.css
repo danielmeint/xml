@@ -1,0 +1,648 @@
+/**     
+Erstellt von der Gruppe "XForms":
+Felix Hennerkes,
+Maximilian Karpfinger,
+Janik Schnellbach,
+Daniel Meint
+**/
+
+:root {
+    --primary-color: #5e995e;
+    --secondary-color: #c5ebc5;
+}
+
+* {
+    font-family: Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    
+    background: linear-gradient(white, #c5ebc5);
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.flex-center {
+    margin: auto;
+    justify-content: center;
+}
+
+.content {
+    width: calc(100vw - 4rem);
+    max-width: 1024px;
+
+    background: white;
+    padding: 1rem 3rem;
+    
+    border-radius: 1rem;
+    
+    text-align: center;
+}
+
+.information {
+
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.left {
+    position: absolute;
+    left: 1rem;
+}
+
+.right {
+    position: absolute;
+    right: 1rem;
+}
+
+.top {
+    top: .5rem;
+}
+
+.bottom {
+    bottom: .5rem;
+}
+
+.left.bottom {
+    border-radius: 0 8px 0 0;
+}
+
+.right.bottom {
+    border-radius: 8px 0 0 0;
+}
+
+svg {
+    max-width: 1200px;
+}
+
+/* gui elements */
+#arrow_down {
+  fill: red;
+  animation: arrow 1s infinite;
+}
+
+.functions {
+    padding: 1rem;
+}
+
+.functions form {
+    display: inline-block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    text-align: left;
+}
+
+table th, table td {
+    padding: 1rem;
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+form {
+    margin: 0;
+    display: inline-block;
+}
+
+#login {
+    font-weight: bold;
+}
+
+#login svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+#login span {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.chat {
+    max-width: 256px;
+}
+
+.chat tbody {
+    display: block;
+    max-height: calc(100vh - 150px);
+    overflow: scroll;
+}
+
+.chat td.msg {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chat td.msg.msg-info {
+    max-width: 100%;
+    font-weight: bold;
+}
+
+.chat td.author {
+    font-weight: bold;
+    width: 20%;
+    color: var(--primary-color);
+}
+
+.chat table th, .chat table td {
+    padding: .5rem;
+}
+
+.chat #chatToggle {
+    display: none;
+}
+
+.chat label {
+    display: block;
+    float: right;
+}
+
+.chat label {
+    text-align: right;
+    padding: 0 0 .5rem 0;
+}
+
+.chat label:hover {
+    cursor:pointer
+}
+
+.chat input#chatToggle:checked ~ *:not(#showChat) {
+    display: none;
+}
+
+.chat #showChat {
+    display: none;
+}
+
+.chat input#chatToggle:checked ~ #showChat {
+    display: block;
+}
+
+.chat label svg {
+    fill: var(--primary-color);
+    width: 2rem;
+    height: 2rem;
+}
+
+#games-table th:last-child, #games-table td:last-child {
+    text-align: right;
+}
+
+#games-table tbody form {
+    opacity: 0.2;
+}
+
+#games-table tbody > tr:hover form {
+    opacity: 1;
+}
+
+input {
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    border-width: 2px;
+    
+    font-size: 1rem;
+}
+
+input:not([type="submit"]):hover, input:not([type="submit"]):focus {
+    border-color: var(--primary-color);
+}
+
+/* buttons */
+.btn {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    cursor: pointer;
+
+    text-decoration: none;
+    
+    background-color: var(--primary-color);
+    color: white;
+    
+    border-color: transparent;
+    border-radius: .25rem;
+    border-width: 2px;
+    border-style: solid;
+    display: inline-block;
+    
+    padding: .375rem .75rem;
+    
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    
+    transition: color .15s ease-in-out, background-color .15s ease-in-out,border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn svg {
+    fill: white;
+}
+
+.btn:hover {
+    background-color: darkolivegreen;
+}
+
+.btn-small {
+    width: 112px;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-secondary svg {
+    fill: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: honeydew;
+}
+
+.btn-danger {
+  color: white;
+  background-color: #d9534f;
+}
+
+.btn-danger:hover {
+  color: white;
+  background-color: #c9302c;
+}
+
+.btn-disabled, .btn-disabled:hover {
+  background-color: #6c757d;
+  color: white;
+  
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn svg {
+    display: inline-block;
+    height: 100%;
+}
+
+.btn-menu {
+    width: 20rem;
+    max-width: 100%;
+    font-size: 1.5rem;
+}
+
+form.form-menu {
+    display: block;
+    padding: .5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+svg .label {
+    fill: white;
+    stroke: black;
+}
+
+svg .label.label-active {
+    animation: shadow-pulse 1s infinite;
+}
+
+svg .label > text {
+    fill: black;
+
+}
+
+svg .label > text.name {
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+svg .label > text.hand_value {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.earnings.won {
+    color: var(--primary-color);
+}
+
+.earnings.lost {
+    color: red;
+}
+
+/* table */
+#table text {
+    font-family: Helvetica, sans-serif;
+    fill: var(--secondary-color);
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+#table text.heavy {
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+#table text.small {
+    font-size: 1.5rem;
+}
+
+#tableBase {
+    fill: var(--primary-color);
+}
+
+#box {
+    stroke: var(--secondary-color);
+}
+
+/* cards */
+#card_base {
+    fill: white;
+    stroke: black;
+}
+
+g[id *= 'hearts'] text,
+g[id *= 'diamonds'] text,
+g[id *= 'spades'] text,
+g[id *= 'clubs'] text,
+#hearts,
+#diamonds,
+#spades,
+#clubs {
+    font-size: 24px;
+}
+
+g[id *= 'hearts'] text,
+g[id *= 'diamonds'] text,
+#diamonds,
+#hearts {
+    fill: red;
+}
+
+g[id *= 'spades'] text,
+g[id *= 'clubs'] text,
+#spades,
+#clubs {
+    fill: black;
+}
+
+.checker-background {
+    fill: white;
+}
+
+.checker {
+    fill: darkblue;
+}
+
+#back > rect:nth-child(2) {
+    fill: url(cards.svg#pattern-checkers);
+}
+
+/* chips */
+
+.chip text {
+    dominant-baseline: central;
+    fill: white;
+    font-size: 32px;
+    text-anchor: middle;
+}
+
+.chip-1 {
+    fill: grey;
+}
+
+.chip-5 {
+    fill: red;
+}
+
+.chip-10 {
+    fill: rgb(134, 180, 241);
+}
+
+.chip-25 {
+    fill: green;
+}
+
+.chip-100 {
+    fill: black;
+}
+
+
+/* TODO: better scaling for chips in game */
+#player_cards .bet.chip text {
+    font-size: 16px;
+}
+
+/* cards */
+.card {
+    transition: all .5s ease;
+}
+
+.card:hover {
+    transform: scale(1.2) translateY(-30px);
+}
+
+/* placing cards */
+#dealer {
+  transform: translate(340px, 40px);
+}
+
+#player_cards {
+    --pos-1-x: 670px;
+    --pos-1-y: 280px;
+    --pos-2-x: 520px;
+    --pos-2-y: 350px;
+    --pos-3-x: 340px;
+    --pos-3-y: 390px;
+    --pos-4-x: 160px;
+    --pos-4-y: var(--pos-2-y);
+    --pos-5-x: 10px;
+    --pos-5-y: var(--pos-1-y);
+}
+
+
+#player_1_of_4, #player_1_of_5 {
+    transform: translate(var(--pos-1-x), var(--pos-1-y));
+}
+
+#player_1_of_2, #player_1_of_3, #player_2_of_4, #player_2_of_5 {
+    transform: translate(var(--pos-2-x), var(--pos-2-y));
+}
+
+#player_1_of_1, #player_2_of_2, #player_2_of_3, #player_3_of_4, #player_3_of_5 {
+    transform: translate(var(--pos-3-x), var(--pos-3-y));
+}
+
+#player_3_of_3, #player_4_of_4, #player_4_of_5 {
+    transform: translate(var(--pos-4-x), var(--pos-4-y));
+}
+
+#player_5_of_5 {
+    transform: translate(var(--pos-5-x), var(--pos-5-y));
+}
+
+
+/* bets */
+#player_1_of_4 .bet, #player_1_of_5 .bet {
+    transform: translate(-10px, -50px)
+}
+
+#player_1_of_2 .bet, #player_1_of_3 .bet, #player_2_of_4 .bet, #player_2_of_5 .bet {
+    transform: translate(5px, -45px)
+}
+
+#player_1_of_1 .bet, #player_2_of_2 .bet, #player_2_of_3 .bet, #player_3_of_4 .bet, #player_3_of_5 .bet {
+    transform: translate(35px, -55px)
+}
+
+#player_3_of_3 .bet, #player_4_of_4 .bet, #player_4_of_5 .bet {
+    transform: translate(65px, -45px)
+}
+
+#player_5_of_5 .bet {
+    transform: translate(80px, -50px)
+}
+
+@keyframes shadow-pulse
+{
+  0% {
+    filter: drop-shadow(0px 0px 2px red);
+  }
+  50% {
+    filter: drop-shadow(0px 0px 4px red);
+  }
+  100% {
+    filter: drop-shadow(0px 0px 2px red);
+  }
+}
+
+@keyframes arrow
+{
+  0% {
+    transform: scale(0.1) translate(0px, -300px) rotate(-90deg)
+  }
+  50% {
+    transform: scale(0.1) translate(-30px, -300px) rotate(-90deg)
+  }
+  100% {
+    transform: scale(0.1) translate(0px, -300px) rotate(-90deg)
+  }
+}
+
+@keyframes chip-won
+{
+  100% {
+    transform: scale(0.5) translate(50px, 50px);
+  }
+}
+
+@keyframes chip-lost
+{
+  100% {
+    transform: translate(0px, -1000px);
+  }
+}
+
+@-webkit-keyframes DynamicBackground {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes DynamicBackground {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes DynamicBackground { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+
+/* Loader */
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 27px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 6px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 6px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 26px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 45px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {f
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(19px, 0);
+  }
+}
