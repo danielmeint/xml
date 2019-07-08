@@ -44,6 +44,9 @@
             <g id="player_cards">
               <xsl:for-each select="game/player">
                 <g id="player_{position()}_of_{count(/game/player)}">
+                  <xsl:if test="@state = 'active'">
+                    <xsl:attribute name="class">active</xsl:attribute>
+                  </xsl:if>
                   <xsl:if test="bet > 0">
                     <g viewBox="0 0 100 100">
                       <xsl:choose>
@@ -100,15 +103,7 @@
                     </xsl:for-each>
                   </g>
                   <xsl:if test="/game/@state = 'playing' or /game/@state = 'toEvaluate'">
-                    <g>
-                      <xsl:choose>
-                        <xsl:when test="@state='active'">
-                          <xsl:attribute name="class">label label-hand label-active</xsl:attribute>
-                        </xsl:when>
-                        <xsl:otherwise>
-                          <xsl:attribute name="class">label label-hand</xsl:attribute>
-                        </xsl:otherwise>
-                      </xsl:choose>
+                    <g class="label">
 					            <rect x="10px" y="110px" rx="15" ry="15" width="{string-length(@name)*5 + 60}px"  height="65"/>
                       <!-- <rect x="10px" y="110px" rx="15" ry="15" width="75" height="65"/> -->
                       <text class="name" x="27px" y="125px">
