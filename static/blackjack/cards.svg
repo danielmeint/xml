@@ -56,130 +56,144 @@ optimiert für Firefox
             <rect width="80" height="112" rx="10" ry="10" fill="white" stroke="grey"/>
             <rect x="5" y="5" width="70" height="102" rx="5" ry="5" fill="url(#pattern-checkers)" stroke="&backColor;" stroke-width="3"/>
         </g>
-        
-        <g id="A_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
+		
+		<g id="hearts_card" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
             <use x="18" y="20" xlink:href="#center_card"/>
             <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
             <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
             <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+		</g>
+		
+		<g id="hearts_card_image" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
+            <use x="18" y="20" xlink:href="#center_card"/>
+            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
+            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
+		</g>
+		
+		
+        
+		<g id="diamonds_card" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
+            <use x="18" y="20" xlink:href="#center_card"/>
+            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
+            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
+            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+		</g>
+		
+		<g id="diamonds_card_image" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
+            <use x="18" y="20" xlink:href="#center_card"/>
+            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
+            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
+		</g>
+		
+		<g id="clubs_card" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
+            <use x="18" y="20" xlink:href="#center_card"/>
+            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
+            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
+            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+		</g>
+		
+		<g id="clubs_card_image" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
+            <use x="18" y="20" xlink:href="#center_card"/>
+            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
+            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
+		</g>
+		
+		
+		<g id="spades_card" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
+            <use x="18" y="20" xlink:href="#center_card"/>
+            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
+            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
+            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+		</g>
+		
+		<g id="spades_card_image" viewBox="0 0 80 120">
+			<use x="0" y="0" xlink:href="#empty_card"/>
+            <use x="18" y="20" xlink:href="#center_card"/>
+            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
+            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
+		</g>
+		
+        <g id="A_hearts" viewBox="0 0 80 120">
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">A</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">A</text>    
         </g>
         
         <g id="2_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">2</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">2</text>    
         </g>
         
         <g id="3_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">3</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">3</text>    
         </g>
         
         
         <g id="4_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">4</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">4</text>    
         </g>
         
         <g id="5_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">5</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">5</text>    
         </g>
         <g id="6_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">6</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">6</text>    
         </g>
         <g id="7_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">7</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">7</text>    
         </g>
         <g id="8_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">8</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">8</text>    
         </g>
         <g id="9_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">9</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">9</text>    
         </g>
         
         <g id="10_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">10</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">10</text>    
         </g>
         
         
         <g id="Q_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">D</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">D</text>
             <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#dame"/>
         </g>
         
         <g id="J_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">B</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">B</text>
             <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#junge"/>
         </g>
         
         <g id="K_hearts" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#hearts"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#hearts"/>
+            <use x="0" y="0" xlink:href="#hearts_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">K</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">K</text>
              <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#koenig"/>
@@ -187,119 +201,70 @@ optimiert für Firefox
         
         
         <g id="A_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">A</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">A</text>    
         </g>       
         <g id="2_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">2</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">2</text>    
         </g>       
         <g id="3_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">3</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">3</text>    
         </g>   
         <g id="4_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">4</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">4</text>    
         </g>      
         <g id="5_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">5</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">5</text>    
         </g>       
         <g id="6_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">6</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">6</text>    
         </g>       
         <g id="7_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">7</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">7</text>    
         </g>      
         <g id="8_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">8</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">8</text>    
         </g>
         <g id="9_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">9</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">9</text>    
         </g>      
         <g id="10_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">10</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">10</text>    
         </g>
         
         <g id="J_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">B</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">B</text>    
            <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#junge"/>
         </g>
         <g id="Q_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">D</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">D</text>    
             <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#dame"/>
         </g>
         <g id="K_diamonds" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#diamonds"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#diamonds"/>
+            <use x="0" y="0" xlink:href="#diamonds_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="red">K</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="red">K</text>    
              <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#koenig"/>
@@ -307,100 +272,57 @@ optimiert für Firefox
         
         
         <g id="A_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">A</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">A</text>    
         </g>
         <g id="2_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">2</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">2</text>    
         </g>
         <g id="3_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">3</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">3</text>    
         </g>
         <g id="4_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">4</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">4</text>    
         </g>
         <g id="5_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">5</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">5</text>    
         </g>
         <g id="6_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">6</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">6</text>    
         </g>
         <g id="7_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">7</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">7</text>    
         </g>
         <g id="8_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">8</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">8</text>    
         </g>
         <g id="9_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">9</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">9</text>    
         </g>
         <g id="10_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">10</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">10</text>    
         </g>
         <g id="J_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">B</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">B</text>   
            <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#junge"/>
@@ -409,142 +331,84 @@ optimiert für Firefox
 			
         </g>
         <g id="Q_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">D</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">D</text>   
-            <!--<image x="13.5" y="15.5" width="54" height="81" xlink:href="dame.svg" />-->
 			 <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#dame"/>
         </g>
         <g id="K_clubs" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#clubs"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#clubs"/>
+            <use x="0" y="0" xlink:href="#clubs_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">K</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">K</text>   
              <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#koenig"/>
         </g>
       
         <g id="A_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">A</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">A</text>    
         </g>
         <g id="2_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">2</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">2</text>    
         </g>
         <g id="3_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">3</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">3</text>    
         </g>
         <g id="4_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">4</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">4</text>    
         </g>
         <g id="5_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">5</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">5</text>    
         </g>
         <g id="6_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+           <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">6</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">6</text>    
         </g>
         <g id="7_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">7</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">7</text>    
         </g>
         <g id="8_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">8</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">8</text>    
         </g>
         <g id="9_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+          <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">9</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">9</text>    
         </g>
         <g id="10_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
-            <use transform="rotate(0) scale(3.2)" x="12.65" y="25" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">10</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">10</text>    
         </g>
         <g id="J_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">B</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">B</text>    
-            <!-- <image x="13.5" y="15.5" width="54" height="81" xlink:href="junge.png"/> -->
 			 <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#junge"/>
         </g>
         <g id="Q_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">D</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">D</text>    
             <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#dame"/>
         </g>
         <g id="K_spades" viewBox="0 0 80 120">
-            <use x="0" y="0" xlink:href="#empty_card"/>
-            <use x="18" y="20" xlink:href="#center_card"/>
-            <use transform="rotate(0) scale(0.8)" x="13" y="40" xlink:href="#spades"/>
-            <use transform="rotate(180) scale(0.8)" x="-87" y="-100" xlink:href="#spades"/>
+            <use x="0" y="0" xlink:href="#spades_card_image"/>
             <text transform="rotate(0) scale(0.8)" text-anchor="middle" x="13" y="22" fill="black">K</text>
             <text transform="rotate(180) scale(0.8)"  text-anchor="middle" x="-87" y="-118" fill="black">K</text>    
-            <!-- <image x="13.5" y="15.5" width="54" height="81" xlink:href="koenig.svg" /> -->
 			 <use transform="rotate(0) scale(0.145)"  x="100" y="115" width="54" height="81"  xlink:href="#koenig"/>
         </g>
 		
