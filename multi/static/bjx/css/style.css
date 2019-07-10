@@ -170,6 +170,15 @@ form {
     color: var(--primary-color);
 }
 
+.chat tr {
+  display: none;
+}
+
+.chat tr:nth-last-child(-n+8) {
+  /* Number of messages to display in chat, currently 8*/
+  display: block;
+}
+
 .chat table th, .chat table td {
     padding: .5rem;
 }

@@ -96,6 +96,18 @@
                                             <xsl:value-of select="bet"/>
                                         </text>
                                     </g>
+                                    <xsl:if test="@insurance = 'true'">
+                                        <g>
+                                            <xsl:attribute name="class">bet chip chip-insurance</xsl:attribute>
+                                            <xsl:if test="@state = 'won' or @state = 'tied' or @state = 'lost'">
+                                                <xsl:attribute name="style">visibility: hidden</xsl:attribute>
+                                            </xsl:if>
+                                            <use href="/static/bjx/chips.svg#chip" width="40" height="40" transform="translate(40, -30)"/>
+                                            <text x="20" y="20" alignment-baseline="central" transform="translate(40, -30)">
+                                                <xsl:value-of select="ceiling(bet div 2)"/>
+                                            </text>
+                                        </g>
+                                    </xsl:if>
                                 </xsl:if>
                                 <g class="card_group">
                                     <xsl:for-each select="hand/card">
@@ -156,7 +168,7 @@
                                 
                                 <xsl:when test="/game/@state = 'playing' and $self/@state = 'active'">
                                     <!-- Playing stage -->
-                                    <xsl:if test="count($self/hand/card) &lt; 3 and $self/@insurance='false' and $self/hand/@value &lt; 21">
+                                    <xsl:if test="count($self/hand/card) &lt; 3 and $self/@insurance='false' and $self/hand/@value &lt; 21 and $self/balance &gt;= $self/bet * 2">
                                         <form action="/bjx/games/{/game/@id}/double" method="POST" target="hiddenFrame">
                                             <button class="btn btn-secondary" type="submit">Double Down</button>
                                         </form>
@@ -183,7 +195,7 @@
                                     <p>
                                         <xsl:choose>
                                             <xsl:when test="$self/@state = 'won'">
-                                                You win<xsl:text>&#xA0;</xsl:text><span class='earnings won'>$<xsl:value-of select="$self/bet"/></span>
+                                                You win<xsl:text>&#xA0;</xsl:text><span class='earnings won'>$<xsl:value-of select="$self/profit"/></span>
                                             </xsl:when>
                                             
                                             <xsl:when test="$self/@state = 'tied'">
@@ -191,7 +203,7 @@
                                             </xsl:when>
                                             
                                             <xsl:when test="$self/@state = 'lost'">
-                                                You lose<xsl:text>&#xA0;</xsl:text><span class='earnings lost'>$<xsl:value-of select="$self/bet"/></span>
+                                                You lose<xsl:text>&#xA0;</xsl:text><span class='earnings lost'>$<xsl:value-of select="$self/profit"/></span>
                                             </xsl:when>
                                         </xsl:choose>
                                     </p>
