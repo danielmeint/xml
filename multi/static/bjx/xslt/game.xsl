@@ -296,7 +296,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
-                <div class="chat right top">
+                <div class="chat left bottom">
                     <input type="checkbox" id="chatToggle"/>
                     <label id="hideChat" for="chatToggle">
                         <svg>
