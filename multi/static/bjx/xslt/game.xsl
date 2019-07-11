@@ -199,37 +199,20 @@
 									        </form>
 									    </xsl:if>
 									    </div>
-									   <div>
-									  <xsl:choose>
-                                    <xsl:when test="count($self/hand/card) &lt; 3 and $self/@insurance='false' and $self/hand/@value &lt; 21 and $self/balance &gt;= $self/bet * 2">
-                                        <form action="/bjx/games/{/game/@id}/double" method="POST" target="hiddenFrame">
-                                            <button class="double" type="submit">Double</button>
-                                        </form>
-                                    </xsl:when>
-									 <xsl:otherwise>
-									       <form action="/bjx/games/{/game/@id}/double" method="POST" target="hiddenFrame">
-									          <button class="double" type="submit" disabled="">Double</button>
-									       </form>
-									      </xsl:otherwise>
-									</xsl:choose>
+									   <div>						
+                                            <xsl:if test="count($self/hand/card) &lt; 3 and $self/@insurance='false' and $self/hand/@value &lt; 21 and $self/balance &gt;= $self/bet * 2">
+                                                <form action="/bjx/games/{/game/@id}/double" method="POST" target="hiddenFrame">
+                                                    <button class="double" type="submit">Double</button>
+                                                </form>
+                                            </xsl:if>
 									   </div>
-
-									    <div>
-									        <xsl:choose>
-   									        <xsl:when test="$activePlayerBet * 2 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
+							           <div>									       
+   									     <xsl:if test="$activePlayerBet * 2 &gt; $activePlayerBalance and $dealerCard='A' and $isInsurance='false'">
                                                    <form action="/bjx/games/{/game/@id}/insurance" method="POST" target="hiddenFrame">
-                                               <button class="insurance" type="submit" id="disabled">Insurance</button>
+                                                        <button class="insurance" type="submit" id="disabled">Insurance</button>
                                                    </form>
-                                            </xsl:when>
-									           <xsl:otherwise>
-									               <form action="/bjx/games/{/game/@id}/insurance" method="POST" target="hiddenFrame">
-									                   <button class="insurance" type="submit">Insurance</button>
-									               </form>
-                                        
-                                            </xsl:otherwise>
-                                             </xsl:choose>
-									        
-									    </div>
+                                            </xsl:if>									                                                    
+									   </div>
 									</div>
 								</div>
                                 </xsl:when>
