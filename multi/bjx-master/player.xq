@@ -67,7 +67,7 @@ function player:hit($self) {
     then (
       if (player:isLast($self))
       then (
-        game:evaluateAfterHit($game)
+        game:evaluate($game,1)
       )
       else (
         player:next($self)
@@ -108,19 +108,17 @@ function player:double($self) {
     (: might trigger evaluate, but the drawn card is not recorded in the database yet .... :)
     if (player:isLast($self))
     then (
-      game:evaluateAfterHit($self/..)
+      game:evaluate($self/..,2)
     ) else (
       player:next($self)
     )
   )
 };
+
 declare
 %updating
 function player:insurance($self){
-  let $_ := ()
-  return (
-    replace value of node $self/@insurance with 'true'
-  )
+   replace value of node $self/@insurance with 'true'
 };
 
 declare function player:nextPlayer($self) {
@@ -157,138 +155,50 @@ function player:next($self) {
         game:play($game)
       ) else if ($game/@state = 'playing')
       then (
-        game:evaluate($game)
+        game:evaluate($game,0)
       )
     )
   )
 };
 
-declare
+
+declare 
 %updating
-function player:evaluate($self) {
-  player:evaluate($self, $self/../dealer/hand/@value)
+function player:newEvaluate($self,$caller){
+    let $game := $self/..
+    let $toBeat := $game/dealer/hand/@value
+    return(
+        if($caller=0)
+        then(
+            let $resultInt := hand:evaluateToInt($self/hand,$toBeat)
+            let $insuranceOffset := dealer:evaluateInsurance($game/dealer,player:isInsured($self),$resultInt,$self/bet)
+            let $resultBet := $self/bet * $resultInt + $insuranceOffset
+            return(
+                replace value of node $self/profit with $resultBet,
+                replace value of node $self/balance with $self/balance + $resultBet
+            )
+        )
+        else(
+            let $game := $self/..
+            let $deck := $game/dealer/deck
+            let $hand := $self/hand
+            let $handAfterHit := hand:addCard($hand, $deck/card[1])        
+            let $resultInt := hand:evaluateToInt($handAfterHit,$toBeat)
+            let $newBet := $caller * $self/bet 
+            let $insuranceOffset := dealer:evaluateInsurance($game/dealer,player:isInsured($self),$resultInt,$newBet)
+            let $resultBet := $newBet*$resultInt+$insuranceOffset
+            return(
+                replace value of node $self/profit with $resultBet,
+                replace value of node $self/balance with $self/balance + $resultBet
+            )
+        )
+    )
 };
 
-declare
-%updating
-function player:evaluateAfterHit($self) {
-  let $game := $self/..
-  let $deck := $game/dealer/deck
-  let $hand := $self/hand
-  let $handAfterHit := hand:addCard($hand, $deck/card[1])
-  let $toBeat := $game/dealer/hand/@value
-  let $result := hand:evaluate($handAfterHit, $toBeat)
-
-  return (
-    if ($result = 'won')
-    then (
-       if($self/@insurance = "true")
-       then(
-        replace value of node $self/@state with "won",
-        replace value of node $self/balance with $self/balance/text() + ceiling(0.5 * $self/bet/text()),
-        replace value of node $self/profit with ceiling(0.5 * $self/bet)
-       )else(
-        replace value of node $self/@state with "won",
-        replace value of node $self/balance with $self/balance/text() + $self/bet/text(),
-        replace value of node $self/profit with $self/bet
-       )
-    )
-    else if ($result = 'tied')
-    then (
-      if(($self/@insurance = "true") and ($toBeat = 21) and (count($game/dealer/hand/card)=2) ) then (
-        replace value of node $self/@state with "won",
-        replace value of node $self/balance with $self/balance/text() + ceiling(0.5 * $self/bet/text()),
-        replace value of node $self/profit with ceiling(0.5 * $self/bet)
-      )
-      else (
-        if(($self/@insurance = "true")) then (
-            replace value of node $self/@state with "lost",
-            replace value of node $self/balance with $self/balance/text() - ceiling(0.5 * $self/bet/text()),
-            replace value of node $self/profit with ceiling(0.5 * $self/bet)
-        ) 
-        else (
-            replace value of node $self/@state with "tied",
-            replace value of node $self/profit with 0
-        )
-      )  
-    ) else (
-      replace value of node $self/@state with "lost",
-      if(($self/@insurance = "true") and ($toBeat = 21) and (count($game/dealer/hand/card)=2) ) then (
-        replace value of node $self/balance with $self/balance/text() - floor(0.5 * $self/bet/text()),
-        replace value of node $self/profit with ceiling(0.5 * $self/bet)
-      )
-      else (
-        if(($self/@insurance = "true")) then (
-            replace value of node $self/balance with $self/balance/text() - ceiling(1.5 * $self/bet/text()),
-            replace value of node $self/profit with ceiling(1.5 * $self/bet)
-        ) 
-        else (
-            replace value of node $self/balance with $self/balance/text() - $self/bet/text(),
-            replace value of node $self/profit with $self/bet
-        )
-      )
-    )
-  )
-};
-
-declare
-%updating
-function player:evaluate($self, $toBeat) {
-   let $game := $self/..
-   let $dealer:=$game/dealer
-   return(
-   if ($self/hand/@value <= 21 and ($self/hand/@value > $toBeat or $toBeat > 21))
-    then (
-       if($self/@insurance = "true")
-       then(
-        replace value of node $self/@state with "won",
-        replace value of node $self/balance with $self/balance/text() + ceiling(0.5 * $self/bet/text()),
-        replace value of node $self/profit with ceiling(0.5 * $self/bet)
-       )else(
-        replace value of node $self/@state with "won",
-        replace value of node $self/balance with $self/balance/text() + $self/bet/text(),
-        replace value of node $self/profit with $self/bet
-       )
-    )
-    else if ($self/hand/@value <= 21 and $self/hand/@value = $toBeat)
-    then (
-      (:insurance + tie -> 0.5 * Einsatz:)
-      if(($self/@insurance = "true") and ($toBeat = 21) and (count($dealer/hand/card)=2) ) then (
-        replace value of node $self/@state with "won",
-        replace value of node $self/balance with $self/balance/text() + ceiling(0.5 * $self/bet/text()),
-        replace value of node $self/profit with ceiling(0.5 * $self/bet)
-      )
-      else (
-        if(($self/@insurance = "true")) then (
-            replace value of node $self/@state with "lost",
-            replace value of node $self/balance with $self/balance/text() - ceiling(0.5 * $self/bet/text()),
-            replace value of node $self/profit with ceiling(0.5 * $self/bet)
-        ) 
-        else (
-            replace value of node $self/@state with "tied",
-            replace value of node $self/profit with 0
-        )
-      )  
-    )
-    else (
-       (:insurance + Lose -> 0 * Einsatz:)
-      replace value of node $self/@state with "lost",
-      if(($self/@insurance = "true") and ($toBeat = 21) and (count($dealer/hand/card)=2) ) then (
-        replace value of node $self/balance with $self/balance/text() - floor(0.5 * $self/bet/text()),
-        replace value of node $self/profit with ceiling(0.5 * $self/bet)
-      )
-      else (
-        if(($self/@insurance = "true")) then (
-            replace value of node $self/balance with $self/balance/text() - ceiling(1.5 * $self/bet/text()),
-            replace value of node $self/profit with ceiling(1.5 * $self/bet)
-        ) 
-        else (
-            replace value of node $self/balance with $self/balance/text() - $self/bet/text(),
-            replace value of node $self/profit with $self/bet
-        )
-      )
-    )  
-    )
+declare function player:isInsured($self) as xs:integer{
+    if($self/@insurance='true')
+    then(1)
+    else(0)
 };
 
 declare variable $player:defaultName := "undefined";

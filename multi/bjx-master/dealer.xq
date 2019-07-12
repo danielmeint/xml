@@ -58,3 +58,16 @@ function dealer:deal($self) {
     )
   )
 };
+
+declare function dealer:hasTwoCards($self) as xs:integer{
+    let $x:=if (count($self/hand/card)=2) then(0.5)else(-0.5)
+    return $x
+    (:if(count($self/hand/card)=2)
+    then(1)
+    else(0)  :) 
+};
+
+declare function dealer:evaluateInsurance($self,$playerIsInsurance,$playerWon,$bet){
+    let $factor := if ($playerWon>0)then(1)else(0)
+    return($playerIsInsurance*(dealer:hasTwoCards($self)*$bet - $factor*$bet))
+};

@@ -35,28 +35,13 @@ function game:play($self) {
 
 declare
 %updating
-function game:evaluate($self) {
-  for $player in $self/player[count(hand/card) >= 2]
+function game:evaluate($self,$caller) {
+  for $player in $self/player
   return (
     (: BUG: last player might have doubled, so we do not have his last card in the DB yet :)
-    player:evaluate($player)
+    player:newEvaluate($player,$caller)
   ),
   replace value of node $self/@state with 'evaluated'
-};
-
-declare
-%updating
-function game:evaluateAfterHit($self) {
-  let $regularPlayers := $self/player[count(hand/card) >= 2][position() != last()]
-  let $lastPlayer := $self/player[count(hand/card) >= 2][position() = last()]
-  return (
-    for $p in $regularPlayers
-    return (
-      player:evaluate($p)
-    ),
-    player:evaluateAfterHit($lastPlayer),
-    replace value of node $self/@state with 'evaluated'
-  )
 };
 
 declare function game:latestId() as xs:double {
