@@ -8,37 +8,24 @@
             <head>
                 <link rel="stylesheet" type="text/css" href="/static/bjx/css/style.css" />
             </head>
-                <xsl:choose>
-                    <xsl:when test="$screen = 'menu'">
-                        <div class="navbar" id="centered">
-                            <h1>XForms' Blackjack</h1>
-                        </div>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <a href="/bjx">
-                            <div class="navbar">
-                                <xsl:if test="$screen = 'games'">
-                                    <button class="menu">&lt; Games</button>
-                                </xsl:if>
-                                <xsl:if test="$screen = 'highscores'">
-                                    <button class="menu">&lt; Highscore</button>
-                                </xsl:if>
-                            </div>
-                        </a>
-                    </xsl:otherwise>
-                </xsl:choose>
-                
+                <div class="navbar" id="centered">
+                    <h1>Hello&#xA0;<xsl:value-of select="$name"/>!</h1> 
+                </div>
+                <a href="/bjx">
+                <xsl:if test="$screen = 'games'">
+                    <button class="menu top left">&lt; Games</button>
+                </xsl:if>
+                <xsl:if test="$screen = 'highscores'">
+                    <button class="menu top left">&lt; Highscore</button>
+                </xsl:if>
+                </a>
+                <a href="/bjx/logout">
+                    <button class = "menu top right">
+                        Logout
+                    </button>
+                </a>
             <body>
-                <span id="login" class="right top">
-                    <span><xsl:value-of select="$name"/></span>
-                    <a class="btn btn-secondary" href="/bjx/logout">
-                        <svg>
-                            <use href="/static/bjx/svg/solid.svg#sign-out-alt"/>
-                        </svg>
-                    </a>
-                </span>
                 <div class="flex-container flex-center">
-                    <div class="content">
                         <xsl:choose>
                             <xsl:when test="$screen = 'menu'">
                                 <form action="/bjx/games" method="post">
@@ -56,19 +43,23 @@
                                     <xsl:when test="count(games/game) = 0">
                                         <p>No active games.</p>
                                         <form action="/bjx/games" method="post">
-                                            <input class="btn" type="submit" value="Create new Game" />
+                                            <button class="btn" type="submit">New Game</button> 
                                         </form>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <table id="games-table" class="table table-hover information">
-                                            <thead class="thead-light">
+                                        <table id="games-table" >
+                                            <thead >
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Players</th>
-                                                    <th>State</th>
-                                                    <th>
+                                                    <th scope="col">Game ID</th>
+                                                    <th scope="col">State</th>
+                                                    <th scope="col">1</th>
+                                                    <th scope="col">2</th>
+                                                    <th scope="col">3</th>
+                                                    <th scope="col">4</th>
+                                                    <th scope="col">5</th>
+                                                    <th scope="col">
                                                         <form action="/bjx/games" method="post">
-                                                            <input class="btn" type="submit" value="+" />
+                                                        <button class="circular" id="table" type="submit">+</button>
                                                         </form>
                                                     </th>
                                                 </tr>
@@ -77,20 +68,66 @@
                                                 <xsl:for-each select="games/game">
                                                     <tr>
                                                         <td>
-                                                            <xsl:value-of select="@id" />
+                                                            <a href="/bjx/games/{@id}"><xsl:value-of select="@id"/></a>
                                                         </td>
                                                         <td>
-                                                            <xsl:value-of select="player[1]/@name" />
-                                                            <xsl:for-each select="player[position() &gt; 1]">
-                                                                ,<xsl:text> </xsl:text><xsl:value-of select="@name" /></xsl:for-each>
+                                                            <a href="/bjx/games/{@id}">
+                                                                <xsl:value-of select="player[@state = 'active']/@name" /><xsl:value-of select="@state" />
+                                                            </a>
                                                         </td>
                                                         <td>
-                                                            <xsl:value-of select="player[@state = 'active']/@name" />=<xsl:value-of select="@state" /></td>
+                                                            <a href="/bjx/games/{@id}">
+                                                                <xsl:if test="player[1]">
+                                                                    <xsl:value-of select="player[1]/@name"/>(<xsl:value-of select="player[1]/balance"/>)
+                                                                </xsl:if>
+                                                                <xsl:if test="not(player[1])">
+                                                                    <text id="free">Free</text>
+                                                                </xsl:if>  
+                                                            </a>
+                                                        </td>
                                                         <td>
-                                                            <a class="btn btn-secondary" href="/bjx/games/{@id}">Open</a>
-                                                            <form action="/bjx/games/{@id}/delete" method="POST">
-                                                                <input class="btn btn-danger" type="submit" value="Delete" />
-                                                            </form>
+                                                            <a href="/bjx/games/{@id}">
+                                                                <xsl:if test="player[2]">
+                                                                    <xsl:value-of select="player[2]/@name"/>(<xsl:value-of select="player[2]/balance"/>)
+                                                                </xsl:if>
+                                                                <xsl:if test="not(player[2])">
+                                                                    <text id="free">Free</text>
+                                                                </xsl:if>  
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/bjx/games/{@id}">
+                                                                <xsl:if test="player[3]">
+                                                                    <xsl:value-of select="player[3]/@name"/>(<xsl:value-of select="player[3]/balance"/>)
+                                                                </xsl:if>
+                                                                <xsl:if test="not(player[3])">
+                                                                    <text id="free">Free</text>
+                                                                </xsl:if>  
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/bjx/games/{@id}">
+                                                                <xsl:if test="player[4]">
+                                                                    <xsl:value-of select="player[4]/@name"/>(<xsl:value-of select="player[4]/balance"/>)
+                                                                </xsl:if>
+                                                                <xsl:if test="not(player[4])">
+                                                                    <text id="free">Free</text>
+                                                                </xsl:if>  
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/bjx/games/{@id}">
+                                                                <xsl:if test="player[5]">
+                                                                    <xsl:value-of select="player[5]/@name"/>(<xsl:value-of select="player[5]/balance"/>)
+                                                                </xsl:if>
+                                                                <xsl:if test="not(player[5])">
+                                                                    <text id="free">Free</text>
+                                                                </xsl:if>  
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/bjx/games/{@id}">
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 </xsl:for-each>
@@ -123,7 +160,6 @@
                                 </table>
                             </xsl:when>
                         </xsl:choose>
-                    </div>
                 </div>
             </body>
         </html>

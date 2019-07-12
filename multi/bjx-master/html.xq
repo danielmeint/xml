@@ -72,9 +72,11 @@ declare function html:signup($error) {
 declare function html:gameNotFound() {
   html:wrap(
     <form action="/bjx/games" method="post">
-      <a class="btn btn-secondary left top" href="/bjx">◀ Menu</a>
-      <p>Game not found.</p>
-      <input class="btn" type="submit" value="Create new Game" />
+    <a href="/bjx">
+        <button class="menu top left">&lt; Menu</button>
+    </a>
+      <p style="text-align: center">Game not found.</p>
+      <button class="btn" type="submit">New Game</button>
     </form>
   )
 };

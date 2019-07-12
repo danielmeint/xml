@@ -16,7 +16,6 @@
 
     <xsl:template match="/">
 
-        
         <div>
             <form class="right bottom" action="/bjx/games/{/game/@id}/draw" method="post" target="hiddenFrame">
                 <button class="btn btn-secondary" type="submit">

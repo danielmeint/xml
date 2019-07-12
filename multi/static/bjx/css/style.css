@@ -110,12 +110,12 @@ body#game {
 
 .left {
     position: absolute;
-    left: 1rem;
+    left: 0;
 }
 
 .right {
     position: absolute;
-    right: 1rem;
+    right: 0;
 }
 
 .top {
@@ -347,6 +347,13 @@ button.circular {
     right: -10%;
 }
 
+button.circular#table {
+    position: relative;
+    float: right;
+    top: 0;
+    right: 40%;
+}
+
 button.circular#animated {
     transform: rotate(45deg);
     animation: rotate 0.8s;
@@ -356,6 +363,11 @@ button.menu {
     color: var(--table-secondary-color);
     box-shadow: none;
     z-index: 100;
+    margin-top: 5px;
+}
+
+button.menu#logout {
+    color: #a10500;
 }
 
 button.menu#fixed {
@@ -906,4 +918,119 @@ input.name {
 
 input:focus {
   border-bottom: 2px solid var(--table-primary-color); 
+}
+
+
+/* table */
+table{ 
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+table *{ 
+    position:relative; 
+    text-align:center;
+    opacity: 0.95;
+    text-decoration: none;
+    color: inherit;
+}
+
+table thead th{ 
+    color: black;
+    height: var(--table-height);
+    opacity: 0.5;
+    padding: var(--spacing);
+    border-bottom: 1px solid var(--background-color-dark);
+}
+
+table thead th:nth-child(1), td:nth-child(1), td:nth-child(1) a{
+    text-align: left;
+}
+
+table thead th:nth-child(n+2),td:nth-child(n+2), td:nth-child(n+2) a{
+    text-align: right;
+}
+
+table tbody tr{ 
+    height: var(--table-height);
+    border-bottom:1px solid var(--background-color-dark);
+}
+
+table tbody tr:hover {
+    background-color: var(--background-color-medium);
+}
+
+#highscore-table tbody tr td {
+    padding: var(--spacing) !important;
+}
+
+table tbody tr td a{
+    display: block;
+    padding: var(--spacing);
+}
+
+table text#free {
+    color: var(--background-color-dark);
+}
+
+table form button{
+    width: auto;
+}
+
+@media (max-width: 1000px) {
+    table, table * {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    table { 
+        border-radius: 0;
+        background-color: var(--background-color-light);
+        box-shadow: none;
+    }
+    
+    table thead {
+        display: none;
+    }
+    
+    table tbody tr {
+        margin: var(--spacing);
+        border-radius: 5px;
+        background-color: white;
+        height: auto;
+        box-shadow: var(--shadow);
+    }
+    
+    table tbody tr:hover {
+        background-color: white;
+        box-shadow: var(--shadow-hover);
+    }
+    
+    table tbody tr td {
+        padding: 0 !important;
+        font-size: 20px;
+        margin: 0;
+        border-bottom: 1px solid var(--background-color-dark);
+    }
+    
+    table tbody tr td a{
+        padding: var(--spacing);
+    }
+    
+    table tbody tr td:nth-child(1) {
+        padding: var(--spacing);
+        padding-bottom: 0;
+        font-size: 35px;
+        opacity:0.5;
+    }
+    
+    table tbody tr * {
+        text-align: left !important;
+    }
 }
