@@ -27,6 +27,7 @@ Daniel Meint
     box-sizing: border-box;
     text-decoration: none;
     outline: none;
+    border: none;
 }
 
 html {
@@ -37,7 +38,8 @@ html {
 
 body {
   margin: 0;
-  background: linear-gradient(white, #c5ebc5);
+  background: var(--background-color-light);
+  height: 100%;
 }
 
 body#game {
@@ -54,6 +56,7 @@ body#game {
     height:60px;
     background-color: var(--table-primary-color);
     margin-bottom: 20px;
+    color: white;
 }
 
 .navbar .header {
@@ -70,12 +73,11 @@ body#game {
     font-family: Brush Script MT, Brush Script Std, cursive;
 }
 
-
 .flex-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    overflow: hidden;
 }
 
 .flex-center {
@@ -98,8 +100,6 @@ body#game {
 .information {
 
 }
-
-
 
 .container {
     flex-direction: column;
@@ -128,10 +128,6 @@ body#game {
 
 .left.bottom {
     border-radius: 0 8px 0 0;
-}
-
-.right.bottom {
-    border-radius: 8px 0 0 0;
 }
 
 svg {
@@ -196,10 +192,6 @@ table {
 form {
     margin: 0;
     display: inline-block;
-}
-
-#login {
-    font-weight: bold;
 }
 
 #login svg {
@@ -313,6 +305,7 @@ input:not([type="submit"]):hover, input:not([type="submit"]):focus {
     border-color: var(--primary-color);
 }
 
+/* buttons */
 button {
     text-decoration: none;
     background-color: var(--table-primary-color);
@@ -342,7 +335,23 @@ button:active {
 button#disabled {
     opacity: 0.2;
     cursor: not-allowed;
+    padding: none;
 }
+
+button.circular {
+    position: absolute;
+    border-radius: 50%;
+    padding: 15px 19px;
+    font-weight: bold;
+    top: 0%;
+    right: -10%;
+}
+
+button.circular#animated {
+    transform: rotate(45deg);
+    animation: rotate 0.8s;
+}
+
 button.menu {
     color: var(--table-secondary-color);
     box-shadow: none;
@@ -354,7 +363,7 @@ button.menu#fixed {
 }
 
 button.menu#game {
-        position: absolute
+    position: absolute
 }
 
 @media (min-width: 850px) {
@@ -363,49 +372,6 @@ button.menu#game {
         box-shadow: var(--shadow);
     } 
 }
-
-.buttongroup {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.buttongroup a {
-    display: block;
-    width: 1%;
-}
-
-/* buttons */
-.btn {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    cursor: pointer;
-
-    text-decoration: none;
-    
-    background-color: var(--primary-color);
-    color: white;
-    
-    border-color: transparent;
-    border-radius: .25rem;
-    border-width: 2px;
-    border-style: solid;
-    display: inline-block;
-    
-    padding: .375rem .75rem;
-    
-    font-size: 1rem;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    
-    transition: color .15s ease-in-out, background-color .15s ease-in-out,border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
-
 button.stand{
     background-color :#f45c42;
 }
@@ -422,59 +388,16 @@ button.insurance{
     background-color:#70ae98;
 }
 
-.btn svg {
-    fill: white;
+.buttongroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.btn:hover {
-    background-color: darkolivegreen;
-}
-
-.btn-small {
-    width: 112px;
-}
-
-.btn-secondary {
-    background-color: white;
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-secondary svg {
-    fill: var(--primary-color);
-}
-
-.btn-secondary:hover {
-    background-color: honeydew;
-}
-
-.btn-danger {
-  color: white;
-  background-color: #d9534f;
-}
-
-.btn-danger:hover {
-  color: white;
-  background-color: #c9302c;
-}
-
-.btn-disabled, .btn-disabled:hover {
-  background-color: #6c757d;
-  color: white;
-  
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.btn svg {
-    display: inline-block;
-    height: 100%;
-}
-
-.btn-menu {
-    width: 20rem;
-    max-width: 100%;
-    font-size: 1.5rem;
+.buttongroup a {
+    display: block;
+    width: 1%;
 }
 
 form.form-menu {
@@ -791,6 +714,7 @@ g[id *= 'clubs'] text,
     transform: scale(1);
   }
 }
+
 @keyframes lds-ellipsis3 {
   0% {
     transform: scale(1);
@@ -799,6 +723,7 @@ g[id *= 'clubs'] text,
     transform: scale(0);
   }
 }
+
 @keyframes lds-ellipsis2 {
   0% {
     transform: translate(0, 0);
@@ -806,4 +731,179 @@ g[id *= 'clubs'] text,
   100% {
     transform: translate(19px, 0);
   }
+}
+
+@keyframes dialog
+{
+  0% {
+      transform: translate(0%, -200%);
+  }
+}
+
+@keyframes dialog-shake
+{
+    10%
+    {
+        transform: translate(-10px, 0px);
+    }
+    40%
+    {
+        transform: translate(10px, 0px);
+    }
+    70%
+    {
+        transform: translate(-3px, 0px);
+    }
+    100%
+    {
+        transform: translate(1px, 0px);
+    }
+}
+
+@keyframes rotate
+{
+    0%
+    {
+        transform: rotate(45deg);
+    }
+}
+
+/* dialog */
+.dialog{
+    position: fixed;
+    width: 40%;
+    min-width: 300px;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 5px;
+    padding: var(--spacing);
+    height: auto;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+}
+
+.dialog#animation{
+    animation: dialog 0.4s;
+}
+
+.dialog--header {
+    font-size: 35px;
+    text-align: left;
+    padding: calc((var(--spacing)) - 10px);
+}
+
+.dialog--content {
+    padding-left: calc((var(--spacing)) - 10px);
+    font-size: 18px;
+}
+
+.dialog--content form div{
+    padding-top: 10px;
+}
+
+.dialog--betting{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dialog button{
+    float: right;
+    margin-top: 30px;
+}
+
+.dialog#buttongroup {
+    position: relative;
+    animation: none;
+}
+
+.dialog#login {
+    position: absolute;
+    top: 25%;
+    width: 30%;
+}
+
+.dialog#register{
+    background-color: var(--table-primary-color);
+    position: absolute;
+    top: 25%;
+    width: 30%;
+    color: white;
+    box-shadow: var(--shadow-hover);
+    animation: dialog-shake 1s;
+}
+
+.dialog#register label{
+    color: white;
+}
+
+.dialog#register button{
+    background-color: white;
+    color: darkgrey;
+    box-shadow: var(--shadow);
+}
+
+.dialog form{
+    width: 100%;
+}
+
+.dialog#shadow {
+    box-shadow: var(--shadow), 0 0 0 2000px rgba(0,0,0,0.8);
+}
+
+.dialog#buttongroup button {
+    float:none
+}
+
+.dialog #win{
+    color: green;
+}
+
+.dialog #lose{
+    color: red;
+    opacity: 0.5;
+}
+
+.dialog #tie{
+    opacity: 0.5;
+}
+
+/* input */
+.input--advanced { 
+  display: flex; 
+  flex-direction: column;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+label#name {
+  font-size:16px;
+  margin-left: 5px;
+  color:var(--table-primary-color);
+}
+
+label#balance {
+    font-size: 12px;
+    margin-top: 2px;
+    margin-left: 0px;
+}
+
+input {
+  width:80%;
+  padding:10px 5px;
+  font-size:18px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 2px solid var(--background-color-dark);
+}
+
+input.betting {
+  max-width: 120px;
+}
+
+input.name {
+  max-width: 300px;
+}
+
+input:focus {
+  border-bottom: 2px solid var(--table-primary-color); 
 }

@@ -8,6 +8,26 @@
             <head>
                 <link rel="stylesheet" type="text/css" href="/static/bjx/css/style.css" />
             </head>
+                <xsl:choose>
+                    <xsl:when test="$screen = 'menu'">
+                        <div class="navbar" id="centered">
+                            <h1>XForms' Blackjack</h1>
+                        </div>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <a href="/bjx">
+                            <div class="navbar">
+                                <xsl:if test="$screen = 'games'">
+                                    <button class="menu">&lt; Games</button>
+                                </xsl:if>
+                                <xsl:if test="$screen = 'highscores'">
+                                    <button class="menu">&lt; Highscore</button>
+                                </xsl:if>
+                            </div>
+                        </a>
+                    </xsl:otherwise>
+                </xsl:choose>
+                
             <body>
                 <span id="login" class="right top">
                     <span><xsl:value-of select="$name"/></span>
@@ -21,21 +41,17 @@
                     <div class="content">
                         <xsl:choose>
                             <xsl:when test="$screen = 'menu'">
-                                <h1>XForms' Multi-Client Blackjack</h1>
-                                <form class="form-menu" action="/bjx/games" method="post">
-                                    <input class="btn btn-menu" type="submit" value="New Game" />
+                                <form action="/bjx/games" method="post">
+                                    <button type="submit">New Game</button>
                                 </form>
-                                <form class="form-menu">
-                                    <a class="btn btn-menu" href="/bjx/games">Join Game</a>
-                                </form>
-                                <form class="form-menu">
-                                    <a class="btn btn-menu btn-secondary" href="/bjx/highscores">Highscores</a>
-                                </form>
+                                <a href="/bjx/games"><button class="btn btn-menu">Join Game</button></a>
+                                
+                                <a href="/bjx/highscores"><button class="btn btn-menu btn-secondary">Highscores</button></a>
+                                
                             </xsl:when>
                             
                             
                             <xsl:when test="$screen = 'games'">
-                                <a class="btn btn-secondary left top" href="/bjx">◀ Menu</a>
                                 <xsl:choose>
                                     <xsl:when test="count(games/game) = 0">
                                         <p>No active games.</p>
@@ -85,7 +101,6 @@
                             </xsl:when>
                             
                             <xsl:when test="$screen = 'highscores'">
-                                <a class="btn btn-secondary left top" href="/bjx">◀ Menu</a>
                                 <table id="highscores-table" class="table information">
                                     <thead class="thead-light">
                                         <tr>
