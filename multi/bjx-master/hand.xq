@@ -75,13 +75,13 @@ declare function hand:evaluate($self, $toBeat) as xs:string {
 declare function hand:evaluateToInt($self,$toBeat) as xs:integer{
 if ($self/@value <= 21 and ($self/@value > $toBeat or $toBeat > 21))
   then (
-    2
+    1
   )
   else if ($self/@value <= 21 and $self/@value = $toBeat)
   then (
-    1
+    0
   )
   else (
-    -2
+    -1
   )
 };

@@ -161,44 +161,58 @@ function player:next($self) {
   )
 };
 
+declare 
+%updating
+function player:evaluate($self,$caller){
+    let $game := $self/..
+    let $hand := if ($caller=0)then($self/hand)else(hand:addCard($self/hand, $game/dealer/deck/card[1]))
+    let $resultInt := hand:evaluateToInt($hand,$game/dealer/hand/@value)
+    let $newBet := if($caller=2)then(2 * $self/bet)else($self/bet) 
+    let $isInsured := if($self/@insurance='true')then(1)else(0)
+    let $resultBet := $newBet*$resultInt+dealer:evaluateInsurance($game/dealer,$isInsured,$resultInt,$newBet)
+    return(
+        replace value of node $self/@state with hand:evaluate($hand,$game/dealer/hand/@value),
+        replace value of node $self/profit with $resultBet,
+        replace value of node $self/balance with $self/balance + $resultBet
+    )
+};
 
 declare 
 %updating
-function player:newEvaluate($self,$caller){
+function player:sevaluate($self,$caller){
     let $game := $self/..
     let $toBeat := $game/dealer/hand/@value
     return(
         if($caller=0)
         then(
             let $resultInt := hand:evaluateToInt($self/hand,$toBeat)
-            let $insuranceOffset := dealer:evaluateInsurance($game/dealer,player:isInsured($self),$resultInt,$self/bet)
+            let $isInsured := if($self/@insurance='true')then(1)else(0)
+            let $insuranceOffset := dealer:evaluateInsurance($game/dealer,$isInsured,$resultInt,$self/bet)
             let $resultBet := $self/bet * $resultInt + $insuranceOffset
+            let $resultState := hand:evaluate($self/hand,$toBeat)
             return(
+                replace value of node $self/@state with $resultState,
                 replace value of node $self/profit with $resultBet,
                 replace value of node $self/balance with $self/balance + $resultBet
             )
         )
-        else(
-            let $game := $self/..
+        else(            
             let $deck := $game/dealer/deck
             let $hand := $self/hand
             let $handAfterHit := hand:addCard($hand, $deck/card[1])        
             let $resultInt := hand:evaluateToInt($handAfterHit,$toBeat)
+            let $resultState := hand:evaluate($handAfterHit,$toBeat)
             let $newBet := $caller * $self/bet 
-            let $insuranceOffset := dealer:evaluateInsurance($game/dealer,player:isInsured($self),$resultInt,$newBet)
+            let $isInsured := if($self/@insurance='true')then(1)else(0)
+            let $insuranceOffset := dealer:evaluateInsurance($game/dealer,$isInsured,$resultInt,$newBet)
             let $resultBet := $newBet*$resultInt+$insuranceOffset
             return(
+                replace value of node $self/@state with $resultState,
                 replace value of node $self/profit with $resultBet,
                 replace value of node $self/balance with $self/balance + $resultBet
             )
         )
     )
-};
-
-declare function player:isInsured($self) as xs:integer{
-    if($self/@insurance='true')
-    then(1)
-    else(0)
 };
 
 declare variable $player:defaultName := "undefined";

@@ -39,7 +39,7 @@ function game:evaluate($self,$caller) {
   for $player in $self/player
   return (
     (: BUG: last player might have doubled, so we do not have his last card in the DB yet :)
-    player:newEvaluate($player,$caller)
+    player:evaluate($player,$caller)
   ),
   replace value of node $self/@state with 'evaluated'
 };
