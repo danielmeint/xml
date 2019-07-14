@@ -207,13 +207,12 @@
 									   </div>
 							           <div>									       
    									     <xsl:choose>
-                                               <xsl:when test="$activePlayerBet * 2 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
+                                               <xsl:when test="$activePlayerBet * 1.5 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
                                             </xsl:when>
                                                <xsl:otherwise>
                                                    <form action="/bjx/games/{/game/@id}/insurance" method="POST" target="hiddenFrame">
                                                        <button class="insurance" type="submit">Insurance</button>
                                                    </form>
-
                                             </xsl:otherwise>
                                              </xsl:choose>									                                                    
 									   </div>
@@ -330,6 +329,9 @@
                                         </td>
                                     </xsl:otherwise>
                                 </xsl:choose>
+                                
+                                
+
                             </tr>
                         </xsl:for-each>
                     </table>
