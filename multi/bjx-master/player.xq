@@ -166,10 +166,9 @@ declare
 function player:evaluate($self,$caller){
     let $game := $self/..
     let $hand := if ($caller=0)then($self/hand)else(hand:addCard($self/hand, $game/dealer/deck/card[1]))
-    let $resultInt := hand:evaluateToInt($hand,$game/dealer/hand/@value)
     let $newBet := if($caller=2)then(2 * $self/bet)else($self/bet) 
     let $isInsured := if($self/@insurance='true')then(1)else(0)
-    let $resultBet := $newBet*$resultInt+dealer:evaluateInsurance($game/dealer,$isInsured,$resultInt,$newBet)
+    let $resultBet := $newBet*hand:evaluateToInt($hand,$game/dealer/hand/@value)+dealer:evaluateInsurance($game/dealer,$isInsured,$newBet)
     return(
         replace value of node $self/@state with hand:evaluate($hand,$game/dealer/hand/@value),
         replace value of node $self/profit with $resultBet,
