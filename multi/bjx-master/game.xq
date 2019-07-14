@@ -119,8 +119,7 @@ declare function game:reset($self) {
   let $players := $self/player ! player:reset(.)
     let $players := (
     for $player in $players
-    let $user := $api:users/user[@name=$player/@name]
-    where $user/balance > 0
+    where $player/balance > 0
     return $player
   )
   let $players := if (count($players) > 0) then (player:setState($players[1], 'active'), subsequence($players, 2, count($players) - 1)) else ($players)
