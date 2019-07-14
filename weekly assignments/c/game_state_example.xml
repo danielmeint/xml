@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE game SYSTEM "game_state.dtd">
+<?xml-stylesheet type="text/xsl" href="transformation.xsl"?>
+<game>
+    <bank>
+        <cards>
+            <card value="7" suit="spades"/>
+        </cards>
+    </bank>
+    <!-- do players need ID attributes? -->
+    <player name="Felix">
+        <balance>7500</balance>
+        <bet>110</bet>
+        <cards>
+            <card value="D" suit="diamonds"/>
+            <card value="3" suit="hearts"/>
+        </cards>
+    </player>
+    <player name="Max">
+        <balance>900</balance>
+        <bet>30</bet>
+        <cards>
+            <card value="A" suit="hearts"/>
+            <card value="K" suit="clubs"/>
+        </cards>
+    </player>
+    <player name="Janik">
+        <balance>7500</balance>
+        <bet>110</bet>
+        <cards>
+            <card value="7" suit="hearts"/>
+            <card value="2" suit="clubs"/>
+        </cards>
+    </player>
+    <player name="Daniel">
+        <balance>7500</balance>
+        <bet>110</bet>
+        <cards>
+            <card value="7" suit="hearts"/>
+            <card value="2" suit="clubs"/>
+        </cards>
+    </player>
+    <player name="Daniel">
+        <balance>7500</balance>
+        <bet>110</bet>
+        <cards>
+            <card value="7" suit="hearts"/>
+            <card value="2" suit="clubs"/>
+        </cards>
+    </player>
+</game>

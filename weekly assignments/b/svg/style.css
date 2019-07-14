@@ -1,0 +1,122 @@
+/**     
+Erstellt von der Gruppe "XForms":
+Felix Hennerkes,
+Maximilian Karpfinger,
+Janik Schnellbach,
+Daniel Meint
+**/
+
+:root {
+    --table-primary-color: #5e995e;
+    --table-secondary-color: #c5ebc5;
+    /*     
+    --table-primary-color: #002C4E;
+    --table-secondary-color: white;
+    */
+}
+
+* {
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;
+}
+
+svg {
+    background-color: #212224;
+}
+
+/* table */
+#table text { 
+    font-family: Helvetica, sans-serif;
+    fill: var(--table-secondary-color);
+    text-transform: uppercase;
+    font-size: 32px;
+}
+
+#table text.heavy { 
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#table text.small {
+    font-size: 24px;
+}
+
+#tableBase {
+    fill: var(--table-primary-color);
+}
+
+#box {
+    stroke: var(--table-secondary-color);;
+}
+
+/* cards */
+#card_base {
+    fill: white;
+    stroke: black;
+}
+
+g[id*='hearts'] text, g[id*='diamonds'] text, g[id*='spades'] text, g[id*='clubs'] text, #hearts, #diamonds, #spades, #clubs {
+    font-size: 24px;
+}
+
+g[id*='hearts'] text, g[id*='diamonds'] text, #diamonds, #hearts {
+    fill: red;
+}
+
+g[id*='spades'] text, g[id*='clubs'] text, #spades, #clubs {
+    fill: black;
+}
+
+.checker-background {
+    fill: white;
+}
+
+.checker {
+    fill: darkred;
+}
+
+#back > rect:nth-child(2) {
+    fill: url(cards.svg#pattern-checkers);
+}
+
+/* chips */
+.chip text {
+    dominant-baseline: central;
+    fill: white;
+    font-size: 32px;
+    text-anchor: middle;
+}
+
+.chip-1 {
+    fill: grey;
+}
+
+.chip-5 {
+    fill: red;
+}
+
+.chip-10 {
+    fill: rgb(134, 180, 241);
+}
+
+.chip-25 {
+    fill: green;
+}
+
+.chip-100 {
+    fill: black;
+}
+
+/* buttons */
+.btn {
+    fill: darkorange;
+    cursor: pointer;
+}
+
+.btn text {
+    dominant-baseline: central;
+    fill: white;
+    font-size: 24px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}

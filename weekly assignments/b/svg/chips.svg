@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="style.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 
+Erstellt von der Gruppe "XForms":
+Felix Hennerkes,
+Maximilian Karpfinger,
+Janik Schnellbach,
+Daniel Meint
+
+optimiert für Firefox
+-->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800" height="400">
+    <defs>
+        <path id="slice" d="
+        M 1 0 
+        A 1 1 0 0 1 0.7071067811865476 0.7071067811865475
+        L 0 0"/>
+        <symbol id="chip" class="chip" viewBox="-1 -1 2 2">
+            <circle cx="0" cy="0" r="1" fill="white"/>
+            <g class="slices">
+                <use xlink:href="#slice" transform="rotate(22.5, 0, 0)"/>
+                <use xlink:href="#slice" transform="rotate(112.5, 0, 0)"/>
+                <use xlink:href="#slice" transform="rotate(202.5, 0, 0)"/>
+                <use xlink:href="#slice" transform="rotate(292.5, 0, 0)"/>
+            </g>
+            <circle cx="0" cy="0" r="0.65" stroke="white" stroke-width="0.1"/>
+        </symbol>
+        <symbol id="chip-1" class="chip chip-1" viewBox="0 0 100 100">
+            <use xlink:href="#chip" x="0" y="0" width="100" height="100"/>
+            <text x="50" y="50" alignment-baseline="central">1</text>
+        </symbol>
+        <symbol id="chip-5" class="chip chip-5" viewBox="0 0 100 100">
+            <use xlink:href="#chip" x="0" y="0" width="100" height="100"/>
+            <text x="50" y="50" alignment-baseline="central">5</text>
+        </symbol>
+        <symbol id="chip-10" class="chip chip-10" viewBox="0 0 100 100">
+            <use xlink:href="#chip" x="0" y="0" width="100" height="100"/>
+            <text x="50" y="50" alignment-baseline="central">10</text>
+        </symbol>
+        <symbol id="chip-25" class="chip chip-25" viewBox="0 0 100 100">
+            <use xlink:href="#chip" x="0" y="0" width="100" height="100"/>
+            <text x="50" y="50" alignment-baseline="central">25</text>
+        </symbol>
+        <symbol id="chip-100" class="chip chip-100" viewBox="0 0 100 100">
+            <use xlink:href="#chip" x="0" y="0" width="100" height="100"/>
+            <text x="50" y="50" alignment-baseline="central">100</text>
+        </symbol>
+    </defs>
+    <!-- Beispielverwendung -->
+    <use xlink:href="#chip-1" x="5" y="5" width="70" height="70" />
+    <use xlink:href="#chip-5" x="105" y="5" width="70" height="70" />
+    <use xlink:href="#chip-10" x="205" y="5" width="70" height="70" />
+    <use xlink:href="#chip-25" x="55" y="105" width="70" height="70" />
+    <use xlink:href="#chip-100" x="155" y="105" width="70" height="70" />
+</svg>

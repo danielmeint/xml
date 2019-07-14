@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE GAME [
+
+<!ELEMENT GAME (BLACKJACK+)>
+<!ELEMENT BLACKJACK (TABLE)>
+<!ELEMENT TABLE (DECK,PLAYER+,DEALER,ROUNDCOUNTER,TURN)>
+
+<!--points to player who is playing-->
+<!ELEMENT TURN (NAME)>
+<!ELEMENT PLAYER (NAME,CARD+,MONEY,BET)>
+<!ELEMENT DEALER (CARD+)>
+<!ELEMENT MONEY (COIN*)>
+<!ELEMENT BET (COIN+)>
+<!ELEMENT DECK (CARD+)>
+
+<!ELEMENT NAME (#PCDATA)>
+<!ELEMENT CARD (#PCDATA)>
+<!ELEMENT COIN (#PCDATA)>
+
+<!--optional-->
+<!ELEMENT ROUNDCOUNTER (#PCDATA)>
+
+<!ATTLIST COIN VALUE (1|10|100) #REQUIRED>
+
+<!ATTLIST CARD CARDVALUE (ACE_L|2|3|4|5|6|7|8|9|10|J|Q|K|ACE_H) #REQUIRED
+               COLOR (HEART|DIAMOND|SPADE|CLUBS) #REQUIRED>
+
+<!ATTLIST BLACKJACK GAMESTATE (dealing|bidding|playerTurn|dealerTurn|evaluation|preRound) #REQUIRED
+                    ID ID #REQUIRED>
+
+<!ATTLIST PLAYER PLAYERSTATE (playing|done|busted|waiting|oom) #REQUIRED
+                 SPLIT (true|false) #REQUIRED
+                 INSURANCE (true|false) #REQUIRED>
+
+<!ATTLIST DEALER DEALERSTATE (playing|done|busted|waiting) #REQUIRED>
+]>
+
+<GAME>
+    <BLACKJACK GAMESTATE="dealerTurn" ID="os3_33t_5hb">
+        <TABLE>
+            <DECK>
+                <CARD COLOR="HEART" CARDVALUE="2"></CARD>
+            </DECK>
+            <PLAYER PLAYERSTATE="waiting" SPLIT="false" INSURANCE="false">
+                <NAME>player1</NAME>
+                <CARD COLOR="SPADE" CARDVALUE="4"></CARD>
+                <CARD CARDVALUE="K" COLOR="DIAMOND"></CARD>
+                <MONEY>
+                    <COIN VALUE="100"></COIN>
+                    <COIN VALUE="10"></COIN>
+                    <COIN VALUE="1"></COIN>
+                    <COIN VALUE="1"></COIN>
+                </MONEY>
+                <BET>
+                    <COIN VALUE="10"></COIN>
+                </BET>
+            </PLAYER>
+            <DEALER DEALERSTATE="playing">
+                <CARD COLOR="DIAMOND" CARDVALUE="9"></CARD>
+            </DEALER>
+            <ROUNDCOUNTER>981273</ROUNDCOUNTER>
+            <TURN>
+                <NAME>dealer</NAME>
+            </TURN>
+        </TABLE>
+    </BLACKJACK>
+    <BLACKJACK GAMESTATE="playerTurn" ID="qs4_j3t_5hb">
+        <TABLE>
+            <DECK>
+                <CARD COLOR="HEART" CARDVALUE="2"></CARD>
+            </DECK>
+            <PLAYER PLAYERSTATE="playing" SPLIT="false" INSURANCE="false">
+                <NAME>player1</NAME>
+                <CARD COLOR="SPADE" CARDVALUE="4"></CARD>
+                <CARD CARDVALUE="K" COLOR="DIAMOND"></CARD>
+                <MONEY>
+                    <COIN VALUE="100"></COIN>
+                    <COIN VALUE="10"></COIN>
+                    <COIN VALUE="1"></COIN>
+                    <COIN VALUE="1"></COIN>
+                </MONEY>
+                <BET>
+                    <COIN VALUE="10"></COIN>
+                </BET>
+            </PLAYER>
+            <DEALER DEALERSTATE="waiting">
+                <CARD COLOR="DIAMOND" CARDVALUE="9"></CARD>
+            </DEALER>
+            <ROUNDCOUNTER>981273</ROUNDCOUNTER>
+            <TURN>
+                <NAME>dealer</NAME>
+            </TURN>
+        </TABLE>
+    </BLACKJACK>    
+</GAME>

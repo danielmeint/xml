@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="style.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 
+Erstellt von der Gruppe "XForms":
+Felix Hennerkes,
+Maximilian Karpfinger,
+Janik Schnellbach,
+Daniel Meint
+
+optimiert für Firefox
+-->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" height="100%">
+    <use xlink:href="table.svg#table" x="560" y="0" width="70" height="70" />
+    <g id="player1Cards" transform="translate(900, 415)">
+        <use xlink:href="cards.svg#D_diamonds" x="0" y="0"/>
+        <use xlink:href="cards.svg#3_hearts" x="40" y="10"/>
+    </g>
+    <g id="player2Cards" transform="translate(1100, 390)">
+        <use xlink:href="cards.svg#A_hearts" x="0" y="0"/>
+        <use xlink:href="cards.svg#K_clubs" x="40" y="10"/>
+    </g>
+    <g id="dealerCards" transform="translate(900, 80)">
+        <use xlink:href="cards.svg#back" x="0" y="0"/>
+        <use xlink:href="cards.svg#7_spades" x="40" y="10"/>
+    </g>
+    <g id="player1Chips">
+        <use xlink:href="chips.svg#chip-100" x="910" y="315" width="50" height="50" />
+        <use xlink:href="chips.svg#chip-10" x="950" y="335" width="50" height="50" />
+    </g>
+    <g id="player2Chips">
+        <use xlink:href="chips.svg#chip-25" x="1100" y="295" width="50" height="50" />
+        <use xlink:href="chips.svg#chip-5" x="1080" y="325" width="50" height="50" />
+    </g>
+    <g id="buttons">
+        <use class="btn" xlink:href="buttons.svg#btn-hit" x="760" y="600" width="180" height="60" />
+        <use class="btn" xlink:href="buttons.svg#btn-stand" x="980" y="600" width="180" height="60"/>
+    </g>
+</svg>
