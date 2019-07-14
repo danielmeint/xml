@@ -161,6 +161,7 @@ function player:next($self) {
   )
 };
 
+(: caller 0 is last player stand, 1 is last player hit & bust, 2 is last player doubled :) 
 declare 
 %updating
 function player:evaluate($self,$caller){
