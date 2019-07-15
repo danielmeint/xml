@@ -16,7 +16,7 @@ import module namespace game="xforms/bjx/game" at 'game.xq';
 import module namespace hand="xforms/bjx/hand" at 'hand.xq';
 import module namespace html="xforms/bjx/html" at 'html.xq';
 import module namespace player="xforms/bjx/player" at 'player.xq';
-
+import module namespace usr="xforms/bjx/usr" at 'usr.xq';
 
 
 import module namespace ws = "http://basex.org/modules/ws";
@@ -25,6 +25,7 @@ import module namespace request = "http://exquery.org/ns/request";
 import module namespace session = 'http://basex.org/modules/session';
 
 declare variable $api:db := db:open("bjx");
+declare variable $api:users := db:open("bjx-users");
 
 declare
 %rest:path("/bjx")
@@ -73,7 +74,8 @@ function api:user-create(
     if(user:exists($name)) then (
       error((), 'User already exists.')
     ) else (
-      user:create($name, $pass, 'none')
+      user:create($name, $pass, 'none'),
+      usr:create($name)
     ),
     update:output(web:redirect("/bjx"))
   } catch * {
@@ -132,6 +134,7 @@ declare
 %updating
 function api:setup() {
   db:create("bjx", doc('model.xml')),
+  db:create("bjx-users", doc('users.xml')),
   update:output(web:redirect('/bjx'))
 };
 

@@ -7,6 +7,7 @@ import module namespace dealer="xforms/bjx/dealer" at 'dealer.xq';
 import module namespace deck="xforms/bjx/deck" at 'deck.xq';
 import module namespace game="xforms/bjx/game" at 'game.xq';
 import module namespace hand="xforms/bjx/hand" at 'hand.xq';
+import module namespace usr="xforms/bjx/usr" at 'usr.xq';
 
 
 declare
@@ -166,6 +167,7 @@ declare
 %updating
 function player:evaluate($self,$caller){
     let $game := $self/..
+    let $user := $api:users/user[@name=$self/@name]
     let $hand := if ($caller=0)then($self/hand)else(hand:addCard($self/hand, $game/dealer/deck/card[1]))
     let $newBet := if($caller=2)then(2 * $self/bet)else($self/bet) 
     let $isInsured := if($self/@insurance='true')then(1)else(0)
@@ -173,7 +175,8 @@ function player:evaluate($self,$caller){
     return(
         replace value of node $self/@state with hand:evaluate($hand,$game/dealer/hand/@value),
         replace value of node $self/profit with $resultBet,
-        replace value of node $self/balance with $self/balance + $resultBet
+        replace value of node $self/balance with $self/balance + $resultBet,
+        usr:win($user, $resultBet)
     )
 };
 
