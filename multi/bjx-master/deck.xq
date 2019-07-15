@@ -86,7 +86,7 @@ declare function deck:shuffle($self) {
 };
 
 declare function deck:drawTo17($hand, $deck) {
-  if ($hand/@value >= 17)
+  if (xs:integer($hand/@value) >= 17)
   then (
     <result>
       {$hand}

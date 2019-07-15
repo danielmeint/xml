@@ -66,7 +66,7 @@ function player:hit($self) {
   let $newHand := hand:addCard($self/hand, $game/dealer/deck/card[1])
   return (
     player:draw($self),
-    if ($newHand/@value >= 21)
+    if (xs:integer($newHand/@value) >= 21)
     then (
       if (player:isLast($self))
       then (
