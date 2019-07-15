@@ -45,8 +45,9 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </g>
+			<xsl:if test="/game/dealer/hand/card[1]/@value > 0">
                         <g class="label label-hand">
-                            <rect x="10px" y="70px" rx="25" ry="25" width="80" height="50"/>
+                            <rect x="10px" y="70px" rx="15" ry="15" width="80" height="50"/>
                             <text class="name" x="30px" y="85px">
                                 Dealer
                             </text>
@@ -63,7 +64,7 @@
                                 
                             </text>
                         </g>
-                        
+                        </xsl:if>
                     </g>
                     <g id="player_cards">
                         <xsl:for-each select="/game/player">
@@ -127,7 +128,7 @@
                                         />
                                     </xsl:for-each>
                                 </g>
-                                <xsl:if test="@state = 'active'">
+                                <xsl:if test="hand/@value > 0">
                                 <g>
                                   <xsl:attribute name="class">label label-hand</xsl:attribute>
                                   
