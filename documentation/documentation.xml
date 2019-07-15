@@ -101,10 +101,24 @@
                 Since the players all play against the dealer, another class <classname>dealer</classname> is required.
                 It has no attributes, but it stores the deck of the game and likewise the players a hand object.
                 Concerning the functions of the class, <function>evaluateInsurance</function> is a helper for evaluating a players profit.
-                The function <function>deal</function>
-                
+                The function <function>deal</function> gives every player two cards and also draws for the dealer.
             </para>
-            
+            <para>
+                The <classname>hand</classname> class has the attribute <code>value</code> which stores the value of the contained cards.
+                On one hand this class provides helper functions for evaluating a player's hand. On the other hand it supplies the <function>getOptimalSum</function> 
+                function that calculates the optimal sum of a hand. This is needed because the card Ace can have the value 1 and 11.
+            </para>
+            <para>
+                The <classname>card</classname> class consists of two attributes.
+                <itemizedlist>
+                    <listitem>
+                        <para><code>value</code> stores the value of a card</para>
+                    </listitem>
+                    <listitem>
+                        <para><code>suit</code> stores the suit of a card</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
         </section>
         <section>
             <title>Design decisions and discussion</title>
