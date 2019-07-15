@@ -21,21 +21,6 @@ declare function dealer:newDealer() {
 
 declare
 %updating
-function dealer:draw($self) {
-  let $game := $self/..
-  let $oldHand := $self/hand
-  let $oldDeck := $self/deck
-  let $result  := deck:drawTo17($oldHand, $oldDeck)
-  let $newHand := $result/hand
-  let $newDeck := $result/deck
-  return (
-    replace node $oldHand with $newHand,
-    replace node $oldDeck with $newDeck
-  )
-};
-
-declare
-%updating
 function dealer:deal($self) {
   let $game := $self/..
   

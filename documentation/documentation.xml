@@ -30,11 +30,13 @@
                 In a MVC-architecture the model has the control of the application's logic. 
                 Furthermore it is resposibel to store data in a database.
                 In order to maintain data, several objects with unique functionality are needed.
-                All these collaborating objects provide different attributes and methods. 
+                All these collaborating objects provide different attributes and methods. In the following the data model will be described at first.
+                Thereon the design decisions will be discussed. The second part consists of the implementation of the game, followed by a discussion on
+                implementation details and what problems were faced.
             </para>
             <para>
                 The database consists of a list of games. For that a class <classname>game</classname> is needed 
-                which stores every information about the instance of a blackjack game. A game object has multiple attributes and methods.
+                which stores every information about the instance of a blackjack game. A game object has multiple attributes and functions.
                 <itemizedlist>
                     <listitem>
                         <para><code>id</code> to distinguish games</para>
@@ -43,7 +45,7 @@
                         <para><code>state</code> stores the state of the game</para>
                     </listitem>
                 </itemizedlist>
-                Regarding <classname>game</classname> methods, their main purpose is constructing,initializing and resetting game objects.
+                Regarding <classname>game</classname> functions, their main purpose is constructing,initializing and resetting game objects.
                 Because every game object also stores all the attending players and a dealer, the functions essentially execute operations on all players.
                 In addition to the basic functions, <classname>game</classname> provides the function <function>evaluate</function>. 
                 However the logic of evaluating a player is sourced to the <classname>player</classname> class. 
@@ -71,6 +73,7 @@
                         <para><code>profit</code> stores the player's profit in a round</para>
                     </listitem>
                 </itemizedlist>
+                Another object stored inside the player is the players hand, which holds the cards.
                 As to the <classname>player</classname> functions, contiguous to the constructors and setters,
                 there are alot of functions that contain the game's logic. Depending on the game's state, a player can 
                 take several actions, which are passed over to the <classname>player</classname> class by the API.
@@ -92,11 +95,14 @@
                         <para><function>evaluate</function> determines the player's profit</para>
                     </listitem>
                 </itemizedlist>
-                Alongside the listed functions there are some helpers, which provide logic for finding the next player and joining a game.
+                Alongside the listed functions there are some helpers, which provide logic for finding the next player and joining or leaving a game.
             </para>
             <para>
-                dealer..
-                Each game object has a dealer object. For this reason the class <classname>dealer</classname> is implemented
+                Since the players all play against the dealer, another class <classname>dealer</classname> is required.
+                It has no attributes, but it stores the deck of the game and likewise the players a hand object.
+                Concerning the functions of the class, <function>evaluateInsurance</function> is a helper for evaluating a players profit.
+                The function <function>deal</function>
+                
             </para>
             
         </section>
@@ -112,6 +118,7 @@
         <section>
             <title>Implementation</title>
             <para>deck is real not generating random cards</para>
+            <para>optimal sum recursive</para>
         </section>
         <section>
             <title>Implementation decisions and discussion</title>
