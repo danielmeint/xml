@@ -14,7 +14,9 @@ declare
 %updating
 function player:joinGame($gameId as xs:integer, $name as xs:string) {
   let $game := $api:db/games/game[@id=$gameId]
-  let $newPlayer := player:setName(player:newPlayer(), $name)
+  let $user := $api:users/user[@name=$name]
+  let $balance := $user/balance/text()
+  let $newPlayer := player:setBalance(player:setName(player:newPlayer(), $name), $balance)
   let $trace := trace(concat($name, " joined game ", $gameId))
   let $msg := <message author="INFO">{$name} joined the game.</message>
   let $chat := $game/chat
