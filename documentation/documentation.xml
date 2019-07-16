@@ -3,7 +3,7 @@
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
     version="5.1">
     <info>
-        <title>XForms Blackjack documentation</title>
+        <title>XForms Multiclient Blackjack Documentation</title>
         <author>
             <personname>Daniel Meint</personname>
             <email>d.meint@tum.de</email>
@@ -23,37 +23,133 @@
         <orgname>Technical University of Munich (TUM)</orgname>
     </info>
     <section>
+        <title>Introduction</title>
+        <!-- Daniel -->
+
+    </section>
+    <section>
+        <title>Description of the case study</title>
+        <!-- Daniel -->
+        <para>We implement the popular casino game Blackjack as a multi-client web application.
+            Globally, there are a variety of rulesets with slight differences. We seek to present
+            the most universally accepted variation, commonly found in Las Vegas casinos.</para>
+        <para>Up to five <emphasis>players</emphasis> compete not against each other, but separately
+            against the <emphasis>dealer</emphasis>. The objective of each player is to draw cards
+            and maximize the sum of their respective values (<emphasis>hand value</emphasis>)
+            without exceeding a sum of 21 (<emphasis>bust</emphasis>). Players win by achieving one
+            of the following final game states: <itemizedlist>
+                <listitem>
+                    <para>A hand value of 21 with only two cards
+                        (<emphasis>blackjack</emphasis>)</para>
+                </listitem>
+                <listitem>
+                    <para>A value higher than dealer's without exceeding 21</para>
+                </listitem>
+                <listitem>
+                    <para>A value less than 21 while the dealer busts</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>The game is played with a single deck of french playing cards. Number cards are worth
+            their value, e.g. the seven of hearts is worth seven points, face cards (Jack, Queen,
+            and King) are worth ten points, and an Ace can be counted as either one or eleven,
+            depending on what is more favorable in a specific situation. A hand containing an Ace
+            counted as eleven is referred to as a <emphasis>soft</emphasis> hand, because the value
+            of the Ace will change to a one to prevent the player from busting if he was to draw
+            another card and otherwise exceed 21. A card's suit is irrelevant in Blackjack.</para>
+        <section>
+            <title>Preparation</title>
+            <para>Before the actual playing begins, players place their bets. Our version uses
+                US-dollars as currency and does not limit players in the amount they want to bet. It
+                does, however, prohitibt them from playing without betting at all. We will refer to
+                this stage of the game as the <emphasis>betting phase</emphasis> throughout the
+                following sections.</para>
+        </section>
+        <section>
+            <title>Course of a round</title>
+            <para> At the beginning of the <emphasis>playing phase</emphasis> each player is dealt
+                two cards face up. The dealer receives one exposed card that everyone can see and
+                one hidden card.</para>
+            <para>The dealer subsequently asks each player, going clockwise around the table,
+                whether they want to improve their respective hand by drawing additional cards. Each
+                player has the following options:
+                <table>
+                    <caption></caption>
+                    <thead>
+                        <tr>
+                            <td>Action</td>
+                            <td>Description</td>
+                            <td>Condition</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stand</td>
+                            <td>Ends the player's turn</td>
+                            <td>Always possible and automatically performed when the player
+                                busts</td>
+                        </tr>
+                        <tr>
+                            <td>Hit</td>
+                            <td>The player receives another card from the deck</td>
+                            <td>Availble if the player's hand value is less than 21</td>
+                        </tr>
+                        <tr>
+                            <td>Double</td>
+                            <td>The player doubles his bet and receives exactly one more card before
+                                finishing his turn</td>
+                            <td>Available if the player only has his two initial two cards</td>
+                        </tr>
+                        <tr>
+                            <td>Insurance</td>
+                            <td>The player puts a side-bet worth half his initial bet on the outcome
+                                that the dealer has a Blackjack</td>
+                            <td>Available if the player's hand value is less than 21 and the first
+                                card of the dealer is an Ace</td>
+                        </tr>
+                    </tbody>
+
+                </table> If a player busts, they lose the round and have to pay their bet to the
+                dealer</para>
+            <para>After all players have finished their turn, the dealer plays in a predetermined
+                manner: He draws cards as long as his hand is worth less than 17 points and must
+                stand on a soft 17 or better.</para>
+        </section>
+    </section>
+    <section>
+        <title>Architecture</title>
+        <!-- Felix -->
+    </section>
+    <section>
         <title>The component model</title>
+        <!-- Max -->
         <section>
             <title>Modeling the model</title>
-            <para>
-                In a MVC-architecture the model has the control of the application's logic. 
-                Furthermore it is resposibel to store data in a database.
-                In order to maintain data, several objects with unique functionality are needed.
-                All these collaborating objects provide different attributes and methods. In the following the data model will be described at first.
-                Thereon the design decisions will be discussed. The second part consists of the implementation of the game, followed by a discussion on
-                implementation details and what problems were faced.
-            </para>
-            <para>
-                The database consists of a list of games. For that a class <classname>game</classname> is needed 
-                which stores every information about the instance of a blackjack game. A game object has multiple attributes and functions.
-                <itemizedlist>
+            <para> In a MVC-architecture the model has the control of the application's logic.
+                Furthermore it is resposibel to store data in a database. In order to maintain data,
+                several objects with unique functionality are needed. All these collaborating
+                objects provide different attributes and methods. In the following the data model
+                will be described at first. Thereon the design decisions will be discussed. The
+                second part consists of the implementation of the game, followed by a discussion on
+                implementation details and what problems were faced. </para>
+            <para> The database consists of a list of games. For that a class
+                    <classname>game</classname> is needed which stores every information about the
+                instance of a blackjack game. A game object has multiple attributes and functions. <itemizedlist>
                     <listitem>
                         <para><code>id</code> to distinguish games</para>
                     </listitem>
                     <listitem>
                         <para><code>state</code> stores the state of the game</para>
                     </listitem>
-                </itemizedlist>
-                Regarding <classname>game</classname> functions, their main purpose is constructing,initializing and resetting game objects.
-                Because every game object also stores all the attending players and a dealer, the functions essentially execute operations on all players.
-                In addition to the basic functions, <classname>game</classname> provides the function <function>evaluate</function>. 
-                However the logic of evaluating a player is sourced to the <classname>player</classname> class. 
-                Another object stored in a game object is the chat.
-            </para>
-            <para>
-                The <classname>player</classname> has the following attributes.
-                <itemizedlist>
+                </itemizedlist> Regarding <classname>game</classname> functions, their main purpose
+                is constructing,initializing and resetting game objects. Because every game object
+                also stores all the attending players and a dealer, the functions essentially
+                execute operations on all players. In addition to the basic functions,
+                    <classname>game</classname> provides the function <function>evaluate</function>.
+                However the logic of evaluating a player is sourced to the
+                    <classname>player</classname> class. Another object stored in a game object is
+                the chat. </para>
+            <para> The <classname>player</classname> has the following attributes. <itemizedlist>
                     <listitem>
                         <para><code>name</code> stores name of the player</para>
                     </listitem>
@@ -61,9 +157,10 @@
                         <para><code>state</code> stores the state of the player</para>
                     </listitem>
                     <listitem>
-                        <para><code>insurance</code> stores wether or not a player chose to take insurance</para>
+                        <para><code>insurance</code> stores wether or not a player chose to take
+                            insurance</para>
                     </listitem>
-                    <listitem>                     
+                    <listitem>
                         <para><code>balance</code> stores the total balance of a player</para>
                     </listitem>
                     <listitem>
@@ -72,13 +169,12 @@
                     <listitem>
                         <para><code>profit</code> stores the player's profit in a round</para>
                     </listitem>
-                </itemizedlist>
-                Another object stored inside the player is the players hand, which holds the cards.
-                As to the <classname>player</classname> functions, contiguous to the constructors and setters,
-                there are alot of functions that contain the game's logic. Depending on the game's state, a player can 
-                take several actions, which are passed over to the <classname>player</classname> class by the API.
-                Following functions are supplied.
-                <itemizedlist>
+                </itemizedlist> Another object stored inside the player is the players hand, which
+                holds the cards. As to the <classname>player</classname> functions, contiguous to
+                the constructors and setters, there are alot of functions that contain the game's
+                logic. Depending on the game's state, a player can take several actions, which are
+                passed over to the <classname>player</classname> class by the API. Following
+                functions are supplied. <itemizedlist>
                     <listitem>
                         <para><function>hit</function> draws another card for the player</para>
                     </listitem>
@@ -86,7 +182,8 @@
                         <para><function>stand</function> the player doesn't want more cards</para>
                     </listitem>
                     <listitem>
-                        <para><function>double</function> doubles the player's bet and draws one last card</para>
+                        <para><function>double</function> doubles the player's bet and draws one
+                            last card</para>
                     </listitem>
                     <listitem>
                         <para><function>insurance</function> the player takes insurance</para>
@@ -94,23 +191,20 @@
                     <listitem>
                         <para><function>evaluate</function> determines the player's profit</para>
                     </listitem>
-                </itemizedlist>
-                Alongside the listed functions there are some helpers, which provide logic for finding the next player and joining or leaving a game.
-            </para>
-            <para>
-                Since the players all play against the dealer, another class <classname>dealer</classname> is required.
-                It has no attributes, but it stores the deck of the game and likewise the players a hand object.
-                Concerning the functions of the class, <function>evaluateInsurance</function> is a helper for evaluating a players profit.
-                The function <function>deal</function> gives every player two cards and also draws for the dealer.
-            </para>
-            <para>
-                The <classname>hand</classname> class has the attribute <code>value</code> which stores the value of the contained cards.
-                On one hand this class provides helper functions for evaluating a player's hand. On the other hand it supplies the <function>getOptimalSum</function> 
-                function that calculates the optimal sum of a hand. This is needed because the card Ace can have the value 1 and 11.
-            </para>
-            <para>
-                The <classname>card</classname> class consists of two attributes.
-                <itemizedlist>
+                </itemizedlist> Alongside the listed functions there are some helpers, which provide
+                logic for finding the next player and joining or leaving a game. </para>
+            <para> Since the players all play against the dealer, another class
+                    <classname>dealer</classname> is required. It has no attributes, but it stores
+                the deck of the game and likewise the players a hand object. Concerning the
+                functions of the class, <function>evaluateInsurance</function> is a helper for
+                evaluating a players profit. The function <function>deal</function> gives every
+                player two cards and also draws for the dealer. </para>
+            <para> The <classname>hand</classname> class has the attribute <code>value</code> which
+                stores the value of the contained cards. On one hand this class provides helper
+                functions for evaluating a player's hand. On the other hand it supplies the
+                    <function>getOptimalSum</function> function that calculates the optimal sum of a
+                hand. This is needed because the card Ace can have the value 1 and 11. </para>
+            <para> The <classname>card</classname> class consists of two attributes. <itemizedlist>
                     <listitem>
                         <para><code>value</code> stores the value of a card</para>
                     </listitem>
@@ -122,12 +216,8 @@
         </section>
         <section>
             <title>Design decisions and discussion</title>
-            <para>
-                why we chose to have object hand
-            </para>
-            <para>
-                why we have usr and player
-            </para>
+            <para> why we chose to have object hand </para>
+            <para> why we have usr and player </para>
         </section>
         <section>
             <title>Implementation</title>
@@ -139,12 +229,42 @@
             <para>dealer drawing at first</para>
             <para>profit for front end</para>
             <para>how to deal with broke players</para>
-            <para>
-                problem of trying to replace node multiple time -> work around
-            </para>
-            <para>
-                double and bust call next() -> problem of evaluate data not in db if it was last player     
-            </para>
+            <para> problem of trying to replace node multiple time -> work around </para>
+            <para> double and bust call next() -> problem of evaluate data not in db if it was last
+                player </para>
         </section>
     </section>
+    <section>
+        <title>The component View</title>
+        <section>
+            <title>Modeling the component View</title>
+            <!-- Janik -->
+        </section>
+        <section>
+            <title>Implementing the component View</title>
+            <!-- Janik -->
+        </section>
+    </section>
+    <section>
+        <title>The component Controller</title>
+        <section>
+            <title>Modeling the component Controller</title>
+            <!-- Felix -->
+        </section>
+        <section>
+            <title>Implementing the component Controller</title>
+            <!-- Felix -->
+        </section>
+    </section>
+    <section>
+        <title>Conclusions</title>
+        
+    </section>
+    <bibliography>
+        <!-- Beispiel -->
+        <biblioentry xreflabel="BaseX" xml:id="BaseXHome">
+            <bibliomisc>BaseX homepage. http://basex.org. Last accessed on 2019 June 16
+            </bibliomisc>
+        </biblioentry>
+    </bibliography>
 </article>
