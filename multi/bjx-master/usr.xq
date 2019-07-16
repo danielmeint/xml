@@ -22,6 +22,15 @@ declare function usr:newUser($name, $balance, $highscore) {
   </user>
 };
 
+declare function usr:exists($name) {
+  if ($api:users/user[@name=$name])
+  then (
+    true()
+  ) else (
+    false()
+  )
+};
+
 declare
 %updating
 function usr:win($self, $amount) {

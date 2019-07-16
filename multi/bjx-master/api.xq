@@ -100,17 +100,25 @@ declare
 %rest:path('/bjx/login')
 %rest:query-param('name', '{$name}')
 %rest:query-param('pass', '{$pass}')
+%updating
 function api:login-check(
   $name  as xs:string,
   $pass  as xs:string
-) as element(rest:response) {
+
+) {
   try {
-    user:check($name, $pass),
-    session:set('name', $name)
+    let $u := user:check($name, $pass)
+    let $s := session:set('name', $name)
+    return (
+      if (not(usr:exists($name)))
+      then (
+        usr:create($name)
+      )
+    )
   } catch user:* {
     (: login fails: no session info is set :)
   },
-  web:redirect('/bjx')
+  update:output(web:redirect('/bjx'))
 };
 
 declare
