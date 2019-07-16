@@ -61,7 +61,7 @@
             <title>Preparation</title>
             <para>Before the actual playing begins, players place their bets. Our version uses
                 US-dollars as currency and does not limit players in the amount they want to bet. It
-                does, however, prohitibt them from playing without betting at all. We will refer to
+                does, however, prohibit them from playing without betting at all. We will refer to
                 this stage of the game as the <emphasis>betting phase</emphasis> throughout the
                 following sections.</para>
         </section>
@@ -92,7 +92,7 @@
                         <tr>
                             <td>Hit</td>
                             <td>The player receives another card from the deck</td>
-                            <td>Availble if the player's hand value is less than 21</td>
+                            <td>Available if the player's hand value is less than 21</td>
                         </tr>
                         <tr>
                             <td>Double</td>
@@ -105,7 +105,8 @@
                             <td>The player puts a side-bet worth half his initial bet on the outcome
                                 that the dealer has a Blackjack</td>
                             <td>Available if the player's hand value is less than 21 and the first
-                                card of the dealer is an Ace</td>
+                                card of the dealer is an Ace and the player only has his initial two
+                                cards</td>
                         </tr>
                     </tbody>
 
@@ -169,7 +170,7 @@
                     <listitem>
                         <para><code>profit</code> stores the player's profit in a round</para>
                     </listitem>
-                </itemizedlist> Another object stored inside the player is the players hand, which
+                </itemizedlist> One more object stored inside the player is the players hand, which
                 holds the cards. As to the <classname>player</classname> functions, contiguous to
                 the constructors and setters, there are alot of functions that contain the game's
                 logic. Depending on the game's state, a player can take several actions, which are
@@ -212,12 +213,60 @@
                         <para><code>suit</code> stores the suit of a card</para>
                     </listitem>
                 </itemizedlist>
+                Besides the constructor and setter functions there is a getter function for the value that returns a card's actual value,   
             </para>
+            <para>
+                Inside the <classname>chat</classname> class, the players' messages are stored.
+            </para>
+            <para>
+                The last class in the model compoment is <classname>usr</classname>, which has these attributes.
+                <itemizedlist>
+                    <listitem>
+                        <para><code>name</code> stores name of user</para>
+                    </listitem>
+                    <listitem>
+                        <para><code>balance</code> stores balance of user</para>
+                    </listitem>
+                    <listitem>
+                        <para><code>highscore</code> stores all time highest balance of user</para>
+                    </listitem>
+                </itemizedlist>
+                It has no functions other than a constructor and setters.                
+            </para>
+            <para>
+                The model is represented in the following class diagram.
+            </para>
+            <figure>
+            <title>Class diagrams for component Model.</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata width="75%" format="png"
+                        fileref="diagrams/UML_no_methods.png"/>
+                </imageobject>
+            </mediaobject>
+            </figure>
         </section>
         <section>
             <title>Design decisions and discussion</title>
+            <para>Continuing the section about the modelling of the model, all the design decisions will be presented and discussed.</para>
             <para> why we chose to have object hand </para>
             <para> why we have usr and player </para>
+            <para> 
+                As an extra feature, it was decided to implement a chat for the players. One reason for that is that we settled for the multiplayer version for local networks.
+                With the chat the players can communicate with each other.
+            </para>
+            <para> 
+                We chose to have the <classname>deck</classname> as an extra class so that we can simply store all of the game's deck's cards in one single instance,
+                instead of having all of the cards inside the <classname>dealer</classname> or <classname>game</classname> object.
+            </para>
+            <para> 
+                So why do we need <classname>dealer</classname> instead of just having another player object? At first sight both classes may not differ alot
+                when looking at what players and the dealer actually do in a game of blackjack. However by closer inspection the dealer has alot of differences.
+                Starting with the attributes, a dealer does not need any information stored like a name, or balance. The dealer does not place a bet each round either.
+                The only resemblance is that both objects store a hand object. Comparing the functions of the classes, the dealer has no choices to make so none of the 
+                player's functions that are needed for a player's decision are required. Without the <classname>dealer</classname> we would need another way to store the cards included in the game.
+                Altogether a dealer object is too unequal to just use another player object instead.             
+            </para>
         </section>
         <section>
             <title>Implementation</title>
