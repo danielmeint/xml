@@ -44,7 +44,7 @@ function dealer:deal($self) {
   )
 };
 
-declare function dealer:evaluateInsurance($self,$playerIsInsurance,$bet){
+declare function dealer:evaluateInsurance($self,$playerIsInsurance as xs:integer,$bet as xs:integer){
     let $dealerHasTwoCards := if (count($self/hand/card)=2 and xs:integer($self/hand/@value) = 21) then(0.5)else(-0.5)
     return($playerIsInsurance*$dealerHasTwoCards*$bet)
 };

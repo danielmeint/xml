@@ -235,19 +235,3 @@ declare function player:setBalance($self, $balance) {
   let $hand := $self/hand
   return player:newPlayer($name, $state, $balance, $bet, $hand)
 };
-
-declare function player:setBet($self, $bet) {
-  let $name := $self/@name
-  let $state := $self/@state
-  let $balance := $self/balance/text()
-  let $hand := $self/hand
-  return player:newPlayer($name, $state, $balance, $bet, $hand)
-};
-
-declare function player:setHand($self, $hand) {
-  let $name := $self/@name
-  let $state := $self/@state
-  let $balance := $self/balance/text()
-  let $bet := $self/bet/text()
-  return player:newPlayer($name, $state, $balance, $bet, $hand)
-};

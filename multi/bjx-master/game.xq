@@ -127,30 +127,6 @@ declare function game:reset($self) {
   return game:newGame($id, $state, $dealer, $players, $chat)
 };
 
-declare function game:setId($self, $id) {
-  let $state := $self/@state
-  let $dealer := $self/dealer
-  let $players := $self/player
-  let $chat := $self/chat
-  return game:newGame($id, $state, $dealer, $players, $chat)
-};
-
-declare function game:setState($self, $state) {
-  let $id := $self/@id
-  let $dealer := $self/dealer
-  let $players := $self/player
-  let $chat := $self/chat
-  return game:newGame($id, $state, $dealer, $players, $chat)
-};
-
-declare function game:setDealer($self, $dealer) {
-  let $id := $self/@id
-  let $state := $self/@state
-  let $players := $self/player
-  let $chat := $self/chat
-  return game:newGame($id, $state, $dealer, $players, $chat)
-};
-
 declare function game:setPlayers($self, $players) {
   let $id := $self/@id
   let $state := $self/@state

@@ -234,7 +234,7 @@
                 It has no functions other than a constructor and setters.                
             </para>
             <para>
-                The model is represented in the following class diagram.
+                The model is represented in the following class diagram. Helper functions and setters/getters/constructors are omitted for readability.
             </para>
             <figure>
             <title>Class diagrams for component Model.</title>
@@ -249,33 +249,342 @@
         <section>
             <title>Design decisions and discussion</title>
             <para>Continuing the section about the modelling of the model, all the design decisions will be presented and discussed.</para>
-            <para> why we chose to have object hand </para>
-            <para> why we have usr and player </para>
-            <para> 
-                As an extra feature, it was decided to implement a chat for the players. One reason for that is that we settled for the multiplayer version for local networks.
-                With the chat the players can communicate with each other.
+            <para>
+                One of the decisions was to implement something that takes care of the players' and the dealer's cards, because we did not like storeing single card instances
+                inside the mentioned classes. We came up with <classname>hand</classname> class that deals with holding cards for the players and the dealer which has the benefit
+                of getting someones cards summed up value easily as well as evaluating a player's hand. Another great advantage of implementing this class is that the feature <quote>split</quote>
+                could be added to our solution without the need to change other classes. In the real worlds game of blackjack players can decide to split their initial hand which allows them to play with two hands at one time.
+                Without the hand class, some other ideas would be needed to enable this feature. For example one could add another attribute to the <classname>card</classname> class which indicates
+                to which hand it belongs. 
             </para>
+            <para> why we have usr and player </para>  
             <para> 
                 We chose to have the <classname>deck</classname> as an extra class so that we can simply store all of the game's deck's cards in one single instance,
-                instead of having all of the cards inside the <classname>dealer</classname> or <classname>game</classname> object.
+                instead of having all of the cards inside the <classname>dealer</classname> or <classname>game</classname> object. This grants a better structure in the model and
+                simplifies functionality like shuffling the deck or drawing cards. When thinking about extending the game, this class can be helpful for example when one wants more than one
+                deck. (in some games of blackjack each player has their own deck)
             </para>
             <para> 
                 So why do we need <classname>dealer</classname> instead of just having another player object? At first sight both classes may not differ alot
-                when looking at what players and the dealer actually do in a game of blackjack. However by closer inspection the dealer has alot of differences.
-                Starting with the attributes, a dealer does not need any information stored like a name, or balance. The dealer does not place a bet each round either.
+                when looking at what players and the dealer actually do in a game of blackjack. However, by closer inspection the dealer has alot of differences.
+                Starting with the attributes, a dealer does not need any information stored like a name or balance. The dealer does not place a bet each round either.
                 The only resemblance is that both objects store a hand object. Comparing the functions of the classes, the dealer has no choices to make so none of the 
                 player's functions that are needed for a player's decision are required. Without the <classname>dealer</classname> we would need another way to store the cards included in the game.
                 Altogether a dealer object is too unequal to just use another player object instead.             
             </para>
+            <para> 
+                As an extra feature, it was decided to implement a chat for the players. One reason for that is that we settled for the multiplayer version for local networks.
+                With the chat the players can communicate with each other which makes the game more vivid. Moreover when players leave or join the game a small information text will be inserted
+                into the chat so other players will know that someone joined/left their game.
+            </para>
+            <para>
+                In conclusion our main idea of modelling the model was to prevent writing the same code multiple times and segregating code by it's functionality. Instead of having a few 
+                huge classes with a big range of functions we rather wanted to have more but smaller classes that are not too complex. This way the model stays alot more readable
+                and it makes it more adjustable and integrating extensions easier.
+            </para>
         </section>
         <section>
             <title>Implementation</title>
-            <para>deck is real not generating random cards</para>
-            <para>optimal sum recursive</para>
+            <para>
+                The compoment model has the responsibility of holding data. Since we use an object-oriented approach, all implemented classes provide their own functionality and attributes.
+                All of the compoment model's functions are written in <code>XQuery</code> and all the data is stored as <code>XML</code> elements. So each class contains data which is then 
+                combined in our database for BaseX. The database also lets us query functions via <code>XQuery</code>. This programming language has a functional approach and was made to run
+                queries on <code>XML</code> databases. One of the most importan highlights of the language are <code>FLOWR-expressions</code>. The name <code>FLOWR</code> contains the initials of <quote>for-let-order-where-return</quote>. 
+                For comparison, this is equivalent of the <quote>select from where</quote> queries of <code>SQL</code>. Usually the object's function have a first parameter <code>self</code> which indicates
+                on which object the code should be executed.
+                Because most of the classes have setters, getters and constructors and the implementation of these functions do not differ in comparison to other classes we won't describe the
+                implementation for every single class. In fact all the setter methods return a new object by calling the classe's constructor with alternated parameters. Regarding the constructors
+                they all create <code>XML</code> elements depending on the classes attributes.  
+            </para>
+            <para>
+                Beginning with <classname>game</classname> class that has a the attribute <code>ID</code> with a unique value and the following functions.
+                <table>
+                    <caption>Game functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>play</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>sets game's state to <quote>playing</quote>, sets all players besides the first player to inactive, the first one to active and finally calls dealer:deal</td>
+                        </tr>
+                        <tr>
+                            <td>evaluate</td>
+                            <td>self, caller:integer</td>
+                            <td>void</td>
+                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate for all players</td>
+                        </tr>
+                        <tr>
+                            <td>latestId</td>
+                            <td>none</td>
+                            <td>double</td>
+                            <td>returns the highest id of all games in the database, needed for new games since the id always gets incremented</td>
+                        </tr>
+                        <tr>
+                            <td>reset</td>
+                            <td>self</td>
+                            <td><code>XML</code> element of game</td>
+                            <td>sets game to state <quote>betting</quote>, basically calls the classes constructor with all the players that have a balance > 0</td>
+                        </tr>
+                    </tbody>                    
+                </table>
+            </para>
+            <para>
+                Secondly the <classname>player</classname> class 
+                
+                <table>
+                    <caption>Player functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>joinGame</td>
+                            <td>gameId:integer, name:string</td>
+                            <td>void</td>
+                            <td>if it is the first player, creates a new game object with the new player, else just inserts the new player and adds an information to the chat about the player joining</td>
+                        </tr>
+                        <tr>
+                            <td>leave</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>deletes self and calls player:next if self was active and there is more than one player, adds leave information to chat</td>
+                        </tr>
+                        <tr>
+                            <td>bet</td>
+                            <td>self,bet:integer</td>
+                            <td>void</td>
+                            <td>updates self's bet by given parameter bet, calls player:next</td>
+                        </tr>
+                        <tr>
+                            <td>hit</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>calls helper player:draw, gives player another card and if they bust calls player:next or game:evaluate if they are the last player</td>
+                        </tr>
+                        <tr>
+                            <td>draw</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>calls deck:drawCard and hand:addCard to add a card to the player, updates the player's hand and the deck</td>
+                        </tr>
+                        <tr>
+                            <td>stand</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>calls player:next</td>
+                        </tr>
+                        <tr>
+                            <td>double</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>updates the player's bet to two times of the amount of bet, calls game:evaluate if player is last otherwise player:next</td>
+                        </tr>
+                        <tr>
+                            <td>insurance</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>updates self insurance to <quote>true</quote></td>
+                        </tr>
+                        <tr>
+                            <td>nextPlayer</td>
+                            <td>self</td>
+                            <td><code>XML</code> element player</td>
+                            <td>determines and returns the next player</td>
+                        </tr>
+                        <tr>
+                            <td>isLast</td>
+                            <td>self</td>
+                            <td>boolean</td>
+                            <td>determines and returns wether player is last</td>
+                        </tr>
+                        <tr>
+                            <td>next</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>sets self state to <quote>inactive</quote> and if there is a next player:nextPlayer to <quote>active</quote> else checks if game's state is <quote>betting</quote>
+                                then calls game:play otherwise game:evaluate
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>evaluate</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>calculates profit of player and updates self's balance accordingly, also updates user's balance accordingly</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
+            <para>
+                dealer
+                <table>
+                    <caption>Dealer functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>deal</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>firstly calls deck:drawTo17 for self, afterwards deals two cards for each player by adding cards of the deck to hand and removing them from the deck</td>
+                        </tr>
+                        <tr>
+                            <td>evaluateInsurance</td>
+                            <td>self,playerIsInsurance:integer,bet:integer</td>
+                            <td>integer</td>
+                            <td>calculates a player's bonus if depending on wether they have an insurance and if the dealer got a blackjack</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
+            <para>       
+                <table>
+                    <caption>Deck functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>drawCard</td>
+                            <td>self</td>
+                            <td>(<code>XML</code> element card,<code>XML</code> element deck)</td>
+                            <td>calls deck:getCard to get the topmost card and calls deck:removeCardAtIndex to remove topmost card to return the new deck</td>
+                        </tr>
+                        <tr>
+                            <td>shuffle</td>
+                            <td>self</td>
+                            <td><code>XML</code> element deck</td>
+                            <td>uses a random number generator to create a new deck with a random permutation of the cards</td>
+                        </tr>
+                        <tr>
+                            <td>drawTo17</td>
+                            <td><code>XML</code> element hand,<code>XML</code> element deck</td>
+                            <td>(<code>XML</code> element hand,<code>XML</code> element deck)</td>
+                            <td>recursively draws cards from given deck to given hand until hand's value >= 17</td>
+                        </tr>
+                        <tr>
+                            <td>removeCardAtIndex</td>
+                            <td>self,index:integer</td>
+                            <td><code>XML</code> element deck</td>
+                            <td>calls helper deck:removeCard that finds and removes the card at given index and returns a new deck without the card</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
+           <para>
+               <table>
+                   <caption>Hand functions</caption>
+                   <thead>
+                       <tr>
+                           <td>name</td>
+                           <td>parameter</td>
+                           <td>return value</td>
+                           <td>functionality</td>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                           <td></td>                           
+                       </tr>
+                   </tbody>
+               </table>
+           </para>
+            <para>
+                <table>
+                    <caption>Card functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                           
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
+            <para>
+                <table>
+                    <caption>Usr functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                           
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
+            <para>
+                <table>
+                    <caption>Chat functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                           
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
         </section>
+        
         <section>
-            <title>Implementation decisions and discussion</title>
+            <title>Implementation detail,decisions and discussion</title>
+            <para>magic of next</para>
             <para>dealer drawing at first</para>
+            <para>deck is real not generating random cards</para>
             <para>profit for front end</para>
             <para>how to deal with broke players</para>
             <para> problem of trying to replace node multiple time -> work around </para>
