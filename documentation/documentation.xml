@@ -230,6 +230,7 @@
                 player's functions that are needed for a player's decision are required. Without the <classname>dealer</classname> we would need another way to store the cards included in the game.
                 Altogether a dealer object is too unequal to just use another player object instead.             
             </para>
+            <para>how to deal with broke players</para>
             <para> 
                 As an extra feature, it was decided to implement a chat for the players. One reason for that is that we settled for the multiplayer version for local networks.
                 With the chat the players can communicate with each other which makes the game more vivid. Moreover when players leave or join the game a small information text will be inserted
@@ -695,14 +696,40 @@
         
         <section>
             <title>Implementation detail,decisions and discussion</title>
-            <para>magic of next</para>
-            <para>dealer drawing at first</para>
-            <para>deck is real not generating random cards</para>
-            <para>profit for front end</para>
-            <para>how to deal with broke players</para>
-            <para> problem of trying to replace node multiple time -> work around </para>
-            <para> double and bust call next() -> problem of evaluate data not in db if it was last
-                player </para>
+            <para>
+                While implementing the model, we faced a few problems and some of the constraints of <code>XQuery</code>. In this section some examples
+                will be illustrated where we had to rethink our attempts of implementing database updating logic. Also some interesting parts of our code will be
+                discussed.
+            </para>
+            <para>
+                The first problem we faced was that one cannot replace the same node in one return statement more than one time. Because we wanted a comfortable version of the game
+                that requires as few input from the user as possible, we made functions like player:hit automatically call player:next when the player busted. That way
+                the busted player stands and the next player can play without any further user input needed. So in our first attempts of implementing the dealer draw function,
+                we ran into the mentioned problem, because if the last player calls hit (which replaces the node of the deck) and busts at the same time, the dealer draw 
+                function was called which also tries to replace the deck. A fast work around was found by not updating the deck in the dealer draw function since after the 
+                dealer has played the round is over and we don't need the deck anymore. However we decided to have the dealer draw in the begin of a round to avoid running
+                into this problem in the future.
+            </para>
+            <para>
+                As to the second problem, it has the same root as the first problem. Since player:double automatically calls game:evaluate if the player was the last one,
+                the database was not updated yet so evaluate would still operate on data pre the player:double call. This means that the last player's bet is not doubled and
+                their hand is their initial hand. One solution could be to have another game state like <quote>toEvaluate</quote> after all players have played and the game is ready 
+                to be evaluated. However atleast one user input to have the game evaluated would be needed which interrupts the game flow. This problem also occurs 
+                when the last player busts. Our final solution was to add a parameter <code>caller</code> to game:evaluate so that the functions knows which action was the last that happend.
+                In case that <code>caller</code> equals 0 the last player decided to stand so no updates to the database were made. When <code>caller</code> equals 1 the last player busted,
+                so we need to make his profit negative. The last case is when <code>caller</code> equals 2, this means the last player doubled so we need to add one card to their hand 
+                and doubling their bet before evaluating the player.
+            </para>
+            <para>
+                For the <classname>deck</classname> implementation we decided to create a <quote>realistic</quote> since we didn't like the idea of generating random cards each time a draw
+                occurs. Randomly generating cards would either face the problems of possibly having duplicate cards or needing to implement some code to check if a generated card already exists
+                and repeat generating a card until it is no longer a duplicate.
+            </para>
+            <para>
+                Like mentioned before, we want a comfortable experience for the player by always ending one's turn if they chose to double or bust automatically. To achieve this we implemented
+                the function player:next, player:nextPlayer and player:isLast. Together these functions check if a player is the last one and help setting the next player to active otherwise.
+                This can be used in both game states where input of each player is required (betting,playing).
+            </para>                                       
         </section>
     </section>
     <section>
