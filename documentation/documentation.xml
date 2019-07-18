@@ -133,49 +133,27 @@
                 will be described at first. Thereon the design decisions will be discussed. The
                 second part consists of the implementation of the game, followed by a discussion on
                 implementation details and what problems were faced. </para>
-            <para> The database consists of a list of games. For that a class
+            <para> 
+                The database consists of a list of games. For that a class
                     <classname>game</classname> is needed which stores every information about the
-                instance of a blackjack game. A game object has multiple attributes and functions. <itemizedlist>
-                    <listitem>
-                        <para><code>id</code> to distinguish games</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>state</code> stores the state of the game</para>
-                    </listitem>
-                </itemizedlist> Regarding <classname>game</classname> functions, their main purpose
+                instance of a blackjack game. A game object needs an attribute to store its' id and another
+                attribute to store the current state of the game. Regarding <classname>game</classname> functions, their main purpose
                 is constructing,initializing and resetting game objects. Because every game object
                 also stores all the attending players and a dealer, the functions essentially
                 execute operations on all players. In addition to the basic functions,
-                    <classname>game</classname> provides the function <function>evaluate</function>.
-                However the logic of evaluating a player is sourced to the
+                    <classname>game</classname> must provide some function to evaluate the game.
+                However the logic of evaluating a player should be sourced to the
                     <classname>player</classname> class. Another object stored in a game object is
                 the chat. </para>
-            <para> The <classname>player</classname> has the following attributes. <itemizedlist>
-                    <listitem>
-                        <para><code>name</code> stores name of the player</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>state</code> stores the state of the player</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>insurance</code> stores wether or not a player chose to take
-                            insurance</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>balance</code> stores the total balance of a player</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>bet</code> stores the player's bet in a round</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>profit</code> stores the player's profit in a round</para>
-                    </listitem>
-                </itemizedlist> One more object stored inside the player is the players hand, which
+            <para>
+                The <classname>player</classname> will need some attributes to store meta data like name, balance, bet and profit.
+                Furthermore this class has to hold a player's state and wether a player chose to take insurance in a round.
+                One more object stored inside the player is the players hand, which
                 holds the cards. As to the <classname>player</classname> functions, contiguous to
-                the constructors and setters, there are alot of functions that contain the game's
-                logic. Depending on the game's state, a player can take several actions, which are
+                the constructors and setters, there will be alot of functions that contain the game's
+                logic. Depending on the game's state, a player can take several actions, which will be
                 passed over to the <classname>player</classname> class by the API. Following
-                functions are supplied. <itemizedlist>
+                functions must be supplied. <itemizedlist>
                     <listitem>
                         <para><function>hit</function> draws another card for the player</para>
                     </listitem>
@@ -192,47 +170,27 @@
                     <listitem>
                         <para><function>evaluate</function> determines the player's profit</para>
                     </listitem>
-                </itemizedlist> Alongside the listed functions there are some helpers, which provide
-                logic for finding the next player and joining or leaving a game. </para>
+                </itemizedlist> Alongside the listed functions, some helpers which provide
+                logic for finding the next player and joining or leaving a game are needed. </para>
             <para> Since the players all play against the dealer, another class
-                    <classname>dealer</classname> is required. It has no attributes, but it stores
+                    <classname>dealer</classname> is required. It does not require any attributes, but it must store
                 the deck of the game and likewise the players a hand object. Concerning the
-                functions of the class, <function>evaluateInsurance</function> is a helper for
-                evaluating a players profit. The function <function>deal</function> gives every
-                player two cards and also draws for the dealer. </para>
-            <para> The <classname>hand</classname> class has the attribute <code>value</code> which
-                stores the value of the contained cards. On one hand this class provides helper
-                functions for evaluating a player's hand. On the other hand it supplies the
-                    <function>getOptimalSum</function> function that calculates the optimal sum of a
-                hand. This is needed because the card Ace can have the value 1 and 11. </para>
-            <para> The <classname>card</classname> class consists of two attributes. <itemizedlist>
-                    <listitem>
-                        <para><code>value</code> stores the value of a card</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>suit</code> stores the suit of a card</para>
-                    </listitem>
-                </itemizedlist>
-                Besides the constructor and setter functions there is a getter function for the value that returns a card's actual value,   
+                functions of the class, it should provide a helper function to help determining a player's profit, depending on their insurance state.
+                More logic to give every
+                player two cards and also draw for the dealer will be required. </para>
+            <para> The <classname>hand</classname> class . On one hand this class will provide helper
+                functions for evaluating a player's hand. On the other hand it will supply some function to calculate the optimal sum of a hand.
+                This is needed because the card Ace can have the value 1 and 11. </para>
+            <para> The <classname>card</classname> class will provide two attributes to store a card's value and suit. 
+                Besides the constructor and setter functions there will be a getter function that returns a card's actual value,   
             </para>
             <para>
-                Inside the <classname>chat</classname> class, the players' messages are stored.
+                Inside the <classname>chat</classname> class, the players' messages should be stored.
             </para>
             <para>
-                The last class in the model compoment is <classname>usr</classname>, which has these attributes.
-                <itemizedlist>
-                    <listitem>
-                        <para><code>name</code> stores name of user</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>balance</code> stores balance of user</para>
-                    </listitem>
-                    <listitem>
-                        <para><code>highscore</code> stores all time highest balance of user</para>
-                    </listitem>
-                </itemizedlist>
+                The last class in the model compoment is <classname>usr</classname>.                
                 It has no functions other than a constructor and setters.                
-            </para>
+            </para>            
             <para>
                 The model is represented in the following class diagram. Helper functions and setters/getters/constructors are omitted for readability.
             </para>
@@ -297,7 +255,29 @@
                 they all create <code>XML</code> elements depending on the classes attributes.  
             </para>
             <para>
-                Beginning with <classname>game</classname> class that has a the attribute <code>ID</code> with a unique value and the following functions.
+                Beginning with <classname>game</classname> class that has the following attributes and functions.
+                <table>
+                    <caption>Game attributes</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>type</td>
+                            <td>description</td>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>double???</td>
+                            <td>to distinguish games</td>
+                        </tr>
+                        <tr>
+                            <td>state</td>
+                            <td>string???</td>
+                            <td>stores the state of the game</td>
+                        </tr>
+                    </tbody>
+                </table>              
                 <table>
                     <caption>Game functions</caption>
                     <thead>
@@ -319,12 +299,12 @@
                             <td>evaluate</td>
                             <td>self, caller:integer</td>
                             <td>void</td>
-                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate for all players</td>
+                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate for all players, uses caller to determine what action the last player took</td>
                         </tr>
                         <tr>
                             <td>latestId</td>
                             <td>none</td>
-                            <td>double</td>
+                            <td>double ???</td>
                             <td>returns the highest id of all games in the database, needed for new games since the id always gets incremented</td>
                         </tr>
                         <tr>
@@ -336,8 +316,49 @@
                     </tbody>                    
                 </table>
             </para>
-            <para>
-                Secondly the <classname>player</classname> class 
+            <para>                         
+                <table>
+                    <caption>Player attributes</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>type</td>
+                            <td>description</td>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td>string???</td>
+                            <td>stores name of player</td>
+                        </tr>
+                        <tr>
+                            <td>state</td>
+                            <td>string???</td>
+                            <td>stores state of player</td>
+                        </tr>
+                        <tr>
+                            <td>insurance</td>
+                            <td>string???</td>
+                            <td>stores wether or not a player took insurance</td>
+                        </tr>
+                        <tr>
+                            <td>balance</td>
+                            <td>integer???</td>
+                            <td>store the balance of player</td>                            
+                        </tr>
+                        <tr>
+                            <td>bet</td>
+                            <td>integer</td>
+                            <td>stores bet of a player</td>
+                        </tr>
+                        <tr>
+                            <td>profit</td>
+                            <td>integer</td>
+                            <td>stores profit of a round</td>
+                        </tr>
+                    </tbody>
+                </table>
                 
                 <table>
                     <caption>Player functions</caption>
@@ -428,7 +449,7 @@
                 </table>
             </para>
             <para>
-                dealer
+                The dealer has no attributes.
                 <table>
                     <caption>Dealer functions</caption>
                     <thead>
@@ -456,6 +477,7 @@
                 </table>
             </para>
             <para>       
+                The deck class has no attributes.           
                 <table>
                     <caption>Deck functions</caption>
                     <thead>
@@ -481,7 +503,7 @@
                         </tr>
                         <tr>
                             <td>drawTo17</td>
-                            <td><code>XML</code> element hand,<code>XML</code> element deck</td>
+                            <td>hand:<code>XML</code> element hand,deck:<code>XML</code> element deck</td>
                             <td>(<code>XML</code> element hand,<code>XML</code> element deck)</td>
                             <td>recursively draws cards from given deck to given hand until hand's value >= 17</td>
                         </tr>
@@ -496,6 +518,23 @@
             </para>
            <para>
                <table>
+                   <caption>Hand attributes</caption>
+                   <thead>
+                       <tr>
+                           <td>name</td>
+                           <td>type</td>
+                           <td>description</td>
+                       </tr>                        
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td>value</td>
+                           <td>integer</td>
+                           <td>stores the sum of the hand's card's value</td>
+                       </tr>
+                   </tbody>
+               </table>
+               <table>
                    <caption>Hand functions</caption>
                    <thead>
                        <tr>
@@ -507,15 +546,55 @@
                    </thead>
                    <tbody>
                        <tr>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>                           
+                           <td>addCard</td>
+                           <td>self,card:<code>XML</code> element hand</td>
+                           <td><code>XML</code> element deck</td>
+                           <td>adds the given card to given hand and returns new hand</td>                           
+                       </tr>
+                       <tr>
+                           <td>getOptimalSum</td>
+                           <td>values:sequence of integers</td>
+                           <td>integer</td>
+                           <td>recursively calculates optimal sum in favor of player, replacing aces with value 1 if the sum of values > 21</td>
+                       </tr>
+                       <tr>
+                           <td>evaluate</td>
+                           <td>self,toBeat:integer</td>
+                           <td>string</td>
+                           <td>checks if player beats the dealer and returns a string accordingly</td>
+                       </tr>
+                       <tr>
+                           <td>evaluateToInt</td>
+                           <td>self,toBeat:integer</td>
+                           <td>integer</td>
+                           <td>checks if player beats the dealer and returns an integer accordingly, needed for player:evaluate</td>
                        </tr>
                    </tbody>
                </table>
            </para>
             <para>
+                <table>
+                    <caption>Card attributes</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>type</td>
+                            <td>description</td>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>value</td>
+                            <td>integer</td>
+                            <td>stores the value of the card</td>
+                        </tr>
+                        <tr>
+                            <td>suit</td>
+                            <td>string???</td>
+                            <td>stores the suit of the card</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <table>
                     <caption>Card functions</caption>
                     <thead>
@@ -528,15 +607,48 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                           
+                            <td>equals</td>
+                            <td>card1:<code>XML</code> element card,card2:<code>XML</code> element deck</td>
+                            <td>boolean ???</td>
+                            <td>checks if value and suit of both cards are equal</td>                           
+                        </tr>
+                        <tr>
+                            <td>getNumericalValue</td>
+                            <td>self</td>
+                            <td>integer</td>
+                            <td>returns cards value, 10 for picture cards, 11 for Aces</td>
                         </tr>
                     </tbody>
                 </table>
             </para>
-            <para>
+            <para>                
+                <table>
+                    <caption>Usr attributes</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>type</td>
+                            <td>description</td>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td>string???</td>
+                            <td>stores name of user</td>
+                        </tr>
+                        <tr>
+                            <td>balance</td>
+                            <td>integer???</td>
+                            <td>store balance of user</td>
+                        </tr>
+                        <tr>
+                            <td>highscore</td>
+                            <td>integer???</td>
+                            <td>store the all time highest balance of user</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <table>
                     <caption>Usr functions</caption>
                     <thead>
@@ -549,15 +661,16 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                           
+                            <td>win</td>
+                            <td>self,amount:integer</td>
+                            <td>void</td>
+                            <td>updates user's balance and replaces user's highscore with balance if balance > highscore </td>                           
                         </tr>
                     </tbody>
                 </table>
             </para>
             <para>
+                The chat has no attributes.           
                 <table>
                     <caption>Chat functions</caption>
                     <thead>
@@ -570,10 +683,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                           
+                            <td>addMessage</td>
+                            <td>self,msg:string ???</td>
+                            <td><code>XML</code> element chat</td>
+                            <td>adds given message to chat and returns new chat</td>                           
                         </tr>
                     </tbody>
                 </table>
