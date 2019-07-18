@@ -36,27 +36,17 @@
         <para>Up to five <emphasis>players</emphasis> compete not against each other, but separately
             against the <emphasis>dealer</emphasis>. The objective of each player is to draw cards
             and maximize the sum of their respective values (<emphasis>hand value</emphasis>)
-            without exceeding a sum of 21 (<emphasis>bust</emphasis>). Players win by achieving one
-            of the following final game states: <itemizedlist>
-                <listitem>
-                    <para>A hand value of 21 with only two cards
-                        (<emphasis>blackjack</emphasis>)</para>
-                </listitem>
-                <listitem>
-                    <para>A value higher than dealer's without exceeding 21</para>
-                </listitem>
-                <listitem>
-                    <para>A value less than 21 while the dealer busts</para>
-                </listitem>
-            </itemizedlist>
-        </para>
-        <para>The game is played with a single deck of french playing cards. Number cards are worth
-            their value, e.g. the seven of hearts is worth seven points, face cards (Jack, Queen,
-            and King) are worth ten points, and an Ace can be counted as either one or eleven,
-            depending on what is more favorable in a specific situation. A hand containing an Ace
-            counted as eleven is referred to as a <emphasis>soft</emphasis> hand, because the value
-            of the Ace will change to a one to prevent the player from busting if he was to draw
-            another card and otherwise exceed 21. A card's suit is irrelevant in Blackjack.</para>
+            without exceeding a sum of 21 (<emphasis>bust</emphasis>). </para>
+        <section>
+            <title>Card values</title>
+            <para>The game is played with a single deck of french playing cards. Number cards are worth
+                their value, e.g. the seven of hearts is worth seven points, face cards (Jack, Queen,
+                and King) are worth ten points, and an Ace can be counted as either one or eleven,
+                depending on what is more favorable in a specific situation. A hand containing an Ace
+                counted as eleven is referred to as a <emphasis>soft</emphasis> hand, because the value
+                of the Ace will change to a one to prevent the player from busting if he was to draw
+                another card and otherwise exceed 21. A card's suit is irrelevant in Blackjack.</para>
+        </section>
         <section>
             <title>Preparation</title>
             <para>Before the actual playing begins, players place their bets. Our version uses
@@ -67,14 +57,13 @@
         </section>
         <section>
             <title>Course of a round</title>
-            <para> At the beginning of the <emphasis>playing phase</emphasis> each player is dealt
+            <para> At the beginning of the <emphasis>playing phase</emphasis>, each player is dealt
                 two cards face up. The dealer receives one exposed card that everyone can see and
                 one hidden card.</para>
             <para>The dealer subsequently asks each player, going clockwise around the table,
                 whether they want to improve their respective hand by drawing additional cards. Each
-                player has the following options:
-                <table>
-                    <caption></caption>
+                player has the following options: <table>
+                    <caption>Playing options</caption>
                     <thead>
                         <tr>
                             <td>Action</td>
@@ -104,17 +93,40 @@
                             <td>Insurance</td>
                             <td>The player puts a side-bet worth half his initial bet on the outcome
                                 that the dealer has a Blackjack</td>
-                            <td>Available if the player's hand value is less than 21 and the first
-                                card of the dealer is an Ace and the player only has his initial two
+                            <td>Available if the player's hand value is less than 21, the first card
+                                of the dealer is an Ace and the player only has his initial two
                                 cards</td>
                         </tr>
                     </tbody>
-
-                </table> If a player busts, they lose the round and have to pay their bet to the
-                dealer</para>
+                </table> Playing double or insurance further assumes that the player has a
+                sufficient balance to cover the increased bet size.</para>
             <para>After all players have finished their turn, the dealer plays in a predetermined
                 manner: He draws cards as long as his hand is worth less than 17 points and must
                 stand on a soft 17 or better.</para>
+        </section>
+        <section>
+            <title>Payout</title>
+            <para>Once the dealer completes his turn, each player's hand gets
+                    <emphasis>evaluated</emphasis> against the dealer's hand. As described above,
+                the goal of each player is to get a hand total closer to 21 than the dealer without
+                busting. Concretely, a player wins by achieving either of the following final game
+                states: <itemizedlist>
+                    <listitem>
+                        <para>A value higher than dealer's without exceeding 21</para>
+                    </listitem>
+                    <listitem>
+                        <para>Any value less than 21 while the dealer busts</para>
+                    </listitem>
+                </itemizedlist> Winning players get paid even money, i.e. 1:1 on the initial bet. If
+                they win with <emphasis>blackjack</emphasis> (hand value of 21 with two cards), they
+                receive one and a half times their bet (3:2). Furthermore, in case a player has
+                decided to place the insurance bet and the dealer has indeed blackjack, this bet is
+                payed out 2:1. A player winning a $5 insurance bet receives back the $5 plus an
+                additional $10 from the bank, for example.</para>
+            <para>If player and dealer have equal hands and did not bust, they tie, and the player's
+                bet is returned (also called <emphasis>push</emphasis>).</para>
+            <para>In any other case, e.g. the player busting even if the dealer busts as well, the
+                player loses their bet.</para>
         </section>
     </section>
     <section>
@@ -126,7 +138,7 @@
         <!-- Max -->
         <section>
             <title>Modeling the model</title>
-            <para> In a MVC-architecture the model has the control of the application's logic.
+            <para> In an MVC-architecture the model has the control of the application's logic.
                 Furthermore it is resposibel to store data in a database. In order to maintain data,
                 several objects with unique functionality are needed. All these collaborating
                 objects provide different attributes and methods. In the following the data model
@@ -212,15 +224,11 @@
                     <listitem>
                         <para><code>suit</code> stores the suit of a card</para>
                     </listitem>
-                </itemizedlist>
-                Besides the constructor and setter functions there is a getter function for the value that returns a card's actual value,   
-            </para>
-            <para>
-                Inside the <classname>chat</classname> class, the players' messages are stored.
-            </para>
-            <para>
-                The last class in the model compoment is <classname>usr</classname>, which has these attributes.
-                <itemizedlist>
+                </itemizedlist> Besides the constructor and setter functions there is a getter
+                function for the value that returns a card's actual value, </para>
+            <para> Inside the <classname>chat</classname> class, the players' messages are stored. </para>
+            <para> The last class in the model compoment is <classname>usr</classname>, which has
+                these attributes. <itemizedlist>
                     <listitem>
                         <para><code>name</code> stores name of user</para>
                     </listitem>
@@ -230,75 +238,88 @@
                     <listitem>
                         <para><code>highscore</code> stores all time highest balance of user</para>
                     </listitem>
-                </itemizedlist>
-                It has no functions other than a constructor and setters.                
-            </para>
-            <para>
-                The model is represented in the following class diagram. Helper functions and setters/getters/constructors are omitted for readability.
-            </para>
+                </itemizedlist> It has no functions other than a constructor and setters. </para>
+            <para> The model is represented in the following class diagram. Helper functions and
+                setters/getters/constructors are omitted for readability. </para>
             <figure>
-            <title>Class diagrams for component Model.</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata width="75%" format="png"
-                        fileref="diagrams/UML_no_methods.png"/>
-                </imageobject>
-            </mediaobject>
+                <title>Class diagrams for component Model.</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata width="75%" format="png" fileref="diagrams/UML_no_methods.png"/>
+                    </imageobject>
+                </mediaobject>
             </figure>
         </section>
         <section>
             <title>Design decisions and discussion</title>
-            <para>Continuing the section about the modelling of the model, all the design decisions will be presented and discussed.</para>
-            <para>
-                One of the decisions was to implement something that takes care of the players' and the dealer's cards, because we did not like storeing single card instances
-                inside the mentioned classes. We came up with <classname>hand</classname> class that deals with holding cards for the players and the dealer which has the benefit
-                of getting someones cards summed up value easily as well as evaluating a player's hand. Another great advantage of implementing this class is that the feature <quote>split</quote>
-                could be added to our solution without the need to change other classes. In the real worlds game of blackjack players can decide to split their initial hand which allows them to play with two hands at one time.
-                Without the hand class, some other ideas would be needed to enable this feature. For example one could add another attribute to the <classname>card</classname> class which indicates
-                to which hand it belongs. 
-            </para>
-            <para> why we have usr and player </para>  
-            <para> 
-                We chose to have the <classname>deck</classname> as an extra class so that we can simply store all of the game's deck's cards in one single instance,
-                instead of having all of the cards inside the <classname>dealer</classname> or <classname>game</classname> object. This grants a better structure in the model and
-                simplifies functionality like shuffling the deck or drawing cards. When thinking about extending the game, this class can be helpful for example when one wants more than one
-                deck. (in some games of blackjack each player has their own deck)
-            </para>
-            <para> 
-                So why do we need <classname>dealer</classname> instead of just having another player object? At first sight both classes may not differ alot
-                when looking at what players and the dealer actually do in a game of blackjack. However, by closer inspection the dealer has alot of differences.
-                Starting with the attributes, a dealer does not need any information stored like a name or balance. The dealer does not place a bet each round either.
-                The only resemblance is that both objects store a hand object. Comparing the functions of the classes, the dealer has no choices to make so none of the 
-                player's functions that are needed for a player's decision are required. Without the <classname>dealer</classname> we would need another way to store the cards included in the game.
-                Altogether a dealer object is too unequal to just use another player object instead.             
-            </para>
-            <para> 
-                As an extra feature, it was decided to implement a chat for the players. One reason for that is that we settled for the multiplayer version for local networks.
-                With the chat the players can communicate with each other which makes the game more vivid. Moreover when players leave or join the game a small information text will be inserted
-                into the chat so other players will know that someone joined/left their game.
-            </para>
-            <para>
-                In conclusion our main idea of modelling the model was to prevent writing the same code multiple times and segregating code by it's functionality. Instead of having a few 
-                huge classes with a big range of functions we rather wanted to have more but smaller classes that are not too complex. This way the model stays alot more readable
-                and it makes it more adjustable and integrating extensions easier.
+            <para>Continuing the section about the modelling of the model, all the design decisions
+                will be presented and discussed.</para>
+            <para> One of the decisions was to implement something that takes care of the players'
+                and the dealer's cards, because we did not like storeing single card instances
+                inside the mentioned classes. We came up with <classname>hand</classname> class that
+                deals with holding cards for the players and the dealer which has the benefit of
+                getting someones cards summed up value easily as well as evaluating a player's hand.
+                Another great advantage of implementing this class is that the feature
+                    <quote>split</quote> could be added to our solution without the need to change
+                other classes. In the real worlds game of blackjack players can decide to split
+                their initial hand which allows them to play with two hands at one time. Without the
+                hand class, some other ideas would be needed to enable this feature. For example one
+                could add another attribute to the <classname>card</classname> class which indicates
+                to which hand it belongs. </para>
+            <para> why we have usr and player </para>
+            <para> We chose to have the <classname>deck</classname> as an extra class so that we can
+                simply store all of the game's deck's cards in one single instance, instead of
+                having all of the cards inside the <classname>dealer</classname> or
+                    <classname>game</classname> object. This grants a better structure in the model
+                and simplifies functionality like shuffling the deck or drawing cards. When thinking
+                about extending the game, this class can be helpful for example when one wants more
+                than one deck. (in some games of blackjack each player has their own deck) </para>
+            <para> So why do we need <classname>dealer</classname> instead of just having another
+                player object? At first sight both classes may not differ alot when looking at what
+                players and the dealer actually do in a game of blackjack. However, by closer
+                inspection the dealer has alot of differences. Starting with the attributes, a
+                dealer does not need any information stored like a name or balance. The dealer does
+                not place a bet each round either. The only resemblance is that both objects store a
+                hand object. Comparing the functions of the classes, the dealer has no choices to
+                make so none of the player's functions that are needed for a player's decision are
+                required. Without the <classname>dealer</classname> we would need another way to
+                store the cards included in the game. Altogether a dealer object is too unequal to
+                just use another player object instead. </para>
+            <para> As an extra feature, it was decided to implement a chat for the players. One
+                reason for that is that we settled for the multiplayer version for local networks.
+                With the chat the players can communicate with each other which makes the game more
+                vivid. Moreover when players leave or join the game a small information text will be
+                inserted into the chat so other players will know that someone joined/left their
+                game. </para>
+            <para> In conclusion our main idea of modelling the model was to prevent writing the
+                same code multiple times and segregating code by it's functionality. Instead of
+                having a few huge classes with a big range of functions we rather wanted to have
+                more but smaller classes that are not too complex. This way the model stays alot
+                more readable and it makes it more adjustable and integrating extensions easier.
             </para>
         </section>
         <section>
             <title>Implementation</title>
-            <para>
-                The compoment model has the responsibility of holding data. Since we use an object-oriented approach, all implemented classes provide their own functionality and attributes.
-                All of the compoment model's functions are written in <code>XQuery</code> and all the data is stored as <code>XML</code> elements. So each class contains data which is then 
-                combined in our database for BaseX. The database also lets us query functions via <code>XQuery</code>. This programming language has a functional approach and was made to run
-                queries on <code>XML</code> databases. One of the most importan highlights of the language are <code>FLOWR-expressions</code>. The name <code>FLOWR</code> contains the initials of <quote>for-let-order-where-return</quote>. 
-                For comparison, this is equivalent of the <quote>select from where</quote> queries of <code>SQL</code>. Usually the object's function have a first parameter <code>self</code> which indicates
-                on which object the code should be executed.
-                Because most of the classes have setters, getters and constructors and the implementation of these functions do not differ in comparison to other classes we won't describe the
-                implementation for every single class. In fact all the setter methods return a new object by calling the classe's constructor with alternated parameters. Regarding the constructors
-                they all create <code>XML</code> elements depending on the classes attributes.  
-            </para>
-            <para>
-                Beginning with <classname>game</classname> class that has a the attribute <code>ID</code> with a unique value and the following functions.
-                <table>
+            <para> The compoment model has the responsibility of holding data. Since we use an
+                object-oriented approach, all implemented classes provide their own functionality
+                and attributes. All of the compoment model's functions are written in
+                    <code>XQuery</code> and all the data is stored as <code>XML</code> elements. So
+                each class contains data which is then combined in our database for BaseX. The
+                database also lets us query functions via <code>XQuery</code>. This programming
+                language has a functional approach and was made to run queries on <code>XML</code>
+                databases. One of the most importan highlights of the language are
+                    <code>FLOWR-expressions</code>. The name <code>FLOWR</code> contains the
+                initials of <quote>for-let-order-where-return</quote>. For comparison, this is
+                equivalent of the <quote>select from where</quote> queries of <code>SQL</code>.
+                Usually the object's function have a first parameter <code>self</code> which
+                indicates on which object the code should be executed. Because most of the classes
+                have setters, getters and constructors and the implementation of these functions do
+                not differ in comparison to other classes we won't describe the implementation for
+                every single class. In fact all the setter methods return a new object by calling
+                the classe's constructor with alternated parameters. Regarding the constructors they
+                all create <code>XML</code> elements depending on the classes attributes. </para>
+            <para> Beginning with <classname>game</classname> class that has a the attribute
+                    <code>ID</code> with a unique value and the following functions. <table>
                     <caption>Game functions</caption>
                     <thead>
                         <tr>
@@ -313,33 +334,36 @@
                             <td>play</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>sets game's state to <quote>playing</quote>, sets all players besides the first player to inactive, the first one to active and finally calls dealer:deal</td>
+                            <td>sets game's state to <quote>playing</quote>, sets all players
+                                besides the first player to inactive, the first one to active and
+                                finally calls dealer:deal</td>
                         </tr>
                         <tr>
                             <td>evaluate</td>
                             <td>self, caller:integer</td>
                             <td>void</td>
-                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate for all players</td>
+                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate
+                                for all players</td>
                         </tr>
                         <tr>
                             <td>latestId</td>
                             <td>none</td>
                             <td>double</td>
-                            <td>returns the highest id of all games in the database, needed for new games since the id always gets incremented</td>
+                            <td>returns the highest id of all games in the database, needed for new
+                                games since the id always gets incremented</td>
                         </tr>
                         <tr>
                             <td>reset</td>
                             <td>self</td>
                             <td><code>XML</code> element of game</td>
-                            <td>sets game to state <quote>betting</quote>, basically calls the classes constructor with all the players that have a balance > 0</td>
+                            <td>sets game to state <quote>betting</quote>, basically calls the
+                                classes constructor with all the players that have a balance >
+                                0</td>
                         </tr>
-                    </tbody>                    
+                    </tbody>
                 </table>
             </para>
-            <para>
-                Secondly the <classname>player</classname> class 
-                
-                <table>
+            <para> Secondly the <classname>player</classname> class <table>
                     <caption>Player functions</caption>
                     <thead>
                         <tr>
@@ -354,13 +378,16 @@
                             <td>joinGame</td>
                             <td>gameId:integer, name:string</td>
                             <td>void</td>
-                            <td>if it is the first player, creates a new game object with the new player, else just inserts the new player and adds an information to the chat about the player joining</td>
+                            <td>if it is the first player, creates a new game object with the new
+                                player, else just inserts the new player and adds an information to
+                                the chat about the player joining</td>
                         </tr>
                         <tr>
                             <td>leave</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>deletes self and calls player:next if self was active and there is more than one player, adds leave information to chat</td>
+                            <td>deletes self and calls player:next if self was active and there is
+                                more than one player, adds leave information to chat</td>
                         </tr>
                         <tr>
                             <td>bet</td>
@@ -372,13 +399,15 @@
                             <td>hit</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>calls helper player:draw, gives player another card and if they bust calls player:next or game:evaluate if they are the last player</td>
+                            <td>calls helper player:draw, gives player another card and if they bust
+                                calls player:next or game:evaluate if they are the last player</td>
                         </tr>
                         <tr>
                             <td>draw</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>calls deck:drawCard and hand:addCard to add a card to the player, updates the player's hand and the deck</td>
+                            <td>calls deck:drawCard and hand:addCard to add a card to the player,
+                                updates the player's hand and the deck</td>
                         </tr>
                         <tr>
                             <td>stand</td>
@@ -390,7 +419,8 @@
                             <td>double</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>updates the player's bet to two times of the amount of bet, calls game:evaluate if player is last otherwise player:next</td>
+                            <td>updates the player's bet to two times of the amount of bet, calls
+                                game:evaluate if player is last otherwise player:next</td>
                         </tr>
                         <tr>
                             <td>insurance</td>
@@ -414,22 +444,22 @@
                             <td>next</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>sets self state to <quote>inactive</quote> and if there is a next player:nextPlayer to <quote>active</quote> else checks if game's state is <quote>betting</quote>
-                                then calls game:play otherwise game:evaluate
-                            </td>
+                            <td>sets self state to <quote>inactive</quote> and if there is a next
+                                player:nextPlayer to <quote>active</quote> else checks if game's
+                                state is <quote>betting</quote> then calls game:play otherwise
+                                game:evaluate </td>
                         </tr>
                         <tr>
                             <td>evaluate</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>calculates profit of player and updates self's balance accordingly, also updates user's balance accordingly</td>
+                            <td>calculates profit of player and updates self's balance accordingly,
+                                also updates user's balance accordingly</td>
                         </tr>
                     </tbody>
                 </table>
             </para>
-            <para>
-                dealer
-                <table>
+            <para> dealer <table>
                     <caption>Dealer functions</caption>
                     <thead>
                         <tr>
@@ -444,18 +474,21 @@
                             <td>deal</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>firstly calls deck:drawTo17 for self, afterwards deals two cards for each player by adding cards of the deck to hand and removing them from the deck</td>
+                            <td>firstly calls deck:drawTo17 for self, afterwards deals two cards for
+                                each player by adding cards of the deck to hand and removing them
+                                from the deck</td>
                         </tr>
                         <tr>
                             <td>evaluateInsurance</td>
                             <td>self,playerIsInsurance:integer,bet:integer</td>
                             <td>integer</td>
-                            <td>calculates a player's bonus if depending on wether they have an insurance and if the dealer got a blackjack</td>
+                            <td>calculates a player's bonus if depending on wether they have an
+                                insurance and if the dealer got a blackjack</td>
                         </tr>
                     </tbody>
                 </table>
             </para>
-            <para>       
+            <para>
                 <table>
                     <caption>Deck functions</caption>
                     <thead>
@@ -471,50 +504,55 @@
                             <td>drawCard</td>
                             <td>self</td>
                             <td>(<code>XML</code> element card,<code>XML</code> element deck)</td>
-                            <td>calls deck:getCard to get the topmost card and calls deck:removeCardAtIndex to remove topmost card to return the new deck</td>
+                            <td>calls deck:getCard to get the topmost card and calls
+                                deck:removeCardAtIndex to remove topmost card to return the new
+                                deck</td>
                         </tr>
                         <tr>
                             <td>shuffle</td>
                             <td>self</td>
                             <td><code>XML</code> element deck</td>
-                            <td>uses a random number generator to create a new deck with a random permutation of the cards</td>
+                            <td>uses a random number generator to create a new deck with a random
+                                permutation of the cards</td>
                         </tr>
                         <tr>
                             <td>drawTo17</td>
                             <td><code>XML</code> element hand,<code>XML</code> element deck</td>
                             <td>(<code>XML</code> element hand,<code>XML</code> element deck)</td>
-                            <td>recursively draws cards from given deck to given hand until hand's value >= 17</td>
+                            <td>recursively draws cards from given deck to given hand until hand's
+                                value >= 17</td>
                         </tr>
                         <tr>
                             <td>removeCardAtIndex</td>
                             <td>self,index:integer</td>
                             <td><code>XML</code> element deck</td>
-                            <td>calls helper deck:removeCard that finds and removes the card at given index and returns a new deck without the card</td>
+                            <td>calls helper deck:removeCard that finds and removes the card at
+                                given index and returns a new deck without the card</td>
                         </tr>
                     </tbody>
                 </table>
             </para>
-           <para>
-               <table>
-                   <caption>Hand functions</caption>
-                   <thead>
-                       <tr>
-                           <td>name</td>
-                           <td>parameter</td>
-                           <td>return value</td>
-                           <td>functionality</td>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       <tr>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>                           
-                       </tr>
-                   </tbody>
-               </table>
-           </para>
+            <para>
+                <table>
+                    <caption>Hand functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
             <para>
                 <table>
                     <caption>Card functions</caption>
@@ -528,10 +566,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                           
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
                         </tr>
                     </tbody>
                 </table>
@@ -549,10 +587,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                           
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
                         </tr>
                     </tbody>
                 </table>
@@ -570,16 +608,16 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                           
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
                         </tr>
                     </tbody>
                 </table>
             </para>
         </section>
-        
+
         <section>
             <title>Implementation detail,decisions and discussion</title>
             <para>magic of next</para>
@@ -616,7 +654,7 @@
     </section>
     <section>
         <title>Conclusions</title>
-        
+
     </section>
     <bibliography>
         <!-- Beispiel -->
