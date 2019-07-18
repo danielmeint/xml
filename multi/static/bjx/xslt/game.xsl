@@ -140,7 +140,14 @@
 									<xsl:value-of select="hand/@value"/>
 								</text>
 								<text class="balance" x="27px" y="142px" xmlns="http://www.w3.org/2000/svg">
-									$:<xsl:value-of select="balance - bet"/>
+									$:<xsl:choose>
+									    <xsl:when test="/game/@state = 'evaluated'">
+									        <xsl:value-of select="balance"/>
+									    </xsl:when>
+									    <xsl:otherwise>
+									        <xsl:value-of select="balance - bet"/>
+									    </xsl:otherwise>
+									</xsl:choose>
 								</text>
                                     
                                 </g>
@@ -277,12 +284,13 @@
                                                         </xsl:when>
                                                     </xsl:choose>
                                                 </xsl:for-each>
+                                                <form action="/bjx/games/{/game/@id}/newRound" method="POST" target="hiddenFrame">
+                                                    <button class="btn" type="submit">New Round</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="/bjx/games/{/game/@id}/newRound" method="POST" target="hiddenFrame">
-                                        <button class="btn" type="submit">New Round</button>
-                                    </form>
+
                                     
                                     
                                     
