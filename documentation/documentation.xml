@@ -178,7 +178,7 @@
                 functions of the class, it should provide a helper function to help determining a player's profit, depending on their insurance state.
                 More logic to give every
                 player two cards and also draw for the dealer will be required. </para>
-            <para> The <classname>hand</classname> class . On one hand this class will provide helper
+            <para> The next class we need in our model is <classname>hand</classname>. On one hand this class will provide helper
                 functions for evaluating a player's hand. On the other hand it will supply some function to calculate the optimal sum of a hand.
                 This is needed because the card Ace can have the value 1 and 11. </para>
             <para> The <classname>card</classname> class will provide two attributes to store a card's value and suit. 
@@ -671,17 +671,17 @@
             </para>
             <para>
                 The chat has no attributes.           
-                <table>
+                <table>                    
                     <caption>Chat functions</caption>
-                    <thead>
-                        <tr>
+                    <thead>                        
+                        <tr>                            
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
                             <td>functionality</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>                        
                         <tr>
                             <td>addMessage</td>
                             <td>self,msg:string ???</td>
