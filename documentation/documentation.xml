@@ -58,7 +58,7 @@
             of the Ace will change to a one to prevent the player from busting if he was to draw
             another card and otherwise exceed 21. A card's suit is irrelevant in Blackjack.</para>
         <section>
-            <title>Preparation</title>
+            <title>Betting</title>
             <para>Before the actual playing begins, players place their bets. Our version uses
                 US-dollars as currency and does not limit players in the amount they want to bet. It
                 does, however, prohibit them from playing without betting at all. We will refer to
@@ -66,7 +66,7 @@
                 following sections.</para>
         </section>
         <section>
-            <title>Course of a round</title>
+            <title>Playing</title>
             <para> At the beginning of the <emphasis>playing phase</emphasis> each player is dealt
                 two cards face up. The dealer receives one exposed card that everyone can see and
                 one hidden card.</para>
