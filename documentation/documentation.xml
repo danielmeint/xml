@@ -230,7 +230,9 @@
                 player's functions that are needed for a player's decision are required. Without the <classname>dealer</classname> we would need another way to store the cards included in the game.
                 Altogether a dealer object is too unequal to just use another player object instead.             
             </para>
-            <para>how to deal with broke players</para>
+            <para>
+                How to deal with players that lost all their money? We decided that those players get set to spectating mode, where they can reset their balance. ???
+            </para>
             <para> 
                 As an extra feature, it was decided to implement a chat for the players. One reason for that is that we settled for the multiplayer version for local networks.
                 With the chat the players can communicate with each other which makes the game more vivid. Moreover when players leave or join the game a small information text will be inserted
