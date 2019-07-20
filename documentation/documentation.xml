@@ -335,12 +335,6 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>play</td>
-                            <td>self</td>
-                            <td>void</td>
-                            <td>sets game's state to <quote>playing</quote>, sets all players besides the first player to inactive, the first one to active and finally calls dealer:deal</td>
-                        </tr>
-                        <tr>
                             <td>evaluate</td>
                             <td>self, caller:integer</td>
                             <td>void</td>
@@ -352,6 +346,12 @@
                             <td>double ???</td>
                             <td>returns the highest id of all games in the database, needed for new games since the id always gets incremented</td>
                         </tr>
+                        <tr>
+                            <td>play</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>sets game's state to <quote>playing</quote>, sets all players besides the first player to inactive, the first one to active and finally calls dealer:deal</td>
+                        </tr>                                               
                         <tr>
                             <td>reset</td>
                             <td>self</td>
@@ -373,21 +373,6 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>name</td>
-                            <td>string???</td>
-                            <td>stores name of player</td>
-                        </tr>
-                        <tr>
-                            <td>state</td>
-                            <td>string???</td>
-                            <td>stores state of player</td>
-                        </tr>
-                        <tr>
-                            <td>insurance</td>
-                            <td>string???</td>
-                            <td>stores wether or not a player took insurance</td>
-                        </tr>
-                        <tr>
                             <td>balance</td>
                             <td>integer???</td>
                             <td>store the balance of player</td>                            
@@ -398,10 +383,25 @@
                             <td>stores bet of a player</td>
                         </tr>
                         <tr>
+                            <td>insurance</td>
+                            <td>string???</td>
+                            <td>stores wether or not a player took insurance</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>string???</td>
+                            <td>stores name of player</td>
+                        </tr>
+                        <tr>
                             <td>profit</td>
                             <td>integer</td>
                             <td>stores profit of a round</td>
                         </tr>
+                        <tr>
+                            <td>state</td>
+                            <td>string???</td>
+                            <td>stores state of player</td>
+                        </tr>                                                                                            
                     </tbody>
                 </table>
                 
@@ -417,6 +417,48 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>bet</td>
+                            <td>self,bet:integer</td>
+                            <td>void</td>
+                            <td>updates self's bet by given parameter bet, calls player:next</td>
+                        </tr>
+                        <tr>
+                            <td>double</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>updates the player's bet to two times of the amount of bet, calls game:evaluate if player is last otherwise player:next</td>
+                        </tr>
+                        <tr>
+                            <td>draw</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>calls deck:drawCard and hand:addCard to add a card to the player, updates the player's hand and the deck</td>
+                        </tr>
+                        <tr>
+                            <td>evaluate</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>calculates profit of player and updates self's balance accordingly, also updates user's balance accordingly</td>
+                        </tr>
+                        <tr>
+                            <td>hit</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>calls helper player:draw, gives player another card and if they bust calls player:next or game:evaluate if they are the last player</td>
+                        </tr>
+                        <tr>
+                            <td>insurance</td>
+                            <td>self</td>
+                            <td>void</td>
+                            <td>updates self insurance to <quote>true</quote></td>
+                        </tr>                        
+                        <tr>
+                            <td>isLast</td>
+                            <td>self</td>
+                            <td>boolean</td>
+                            <td>determines and returns wether player is last</td>
+                        </tr>
+                        <tr>
                             <td>joinGame</td>
                             <td>gameId:integer, name:string</td>
                             <td>void</td>
@@ -429,54 +471,6 @@
                             <td>deletes self and calls player:next if self was active and there is more than one player, adds leave information to chat</td>
                         </tr>
                         <tr>
-                            <td>bet</td>
-                            <td>self,bet:integer</td>
-                            <td>void</td>
-                            <td>updates self's bet by given parameter bet, calls player:next</td>
-                        </tr>
-                        <tr>
-                            <td>hit</td>
-                            <td>self</td>
-                            <td>void</td>
-                            <td>calls helper player:draw, gives player another card and if they bust calls player:next or game:evaluate if they are the last player</td>
-                        </tr>
-                        <tr>
-                            <td>draw</td>
-                            <td>self</td>
-                            <td>void</td>
-                            <td>calls deck:drawCard and hand:addCard to add a card to the player, updates the player's hand and the deck</td>
-                        </tr>
-                        <tr>
-                            <td>stand</td>
-                            <td>self</td>
-                            <td>void</td>
-                            <td>calls player:next</td>
-                        </tr>
-                        <tr>
-                            <td>double</td>
-                            <td>self</td>
-                            <td>void</td>
-                            <td>updates the player's bet to two times of the amount of bet, calls game:evaluate if player is last otherwise player:next</td>
-                        </tr>
-                        <tr>
-                            <td>insurance</td>
-                            <td>self</td>
-                            <td>void</td>
-                            <td>updates self insurance to <quote>true</quote></td>
-                        </tr>
-                        <tr>
-                            <td>nextPlayer</td>
-                            <td>self</td>
-                            <td><code>XML</code> element player</td>
-                            <td>determines and returns the next player</td>
-                        </tr>
-                        <tr>
-                            <td>isLast</td>
-                            <td>self</td>
-                            <td>boolean</td>
-                            <td>determines and returns wether player is last</td>
-                        </tr>
-                        <tr>
                             <td>next</td>
                             <td>self</td>
                             <td>void</td>
@@ -485,11 +479,17 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>evaluate</td>
+                            <td>nextPlayer</td>
+                            <td>self</td>
+                            <td><code>XML</code> element player</td>
+                            <td>determines and returns the next player</td>
+                        </tr>                                              
+                        <tr>
+                            <td>stand</td>
                             <td>self</td>
                             <td>void</td>
-                            <td>calculates profit of player and updates self's balance accordingly, also updates user's balance accordingly</td>
-                        </tr>
+                            <td>calls player:next</td>
+                        </tr>                                                                                                                     
                     </tbody>
                 </table>
             </para>
@@ -541,12 +541,6 @@
                             <td>calls deck:getCard to get the topmost card and calls deck:removeCardAtIndex to remove topmost card to return the new deck</td>
                         </tr>
                         <tr>
-                            <td>shuffle</td>
-                            <td>self</td>
-                            <td><code>XML</code> element deck</td>
-                            <td>uses a random number generator to create a new deck with a random permutation of the cards</td>
-                        </tr>
-                        <tr>
                             <td>drawTo17</td>
                             <td>hand:<code>XML</code> element hand,deck:<code>XML</code> element deck</td>
                             <td>(<code>XML</code> element hand,<code>XML</code> element deck)</td>
@@ -558,6 +552,12 @@
                             <td><code>XML</code> element deck</td>
                             <td>calls helper deck:removeCard that finds and removes the card at given index and returns a new deck without the card</td>
                         </tr>
+                        <tr>
+                            <td>shuffle</td>
+                            <td>self</td>
+                            <td><code>XML</code> element deck</td>
+                            <td>uses a random number generator to create a new deck with a random permutation of the cards</td>
+                        </tr>                                                
                     </tbody>
                 </table>
             </para>
@@ -593,14 +593,8 @@
                        <tr>
                            <td>addCard</td>
                            <td>self,card:<code>XML</code> element hand</td>
-                           <td><code>XML</code> element deck</td>
+                           <td><code>XML</code> element hand</td>
                            <td>adds the given card to given hand and returns new hand</td>                           
-                       </tr>
-                       <tr>
-                           <td>getOptimalSum</td>
-                           <td>values:sequence of integers</td>
-                           <td>integer</td>
-                           <td>recursively calculates optimal sum in favor of player, replacing aces with value 1 if the sum of values > 21</td>
                        </tr>
                        <tr>
                            <td>evaluate</td>
@@ -614,6 +608,12 @@
                            <td>integer</td>
                            <td>checks if player beats the dealer and returns an integer accordingly, needed for player:evaluate</td>
                        </tr>
+                       <tr>
+                           <td>getOptimalSum</td>
+                           <td>values:sequence of integers???</td>
+                           <td>integer</td>
+                           <td>recursively calculates optimal sum in favor of player, replacing aces with value 1 if the sum of values > 21</td>
+                       </tr>                                             
                    </tbody>
                </table>
            </para>
@@ -629,15 +629,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>value</td>
-                            <td>integer</td>
-                            <td>stores the value of the card</td>
-                        </tr>
-                        <tr>
                             <td>suit</td>
                             <td>string???</td>
                             <td>stores the suit of the card</td>
                         </tr>
+                        <tr>
+                            <td>value</td>
+                            <td>integer</td>
+                            <td>stores the value of the card</td>
+                        </tr>                        
                     </tbody>
                 </table>
                 <table>
