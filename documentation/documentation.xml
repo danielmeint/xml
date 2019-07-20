@@ -39,30 +39,38 @@
             without exceeding a sum of 21 (<emphasis>bust</emphasis>). </para>
         <section>
             <title>Card values</title>
-            <para>The game is played with a single deck of french playing cards. Number cards are worth
-                their value, e.g. the seven of hearts is worth seven points, face cards (Jack, Queen,
-                and King) are worth ten points, and an Ace can be counted as either one or eleven,
-                depending on what is more favorable in a specific situation. A hand containing an Ace
-                counted as eleven is referred to as a <emphasis>soft</emphasis> hand, because the value
-                of the Ace will change to a one to prevent the player from busting if he was to draw
-                another card and otherwise exceed 21. A card's suit is irrelevant in Blackjack.</para>
+            <para>The game is played with a single deck of french playing cards. Number cards are
+                worth their value, e.g. the seven of hearts is worth seven points, face cards (Jack,
+                Queen, and King) are worth ten points, and an Ace can be counted as either one or
+                eleven, depending on what is more favorable in a specific situation. A hand
+                containing an Ace counted as eleven is referred to as a <emphasis>soft</emphasis>
+                hand, because the value of the Ace will change to a one to prevent the player from
+                busting if he was to draw another card and otherwise exceed 21. A card's suit is
+                irrelevant in Blackjack.</para>
         </section>
         <section>
-            <title>Betting</title>
-            <para>Before the actual playing begins, players place their bets. Our version uses
-                US-dollars as currency and does not limit players in the amount they want to bet. It
-                does, however, prohibit them from playing without betting at all. We will refer to
-                this stage of the game as the <emphasis>betting phase</emphasis> throughout the
-                following sections.</para>
-        </section>
-        <section>
-            <title>Playing</title>
-            <para> At the beginning of the <emphasis>playing phase</emphasis>, each player is dealt
-                two cards face up. The dealer receives one exposed card that everyone can see and
-                one hidden card.</para>
-            <para>The dealer subsequently asks each player, going clockwise around the table,
-                whether they want to improve their respective hand by drawing additional cards. Each
-                player has the following options: <table>
+            <title>Course of a Round</title>
+            <para>Blackjack is round-based and each round consists of multiple stages. We
+                distinguish between the betting, playing, and evaluation phase. After the end of a
+                round, the next round can be initialized by any participating player. Players can
+                leave the table at any time.</para>
+            <section>
+                <title>Betting</title>
+                <para>Before the actual playing begins, players place their bets. Our version uses
+                    US-dollars as currency and does not limit players in the amount they want to
+                    bet. It does, however, prohibit them from playing without betting at all. We
+                    will refer to this stage of the game as the <emphasis>betting phase</emphasis>
+                    throughout the following sections.</para>
+            </section>
+            <section>
+                <title>Playing</title>
+                <para> At the beginning of the <emphasis>playing phase</emphasis>, each player is
+                    dealt two cards face up. The dealer receives one exposed card that everyone can
+                    see and one hidden card.</para>
+                <para>The dealer subsequently asks each player, going clockwise around the table,
+                    whether they want to improve their respective hand by drawing additional cards.
+                    Each player has the following options:</para>
+                <table>
                     <caption>Playing options</caption>
                     <thead>
                         <tr>
@@ -87,7 +95,7 @@
                             <td>Double</td>
                             <td>The player doubles his bet and receives exactly one more card before
                                 finishing his turn</td>
-                            <td>Available if the player only has his two initial two cards</td>
+                            <td>Available as the player's first action</td>
                         </tr>
                         <tr>
                             <td>Insurance</td>
@@ -98,35 +106,37 @@
                                 cards</td>
                         </tr>
                     </tbody>
-                </table> Playing double or insurance further assumes that the player has a
-                sufficient balance to cover the increased bet size.</para>
-            <para>After all players have finished their turn, the dealer plays in a predetermined
-                manner: He draws cards as long as his hand is worth less than 17 points and must
-                stand on a soft 17 or better.</para>
-        </section>
-        <section>
-            <title>Payout</title>
-            <para>Once the dealer completes his turn, each player's hand gets
-                    <emphasis>evaluated</emphasis> against the dealer's hand. As described above,
-                the goal of each player is to get a hand total closer to 21 than the dealer without
-                busting. Concretely, a player wins by achieving either of the following final game
-                states: <itemizedlist>
-                    <listitem>
-                        <para>A value higher than dealer's without exceeding 21</para>
-                    </listitem>
-                    <listitem>
-                        <para>Any value less than 21 while the dealer busts</para>
-                    </listitem>
-                </itemizedlist> Winning players get paid even money, i.e. 1:1 on the initial bet. If
-                they win with <emphasis>blackjack</emphasis> (hand value of 21 with two cards), they
-                receive one and a half times their bet (3:2). Furthermore, in case a player has
-                decided to place the insurance bet and the dealer has indeed blackjack, this bet is
-                payed out 2:1. A player winning a $5 insurance bet receives back the $5 plus an
-                additional $10 from the bank, for example.</para>
-            <para>If player and dealer have equal hands and did not bust, they tie, and the player's
-                bet is returned (also called <emphasis>push</emphasis>).</para>
-            <para>In any other case, e.g. the player busting even if the dealer busts as well, the
-                player loses their bet.</para>
+                </table>
+                <para>Playing double or insurance further assumes that the player has a sufficient
+                    balance to cover the increased bet size.</para>
+                <para>After all players have finished their turn, the dealer plays in a
+                    predetermined manner: He draws cards as long as his hand is worth less than 17
+                    points and must stand on a soft 17 or better.</para>
+            </section>
+            <section>
+                <title>Evaluation</title>
+                <para>Once the dealer completes his turn, each player's hand gets
+                        <emphasis>evaluated</emphasis> against the dealer's hand. As described
+                    above, the goal of each player is to get a hand total closer to 21 than the
+                    dealer without busting. Concretely, a player wins by achieving either of the
+                    following final game states: <itemizedlist>
+                        <listitem>
+                            <para>A value higher than dealer's without exceeding 21</para>
+                        </listitem>
+                        <listitem>
+                            <para>Any value less than 21 while the dealer busts</para>
+                        </listitem>
+                    </itemizedlist> Winning players get paid even money, i.e. 1:1 on the initial
+                    bet. If they win with <emphasis>blackjack</emphasis> (hand value of 21 with two
+                    cards), they receive one and a half times their bet (3:2). Furthermore, in case
+                    a player has decided to place the insurance bet and the dealer has indeed
+                    blackjack, this bet is payed out 2:1. A player winning a $5 insurance bet
+                    receives back the $5 plus an additional $10 from the bank, for example.</para>
+                <para>If player and dealer have equal hands and did not bust, they tie, and the
+                    player's bet is returned (also called <emphasis>push</emphasis>).</para>
+                <para>In any other case, e.g. the player busting even if the dealer busts as well,
+                    the player loses their bet.</para>
+            </section>
         </section>
     </section>
     <section>
