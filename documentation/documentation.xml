@@ -277,7 +277,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata width="75%" format="png"
-                        fileref="diagrams/UML_no_methods.png"/>
+                        fileref="diagrams/UML"/>
                 </imageobject>
             </mediaobject>
             </figure>
@@ -329,11 +329,11 @@
                 All of the compoment model's functions are written in <code>XQuery</code> and all the data is stored as <code>XML</code> elements. So each class contains data which is then 
                 combined in our database for BaseX. The database also lets us query functions via <code>XQuery</code>. This programming language has a functional approach and was made to run
                 queries on <code>XML</code> databases. One of the most importan highlights of the language are <code>FLOWR-expressions</code>. The name <code>FLOWR</code> contains the initials of <quote>for-let-order-where-return</quote>. 
-                For comparison, this is equivalent of the <quote>select from where</quote> queries of <code>SQL</code>. Usually the object's function have a first parameter <code>self</code> which indicates
+                For comparison, this is equivalent of the <quote>select from where</quote> queries of <code>SQL</code>. The object's function usually have a first parameter <code>self</code> which indicates
                 on which object the code should be executed.
                 Because most of the classes have setters, getters and constructors and the implementation of these functions do not differ in comparison to other classes we won't describe the
                 implementation for every single class. In fact all the setter methods return a new object by calling the classe's constructor with alternated parameters. Regarding the constructors
-                they all create <code>XML</code> elements depending on the classes attributes.  
+                they all create <code>XML</code> elements depending on the classe's attributes.  
             </para>
             <para>
                 Beginning with <classname>game</classname> class that has the following attributes and functions.
@@ -712,12 +712,7 @@
                             <td>description</td>
                         </tr>                        
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>name</td>
-                            <td>string???</td>
-                            <td>stores name of user</td>
-                        </tr>
+                    <tbody>                      
                         <tr>
                             <td>balance</td>
                             <td>integer???</td>
@@ -727,6 +722,11 @@
                             <td>highscore</td>
                             <td>integer???</td>
                             <td>store the all time highest balance of user</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>string???</td>
+                            <td>stores name of user</td>
                         </tr>
                     </tbody>
                 </table>
@@ -806,7 +806,7 @@
                 and repeat generating a card until it is no longer a duplicate.
             </para>
             <para>
-                Like mentioned before, we want a comfortable experience for the player by always ending one's turn if they chose to double or bust automatically. To achieve this we implemented
+                Like mentioned before, we want a comfortable experience for the player by always ending one's turn automatically if they choose to double or bust. To achieve this we implemented
                 the function player:next, player:nextPlayer and player:isLast. Together these functions check if a player is the last one and help setting the next player to active otherwise.
                 This can be used in both game states where input of each player is required (betting,playing).
             </para>                                       
