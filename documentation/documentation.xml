@@ -212,62 +212,45 @@
                 second part consists of the implementation of the game, followed by a discussion on
                 implementation details and what problems were faced. </para>
             <para> 
-                The database consists of a list of games. For that a class
-                    <classname>game</classname> is needed which stores every information about the
+                The model database consists of a list of games. For that a class
+                    <classname>Game</classname> is needed which stores every information about the
                 instance of a blackjack game. A game object needs an attribute to store its' id and another
-                attribute to store the current state of the game. Regarding <classname>game</classname> functions, their main purpose
+                attribute to store the current state of the game. Regarding <classname>Game</classname> functions, their main purpose
                 is constructing,initializing and resetting game objects. Because every game object
                 also stores all the attending players and a dealer, the functions essentially
                 execute operations on all players. In addition to the basic functions,
-                    <classname>game</classname> must provide some function to evaluate the game.
+                    <classname>Game</classname> must provide some function to evaluate the game.
                 However the logic of evaluating a player should be sourced to the
-                    <classname>player</classname> class. Another object stored in a game object is
+                    <classname>Player</classname> class. Another object stored in a game object is
                 the chat. </para>
             <para>
-                The <classname>player</classname> will need some attributes to store meta data like name, balance, bet and profit.
+                The <classname>Player</classname> will need some attributes to store meta data like name, balance, bet and profit.
                 Furthermore this class has to hold a player's state and wether a player chose to take insurance in a round.
                 One more object stored inside the player is the players hand, which
-                holds the cards. As to the <classname>player</classname> functions, contiguous to
+                holds the cards. As to the <classname>Player</classname> functions, contiguous to
                 the constructors and setters, there will be alot of functions that contain the game's
                 logic. Depending on the game's state, a player can take several actions, which will be
-                passed over to the <classname>player</classname> class by the API. Following
-                functions must be supplied. <itemizedlist>
-                    <listitem>
-                        <para><function>hit</function> draws another card for the player</para>
-                    </listitem>
-                    <listitem>
-                        <para><function>stand</function> the player doesn't want more cards</para>
-                    </listitem>
-                    <listitem>
-                        <para><function>double</function> doubles the player's bet and draws one
-                            last card</para>
-                    </listitem>
-                    <listitem>
-                        <para><function>insurance</function> the player takes insurance</para>
-                    </listitem>
-                    <listitem>
-                        <para><function>evaluate</function> determines the player's profit</para>
-                    </listitem>
-                </itemizedlist> Alongside the listed functions, some helpers which provide
-                logic for finding the next player and joining or leaving a game are needed. </para>
+                passed over to the <classname>Player</classname> class by the API. Alongside the playing functions, some helpers which provide
+                logic for finding the next player and joining or leaving a game are needed. Finally logic to evaluate a player must be integrated. </para>
             <para> Since the players all play against the dealer, another class
-                    <classname>dealer</classname> is required. It does not require any attributes, but it must store
+                    <classname>Dealer</classname> is required. It does not require any attributes, but it must store
                 the deck of the game and likewise the players a hand object. Concerning the
                 functions of the class, it should provide a helper function to help determining a player's profit, depending on their insurance state.
                 More logic to give every
                 player two cards and also draw for the dealer will be required. </para>
-            <para> The next class we need in our model is <classname>hand</classname>. On one hand this class will provide helper
+            <para> The next class we need in our model is <classname>Hand</classname>. On one hand this class will provide helper
                 functions for evaluating a player's hand. On the other hand it will supply some function to calculate the optimal sum of a hand.
                 This is needed because the card Ace can have the value 1 and 11. </para>
-            <para> The <classname>card</classname> class will provide two attributes to store a card's value and suit. 
+            <para> The <classname>Card</classname> class will provide two attributes to store a card's value and suit. 
                 Besides the constructor and setter functions there will be a getter function that returns a card's actual value,   
             </para>
             <para>
-                Inside the <classname>chat</classname> class, the players' messages should be stored.
+                Inside the <classname>Chat</classname> class, the players' messages should be stored.
             </para>
             <para>
-                The last class in the model compoment is <classname>usr</classname>.                
-                It has no functions other than a constructor and setters.                
+                The last class in the model compoment is <classname>Usr</classname>.                
+                It has no functions other than a constructor and setters.
+                We store the usr's in another database <quote>users</quote>.                
             </para>            
             <para>
                 The model is represented in the following class diagram. Helper functions and setters/getters/constructors are omitted for readability.
@@ -287,29 +270,32 @@
             <para>Continuing the section about the modelling of the model, all the design decisions will be presented and discussed.</para>
             <para>
                 One of the decisions was to implement something that takes care of the players' and the dealer's cards, because we did not like storeing single card instances
-                inside the mentioned classes. We came up with <classname>hand</classname> class that deals with holding cards for the players and the dealer which has the benefit
+                inside the mentioned classes. We came up with <classname>Hand</classname> class that deals with holding cards for the players and the dealer which has the benefit
                 of getting someones cards summed up value easily as well as evaluating a player's hand. Another great advantage of implementing this class is that the feature <quote>split</quote>
                 could be added to our solution without the need to change other classes. In the real worlds game of blackjack players can decide to split their initial hand which allows them to play with two hands at one time.
-                Without the hand class, some other ideas would be needed to enable this feature. For example one could add another attribute to the <classname>card</classname> class which indicates
+                Without the hand class, some other ideas would be needed to enable this feature. For example one could add another attribute to the <classname>Card</classname> class which indicates
                 to which hand it belongs. 
             </para>
-            <para> why we have usr and player </para>  
             <para> 
-                We chose to have the <classname>deck</classname> as an extra class so that we can simply store all of the game's deck's cards in one single instance,
-                instead of having all of the cards inside the <classname>dealer</classname> or <classname>game</classname> object. This grants a better structure in the model and
+                Because we want to store the global balance of a player permamently, we introduced the <classname>Usr</classname> class. This way we can easily look up the player's highest achieved balance
+                for the highscore list in the lobby. 
+            </para>  
+            <para> 
+                We chose to have the <classname>Deck</classname> as an extra class so that we can simply store all of the game's deck's cards in one single instance,
+                instead of having all of the cards inside the <classname>Dealer</classname> or <classname>Game</classname> object. This grants a better structure in the model and
                 simplifies functionality like shuffling the deck or drawing cards. When thinking about extending the game, this class can be helpful for example when one wants more than one
                 deck. (in some games of blackjack each player has their own deck)
             </para>
             <para> 
-                So why do we need <classname>dealer</classname> instead of just having another player object? At first sight both classes may not differ alot
+                So why do we need <classname>Dealer</classname> instead of just having another player object? At first sight both classes may not differ alot
                 when looking at what players and the dealer actually do in a game of blackjack. However, by closer inspection the dealer has alot of differences.
                 Starting with the attributes, a dealer does not need any information stored like a name or balance. The dealer does not place a bet each round either.
                 The only resemblance is that both objects store a hand object. Comparing the functions of the classes, the dealer has no choices to make so none of the 
-                player's functions that are needed for a player's decision are required. Without the <classname>dealer</classname> we would need another way to store the cards included in the game.
+                player's functions that are needed for a player's decision are required. Without the <classname>Dealer</classname> we would need another way to store the cards included in the game.
                 Altogether a dealer object is too unequal to just use another player object instead.             
             </para>
             <para>
-                How to deal with players that lost all their money? We decided that those players get set to spectating mode, where they can reset their balance. ???
+                Another question is How to deal with players that lost all their money? We decided that those players get set to spectating mode, where they can reset their balance. ???
             </para>
             <para> 
                 As an extra feature, it was decided to implement a chat for the players. One reason for that is that we settled for the multiplayer version for local networks.
@@ -336,7 +322,7 @@
                 they all create <code>XML</code> elements depending on the classe's attributes.  
             </para>
             <para>
-                Beginning with <classname>game</classname> class that has the following attributes and functions.
+                Beginning with <classname>Game</classname> class that has the following attributes and functions.
                 <table>
                     <caption>Game attributes</caption>
                     <thead>
@@ -801,7 +787,7 @@
                 and doubling their bet before evaluating the player.
             </para>
             <para>
-                For the <classname>deck</classname> implementation we decided to create a <quote>realistic</quote> since we didn't like the idea of generating random cards each time a draw
+                For the <classname>Deck</classname> implementation we decided to create a <quote>realistic</quote> since we didn't like the idea of generating random cards each time a draw
                 occurs. Randomly generating cards would either face the problems of possibly having duplicate cards or needing to implement some code to check if a generated card already exists
                 and repeat generating a card until it is no longer a duplicate.
             </para>
