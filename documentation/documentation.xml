@@ -260,7 +260,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata width="75%" format="png"
-                        fileref="diagrams/UML"/>
+                        fileref="diagrams/UML.png"/>
                 </imageobject>
             </mediaobject>
             </figure>
