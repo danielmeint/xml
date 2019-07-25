@@ -751,7 +751,7 @@
         </section>
         
         <section>
-            <title>Implementation detail,decisions and discussion</title>
+            <title>Implementation detail, decisions and discussion</title>
             <para>
                 <!-- siehe Folien ueber "XQuery update constraint" -->
                 While implementing the model, we faced a few problems and some of the constraints of <code>XQuery</code>. In this section some examples
