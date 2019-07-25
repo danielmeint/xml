@@ -36,27 +36,8 @@
         <para>Up to five <emphasis>players</emphasis> compete not against each other, but separately
             against the <emphasis>dealer</emphasis>. The objective of each player is to draw cards
             and maximize the sum of their respective values (<emphasis>hand value</emphasis>)
-            without exceeding a sum of 21 (<emphasis>bust</emphasis>). Players win by achieving one
-            of the following final game states: <itemizedlist>
-                <listitem>
-                    <para>A hand value of 21 with only two cards
-                        (<emphasis>blackjack</emphasis>)</para>
-                </listitem>
-                <listitem>
-                    <para>A value higher than dealer's without exceeding 21</para>
-                </listitem>
-                <listitem>
-                    <para>A value less than 21 while the dealer busts</para>
-                </listitem>
-            </itemizedlist>
+            without exceeding a sum of 21 (<emphasis>bust</emphasis>).
         </para>
-        <para>The game is played with a single deck of french playing cards. Number cards are worth
-            their value, e.g. the seven of hearts is worth seven points, face cards (Jack, Queen,
-            and King) are worth ten points, and an Ace can be counted as either one or eleven,
-            depending on what is more favorable in a specific situation. A hand containing an Ace
-            counted as eleven is referred to as a <emphasis>soft</emphasis> hand, because the value
-            of the Ace will change to a one to prevent the player from busting if he was to draw
-            another card and otherwise exceed 21. A card's suit is irrelevant in Blackjack.</para>
         <section>
             <title>Card values</title>
             <para>The game is played with a single deck of french playing cards. Number cards are
@@ -90,8 +71,17 @@
                 <para>The dealer subsequently asks each player, going clockwise around the table,
                     whether they want to improve their respective hand by drawing additional cards.
                     Each player has the following options:</para>
+                <figure>
+                    <title>Possible player decisions.</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="100%" format="png"
+                                fileref="diagrams/decisions_activity.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
                 <table>
-                    <caption>Playing options</caption>
+                    <caption>Playing options explained.</caption>
                     <thead>
                         <tr>
                             <td>Action</td>
@@ -121,8 +111,8 @@
                             <td>Insurance</td>
                             <td>The player puts a side-bet worth half his initial bet on the outcome
                                 that the dealer has a Blackjack</td>
-                            <td>Available if the player's hand value is less than 21 and the first
-                                card of the dealer is an Ace and the player only has his initial two
+                            <td>Available if the player's hand value is less than 21, the first
+                                card of the dealer is an Ace, and the player only has his initial two
                                 cards</td>
                         </tr>
                     </tbody>
@@ -763,6 +753,7 @@
         <section>
             <title>Implementation detail,decisions and discussion</title>
             <para>
+                <!-- siehe Folien ueber "XQuery update constraint" -->
                 While implementing the model, we faced a few problems and some of the constraints of <code>XQuery</code>. In this section some examples
                 will be illustrated where we had to rethink our attempts of implementing database updating logic. Also some interesting parts of our code will be
                 discussed.
