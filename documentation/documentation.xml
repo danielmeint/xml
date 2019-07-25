@@ -824,10 +824,10 @@
         The implementation of the web application was done as a group projoct with a group size of 4. 
         Git was used as a distributed version control system. Further, the issues functionality of git was used to track and assign tasks and problems. Different branches were utilized to test different possible implementations. 
        </para>
-       <para>
-        Regular meetings in person at the Informatik Faculty of the TUM and voice ocer ip chats (TS3) were arranged using the messenger whats app regulary to coordinate the collaboration and progress.
-        Visualizations of git concerning the issues and commits can be seen below.
-        </para>
+       <para> Regular meetings in person at the Informatik Faculty of the TUM and voice over ip
+            chats (TS3) were arranged using the messenger whats app regulary to coordinate the
+            collaboration and progress. Visualizations of git concerning the issues and commits can
+            be seen below. </para>
         <figure>
             <title>Git Overview (Master).</title>
             <mediaobject>
