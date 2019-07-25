@@ -22,7 +22,7 @@
                     &#8634; Redraw Game
                 </button>
             </form>
-            <div class="flex-container">
+            <div class="container flex-container">
                 <svg viewBox="-100 0 1000 620">
                     <!-- table dimensions: 800 x 450 -->
                     <use href="/static/bjx/svg/table.svg#table" x="0" y="0"/>
