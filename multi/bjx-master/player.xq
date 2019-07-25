@@ -174,8 +174,7 @@ function player:evaluate($self,$caller){
     let $newBet := if($caller=2)then(2 * $self/bet)else($self/bet) 
     let $isInsured := if($self/@insurance='true')then(1)else(0)
     let $playerWon :=hand:evaluateToInt($hand,$game/dealer/hand/@value)
-    let $resultBet := $newBet*$playerWon+dealer:evaluateInsurance($game/dealer,$isInsured,$newBet,$playerWon)    
-    let $trace := trace(concat(" hello ", $caller))
+    let $resultBet := $newBet*$playerWon+dealer:evaluateInsurance($game/dealer,$isInsured,$newBet,$playerWon)        
     let $floorBet := if(count($hand/card)=2 and (xs:integer($hand/@value) = 21))then(floor($self/bet*0.5))else(floor($resultBet))
     return(
         replace value of node $self/@state with hand:evaluate($hand,$game/dealer/hand/@value),
