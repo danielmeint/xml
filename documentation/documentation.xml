@@ -250,7 +250,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata width="75%" format="png"
-                        fileref="diagrams/UML.png"/>
+                        fileref="diagrams/UML_final.png"/>
                 </imageobject>
             </mediaobject>
             </figure>
@@ -526,9 +526,9 @@
                         </tr>
                         <tr>
                             <td>evaluateInsurance</td>
-                            <td>playerIsInsurance:integer,bet:integer</td>
+                            <td>playerIsInsurance:integer,bet:double,playerWon:integer</td>
                             <td>integer</td>
-                            <td>calculates a player's bonus if depending on wether they have an insurance and if the dealer got a blackjack</td>
+                            <td>calculates a player's bonus depending on wether they have an insurance and if the dealer got a blackjack</td>
                         </tr>
                     </tbody>
                 </table>
@@ -666,7 +666,7 @@
                         <tr>
                             <td>equals</td>
                             <td>card1:<code>XML</code> element card,card2:<code>XML</code> element deck</td>
-                            <td>boolean ???</td>
+                            <td>boolean</td>
                             <td>checks if value and suit of both cards are equal</td>                           
                         </tr>
                         <tr>
