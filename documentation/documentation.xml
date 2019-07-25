@@ -194,7 +194,7 @@
         <!-- Max -->
         <section>
             <title>Modeling the model</title>
-            <para> In a MVC-architecture the model has the control of the application's logic.
+            <para> In an MVC-architecture the model has the control of the application's logic.
                 Furthermore it is resposibel to store data in a database. In order to maintain data,
                 several objects with unique functionality are needed. All these collaborating
                 objects provide different attributes and methods. In the following the data model
@@ -325,12 +325,12 @@
                     <tbody>
                         <tr>
                             <td>id</td>
-                            <td>double???</td>
+                            <td>double</td>
                             <td>to distinguish games</td>
                         </tr>
                         <tr>
                             <td>state</td>
-                            <td>string???</td>
+                            <td>string</td>
                             <td>stores the state of the game</td>
                         </tr>
                     </tbody>
@@ -348,7 +348,7 @@
                     <tbody>
                         <tr>
                             <td>evaluate</td>
-                            <td>self, caller:integer</td>
+                            <td>caller:integer</td>
                             <td>void</td>
                             <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate for all players, uses caller to determine what action the last player took</td>
                         </tr>
@@ -360,13 +360,13 @@
                         </tr>
                         <tr>
                             <td>play</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>sets game's state to <quote>playing</quote>, sets all players besides the first player to inactive, the first one to active and finally calls dealer:deal</td>
                         </tr>                                               
                         <tr>
                             <td>reset</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td><code>XML</code> element of game</td>
                             <td>sets game to state <quote>betting</quote>, basically calls the classes constructor with all the players that have a balance > 0</td>
                         </tr>
@@ -386,7 +386,7 @@
                     <tbody>
                         <tr>
                             <td>balance</td>
-                            <td>integer???</td>
+                            <td>integer</td>
                             <td>store the balance of player</td>                            
                         </tr>
                         <tr>
@@ -396,12 +396,12 @@
                         </tr>
                         <tr>
                             <td>insurance</td>
-                            <td>string???</td>
+                            <td>string</td>
                             <td>stores wether or not a player took insurance</td>
                         </tr>
                         <tr>
                             <td>name</td>
-                            <td>string???</td>
+                            <td>string</td>
                             <td>stores name of player</td>
                         </tr>
                         <tr>
@@ -411,7 +411,7 @@
                         </tr>
                         <tr>
                             <td>state</td>
-                            <td>string???</td>
+                            <td>string</td>
                             <td>stores state of player</td>
                         </tr>                                                                                            
                     </tbody>
@@ -430,43 +430,43 @@
                     <tbody>
                         <tr>
                             <td>bet</td>
-                            <td>self,bet:integer</td>
+                            <td>bet:integer</td>
                             <td>void</td>
                             <td>updates self's bet by given parameter bet, calls player:next</td>
                         </tr>
                         <tr>
                             <td>double</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>updates the player's bet to two times of the amount of bet, calls game:evaluate if player is last otherwise player:next</td>
                         </tr>
                         <tr>
                             <td>draw</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>calls deck:drawCard and hand:addCard to add a card to the player, updates the player's hand and the deck</td>
                         </tr>
                         <tr>
                             <td>evaluate</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>calculates profit of player and updates self's balance accordingly, also updates user's balance accordingly</td>
                         </tr>
                         <tr>
                             <td>hit</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>calls helper player:draw, gives player another card and if they bust calls player:next or game:evaluate if they are the last player</td>
                         </tr>
                         <tr>
                             <td>insurance</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>updates self insurance to <quote>true</quote></td>
                         </tr>                        
                         <tr>
                             <td>isLast</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>boolean</td>
                             <td>determines and returns wether player is last</td>
                         </tr>
@@ -478,13 +478,13 @@
                         </tr>
                         <tr>
                             <td>leave</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>deletes self and calls player:next if self was active and there is more than one player, adds leave information to chat</td>
                         </tr>
                         <tr>
                             <td>next</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>sets self state to <quote>inactive</quote> and if there is a next player:nextPlayer to <quote>active</quote> else checks if game's state is <quote>betting</quote>
                                 then calls game:play otherwise game:evaluate
@@ -492,13 +492,13 @@
                         </tr>
                         <tr>
                             <td>nextPlayer</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td><code>XML</code> element player</td>
                             <td>determines and returns the next player</td>
                         </tr>                                              
                         <tr>
                             <td>stand</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>calls player:next</td>
                         </tr>                                                                                                                     
@@ -520,13 +520,13 @@
                     <tbody>
                         <tr>
                             <td>deal</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>void</td>
                             <td>firstly calls deck:drawTo17 for self, afterwards deals two cards for each player by adding cards of the deck to hand and removing them from the deck</td>
                         </tr>
                         <tr>
                             <td>evaluateInsurance</td>
-                            <td>self,playerIsInsurance:integer,bet:integer</td>
+                            <td>playerIsInsurance:integer,bet:integer</td>
                             <td>integer</td>
                             <td>calculates a player's bonus if depending on wether they have an insurance and if the dealer got a blackjack</td>
                         </tr>
@@ -548,7 +548,7 @@
                     <tbody>
                         <tr>
                             <td>drawCard</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>(<code>XML</code> element card,<code>XML</code> element deck)</td>
                             <td>calls deck:getCard to get the topmost card and calls deck:removeCardAtIndex to remove topmost card to return the new deck</td>
                         </tr>
@@ -560,13 +560,13 @@
                         </tr>
                         <tr>
                             <td>removeCardAtIndex</td>
-                            <td>self,index:integer</td>
+                            <td>index:integer</td>
                             <td><code>XML</code> element deck</td>
                             <td>calls helper deck:removeCard that finds and removes the card at given index and returns a new deck without the card</td>
                         </tr>
                         <tr>
                             <td>shuffle</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td><code>XML</code> element deck</td>
                             <td>uses a random number generator to create a new deck with a random permutation of the cards</td>
                         </tr>                                                
@@ -604,25 +604,25 @@
                    <tbody>
                        <tr>
                            <td>addCard</td>
-                           <td>self,card:<code>XML</code> element hand</td>
+                           <td>card:<code>XML</code> element hand</td>
                            <td><code>XML</code> element hand</td>
                            <td>adds the given card to given hand and returns new hand</td>                           
                        </tr>
                        <tr>
                            <td>evaluate</td>
-                           <td>self,toBeat:integer</td>
+                           <td>toBeat:integer</td>
                            <td>string</td>
                            <td>checks if player beats the dealer and returns a string accordingly</td>
                        </tr>
                        <tr>
                            <td>evaluateToInt</td>
-                           <td>self,toBeat:integer</td>
+                           <td>toBeat:integer</td>
                            <td>integer</td>
                            <td>checks if player beats the dealer and returns an integer accordingly, needed for player:evaluate</td>
                        </tr>
                        <tr>
                            <td>getOptimalSum</td>
-                           <td>values:sequence of integers???</td>
+                           <td>values:sequence of integers</td>
                            <td>integer</td>
                            <td>recursively calculates optimal sum in favor of player, replacing aces with value 1 if the sum of values > 21</td>
                        </tr>                                             
@@ -642,7 +642,7 @@
                     <tbody>
                         <tr>
                             <td>suit</td>
-                            <td>string???</td>
+                            <td>string</td>
                             <td>stores the suit of the card</td>
                         </tr>
                         <tr>
@@ -671,7 +671,7 @@
                         </tr>
                         <tr>
                             <td>getNumericalValue</td>
-                            <td>self</td>
+                            <td>none</td>
                             <td>integer</td>
                             <td>returns cards value, 10 for picture cards, 11 for Aces</td>
                         </tr>
@@ -691,17 +691,17 @@
                     <tbody>                      
                         <tr>
                             <td>balance</td>
-                            <td>integer???</td>
+                            <td>integer</td>
                             <td>store balance of user</td>
                         </tr>
                         <tr>
                             <td>highscore</td>
-                            <td>integer???</td>
+                            <td>integer</td>
                             <td>store the all time highest balance of user</td>
                         </tr>
                         <tr>
                             <td>name</td>
-                            <td>string???</td>
+                            <td>string</td>
                             <td>stores name of user</td>
                         </tr>
                     </tbody>
@@ -719,7 +719,7 @@
                     <tbody>
                         <tr>
                             <td>win</td>
-                            <td>self,amount:integer</td>
+                            <td>amount:integer</td>
                             <td>void</td>
                             <td>updates user's balance and replaces user's highscore with balance if balance > highscore </td>                           
                         </tr>
@@ -741,7 +741,7 @@
                     <tbody>                        
                         <tr>
                             <td>addMessage</td>
-                            <td>self,msg:string ???</td>
+                            <td>self,msg:string</td>
                             <td><code>XML</code> element chat</td>
                             <td>adds given message to chat and returns new chat</td>                           
                         </tr>
