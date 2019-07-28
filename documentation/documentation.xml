@@ -755,7 +755,7 @@
             <para>
                 <!-- siehe Folien ueber "XQuery update constraint" -->
                 While implementing the model, we faced a few problems and the <quote>XQuery-Update-Facility</quote>. In this section some examples
-                will be illustrated where we had to rethink our attempts of implementing database updating logic because <code>XQuery</code> is <quote>READ-ONLY</quote>. 
+                will be illustrated where we had to rethink our attempts of implementing database updating logic because <code>XQuery</code> is <quote>READ-ONLY</quote> and the <quote>XQuery Update Constraints</quote>.
                 Also some interesting parts of our code will be discussed.
             </para>
             <para>
@@ -787,6 +787,10 @@
                 the function player:next, player:nextPlayer and player:isLast. Together these functions check if a player is the last one and help setting the next player to active otherwise.
                 This can be used in both game states where input of each player is required (betting,playing).
             </para>                                       
+            <para>
+                As XQuery functions are either querying or updating, we use the function <function>update</function> provided by <code>BaseX</code>. It grants mixed returns, for example when our 
+                <quote>API</quote> receives a call <quote>hit</quote> it on one hand notices the model to update data accordingly, on the other hand makes sure that .... <!-- folien E lösung der Constraints Teil B eher für Controller?-->
+            </para>
         </section>
     </section>
     <section>
