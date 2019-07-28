@@ -195,7 +195,7 @@
         <section>
             <title>Modeling the model</title>
             <para> In an MVC-architecture the model has the control of the application's logic.
-                Furthermore it is resposibel to store data in a database. In order to maintain data,
+                Furthermore it is responsibel to store data in a database. In order to maintain data,
                 several objects with unique functionality are needed. All these collaborating
                 objects provide different attributes and methods. In the following the data model
                 will be described at first. Thereon the design decisions will be discussed. The
@@ -301,12 +301,12 @@
         <section>
             <title>Implementation</title>
             <para>
-                The compoment model has the responsibility of holding data. Since we use an object-oriented approach, all implemented classes provide their own functionality and attributes.
+                The compoment model has the responsibility of holding data. Since we use an object-oriented approach, all implemented classes provide their own functionality and attributes. 
                 All of the compoment model's functions are written in <code>XQuery</code> and all the data is stored as <code>XML</code> elements. So each class contains data which is then 
-                combined in our database for BaseX. The database also lets us query functions via <code>XQuery</code>. This programming language has a functional approach and was made to run
+                combined in our database for BaseX. The database also lets us query functions via <code>XQuery</code> and the <code>XQuery-Processor</code>. This programming language has a functional approach and was made to run
                 queries on <code>XML</code> databases. One of the most importan highlights of the language are <code>FLOWR-expressions</code>. The name <code>FLOWR</code> contains the initials of <quote>for-let-order-where-return</quote>. 
                 For comparison, this is equivalent of the <quote>select from where</quote> queries of <code>SQL</code>. The object's function usually have a first parameter <code>self</code> which indicates
-                on which object the code should be executed.
+                on which object the code should be executed. This ensures encapsulation.
                 Because most of the classes have setters, getters and constructors and the implementation of these functions do not differ in comparison to other classes we won't describe the
                 implementation for every single class. In fact all the setter methods return a new object by calling the classe's constructor with alternated parameters. Regarding the constructors
                 they all create <code>XML</code> elements depending on the classe's attributes.  
@@ -754,9 +754,9 @@
             <title>Implementation detail, decisions and discussion</title>
             <para>
                 <!-- siehe Folien ueber "XQuery update constraint" -->
-                While implementing the model, we faced a few problems and some of the constraints of <code>XQuery</code>. In this section some examples
-                will be illustrated where we had to rethink our attempts of implementing database updating logic. Also some interesting parts of our code will be
-                discussed.
+                While implementing the model, we faced a few problems and the <quote>XQuery-Update-Facility</quote>. In this section some examples
+                will be illustrated where we had to rethink our attempts of implementing database updating logic because <code>XQuery</code> is <quote>READ-ONLY</quote>. 
+                Also some interesting parts of our code will be discussed.
             </para>
             <para>
                 The first problem we faced was that one cannot replace the same node in one return statement more than one time. Because we wanted a comfortable version of the game
@@ -778,7 +778,7 @@
                 and doubling their bet before evaluating the player.
             </para>
             <para>
-                For the <classname>Deck</classname> implementation we decided to create a <quote>realistic</quote> since we didn't like the idea of generating random cards each time a draw
+                For the <classname>Deck</classname> implementation we decided to create a <quote>realistic</quote> deck since we didn't like the idea of generating random cards each time a draw
                 occurs. Randomly generating cards would either face the problems of possibly having duplicate cards or needing to implement some code to check if a generated card already exists
                 and repeat generating a card until it is no longer a duplicate.
             </para>
