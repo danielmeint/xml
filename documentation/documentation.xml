@@ -755,7 +755,7 @@
             <para>
                 <!-- siehe Folien ueber "XQuery update constraint" -->
                 While implementing the model, we faced a few problems and the <quote>XQuery-Update-Facility</quote>. In this section some examples
-                will be illustrated where we had to rethink our attempts of implementing database updating logic because <code>XQuery</code> is <quote>READ-ONLY</quote> and the <quote>XQuery Update Constraints</quote>.
+                will be illustrated where we had to rethink our attempts of implementing database updating logic because <code>XQuery</code> is <quote>READ-ONLY</quote>.
                 Also some interesting parts of our code will be discussed.
             </para>
             <para>
@@ -786,11 +786,7 @@
                 Like mentioned before, we want a comfortable experience for the player by always ending one's turn automatically if they choose to double or bust. To achieve this we implemented
                 the function player:next, player:nextPlayer and player:isLast. Together these functions check if a player is the last one and help setting the next player to active otherwise.
                 This can be used in both game states where input of each player is required (betting,playing).
-            </para>                                       
-            <para>
-                As XQuery functions are either querying or updating, we use the function <function>update</function> provided by <code>BaseX</code>. It grants mixed returns, for example when our 
-                <quote>API</quote> receives a call <quote>hit</quote> it on one hand notices the model to update data accordingly, on the other hand makes sure that .... <!-- folien E lösung der Constraints Teil B eher für Controller?-->
-            </para>
+            </para>                                                   
         </section>
     </section>
     <section>
@@ -819,6 +815,10 @@
                 The requests bjx, signup, login, logout, highscore are used for the account control and the displaying of the highscores.
                 The remaining requests are used to implement the game functionalities, including the group chat.
                 
+            </para>
+            <para>
+               <!-- As XQuery functions are either querying or updating, we use the function <function>update</function> provided by <code>BaseX</code>. It grants mixed returns, for example when our 
+                <quote>API</quote> receives a call <quote>hit</quote> it on one hand notices the model to update data accordingly, on the other hand makes sure that ....  folien E s.24 ff lösung der Constraints-->
             </para>
         </section>        
     </section>
