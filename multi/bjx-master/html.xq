@@ -1,4 +1,4 @@
-module namespace html = "xforms/bjx/html";
+module namespace html = "xforms/html";
 
 declare function html:wrap($content) {
 <html>

@@ -1,13 +1,13 @@
-module namespace player="xforms/bjx/player";
+module namespace player="xforms/player";
 
-import module namespace api="xforms/bjx/api" at 'api.xq';
-import module namespace card="xforms/bjx/card" at 'card.xq';
-import module namespace chat="xforms/bjx/chat" at 'chat.xq';
-import module namespace dealer="xforms/bjx/dealer" at 'dealer.xq';
-import module namespace deck="xforms/bjx/deck" at 'deck.xq';
-import module namespace game="xforms/bjx/game" at 'game.xq';
-import module namespace hand="xforms/bjx/hand" at 'hand.xq';
-import module namespace usr="xforms/bjx/usr" at 'usr.xq';
+import module namespace api="xforms/api" at 'api.xq';
+import module namespace card="xforms/card" at 'card.xq';
+import module namespace chat="xforms/chat" at 'chat.xq';
+import module namespace dealer="xforms/dealer" at 'dealer.xq';
+import module namespace deck="xforms/deck" at 'deck.xq';
+import module namespace game="xforms/game" at 'game.xq';
+import module namespace hand="xforms/hand" at 'hand.xq';
+import module namespace usr="xforms/usr" at 'usr.xq';
 
 
 declare
