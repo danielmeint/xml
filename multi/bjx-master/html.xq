@@ -22,13 +22,13 @@ declare function html:login() {
         Login
       </div>
       <form action='/bjx/login' method='post'>
-        <div class="input--advanced">
+        <div class="input--advanced" id="menu">
           <label id="name">
             Name
           </label>
           <input type="text" name='name' id='user' autofocus='' />
         </div>
-        <div class="input--advanced">
+        <div class="input--advanced" id="menu">
           <label id="name">
             Password
           </label>
@@ -47,13 +47,13 @@ declare function html:signup($error) {
         Register
       </div>
       <form action='/bjx/signup' method='post'>
-        <div class="input--advanced">
+        <div class="input--advanced" id="menu">
           <label id="name">
             Name
           </label>
           <input type="text" name='name' id='user' autofocus='' />
         </div>
-        <div class="input--advanced">
+        <div class="input--advanced" id="menu">
           <label id="name">
             Password
           </label>

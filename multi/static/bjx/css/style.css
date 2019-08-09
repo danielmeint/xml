@@ -7,9 +7,8 @@ Daniel Meint
 **/
 
 :root {
-    --primary-color: #5e995e;
+    --primary-color: #2e7d32;
     --secondary-color: #c5ebc5;
-	--table-primary-color: #5e995e;
     --table-secondary-color: #c5ebc5;
     
     --background-color-light: #f5f5f5;
@@ -17,6 +16,8 @@ Daniel Meint
     --background-color-dark: #e0e0e0;
     --shadow: 0 1px 3px #bdbdbd, 0 1px 2px #bdbdbd;
     --shadow-hover: 0 14px 28px #bdbdbd, 0 10px 10px #bdbdbd;
+    
+    
     
     --spacing: 20px;
     --table-height: 40px;
@@ -43,7 +44,7 @@ body {
 }
 
 body#game {
-  background: #BD1A2E;
+  background: #7d2f2e;
   background: linear-gradient(to top right, #bd1a2e, #4b0a12);
   background-repeat: no-repeat;
   height: 100%;
@@ -54,7 +55,7 @@ body#game {
     justify-content: flex-start;
     align-items: center;
     height:60px;
-    background-color: var(--table-primary-color);
+    background-color: var(--primary-color);
     margin-bottom: 20px;
     color: white;
 }
@@ -71,6 +72,10 @@ body#game {
 
 .navbar#centered h1 {
     font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+.flex-box {
+    flex-direction: row;
 }
 
 .flex-container {
@@ -95,10 +100,6 @@ body#game {
     border-radius: 1rem;
     
     text-align: center;
-}
-
-.information {
-
 }
 
 .container {
@@ -141,12 +142,16 @@ svg {
 }
 
 .functions {
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.functions form {
-    display: inline-block;
-}
+
+
+
+
+
+
 
 svg .label {
     fill: white;
@@ -168,25 +173,25 @@ svg .label > text.hand_value {
 }
 
 svg .active .card_group {
-    filter: drop-shadow(0px 0px 8px blue);
+    filter: drop-shadow(0px 0px 8px #7d2e53);
     transform: scale(1.2);
 }
 
 table {
 	width: 100%;
     font-family: Helvetica, sans-serif;
-    fill: var(--table-secondary-color);
+    fill: var(--secondary-color);
     text-transform: uppercase;
 
 }
 
 
 #tableBase {
-    fill: var(--table-primary-color);
+    fill: var(--primary-color);
 }
 
 #box {
-    stroke: var(--table-secondary-color);
+    stroke: var(--secondary-color);
 }
 
 form {
@@ -205,7 +210,23 @@ form {
 }
 
 .chat {
+    z-index: 10000;
+    position: absolute;
     max-width: 256px;
+    bottom: .5rem;
+    left: .5rem;
+}
+
+.chat * {
+    text-transform: none;
+}
+
+@media (max-width: 1000px) {
+    .chat {
+        display: none;
+        position: relative;
+        width: 100%;
+    }
 }
 
 .chat tbody {
@@ -259,6 +280,11 @@ form {
     padding: 0 0 .5rem 0;
 }
 
+.chat label#showChat {
+    padding: 0 10%;
+    margin-bottom: -2px;
+}
+
 .chat label:hover {
     cursor:pointer
 }
@@ -308,7 +334,7 @@ input:not([type="submit"]):hover, input:not([type="submit"]):focus {
 /* buttons */
 button {
     text-decoration: none;
-    background-color: var(--table-primary-color);
+    background-color: var(--primary-color);
     color: white;
     border-radius: 4px;
     border: none;
@@ -343,7 +369,7 @@ button.circular {
     border-radius: 50%;
     padding: 15px 19px;
     font-weight: bold;
-    top: 0px;
+    top: 12px;
     right: -30px;
 }
 
@@ -385,19 +411,19 @@ button.menu#game {
     } 
 }
 button.stand{
-    background-color :#f45c42;
+    background-color: #7d2e53;
 }
 
 button.hit{
-    background-color: #f243ef;
+    background-color: #312e7d;;
 }
 
 button.double{
-    background-color:#2bd6e2;
+    background-color: #2e797d;
 }
 
 button.insurance{
-    background-color:#70ae98;
+    background-color:#7d572e;
 }
 
 .buttongroup {
@@ -748,7 +774,7 @@ g[id *= 'clubs'] text,
 @keyframes dialog
 {
   0% {
-      transform: translate(0%, -200%);
+      transform: translate(0%, +200%);
   }
 }
 
@@ -782,9 +808,6 @@ g[id *= 'clubs'] text,
 
 /* dialog */
 .dialog{
-    position: fixed;
-    width: 40%;
-    min-width: 300px;
     max-width: 500px;
     background-color: white;
     border-radius: 5px;
@@ -792,10 +815,6 @@ g[id *= 'clubs'] text,
     height: auto;
     margin-bottom: 20px;
     box-shadow: var(--shadow);
-}
-
-.dialog#animation{
-    animation: dialog 0.4s;
 }
 
 .dialog--header {
@@ -820,7 +839,6 @@ g[id *= 'clubs'] text,
 
 .dialog button{
     float: right;
-    margin-top: 30px;
 }
 
 .dialog#buttongroup {
@@ -835,7 +853,7 @@ g[id *= 'clubs'] text,
 }
 
 .dialog#register{
-    background-color: var(--table-primary-color);
+    background-color: var(--primary-color);
     position: absolute;
     top: 25%;
     width: 30%;
@@ -858,8 +876,15 @@ g[id *= 'clubs'] text,
     width: 100%;
 }
 
+.dialog form.join{
+    width: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .dialog#shadow {
-    box-shadow: var(--shadow), 0 0 0 2000px rgba(0,0,0,0.8);
+    box-shadow: var(--shadow), 0 0 0 2000px rgba(0,0,0,0.5);
+    animation: dialog 0.4s;f
 }
 
 .dialog#buttongroup button {
@@ -879,18 +904,28 @@ g[id *= 'clubs'] text,
     opacity: 0.5;
 }
 
+.dialog.result{
+    position: fixed;
+    top: 60%;
+    left: 30%;
+    width: 40%;
+}
+
 /* input */
 .input--advanced { 
   display: flex; 
   flex-direction: column;
-  margin-top: 15px;
   margin-right: 15px;
+}
+
+.input--advanced#menu {
+    margin-top: 15px;
 }
 
 label#name {
   font-size:16px;
   margin-left: 5px;
-  color:var(--table-primary-color);
+  color:var(--primary-color);
 }
 
 label#balance {
@@ -909,6 +944,7 @@ input {
 }
 
 input.betting {
+  min-width: 50px;
   max-width: 120px;
 }
 
@@ -917,12 +953,12 @@ input.name {
 }
 
 input:focus {
-  border-bottom: 2px solid var(--table-primary-color); 
+  border-bottom: 2px solid var(--primary-color); 
 }
 
 
 /* table */
-table{ 
+.menutable table{ 
     border-collapse: collapse;
     border-spacing: 0;
     width: 90%;
@@ -933,7 +969,7 @@ table{
     box-shadow: var(--shadow);
 }
 
-table *{ 
+.menutable table *{ 
     position:relative; 
     text-align:center;
     opacity: 0.95;
@@ -941,7 +977,7 @@ table *{
     color: inherit;
 }
 
-table thead th{ 
+.menutable table thead th{ 
     color: black;
     height: var(--table-height);
     opacity: 0.5;
@@ -949,20 +985,20 @@ table thead th{
     border-bottom: 1px solid var(--background-color-dark);
 }
 
-table thead th:nth-child(1), td:nth-child(1), td:nth-child(1) a{
+.menutable table thead th:nth-child(1), td:nth-child(1), td:nth-child(1) a{
     text-align: left;
 }
 
-table thead th:nth-child(n+2),td:nth-child(n+2), td:nth-child(n+2) a{
+.menutable table thead th:nth-child(n+2),td:nth-child(n+2), td:nth-child(n+2) a{
     text-align: right;
 }
 
-table tbody tr{ 
+.menutable table tbody tr{ 
     height: var(--table-height);
     border-bottom:1px solid var(--background-color-dark);
 }
 
-table tbody tr:hover {
+.menutable table tbody tr:hover {
     background-color: var(--background-color-medium);
 }
 
@@ -970,36 +1006,36 @@ table tbody tr:hover {
     padding: var(--spacing) !important;
 }
 
-table tbody tr td a{
+.menutable table tbody tr td a{
     display: block;
     padding: var(--spacing);
 }
 
-table text#free {
+.menutable table text#free {
     color: var(--background-color-dark);
 }
 
-table form button{
+.menutable table form button{
     width: auto;
 }
 
 @media (max-width: 1000px) {
-    table, table * {
+    .menutable table, .menutable table * {
         display: flex;
         flex-direction: column;
     }
     
-    table { 
+    .menutable table { 
         border-radius: 0;
         background-color: var(--background-color-light);
         box-shadow: none;
     }
     
-    table thead {
+    .menutable table thead {
         display: none;
     }
     
-    table tbody tr {
+    .menutable table tbody tr {
         margin: var(--spacing);
         border-radius: 5px;
         background-color: white;
@@ -1007,30 +1043,30 @@ table form button{
         box-shadow: var(--shadow);
     }
     
-    table tbody tr:hover {
+    .menutable table tbody tr:hover {
         background-color: white;
         box-shadow: var(--shadow-hover);
     }
     
-    table tbody tr td {
+    .menutable table tbody tr td {
         padding: 0 !important;
         font-size: 20px;
         margin: 0;
         border-bottom: 1px solid var(--background-color-dark);
     }
     
-    table tbody tr td a{
+    .menutable table tbody tr td a{
         padding: var(--spacing);
     }
     
-    table tbody tr td:nth-child(1) {
+    .menutable table tbody tr td:nth-child(1) {
         padding: var(--spacing);
         padding-bottom: 0;
         font-size: 35px;
         opacity:0.5;
     }
     
-    table tbody tr * {
+    .menutable table tbody tr * {
         text-align: left !important;
     }
 }

@@ -234,6 +234,7 @@ function api:leaveGame($gameId as xs:integer) {
   ) 
 };
 
+
 declare
 %rest:path("/bjx/games/{$gameId}")
 %rest:GET

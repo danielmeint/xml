@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
-    version="5.1">
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.1">
     <info>
         <title>XForms Multiclient Blackjack Documentation</title>
         <author>
@@ -75,8 +74,7 @@
                     <title>Possible player decisions.</title>
                     <mediaobject>
                         <imageobject>
-                            <imagedata width="100%" format="png"
-                                fileref="diagrams/decisions_activity.png"/>
+                            <imagedata width="100%" format="png" fileref="diagrams/decisions_activity.png"/>
                         </imageobject>
                     </mediaobject>
                 </figure>
@@ -181,8 +179,7 @@
             <title>Model of the Resulting Architecture.</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata width="75%" format="png"
-                        fileref="diagrams/architecture.png"/>
+                    <imagedata width="75%" format="png" fileref="diagrams/architecture.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -793,11 +790,107 @@
         <title>The component View</title>
         <section>
             <title>Modeling the component View</title>
-            <!-- Janik -->
+            <para>
+                The view within the MVC architecture is used
+                to display different kind of screens. The basic structure is divided into Lobby and
+                Game. While the Lobby is used for basic interaction of administrative nature, the Game
+                displays the actual Blackjack. The current view as well as the interaction of the view
+                is specified by the current path which is defined within the API controller (see Controller section). 
+                In the following table one can find the listed screen types with the corresponding Information and Interaction. 
+            </para>
+            <para>
+                <table>
+                    <title>Model for View</title>
+                    <tgroup cols="3">
+                        <tbody>
+                            <row rowsep="1">
+                                <entry><emphasis>Screen</emphasis></entry>
+                                <entry><emphasis>Information</emphasis></entry>
+                                <entry><emphasis>Interaction</emphasis></entry>
+                            </row>
+                            
+                            
+                            <row rowsep="1">
+                                <entry>bjx</entry>
+                                <entry></entry>
+                                <entry><para>login</para><para>go to signup</para></entry>              
+                            </row>
+                            
+                            <row rowsep="1">
+                                <entry>bjx/signup</entry>
+                                <entry></entry>
+                                <entry><para>create</para><para>go to signin</para></entry>              
+                            </row>
+                            
+                            <row rowsep="1">
+                                <entry>bjx (logged in)</entry>
+                                <entry><para>name</para><para>balance</para></entry>
+                                <entry><para>new game</para><para>join game</para><para>highscore</para><para>logout</para></entry>              
+                            </row>
+                            
+                            <row rowsep="1">
+                                <entry>bjx/games</entry>
+                                <entry><para>games(id, state, players)</para></entry>
+                                <entry><para>join game</para><para>new game</para><para>go back</para><para>logout</para></entry>              
+                            </row>
+                            
+                            <row rowsep="1">
+                                <entry>bjx/highscores</entry>
+                                <entry><para>highscore(name, balance)</para></entry>
+                                <entry><para>go back</para><para>logout</para></entry>              
+                            </row>
+                            <row rowsep="1">
+                                <entry>bjx/games/[id] (join)</entry>
+                                <entry><para>depending on game state</para></entry>
+                                <entry><para>join</para><para>leave</para><para>chat</para></entry>              
+                            </row>
+                            
+                            <row rowsep="1">
+                                <entry>bjx/games/[id] (betting)</entry>
+                                <entry><para>balance</para><para>chat</para></entry>
+                                <entry><para>bet</para><para>leave</para><para>chat</para></entry>              
+                            </row>
+                            
+                            <row rowsep="1">
+                                <entry>bjx/games/[id] (playing)</entry>
+                                <entry><para>cards</para><para>bets</para><para>players</para><para>balances</para><para>hand values</para><para>chat</para></entry>
+                                <entry><para>game action(stand, hit, double, insurance)</para><para>leave</para><para>chat</para></entry>              
+                            </row>
+                            
+                            <row rowsep="1">
+                                <entry>bjx/games/[id] (playing)</entry>
+                                <entry><para>cards</para><para>bets</para><para>players</para><para>balances</para><para>hand values</para><para>result</para><para>chat</para></entry>
+                                <entry><para>new round</para><para>leave</para><para>chat</para></entry>              
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
         </section>
         <section>
             <title>Implementing the component View</title>
-            <!-- Janik -->
+            <para>
+                The corresponding XSL-files for Lobby and Game create a XHTML page to display the application in a Browser. As already stated before, the created page depends on the current path but also the current state of Game and Player.
+            </para>
+            <para>
+                Based on the restriction to XHTML, we frequently use HTML tags such as button, form, input, label and table. In order to customize the appearance, a global Cascading Style Sheet(CSS) applies to all the created XHTML pages. 
+                The style.css file can be found in the static/css folder. We make use of different CSS features such as counters, advanced collectors, transitions and media queries. Through the media queries we enable a responsive user experience. 
+                Depending on the screen size elements can either be hidden like the chat for instance or displayed with a different shape such as the tables. For the general layout we apply a basic and minimalistic design that enables an uniform appearance across the whole application. 
+            </para>   
+            <para>
+                To enable the basic interaction, we use the submit type of the HTML buttons. On click they create a GET/POST HTTP Request which in turn are handled and specified by the API. Within the Lobby those buttons represent the central element. 
+            </para> 
+            <para>
+                On the starting screen, a player can either login or register for the game. Once logged in, his current balance is displayed as well as the different buttons to create a new game, join an existing game, to see the highscore or to reset his balance. 
+                While the new game button will simply create a new game, the join game and highscore buttons lead to another screen including a HTML table with corresponding information. The Player can join a displayed game by clicking on the corresponding row. 
+            </para>
+            <para>
+                The core element of the game is the table, which is implemented with SVG. Depending on the current situation, the SVG includes corresponding cards, chips and labels(including player name, balance and hand value).
+                Concerning the game interaction we implemented a dialog box placed below the table. A player can join the game, place bets or is able to make context depending actions like hit, stand, double or insurance. 
+                The dialog box is also used to display the results of a round, informing the player about his wins or losses. 
+                In the bottom left hand corner the chat is displayed. In order to display/hide the chat window, an intuitive toggle mechanism was implemented.
+                In the top left hand corner, a player has always the possibility to leave the game and to go back to the lobby.
+            </para>
         </section>
     </section>
     <section>
@@ -836,8 +929,7 @@
             <title>Git Overview (Master).</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata width="50%" format="png"
-                        fileref="diagrams/pulse.png"/>
+                    <imagedata width="50%" format="png" fileref="diagrams/pulse.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -845,8 +937,7 @@
             <title>Code Frequencey (Master).</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata width="50%" format="png"
-                        fileref="diagrams/code_freq.png"/>
+                    <imagedata width="50%" format="png" fileref="diagrams/code_freq.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -854,8 +945,7 @@
             <title>Contributions (Master).</title>
             <mediaobject>
                 <imageobject>
-                    <imagedata width="50%" format="png"
-                        fileref="diagrams/contributions.png"/>
+                    <imagedata width="50%" format="png" fileref="diagrams/contributions.png"/>
                 </imageobject>
             </mediaobject>
         </figure>

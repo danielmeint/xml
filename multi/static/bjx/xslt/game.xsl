@@ -5,6 +5,7 @@
     <xsl:param name="name"/>
     
     <xsl:variable name="self" select="/game/player[@name = $name]"/>
+    <xsl:variable name="selfBalance" select="/game/player[@name = $name]/balance"/>
     <xsl:variable name="activePlayer" select="/game/player[@state = 'active']"/>
 	<xsl:variable name="activePlayerHandValue" select="/game/player[@state = 'active']/hand/@value"/>
     
@@ -16,12 +17,7 @@
 
     <xsl:template match="/">
 
-        <div>
-            <form class="right bottom" action="/bjx/games/{/game/@id}/draw" method="post" target="hiddenFrame">
-                <button class="btn btn-secondary" type="submit">
-                    &#8634; Redraw Game
-                </button>
-            </form>
+        <div id="game">
             <div class="container flex-container">
                 <svg viewBox="-100 0 1000 620">
                     <!-- table dimensions: 800 x 450 -->
@@ -140,7 +136,7 @@
 									<xsl:value-of select="hand/@value"/>
 								</text>
 								<text class="balance" x="27px" y="142px" xmlns="http://www.w3.org/2000/svg">
-									$:<xsl:choose>
+									$<xsl:choose>
 									    <xsl:when test="/game/@state = 'evaluated'">
 									        <xsl:value-of select="balance"/>
 									    </xsl:when>
@@ -148,8 +144,7 @@
 									        <xsl:value-of select="balance - bet"/>
 									    </xsl:otherwise>
 									</xsl:choose>
-								</text>
-                                    
+								</text> 
                                 </g>
                                 </xsl:if>
                             </g>
@@ -165,9 +160,7 @@
                                     Leave
                                 </button>
                             </form>
-                            
                             <xsl:choose>
-                                
                                 <xsl:when test="(/game/@state = 'betting' or /game/@state = 'playing') and $self/@state = 'inactive'">
                                     <!-- Player is inactive -->
                             <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
@@ -175,16 +168,25 @@
                                 
                                 <xsl:when test="/game/@state = 'betting' and $self/@state = 'active'">
                                     <!-- Betting stage -->
-                                    <form action="/bjx/games/{/game/@id}/bet" method="POST" target="hiddenFrame">
-                                        <input  class="betting" type="number" name="bet" min="5" max="{$self/balance}" required=""/>
+                                    <div class="dialog animation" id="shadow">
+                                    <div class="dialog--header">
+                                        Place your bets!
+                                    </div>
+                                    <div class="dialog--betting">
+                                    <form class="join" action="/bjx/games/{/game/@id}/bet" method="POST" target="hiddenFrame">
+                                        <div class="input--advanced">
+                                        <input class="betting" type="number" name="bet" min="1" max="{$self/balance}" required=""/>
                                         <label id="balance">
 											&#x1F4B0;
 										<xsl:value-of select="$self/balance"/>
 										</label>
-										<button class="btn" type="submit">
+                                        </div>
+										<button type="submit">
                                             Bet
                                         </button>
                                     </form>
+                                    </div>
+                                    </div>
                                 </xsl:when>
 
                                 <xsl:when test="/game/@state = 'playing' and $self/@state = 'active'">
@@ -215,139 +217,105 @@
 									   </div>
 							           <div>									       
    									     <xsl:choose>
-                                               <xsl:when test="$activePlayerBet * 1.5 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
-                                            </xsl:when>
-                                               <xsl:otherwise>
+                                                <xsl:when test="$activePlayerBet * 1.5 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
+                                                </xsl:when>
+                                                <xsl:otherwise>
                                                    <form action="/bjx/games/{/game/@id}/insurance" method="POST" target="hiddenFrame">
                                                        <button class="insurance" type="submit">Insurance</button>
                                                    </form>
-                                            </xsl:otherwise>
-                                             </xsl:choose>									                                                    
+                                                </xsl:otherwise>
+                                            </xsl:choose>									                                                    
 									   </div>
 									</div>
 								</div>
                                 </xsl:when>
-								
                                 <xsl:when test="/game/@state = 'evaluated'">
-
                                     <div class="dialog" id="shadow">
-                                        <div class="dialog--result">
-                                            <div class="dialog--header">Results &#x1F4B0;</div>
-                                            <div class="dialog--content">
-                                                <xsl:for-each select="game/player">
-                                                    <xsl:choose>
-                                                        <xsl:when test="@state = 'won'">
-                                                            <p id="win">
-                                                                &#x1F60A; &#xA0;
-                                                                <span>
-                                                                    <xsl:value-of select="@name"/>
-                                                                </span>
-                                                                <span>
-                                                                    &#x2B;
-                                                                </span>
-                                                                <span>
-                                                                    <xsl:value-of select="profit"/>
-                                                                </span>
-                                                            </p>
-                                                        </xsl:when>
-                                                        <xsl:when test="@state = 'lost'">
-                                                            <p id="lose">
-                                                                <span>
-                                                                    &#x1F612; &#xA0;
-                                                                </span>
-                                                                <span>
-                                                                    <xsl:value-of select="@name"/>
-                                                                </span>
-                                                                <span>
-                                                                    &#8722;
-                                                                </span>
-                                                                <span>
-                                                                    <xsl:value-of select="profit"/>
-                                                                </span>
-                                                            </p>
-                                                        </xsl:when>
-                                                        <xsl:when test="@state = 'tied'">
-                                                            <p id="tie">
-                                                                <span>
-                                                                    &#x1F60A; &#xA0;
-                                                                </span>
-                                                                <span>
-                                                                    <xsl:value-of select="@name"/>
-                                                                </span>
-                                                                <span>
-                                                                    &#xB1;
-                                                                </span>
-                                                                <span>
-                                                                    0
-                                                                </span>
-                                                            </p>
-                                                        </xsl:when>
-                                                    </xsl:choose>
-                                                </xsl:for-each>
-                                                <form action="/bjx/games/{/game/@id}/newRound" method="POST" target="hiddenFrame">
-                                                    <button class="btn" type="submit">New Round</button>
-                                                </form>
-                                            </div>
+                                        <div class="dialog--header">
+                                            <xsl:choose>
+                                                <xsl:when test="$self/@state = 'won'">
+                                                    <a id="win">
+                                                        You won +<xsl:value-of select="$self/profit"/>!
+                                                    </a>
+                                                </xsl:when>
+                                                <xsl:when test="$self/@state = 'lost'">
+                                                    <a id="lose">
+                                                        You lost -<xsl:value-of select="$self/profit *-1"/>!
+                                                    </a>
+                                                </xsl:when>
+                                                <xsl:when test="$self/@state = 'tied'">
+                                                    <a id="tie">
+                                                        You tied!
+                                                    </a>
+                                                </xsl:when>
+                                            </xsl:choose>
                                         </div>
-                                    </div>
-
-                                    
-                                    
-                                    
-                                    
+                                        <form action="/bjx/games/{/game/@id}/newRound" method="POST" target="hiddenFrame">
+                                            <button class="btn" type="submit">New Round</button>
+                                        </form>
+                                    </div>                             
                                 </xsl:when>
                             </xsl:choose>
                         </xsl:when>
                         <xsl:otherwise>
                             <!-- client is not participating, spectator mode -->
-                            <p>You are<xsl:text>&#xA0;</xsl:text><b>spectating</b><xsl:text>&#xA0;</xsl:text>this game.</p>
-                            <a class="btn btn-secondary" href="/bjx">◀ Menu</a>
-                            <form action='/bjx/games/{/game/@id}/join' method='POST' target="hiddenFrame">
-                                <button class="btn" type='submit'>Join</button>
-                            </form>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
-                <div class="chat left bottom">
-                    <input type="checkbox" id="chatToggle"/>
-                    <label id="hideChat" for="chatToggle">
-                        <svg>
-                            <use href="/static/bjx/svg/solid.svg#times"/>
-                        </svg>
-                    </label>
-                    <label id="showChat" for="chatToggle">
-                        <svg>
-                            <use href="/static/bjx/svg/solid.svg#comments"/>
-                        </svg>
-                    </label>
-                    <table>
-                        <xsl:for-each select="/game/chat/message">
-                            <tr>
+                            <div class="dialog" id="shadow">
+                            <div class="dialog--header">
+                            Spectating mode
+                            </div>
+                            <a href="/bjx"><button>◀ Leave</button></a>
                                 <xsl:choose>
-                                    <xsl:when test="@author = 'INFO'">
-                                        <td colspan="2" class="msg msg-info">
-                                            <xsl:value-of select="text()"/>
-                                        </td>
+                                    <xsl:when test="false">
+                                        <!--test="game/player[@state = 'active']/balance = 0"> -->
+                                        <button id="disabled" type='submit'>no balance/></button>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <td class="author">
-                                            <xsl:value-of select="@author"/>
-                                        </td>
-                                        <td class="msg">
-                                            <xsl:value-of select="text()"/>
-                                        </td>
+                                        <form class="join" action='/bjx/games/{/game/@id}/join' method='POST' target="hiddenFrame">
+                                            <button type='submit'>join</button>
+                                        </form>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                
-                                
-
-                            </tr>
-                        </xsl:for-each>
-                    </table>
-                    <form action="/bjx/games/{/game/@id}/chat" method="POST" target="hiddenFrame">
-                        <input type="text" name="msg" placeholder="Chatting as {$name}"/>
-                        <button class="btn" type="submit">Chat</button>
-                    </form>
+                            </div>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <div class="dialog chat">
+                        <input type="checkbox" id="chatToggle"/>
+                        <label id="hideChat" for="chatToggle">
+                            <svg>
+                                <use href="/static/bjx/svg/solid.svg#times"/>
+                            </svg>
+                        </label>
+                        <label class="bottom left" id="showChat" for="chatToggle">
+                            <svg>
+                                <use href="/static/bjx/svg/solid.svg#comments"/>
+                            </svg>
+                        </label>
+                        <table>
+                            <xsl:for-each select="/game/chat/message">
+                                <tr>
+                                    <xsl:choose>
+                                        <xsl:when test="@author = 'INFO'">
+                                            <td colspan="2" class="msg msg-info">
+                                                <xsl:value-of select="text()"/>
+                                            </td>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <td class="author">
+                                                <xsl:value-of select="@author"/>
+                                            </td>
+                                            <td class="msg">
+                                                <xsl:value-of select="text()"/>
+                                            </td>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </tr>
+                            </xsl:for-each>
+                        </table>
+                        <form class ="join" action="/bjx/games/{/game/@id}/chat" method="POST" target="hiddenFrame">
+                            <input type="text" name="msg" placeholder="Chatting as {$name}" required=""/>
+                            <button class="btn" type="submit">►</button>
+                        </form>
+                    </div>
                 </div>
                 <iframe class="hidden" name="hiddenFrame"/>
             </div>
