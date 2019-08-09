@@ -105,7 +105,6 @@ body#game {
 .container {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 100%;
 }
 
@@ -132,6 +131,7 @@ body#game {
 }
 
 svg {
+    top: 0;
     max-width: 1200px;
 }
 
