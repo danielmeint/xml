@@ -1,12 +1,12 @@
 xquery version "3.0";
 
-module namespace bjxws = "xforms/bjx/bjxws";
+module namespace bjxws = "xforms/bjxws";
 
 import module namespace ws = "http://basex.org/modules/ws";
 
-import module namespace api="xforms/bjx/api" at "api.xq";
-import module namespace player="xforms/bjx/player" at 'player.xq';
-import module namespace game="xforms/bjx/game" at 'game.xq';
+import module namespace api="xforms/api" at "api.xq";
+import module namespace player="xforms/player" at 'player.xq';
+import module namespace game="xforms/game" at 'game.xq';
 
 
 declare

@@ -1,10 +1,10 @@
-module namespace game='xforms/bjx/game';
+module namespace game='xforms/game';
 
-import module namespace api="xforms/bjx/api" at 'api.xq';
-import module namespace dealer="xforms/bjx/dealer" at 'dealer.xq';
-import module namespace player="xforms/bjx/player" at 'player.xq';
-import module namespace deck="xforms/bjx/deck" at 'deck.xq';
-import module namespace chat="xforms/bjx/chat" at 'chat.xq';
+import module namespace api="xforms/api" at 'api.xq';
+import module namespace dealer="xforms/dealer" at 'dealer.xq';
+import module namespace player="xforms/player" at 'player.xq';
+import module namespace deck="xforms/deck" at 'deck.xq';
+import module namespace chat="xforms/chat" at 'chat.xq';
 
 
 

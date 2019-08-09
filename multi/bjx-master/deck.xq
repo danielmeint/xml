@@ -1,10 +1,10 @@
-module namespace deck='xforms/bjx/deck';
+module namespace deck='xforms/deck';
 
-import module namespace api="xforms/bjx/api" at 'api.xq';
-import module namespace card="xforms/bjx/card" at 'card.xq';
-import module namespace dealer="xforms/bjx/dealer" at 'dealer.xq';
-import module namespace game="xforms/bjx/game" at 'game.xq';
-import module namespace hand="xforms/bjx/hand" at 'hand.xq';
+import module namespace api="xforms/api" at 'api.xq';
+import module namespace card="xforms/card" at 'card.xq';
+import module namespace dealer="xforms/dealer" at 'dealer.xq';
+import module namespace game="xforms/game" at 'game.xq';
+import module namespace hand="xforms/hand" at 'hand.xq';
 
 declare function deck:newDeck() {
   let $cards := (
