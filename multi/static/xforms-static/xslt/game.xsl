@@ -21,20 +21,20 @@
             <div class="container flex-container">
                 <svg viewBox="-100 0 1000 620">
                     <!-- table dimensions: 800 x 450 -->
-                    <use href="/static/bjx/svg/table.svg#table" x="0" y="0"/>
+                    <use href="/static/xforms-static/svg/table.svg#table" x="0" y="0"/>
                     <g id="dealer">
                         <g class="card_group">
                             <xsl:choose>
                                 <xsl:when test="game/@state = 'playing'">
                                     <!-- only show the dealer's first card -->
                                     <use
-                                        href="/static/bjx/svg/cards.svg#{game/dealer/hand/card[1]/@value}_{game/dealer/hand/card[1]/@suit}"/>
-                                    <use href="/static/bjx/svg/cards.svg#back"
+                                        href="/static/xforms-static/svg/cards.svg#{game/dealer/hand/card[1]/@value}_{game/dealer/hand/card[1]/@suit}"/>
+                                    <use href="/static/xforms-static/svg/cards.svg#back"
                                         style="transform: translate(20px, 4px)"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:for-each select="game/dealer/hand/card">
-                                        <use href="/static/bjx/svg/cards.svg#{@value}_{@suit}"
+                                        <use href="/static/xforms-static/svg/cards.svg#{@value}_{@suit}"
                                             style="transform: translate({(position() - 1) * 20}px, {(position() - 1) * 4}px)"
                                         />
                                     </xsl:for-each>
@@ -99,7 +99,7 @@
                                                 <xsl:attribute name="class">bet chip</xsl:attribute>
                                             </xsl:otherwise>
                                         </xsl:choose>
-                                        <use href="/static/bjx/svg/chips.svg#chip" width="50" height="50"/>
+                                        <use href="/static/xforms-static/svg/chips.svg#chip" width="50" height="50"/>
                                         <text x="25" y="25" alignment-baseline="central">
                                             <xsl:value-of select="bet"/>
                                         </text>
@@ -110,7 +110,7 @@
                                             <xsl:if test="@state = 'won' or @state = 'tied' or @state = 'lost'">
                                                 <xsl:attribute name="style">visibility: hidden</xsl:attribute>
                                             </xsl:if>
-                                            <use href="/static/bjx/svg/chips.svg#chip" width="40" height="40" transform="translate(40, -30)"/>
+                                            <use href="/static/xforms-static/svg/chips.svg#chip" width="40" height="40" transform="translate(40, -30)"/>
                                             <text x="20" y="20" alignment-baseline="central" transform="translate(40, -30)">
                                                 <xsl:value-of select="ceiling(bet div 2)"/>
                                             </text>
@@ -119,7 +119,7 @@
                                 </xsl:if>
                                 <g class="card_group">
                                     <xsl:for-each select="hand/card">
-                                        <use href="/static/bjx/svg/cards.svg#{@value}_{@suit}"
+                                        <use href="/static/xforms-static/svg/cards.svg#{@value}_{@suit}"
                                             style="transform: translate({(position() - 1) * 20}px, {(position() - 1) * 4}px)"
                                         />
                                     </xsl:for-each>
@@ -155,7 +155,7 @@
                     <xsl:choose>
                         <xsl:when test="$self">
                             <!-- client is participating in the game -->
-                            <form class="top left" action="/bjx/games/{/game/@id}/leave" method="post" target="hiddenFrame">
+                            <form class="top left" action="/xforms-multiclient/games/{/game/@id}/leave" method="post" target="hiddenFrame">
                                 <button class="btn btn-secondary" type="submit">
                                     Leave
                                 </button>
@@ -173,7 +173,7 @@
                                         Place your bets!
                                     </div>
                                     <div class="dialog--betting">
-                                    <form class="join" action="/bjx/games/{/game/@id}/bet" method="POST" target="hiddenFrame">
+                                    <form class="join" action="/xforms-multiclient/games/{/game/@id}/bet" method="POST" target="hiddenFrame">
                                         <div class="input--advanced">
                                         <input class="betting" type="number" name="bet" min="1" max="{$self/balance}" required=""/>
                                         <label id="balance">
@@ -197,20 +197,20 @@
 									</div>
 									<div class="buttongroup">
 									    <div>
-									    <form action="/bjx/games/{/game/@id}/stand" method="POST" target="hiddenFrame">
+									    <form action="/xforms-multiclient/games/{/game/@id}/stand" method="POST" target="hiddenFrame">
 									        <button class="stand" type="submit">Stand</button>
 									    </form>
 									    </div>
 									    <div>
 									    <xsl:if test="$self/hand/@value &lt; 21">
-									        <form action="/bjx/games/{/game/@id}/hit" method="POST" target="hiddenFrame">
+									        <form action="/xforms-multiclient/games/{/game/@id}/hit" method="POST" target="hiddenFrame">
 									            <button class="hit" type="submit">Hit</button>
 									        </form>
 									    </xsl:if>
 									    </div>
 									   <div>						
                                             <xsl:if test="count($self/hand/card) &lt; 3 and $self/@insurance='false' and $self/hand/@value &lt; 21 and $self/balance &gt;= $self/bet * 2">
-                                                <form action="/bjx/games/{/game/@id}/double" method="POST" target="hiddenFrame">
+                                                <form action="/xforms-multiclient/games/{/game/@id}/double" method="POST" target="hiddenFrame">
                                                     <button class="double" type="submit">Double</button>
                                                 </form>
                                             </xsl:if>
@@ -220,7 +220,7 @@
                                                 <xsl:when test="$activePlayerBet * 1.5 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
                                                 </xsl:when>
                                                 <xsl:otherwise>
-                                                   <form action="/bjx/games/{/game/@id}/insurance" method="POST" target="hiddenFrame">
+                                                   <form action="/xforms-multiclient/games/{/game/@id}/insurance" method="POST" target="hiddenFrame">
                                                        <button class="insurance" type="submit">Insurance</button>
                                                    </form>
                                                 </xsl:otherwise>
@@ -250,7 +250,7 @@
                                                 </xsl:when>
                                             </xsl:choose>
                                         </div>
-                                        <form action="/bjx/games/{/game/@id}/newRound" method="POST" target="hiddenFrame">
+                                        <form action="/xforms-multiclient/games/{/game/@id}/newRound" method="POST" target="hiddenFrame">
                                             <button class="btn" type="submit">New Round</button>
                                         </form>
                                     </div>                             
@@ -263,14 +263,14 @@
                             <div class="dialog--header">
                             Spectating mode
                             </div>
-                            <a href="/bjx"><button>◀ Leave</button></a>
+                            <a href="/xforms-multiclient"><button>◀ Leave</button></a>
                                 <xsl:choose>
                                     <xsl:when test="false">
                                         <!--test="game/player[@state = 'active']/balance = 0"> -->
                                         <button id="disabled" type='submit'>no balance/></button>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <form class="join" action='/bjx/games/{/game/@id}/join' method='POST' target="hiddenFrame">
+                                        <form class="join" action='/xforms-multiclient/games/{/game/@id}/join' method='POST' target="hiddenFrame">
                                             <button type='submit'>join</button>
                                         </form>
                                     </xsl:otherwise>
@@ -282,12 +282,12 @@
                         <input type="checkbox" id="chatToggle"/>
                         <label id="hideChat" for="chatToggle">
                             <svg>
-                                <use href="/static/bjx/svg/solid.svg#times"/>
+                                <use href="/static/xforms-static/svg/solid.svg#times"/>
                             </svg>
                         </label>
                         <label class="bottom left" id="showChat" for="chatToggle">
                             <svg>
-                                <use href="/static/bjx/svg/solid.svg#comments"/>
+                                <use href="/static/xforms-static/svg/solid.svg#comments"/>
                             </svg>
                         </label>
                         <table>
@@ -311,7 +311,7 @@
                                 </tr>
                             </xsl:for-each>
                         </table>
-                        <form class ="join" action="/bjx/games/{/game/@id}/chat" method="POST" target="hiddenFrame">
+                        <form class ="join" action="/xforms-multiclient/games/{/game/@id}/chat" method="POST" target="hiddenFrame">
                             <input type="text" name="msg" placeholder="Chatting as {$name}" required=""/>
                             <button class="btn" type="submit">►</button>
                         </form>

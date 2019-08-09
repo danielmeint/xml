@@ -85,29 +85,29 @@ declare function game:draw($self, $name) {
     <textarea style="width: 100%; height: 80%;">
       {$self}
     </textarea>
-    <form action="/bjx/games/{$self/@id}/newRound" method="POST" target="hiddenFrame">
+    <form action="/xforms-multiclient/games/{$self/@id}/newRound" method="POST" target="hiddenFrame">
       <input type="submit" value="newRound"/>
     </form>
-    <form action="/bjx/games/{$self/@id}/{$name}/bet" method="POST" target="hiddenFrame">
+    <form action="/xforms-multiclient/games/{$self/@id}/{$name}/bet" method="POST" target="hiddenFrame">
       <input type="number" name="bet"/>
       <input type="submit" value = "Bet"/>
     </form>
-    <form action="/bjx/games/{$self/@id}/{$name}/hit" method="POST" target="hiddenFrame">
+    <form action="/xforms-multiclient/games/{$self/@id}/{$name}/hit" method="POST" target="hiddenFrame">
       <input type="submit" value="Hit"/>
     </form>
-    <form action="/bjx/games/{$self/@id}/{$name}/stand" method="POST" target="hiddenFrame">
+    <form action="/xforms-multiclient/games/{$self/@id}/{$name}/stand" method="POST" target="hiddenFrame">
       <input type="submit" value="Stand"/>
     </form>
-    <form action="/bjx/games/{$self/@id}/{$name}/leave" method="POST">
+    <form action="/xforms-multiclient/games/{$self/@id}/{$name}/leave" method="POST">
       <input type="submit" value="Leave via POST (obsolete)"/>
     </form>
-    <a href="/bjx/games/{$self/@id}/{$name}/leave">Leave via GET</a>
+    <a href="/xforms-multiclient/games/{$self/@id}/{$name}/leave">Leave via GET</a>
     <iframe class="hidden hiddenFrame" name="hiddenFrame"/>
   </div>
 };
 
 declare function game:drawFull($self, $name) {
-  let $xsl := doc('../static/bjx/xslt/game.xsl')
+  let $xsl := doc('../static/xforms-static/xslt/game.xsl')
   let $map := map{ "name" : $name }
   return xslt:transform($self, $xsl, $map)
 };

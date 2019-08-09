@@ -3,7 +3,7 @@ module namespace html = "xforms/html";
 declare function html:wrap($content) {
 <html>
     <head>
-      <link rel="stylesheet" type="text/css" href="/static/bjx/css/style.css"/>
+      <link rel="stylesheet" type="text/css" href="/static/xforms-static/css/style.css"/>
     </head>
     <div class="navbar" id="centered">
     <h1>XForms' Blackjack</h1>
@@ -21,7 +21,7 @@ declare function html:login() {
       <div class="dialog--header">
         Login
       </div>
-      <form action='/bjx/login' method='post'>
+      <form action='/xforms-multiclient/login' method='post'>
         <div class="input--advanced" id="menu">
           <label id="name">
             Name
@@ -36,7 +36,7 @@ declare function html:login() {
         </div>
         <button type="submit">Login</button>
       </form>
-        <a href='/bjx/signup'><button class="circular"><text>+</text></button></a>
+        <a href='/xforms-multiclient/signup'><button class="circular"><text>+</text></button></a>
       </div>
   )
 };
@@ -46,7 +46,7 @@ declare function html:signup($error) {
       <div class="dialog--header">
         Register
       </div>
-      <form action='/bjx/signup' method='post'>
+      <form action='/xforms-multiclient/signup' method='post'>
         <div class="input--advanced" id="menu">
           <label id="name">
             Name
@@ -61,14 +61,14 @@ declare function html:signup($error) {
         </div>
         <button type="submit" class="menu">Create</button>
       </form>
-        <a href='/bjx'><button class="circular" id="animated"><text>+</text></button></a>
+        <a href='/xforms-multiclient'><button class="circular" id="animated"><text>+</text></button></a>
       </div>
   )
 };
 declare function html:gameNotFound() {
   html:wrap(
-    <form action="/bjx/games" method="post">
-    <a href="/bjx">
+    <form action="/xforms-multiclient/games" method="post">
+    <a href="/xforms-multiclient">
         <button class="menu top left">&lt; Menu</button>
     </a>
       <p style="text-align: center">Game not found.</p>

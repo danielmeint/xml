@@ -7,12 +7,12 @@
     <xsl:template match="/">
         <html>
             <head>
-                <link rel="stylesheet" type="text/css" href="/static/bjx/css/style.css" />
+                <link rel="stylesheet" type="text/css" href="/static/xforms-static/css/style.css" />
             </head>
                 <div class="navbar" id="centered">
                     <h1>Hello&#xA0;<xsl:value-of select="$name"/>!</h1> 
                 </div>
-                <a href="/bjx">
+                <a href="/xforms-multiclient">
                 <xsl:if test="$screen = 'games'">
                     <button class="menu top left">◀ Games</button>
                 </xsl:if>
@@ -20,7 +20,7 @@
                     <button class="menu top left">◀ Highscore</button>
                 </xsl:if>
                 </a>
-                <a href="/bjx/logout">
+                <a href="/xforms-multiclient/logout">
                     <button class = "menu top right">
                         Logout
                     </button>
@@ -29,12 +29,12 @@
                 <div class="flex-container flex-center">
                         <xsl:choose>
                             <xsl:when test="$screen = 'menu'">
-                                <form action="/bjx/games" method="post">
+                                <form action="/xforms-multiclient/games" method="post">
                                     <button type="submit">New Game</button>
                                 </form>
-                                <a href="/bjx/games"><button>Join Game</button></a>
-                                <a href="/bjx/highscores"><button>Highscores</button></a>
-                                <form class="join" action="/bjx/games" method="post">
+                                <a href="/xforms-multiclient/games"><button>Join Game</button></a>
+                                <a href="/xforms-multiclient/highscores"><button>Highscores</button></a>
+                                <form class="join" action="/xforms-multiclient/games" method="post">
                                     <a>&#x1F4B0; 100</a>
                                     <button type="submit">Reset</button> 
                                 </form>
@@ -43,7 +43,7 @@
                                 <xsl:choose>
                                     <xsl:when test="count(games/game) = 0">
                                         <p>No active games.</p>
-                                        <form action="/bjx/games" method="post">
+                                        <form action="/xforms-multiclient/games" method="post">
                                             <button type="submit">New Game</button> 
                                         </form>
                                     </xsl:when>
@@ -60,7 +60,7 @@
                                                         <th scope="col">4</th>
                                                         <th scope="col">5</th>
                                                         <th scope="col">
-                                                            <form action="/bjx/games" method="post">
+                                                            <form action="/xforms-multiclient/games" method="post">
                                                             <button class="circular" id="table" type="submit">+</button>
                                                             </form>
                                                         </th>
@@ -70,15 +70,15 @@
                                                     <xsl:for-each select="games/game">
                                                         <tr>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}"><xsl:value-of select="@id"/></a>
+                                                                <a href="/xforms-multiclient/games/{@id}"><xsl:value-of select="@id"/></a>
                                                             </td>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}">
+                                                                <a href="/xforms-multiclient/games/{@id}">
                                                                     <xsl:value-of select="player[@state = 'active']/@name" /><xsl:value-of select="@state" />
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}">
+                                                                <a href="/xforms-multiclient/games/{@id}">
                                                                     <xsl:if test="player[1]">
                                                                         <xsl:value-of select="player[1]/@name"/>(<xsl:value-of select="player[1]/balance"/>)
                                                                     </xsl:if>
@@ -88,7 +88,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}">
+                                                                <a href="/xforms-multiclient/games/{@id}">
                                                                     <xsl:if test="player[2]">
                                                                         <xsl:value-of select="player[2]/@name"/>(<xsl:value-of select="player[2]/balance"/>)
                                                                     </xsl:if>
@@ -98,7 +98,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}">
+                                                                <a href="/xforms-multiclient/games/{@id}">
                                                                     <xsl:if test="player[3]">
                                                                         <xsl:value-of select="player[3]/@name"/>(<xsl:value-of select="player[3]/balance"/>)
                                                                     </xsl:if>
@@ -108,7 +108,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}">
+                                                                <a href="/xforms-multiclient/games/{@id}">
                                                                     <xsl:if test="player[4]">
                                                                         <xsl:value-of select="player[4]/@name"/>(<xsl:value-of select="player[4]/balance"/>)
                                                                     </xsl:if>
@@ -118,7 +118,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}">
+                                                                <a href="/xforms-multiclient/games/{@id}">
                                                                     <xsl:if test="player[5]">
                                                                         <xsl:value-of select="player[5]/@name"/>(<xsl:value-of select="player[5]/balance"/>)
                                                                     </xsl:if>
@@ -128,7 +128,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                <a href="/bjx/games/{@id}">
+                                                                <a href="/xforms-multiclient/games/{@id}">
                                                                 </a>
                                                             </td>
                                                         </tr>
