@@ -1,32 +1,53 @@
 <html xmlns:ng="http://docbook.org/docbook-ng"><head>
       <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-   <title>XForms Multiclient Blackjack Documentation</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.2"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article"><div class="titlepage"><div><div><h1 class="title"><a name="d5e1"></a>XForms Multiclient Blackjack Documentation</h1></div><div><div class="author"><h3 class="author">Daniel Meint</h3><code class="email">&lt;<a class="email" href="mailto:d.meint@tum.de">d.meint@tum.de</a>&gt;</code></div></div><div><div class="author"><h3 class="author">Felix Hennerkes</h3><code class="email">&lt;<a class="email" href="mailto:ga38hom@mytum.de">ga38hom@mytum.de</a>&gt;</code></div></div><div><div class="author"><h3 class="author">Janik Schnellbach</h3><code class="email">&lt;<a class="email" href="mailto:janik.schnellbach@tum.de">janik.schnellbach@tum.de</a>&gt;</code></div></div><div><div class="author"><h3 class="author">Maximilian Karpfinger</h3><code class="email">&lt;<a class="email" href="mailto:maximilian.karpfinger@tum.de">maximilian.karpfinger@tum.de</a>&gt;</code></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="#d5e17">Introduction</a></span></dt><dt><span class="section"><a href="#d5e19">Description of the case study</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e27">Card values</a></span></dt><dt><span class="section"><a href="#d5e31">Course of a Round</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e87">Architecture</a></span></dt><dt><span class="section"><a href="#d5e98">The component model</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e100">Modeling the model</a></span></dt><dt><span class="section"><a href="#d5e131">Design decisions and discussion</a></span></dt><dt><span class="section"><a href="#d5e150">Implementation</a></span></dt><dt><span class="section"><a href="#d5e515">Implementation details, decisions and discussion</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e533">The component View</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e535">Modeling the component View</a></span></dt><dt><span class="section"><a href="#d5e632">Implementing the component View</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e639">The component Controller</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e641">Modeling the component Controller</a></span></dt><dt><span class="section"><a href="#d5e644">Implementing the component Controller</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e648">Collaboration</a></span></dt><dt><span class="section"><a href="#d5e667">Conclusions</a></span></dt><dt><span class="bibliography"><a href="#d5e669">Bibliography</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e17"></a>Introduction</h2></div></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e19"></a>Description of the case study</h2></div></div></div><p>We implement the popular casino game Blackjack as a multi-client web application.
-            [...]
+   <title>XForms Multiclient Blackjack Documentation</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.2"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article"><div class="titlepage"><div><div><h1 class="title"><a name="d5e1"></a>XForms Multiclient Blackjack Documentation</h1></div><div><div class="author"><h3 class="author">Daniel Meint</h3><code class="email">&lt;<a class="email" href="mailto:d.meint@tum.de">d.meint@tum.de</a>&gt;</code></div></div><div><div class="author"><h3 class="author">Felix Hennerkes</h3><code class="email">&lt;<a class="email" href="mailto:ga38hom@mytum.de">ga38hom@mytum.de</a>&gt;</code></div></div><div><div class="author"><h3 class="author">Janik Schnellbach</h3><code class="email">&lt;<a class="email" href="mailto:janik.schnellbach@tum.de">janik.schnellbach@tum.de</a>&gt;</code></div></div><div><div class="author"><h3 class="author">Maximilian Karpfinger</h3><code class="email">&lt;<a class="email" href="mailto:maximilian.karpfinger@tum.de">maximilian.karpfinger@tum.de</a>&gt;</code></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="#d5e17">Introduction</a></span></dt><dt><span class="section"><a href="#d5e28">Description of the Case Study</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e35">Card Values</a></span></dt><dt><span class="section"><a href="#d5e39">Course of a Round</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e95">Architecture</a></span></dt><dt><span class="section"><a href="#d5e106">The component model</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e108">Modeling the model</a></span></dt><dt><span class="section"><a href="#d5e139">Design decisions and discussion</a></span></dt><dt><span class="section"><a href="#d5e158">Implementation</a></span></dt><dt><span class="section"><a href="#d5e523">Implementation details, decisions and discussion</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e541">The component View</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e543">Modeling the component View</a></span></dt><dt><span class="section"><a href="#d5e640">Implementing the component View</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e647">The component Controller</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e649">Modeling the component Controller</a></span></dt><dt><span class="section"><a href="#d5e652">Implementing the component Controller</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e656">Collaboration</a></span></dt><dt><span class="section"><a href="#d5e675">Conclusions</a></span></dt><dt><span class="bibliography"><a href="#d5e677">Bibliography</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e17"></a>Introduction</h2></div></div></div><p> The so-called X stack allows us to build stable and highly performant multi-client
+            web applications using only XML technologies. This paper documents the design and
+            implementation of the popular casino game Blackjack as a browser-based online
+            multiplayer game and thereby demonstrates the X Stack's capabilities. The entire system
+            is built exclusively with XML, XQuery, XSLT, HTML, and CSS and was developed during the
+            summer semester 2019 in the context of the practical course <span class="emphasis"><em>XML
+                Technology</em></span> at the Technical University of Munich.
             
-        </p><p>Globally, there are a variety of rulesets with slight differences. We seek to present
+        </p><p>The app is expected to run reasonably well in any modern browser with SVG support, but
+            we strongly recommend to use a current version of <span class="emphasis"><em>Mozilla Firefox</em></span>.
+            Furthermore, for server-side processing, a current version of the XML database system
+            and XQuery processor <span class="emphasis"><em>BaseX</em></span> with support for the STOMP protocol is
+            needed. An installation guide can be found on Github [<a class="xref" href="#BaseXHome">BaseX</a>, <a class="xref" href="#BaseXStomp">BaseXStomp</a>]. The installation manual for our Blackjack application is
+            part of this document.</p><p> Our application can be used by any number of users and handles multiple games played
+            in simultaneously. A client can spectate a game or join as an actively participating
+            player. Unlimited clients can be subscribed to a game as spectators, but only up to five
+            can play on a single table, i.e. one instance of a game, at the same time.
+            
+        </p><p>The paper is structured as follows. The next section described the rules and
+            conceptually analyses the various phases of the game. It is followed by a section on the
+            high-level architecture of our system, which is based on the Model-View-Controller
+            pattern. Subsequently, three sections explain the components of an MVC architecture
+            both from a modeling and technical perspective. Finally, we dedicate one section to
+            reflect on the development methodologies we employed and the organization of the
+            practical course.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e28"></a>Description of the Case Study</h2></div></div></div><p>Globally, there are a variety of rulesets with slight differences. We seek to present
             the most universally accepted variation, commonly found in Las Vegas casinos. Up to five
                 <span class="emphasis"><em>players</em></span> compete not against each other, but separately against
             the <span class="emphasis"><em>dealer</em></span>. The objective of each player is to draw cards and
             maximize the sum of their respective values (<span class="emphasis"><em>hand value</em></span>) without
-            exceeding a sum of 21 (<span class="emphasis"><em>bust</em></span>).</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e27"></a>Card values</h3></div></div></div><p>The game is played with a single deck of French playing cards. Number cards are
+            exceeding a sum of 21 (<span class="emphasis"><em>bust</em></span>).</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e35"></a>Card Values</h3></div></div></div><p>The game is played with a single deck of French playing cards. Number cards are
                 worth their value, e.g. the seven of hearts is worth seven points, face cards (Jack,
                 Queen, and King) are worth ten points, and an Ace can be counted as either one or
                 eleven, depending on what is more favorable in a specific situation. A hand
                 containing an Ace counted as eleven is referred to as a <span class="emphasis"><em>soft</em></span>
                 hand because the value of the Ace will change to a one to prevent the player from
                 busting if he was to draw another card and otherwise exceed 21. A card's suit is
-                irrelevant in Blackjack.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e31"></a>Course of a Round</h3></div></div></div><p>Blackjack is round-based and each round consists of multiple stages. We
+                irrelevant in Blackjack.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e39"></a>Course of a Round</h3></div></div></div><p>Blackjack is round-based and each round consists of multiple stages. We
                 distinguish between the betting, playing, and evaluation phase. After the end of a
                 round, the next round can be initialized by any participating player. Players can
-                leave the table at any time.</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d5e34"></a>Betting</h4></div></div></div><p>Before the actual playing begins, players place their bets. Our version uses
+                leave the table at any time.</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d5e42"></a>Betting</h4></div></div></div><p>Before the actual playing begins, players place their bets. Our version uses
                     US-dollars as currency and does not limit players in the amount they want to
                     bet. It does, however, prohibit them from playing without betting at all. We
                     will refer to this stage of the game as the <span class="emphasis"><em>betting phase</em></span>
-                    throughout the following sections.</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d5e38"></a>Playing</h4></div></div></div><p> At the beginning of the <span class="emphasis"><em>playing phase</em></span>, each player is
+                    throughout the following sections.</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d5e46"></a>Playing</h4></div></div></div><p> At the beginning of the <span class="emphasis"><em>playing phase</em></span>, each player is
                     dealt two cards face up. The dealer receives one exposed card that everyone can
                     see and one hidden card.</p><p>The dealer subsequently asks each player, going clockwise around the table,
                     whether they want to improve their respective hand by drawing additional cards.
-                    Each player has the following options:</p><div class="figure"><a name="d5e43"></a><p class="title"><b>Figure&nbsp;1.&nbsp;Possible player decisions.</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="100%"><tr><td><img src="../../diagrams/decisions_activity.png" width="100%" alt="Possible player decisions."></td></tr></table></div></div></div><br class="figure-break"><div class="table"><a name="d5e48"></a><p class="title"><b>Table&nbsp;1.&nbsp;Playing options explained.</b></p><div class="table-contents"><table><thead><tr>
+                    Each player has the following options:</p><div class="figure"><a name="d5e51"></a><p class="title"><b>Figure&nbsp;1.&nbsp;Possible player decisions.</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="100%"><tr><td><img src="../../diagrams/decisions_activity.png" width="100%" alt="Possible player decisions."></td></tr></table></div></div></div><br class="figure-break"><div class="table"><a name="d5e56"></a><p class="title"><b>Table&nbsp;1.&nbsp;Playing options explained.</b></p><div class="table-contents"><table><thead><tr>
                             <td>Action</td>
                             <td>Description</td>
                             <td>Condition</td>
@@ -54,7 +75,7 @@
                         </tr></tbody></table></div></div><br class="table-break"><p>Playing double or insurance further assumes that the player has a sufficient
                     balance to cover the increased bet size.</p><p>After all of the players have finished their turn, the dealer plays in a
                     predetermined manner: He draws cards as long as his hand is worth less than 17
-                    points and must stand on a soft 17 or better.</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d5e74"></a>Evaluation</h4></div></div></div><p>Once the dealer completes his turn, each player's hand gets
+                    points and must stand on a soft 17 or better.</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d5e82"></a>Evaluation</h4></div></div></div><p>Once the dealer completes his turn, each player's hand gets
                         <span class="emphasis"><em>evaluated</em></span> against the dealer's hand. As described
                     above, the goal of each player is to get a hand total closer to 21 than the
                     dealer without busting. Concretely, a player wins by achieving either of the
@@ -65,59 +86,59 @@
                     blackjack, this bet is paid out 2:1. A player winning a $5 insurance bet
                     receives back the $5 plus an additional $10 from the bank, for example.</p><p>If player and dealer have equal hands and did not bust, they tie, and the
                     player's bet is returned (also called <span class="emphasis"><em>push</em></span>).</p><p>In any other case, e.g. the player busting even if the dealer busts as well,
-                    the player loses their bet.</p></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e87"></a>Architecture</h2></div></div></div><p> As our Blackjack game is implemented as a web application, the basic architecture
+                    the player loses their bet.</p></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e95"></a>Architecture</h2></div></div></div><p> As our Blackjack game is implemented as a web application, the basic architecture
             resembles a client-server model, where the client (front end) runs in a web browser and
             directly communicates with the server (back end). Due to the simplicity of our
             application and the utilization of XStack, we resided from using more sophisticated
             architectures, such as Client-Server-Broker or Client-Server-Dispatcher. </p><p> The server-side Business Logic and Persistency Layers are realized using the XQuery
-            processor and XML database of BaseX. The content is rendered on the server-side using
-            an XSLT processor. </p><p> Communication using only HTTP requests and responses is not bidirectional. The client
+            processor and XML database of BaseX. The content is rendered on the server-side using an
+            XSLT processor. </p><p> Communication using only HTTP requests and responses is not bidirectional. The client
             can send stateless requests that are answered by the server with a response. The server
             is not able to send requests to the client, as no active connection is maintained after
-            fulfilling a request. This kind of communication is sufficient in web applications
-            where the business logic is only based on the actions of the client. Applications in which the
+            fulfilling a request. This kind of communication is sufficient in web applications where
+            the business logic is only based on the actions of the client. Applications in which the
             server should be able to update the content of the client without any requests require
-            full-duplex communication. Examples for such applications are chat rooms and multiplayer video games. Bidirectional communication can
-            be realized using web sockets. Here, a Transmission Control Protocol (TCP) connection
-            between the client and the server is established and maintained until the client or
-            server closes the connection. Therefore, the server can send new content to the
-            client without incoming requests until the connection is closed. BaseX supports Web
-            Sockets, utilizing the Jetty's WebSocket servlet API. As we decided to implement a
-            distributed version of the game, allowing multiple clients to play together, we made use
-            of the WebSockets support of BaseX. 
-        </p><p> Further, our app complies with the Model View Controller (MVC) architecture to
-            enable separation of concerns and increase the maintainability of the application by
-            decoupling the data representation from the data access. In MVC, the system is separated
-            into 3 different subsystems: the model representing the data access, the view for
-            data presentation and the controller as a mediator between the data presentation and
-            access. Implementations of MVC can be categorized as Push and Pull variants. In the Pull
+            full-duplex communication. Examples for such applications are chat rooms and multiplayer
+            video games. Bidirectional communication can be realized using web sockets. Here, a
+            Transmission Control Protocol (TCP) connection between the client and the server is
+            established and maintained until the client or server closes the connection. Therefore,
+            the server can send new content to the client without incoming requests until the
+            connection is closed. BaseX supports Web Sockets, utilizing the Jetty's WebSocket
+            servlet API. As we decided to implement a distributed version of the game, allowing
+            multiple clients to play together, we made use of the WebSockets support of BaseX.
+            
+        </p><p> Further, our app complies with the Model View Controller (MVC) architecture to enable
+            separation of concerns and increase the maintainability of the application by decoupling
+            the data representation from the data access. In MVC, the system is separated into 3
+            different subsystems: the model representing the data access, the view for data
+            presentation and the controller as a mediator between the data presentation and access.
+            Implementations of MVC can be categorized as Push and Pull variants. In the Pull
             variant, the data is retrieved by the view from the model, while in the Push variant the
             model updates the view after changes to the data. In our application, every player
             should see the current state of the game. Therefore, we chose the push variant. The
-            resulting architectural structure of our web application can be seen below. </p><div class="figure"><a name="d5e93"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Model of the Resulting Architecture.</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="75%"><tr><td><img src="../../diagrams/architecture.png" width="100%" alt="Model of the Resulting Architecture."></td></tr></table></div></div></div><br class="figure-break"></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e98"></a>The component model</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e100"></a>Modeling the model</h3></div></div></div><p> In an MVC-architecture the model has the control of the application's logic.
+            resulting architectural structure of our web application can be seen below. </p><div class="figure"><a name="d5e101"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Model of the Resulting Architecture.</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="75%"><tr><td><img src="../../diagrams/architecture.png" width="100%" alt="Model of the Resulting Architecture."></td></tr></table></div></div></div><br class="figure-break"></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e106"></a>The component model</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e108"></a>Modeling the model</h3></div></div></div><p> In an MVC-architecture the model has the control of the application's logic.
                 Furthermore, it is responsible to store data, for example in a database. In order to
                 maintain data, several objects with unique functionality are needed. All these
-                collaborating objects provide different attributes and methods. In the following, the
-                data model will be described first. Thereon the design decisions will be
+                collaborating objects provide different attributes and methods. In the following,
+                the data model will be described first. Thereon the design decisions will be
                 discussed. The second part consists of the implementation of the game, followed by a
-                discussion on implementation details and which problems were faced. </p><p> The primary database <code class="code">xforms-games</code> consists of a list of games. For that, a
-                class <code class="classname">Game</code> is needed which stores all information about the
-                instance of a blackjack game. A game object needs an attribute to store its' id and
-                another attribute to store the current state of the game. Regarding
-                    <code class="classname">Game</code> functions, their main purpose is
-                constructing, initializing and resetting game objects. Because every game object also
-                stores all the attending players and a dealer, the functions essentially execute
-                operations on all players. In addition to the basic functions,
-                    <code class="classname">Game</code> must provide some function to evaluate the game.
-                However, the logic of evaluating a player should be sourced to the
-                    <code class="classname">Player</code> class. Another object stored in a game object is
-                the chat. </p><p> The <code class="classname">Player</code> will need some attributes to store metadata
+                discussion on implementation details and which problems were faced. </p><p> The primary database <code class="code">xforms-games</code> consists of a list of games. For
+                that, a class <code class="classname">Game</code> is needed which stores all information
+                about the instance of a blackjack game. A game object needs an attribute to store
+                its' id and another attribute to store the current state of the game. Regarding
+                    <code class="classname">Game</code> functions, their main purpose is constructing,
+                initializing and resetting game objects. Because every game object also stores all
+                the attending players and a dealer, the functions essentially execute operations on
+                all players. In addition to the basic functions, <code class="classname">Game</code> must
+                provide some function to evaluate the game. However, the logic of evaluating a
+                player should be sourced to the <code class="classname">Player</code> class. Another object
+                stored in a game object is the chat. </p><p> The <code class="classname">Player</code> will need some attributes to store metadata
                 like name, balance, bet, and profit. Furthermore, this class has to hold a player's
                 state and whether or not a player chooses to take insurance. One more object stored
                 inside the player is the player's hand, which holds the cards. As to the
                     <code class="classname">Player</code> functions, contiguous to the constructors and
-                setters, there will be a lot of functions that contain the game's logic. Depending on
-                the game's state, a player can take several actions, which will be passed over to
+                setters, there will be a lot of functions that contain the game's logic. Depending
+                on the game's state, a player can take several actions, which will be passed over to
                 the <code class="classname">Player</code> class by the API. Alongside the playing functions,
                 some helpers which provide logic for finding the next player and joining or leaving
                 a game are needed. Finally, logic to evaluate a player must be integrated. </p><p> Since the players all play against the dealer, another class
@@ -125,16 +146,17 @@
                 but it must store the deck of the game and a hand object similar to the player's.
                 Concerning the functions of the class, it should provide a helper function to help
                 to determine a player's profit, depending on their insurance state. More logic to
-                give every player two cards and also draw for the dealer will be required. </p><p> The next class we need in our model is <code class="classname">Hand</code>. On the one hand,
-                this class will provide helper functions for evaluating a player's hand. On the
-                other hand, it will supply some function to calculate the optimal sum of a hand. This
-                is needed because the card Ace can have the value 1 and 11. </p><p> The <code class="classname">Card</code> class will provide two attributes to store a
+                give every player two cards and also draw for the dealer will be required. </p><p> The next class we need in our model is <code class="classname">Hand</code>. On the one
+                hand, this class will provide helper functions for evaluating a player's hand. On
+                the other hand, it will supply some function to calculate the optimal sum of a hand.
+                This is needed because the card Ace can have the value 1 and 11. </p><p> The <code class="classname">Card</code> class will provide two attributes to store a
                 card's value and suit. Besides the constructor and setter functions, there will be a
                 getter function that returns a card's actual value, </p><p> Inside the <code class="classname">Chat</code> class, the players' messages should be
-                stored. </p><p> The last class in the model component is <code class="classname">Usr</code> (<code class="classname">User</code> is a reserved namespace in BaseX). It has no
-                functions other than a constructor and setters. Users are stored
-                database <span class="quote">&#8220;<span class="quote">xforms-users</span>&#8221;</span>. </p><p> The model is represented in the following class diagram. Helper functions and
-                setters/getters/constructors are omitted for readability. </p><div class="figure"><a name="d5e126"></a><p class="title"><b>Figure&nbsp;3.&nbsp;Class diagrams for component Model.</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="75%"><tr><td><img src="../../diagrams/UML.png" width="100%" alt="Class diagrams for component Model."></td></tr></table></div></div></div><br class="figure-break"></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e131"></a>Design decisions and discussion</h3></div></div></div><p>Continuing the section about the modeling of the model, all the design decisions
+                stored. </p><p> The last class in the model component is <code class="classname">Usr</code>
+                    (<code class="classname">User</code> is a reserved namespace in BaseX). It has no
+                functions other than a constructor and setters. Users are stored database
+                    <span class="quote">&#8220;<span class="quote">xforms-users</span>&#8221;</span>. </p><p> The model is represented in the following class diagram. Helper functions and
+                setters/getters/constructors are omitted for readability. </p><div class="figure"><a name="d5e134"></a><p class="title"><b>Figure&nbsp;3.&nbsp;Class diagrams for component Model.</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="75%"><tr><td><img src="../../diagrams/UML.png" width="100%" alt="Class diagrams for component Model."></td></tr></table></div></div></div><br class="figure-break"></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e139"></a>Design decisions and discussion</h3></div></div></div><p>Continuing the section about the modeling of the model, all the design decisions
                 will be presented and discussed.</p><p> One of the decisions was to implement a class that takes care of the players' and
                 the dealer's cards because we did not like storing single card instances inside a
                 player or dealer element. We came up with the <code class="classname">Hand</code> class
@@ -155,42 +177,46 @@
                 and simplifies functionality like shuffling the deck or drawing cards. When thinking
                 about extending the game, this class can be helpful for example when one wants more
                 than one deck. (in some variants of blackjack, each player has a separate deck) </p><p> So why do we need <code class="classname">Dealer</code> instead of just having another
-                player object? At first, both classes may not differ a lot looking at what
-                players and the dealer do in a game of blackjack. However, by closer
-                inspection, one notices that the dealer has a lot of differences. Starting with the attributes, a
-                dealer does not need any meta information stored like a name or balance and the
-                dealer does not place a bet each round either. The only resemblance is that both
-                objects store a hand object. Comparing the functions of the classes, the dealer has
-                no choices to make, so none of the player's functions that are needed for a player's
-                decision are required. Without the <code class="classname">Dealer</code>, we would need
-                another way to store the cards included in the game. Altogether a dealer object is
-                too unequal to just use another player object instead. </p><p> Another question is how to deal with players that lost all their money? We decided
-                that those players get set to spectating mode and can deposit more money in the main menu </p><p> As an extra feature, we decide to implement a chat for the players. One reason
-                for this is that we settle for the multiplayer version for local networks. Players can communicate with each other through the chat, which makes the experience more social.
-                Moreover, when players leave or join the game a small information text will be
-                inserted into the chat so other players will know that someone joined/left their
-                game. </p><p> In conclusion, our main idea while modelling the model was to prevent writing the same
-                code multiple times and segregating code by its functionality. Instead of having a
-                few huge classes with a big range of functions we rather want to have more but
-                smaller classes that are not too complex. This way the model stays a lot more
-                readable and it makes it more adjustable and integrating extensions easier. </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e150"></a>Implementation</h3></div></div></div><p> The component model has the responsibility of holding data. Since we use an
+                player object? At first, both classes may not differ a lot looking at what players
+                and the dealer do in a game of blackjack. However, by closer inspection, one notices
+                that the dealer has a lot of differences. Starting with the attributes, a dealer
+                does not need any meta information stored like a name or balance and the dealer does
+                not place a bet each round either. The only resemblance is that both objects store a
+                hand object. Comparing the functions of the classes, the dealer has no choices to
+                make, so none of the player's functions that are needed for a player's decision are
+                required. Without the <code class="classname">Dealer</code>, we would need another way to
+                store the cards included in the game. Altogether a dealer object is too unequal to
+                just use another player object instead. </p><p> Another question is how to deal with players that lost all their money? We
+                decided that those players get set to spectating mode and can deposit more money in
+                the main menu </p><p> As an extra feature, we decide to implement a chat for the players. One reason
+                for this is that we settle for the multiplayer version for local networks. Players
+                can communicate with each other through the chat, which makes the experience more
+                social. Moreover, when players leave or join the game a small information text will
+                be inserted into the chat so other players will know that someone joined/left their
+                game. </p><p> In conclusion, our main idea while modelling the model was to prevent writing the
+                same code multiple times and segregating code by its functionality. Instead of
+                having a few huge classes with a big range of functions we rather want to have more
+                but smaller classes that are not too complex. This way the model stays a lot more
+                readable and it makes it more adjustable and integrating extensions easier. </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e158"></a>Implementation</h3></div></div></div><p> The component model has the responsibility of holding data. Since we use an
                 object-oriented approach, all implemented classes provide their own functionality
                 and attributes. So each class contains data which is altogether stored in our BaseX
                 database. The database also lets us query functions via <code class="code">XQuery</code> and the
                     <code class="code">XQuery-Processor</code> because of that all of the component model's
                 functions are written in <code class="code">XQuery</code> and all the data is stored as
                     <code class="code">XML</code> elements. XQuery has a functional approach and was created to
-                run queries on <code class="code">XML</code> databases. One of the most important concepts of
-                the language are <code class="code">FLOWR-expressions</code>. The name <code class="code">FLOWR</code>
-                contains the initials of <span class="quote">&#8220;<span class="quote">for-let-order-where-return</span>&#8221;</span> and can be regarded as the equivalent of <span class="quote">&#8220;<span class="quote">select from where</span>&#8221;</span> queries in
-                    <code class="code">SQL</code>. The functions need an additional parameter
-                    <code class="code">self</code> which indicates on which object the code should be executed to emulate object-oriented programming in XQuery.</p><p> Because most of the classes have setters, getters, and constructors and the
+                run queries on <code class="code">XML</code> databases. One of the most important concepts of the
+                language are <code class="code">FLOWR-expressions</code>. The name <code class="code">FLOWR</code> contains
+                the initials of <span class="quote">&#8220;<span class="quote">for-let-order-where-return</span>&#8221;</span> and can be regarded as the
+                equivalent of <span class="quote">&#8220;<span class="quote">select from where</span>&#8221;</span> queries in <code class="code">SQL</code>. The
+                functions need an additional parameter <code class="code">self</code> which indicates on which
+                object the code should be executed to emulate object-oriented programming in
+                XQuery.</p><p> Because most of the classes have setters, getters, and constructors and the
                 implementation of these functions do not differ in comparison to other classes we
                 don't describe the implementation for every single class. In fact, all setter
                 methods return a new element by calling the constructor with alternated parameters.
                 All of the constructors create <code class="code">XML</code> elements depending on the attributes
                 of a class. </p><p> Beginning with <code class="classname">Game</code> class that has the following
-                attributes and functions. </p><div class="table"><a name="d5e168"></a><p class="title"><b>Table&nbsp;2.&nbsp;Game attributes</b></p><div class="table-contents"><table><thead><tr>
+                attributes and functions. </p><div class="table"><a name="d5e176"></a><p class="title"><b>Table&nbsp;2.&nbsp;Game attributes</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
@@ -203,7 +229,7 @@
                             <td>string</td>
                             <td>stores the state of the game</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-                </p><div class="table"><a name="d5e184"></a><p class="title"><b>Table&nbsp;3.&nbsp;Game functions</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e192"></a><p class="title"><b>Table&nbsp;3.&nbsp;Game functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -237,7 +263,7 @@
                                 0</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
             </p><p>
-                </p><div class="table"><a name="d5e218"></a><p class="title"><b>Table&nbsp;4.&nbsp;Player attributes</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e226"></a><p class="title"><b>Table&nbsp;4.&nbsp;Player attributes</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
@@ -266,7 +292,7 @@
                             <td>string</td>
                             <td>stores state of player</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-                </p><div class="table"><a name="d5e250"></a><p class="title"><b>Table&nbsp;5.&nbsp;Player functions</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e258"></a><p class="title"><b>Table&nbsp;5.&nbsp;Player functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -342,7 +368,7 @@
                             <td>void</td>
                             <td>calls player:next</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-            </p><p> The dealer has no attributes. </p><div class="table"><a name="d5e325"></a><p class="title"><b>Table&nbsp;6.&nbsp;Dealer functions</b></p><div class="table-contents"><table><thead><tr>
+            </p><p> The dealer has no attributes. </p><div class="table"><a name="d5e333"></a><p class="title"><b>Table&nbsp;6.&nbsp;Dealer functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -361,7 +387,7 @@
                             <td>calculates a player's bonus depending on whether they have an
                                 insurance and if the dealer got a blackjack</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-            </p><p> The deck class has no attributes. </p><div class="table"><a name="d5e345"></a><p class="title"><b>Table&nbsp;7.&nbsp;Deck functions</b></p><div class="table-contents"><table><thead><tr>
+            </p><p> The deck class has no attributes. </p><div class="table"><a name="d5e353"></a><p class="title"><b>Table&nbsp;7.&nbsp;Deck functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -394,7 +420,7 @@
                                 permutation of the cards</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
             </p><p>
-                </p><div class="table"><a name="d5e383"></a><p class="title"><b>Table&nbsp;8.&nbsp;Hand attributes</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e391"></a><p class="title"><b>Table&nbsp;8.&nbsp;Hand attributes</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
@@ -403,7 +429,7 @@
                             <td>integer</td>
                             <td>stores the sum of the hand's card's value</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-                </p><div class="table"><a name="d5e395"></a><p class="title"><b>Table&nbsp;9.&nbsp;Hand functions</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e403"></a><p class="title"><b>Table&nbsp;9.&nbsp;Hand functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -433,7 +459,7 @@
                                 aces with value 1 if the sum of values &gt; 21</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
             </p><p>
-                </p><div class="table"><a name="d5e427"></a><p class="title"><b>Table&nbsp;10.&nbsp;Card attributes</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e435"></a><p class="title"><b>Table&nbsp;10.&nbsp;Card attributes</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
@@ -446,7 +472,7 @@
                             <td>integer</td>
                             <td>stores the value of the card</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-                </p><div class="table"><a name="d5e443"></a><p class="title"><b>Table&nbsp;11.&nbsp;Card functions</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e451"></a><p class="title"><b>Table&nbsp;11.&nbsp;Card functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -464,7 +490,7 @@
                             <td>returns cards value, 10 for picture cards, 11 for Aces</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
             </p><p>
-                </p><div class="table"><a name="d5e465"></a><p class="title"><b>Table&nbsp;12.&nbsp;Usr attributes</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e473"></a><p class="title"><b>Table&nbsp;12.&nbsp;Usr attributes</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
@@ -481,7 +507,7 @@
                             <td>string</td>
                             <td>stores name of user</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-                </p><div class="table"><a name="d5e485"></a><p class="title"><b>Table&nbsp;13.&nbsp;Usr functions</b></p><div class="table-contents"><table><thead><tr>
+                </p><div class="table"><a name="d5e493"></a><p class="title"><b>Table&nbsp;13.&nbsp;Usr functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -493,7 +519,7 @@
                             <td>updates user's balance and replaces user's highscore with balance if
                                 balance &gt; highscore </td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-            </p><p> The chat has no attributes. </p><div class="table"><a name="d5e500"></a><p class="title"><b>Table&nbsp;14.&nbsp;Chat functions</b></p><div class="table-contents"><table><thead><tr>
+            </p><p> The chat has no attributes. </p><div class="table"><a name="d5e508"></a><p class="title"><b>Table&nbsp;14.&nbsp;Chat functions</b></p><div class="table-contents"><table><thead><tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
@@ -504,11 +530,11 @@
                             <td><code class="code">XML</code> element chat</td>
                             <td>adds given message to chat and returns new chat</td>
                         </tr></tbody></table></div></div><p><br class="table-break">
-            </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e515"></a>Implementation details, decisions and discussion</h3></div></div></div><p> While implementing the model, we faced a few problems and the
+            </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e523"></a>Implementation details, decisions and discussion</h3></div></div></div><p> While implementing the model, we faced a few problems and the
                     <span class="quote">&#8220;<span class="quote">XQuery-Update-Facility</span>&#8221;</span> because <code class="code">XQuery</code> is
-                    <span class="quote">&#8220;<span class="quote">READ-ONLY</span>&#8221;</span>. In this section, some examples will be illustrated where
-                we had to rethink our attempts of implementing database updating logic. Also, some
-                interesting parts of our code will be discussed. </p><p> The first problem we faced was that one cannot replace the same node in one
+                    <span class="quote">&#8220;<span class="quote">READ-ONLY</span>&#8221;</span>. In this section, some examples will be illustrated
+                where we had to rethink our attempts of implementing database updating logic. Also,
+                some interesting parts of our code will be discussed. </p><p> The first problem we faced was that one cannot replace the same node in one
                 return statement more than one time. Because we want a comfortable game that
                 requires as few inputs from the user as possible, we make functions like player:hit
                 automatically call player:next when the player busted. That way the busted player
@@ -518,8 +544,8 @@
                 and busts at the same time, the dealer:draw function is called which also will try
                 to replace the deck. A quick workaround was found by not updating the deck in the
                 dealer draw function since after the dealer has played the round is over and we
-                don't need the deck anymore. However,we decide to have the dealer draw at the beginning
-                of a round to avoid running into this problem in the future. </p><p> As to the second problem, which has the same root as the first problem. Since
+                don't need the deck anymore. However,we decide to have the dealer draw at the
+                beginning of a round to avoid running into this problem in the future. </p><p> As to the second problem, which has the same root as the first problem. Since
                 player:double automatically calls game:evaluate if the player was the last one, the
                 database was not updated yet so evaluate would still operate on data pre the
                 player:double call. This means that the last player's bet is not doubled and their
@@ -528,8 +554,8 @@
                 ready to be evaluated. However,at least one user input to have the game evaluated
                 would be needed which interrupts the game flow. This problem also occurs when the
                 last player busts. Our final solution is to add a parameter <code class="code">caller</code> to
-                game:evaluate so that the function knows which action was just executed. In case that
-                    <code class="code">caller</code> equals 0 the last player decides to stand so no updates to
+                game:evaluate so that the function knows which action was just executed. In case
+                that <code class="code">caller</code> equals 0 the last player decides to stand so no updates to
                 the database are required. When <code class="code">caller</code> equals 1 the last player busts,
                 so we need to make his profit negative. The third case is when <code class="code">caller</code>
                 equals 2, this means the last player doubles so we need to add one card to their
@@ -541,64 +567,66 @@
                 longer a duplicate. </p><p> Like mentioned before, we want a comfortable experience for the player by always
                 ending one's turn automatically if they choose to double or bust. To achieve this we
                 implement the function player:next, player:nextPlayer and player:isLast. Together
-                these functions check if a player is the last one and help to set the next player's state
-                to <span class="quote">&#8220;<span class="quote">active</span>&#8221;</span> otherwise. This can be used in both game states where inputs of all players
-                is required (betting and playing). </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e533"></a>The component View</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e535"></a>Modeling the component View</h3></div></div></div><p> The view within the MVC architecture is used to display different kind of
+                these functions check if a player is the last one and help to set the next player's
+                state to <span class="quote">&#8220;<span class="quote">active</span>&#8221;</span> otherwise. This can be used in both game states where
+                inputs of all players is required (betting and playing). </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e541"></a>The component View</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e543"></a>Modeling the component View</h3></div></div></div><p> The view within the MVC architecture is used to display different kinds of
                 screens. The basic structure is divided into Lobby and Game. While the Lobby is used
                 for basic interaction of administrative nature, the Game displays the actual
-                Blackjack. The current view as well as the interaction of the view is specified by
+                Blackjack. The current view, as well as the interaction of the view, is specified by
                 the current path which is defined within the API controller (see Controller
-                section). In the following table one can find the listed screen types with the
-                corresponding Information and Interaction. </p><p>
-                </p><div class="table"><a name="d5e539"></a><p class="title"><b>Table&nbsp;15.&nbsp;Model for View</b></p><div class="table-contents"><table class="table" summary="Model for View" border="1"><colgroup><col><col><col></colgroup><tbody><tr><td><span class="emphasis"><em>Screen</em></span></td><td><span class="emphasis"><em>Information</em></span></td><td><span class="emphasis"><em>Interaction</em></span></td></tr><tr><td>bjx</td><td>&nbsp;</td><td><p>login</p><p>go to signup</p></td></tr><tr><td>bjx/signup</td><td>&nbsp;</td><td><p>create</p><p>go to signin</p></td></tr><tr><td>bjx (logged in)</td><td><p>name</p><p>balance</p></td><td><p>new game</p><p>join
-                                        game</p><p>highscore</p><p>logout</p></td></tr><tr><td>bjx/games</td><td><p>games(id, state, players)</p></td><td><p>join game</p><p>new game</p><p>go
-                                        back</p><p>logout</p></td></tr><tr><td>bjx/highscores</td><td><p>highscore(name, balance)</p></td><td><p>go back</p><p>logout</p></td></tr><tr><td>bjx/games/[id] (join)</td><td><p>depending on game state</p></td><td><p>join</p><p>leave</p><p>chat</p></td></tr><tr><td>bjx/games/[id] (betting)</td><td><p>balance</p><p>chat</p></td><td><p>bet</p><p>leave</p><p>chat</p></td></tr><tr><td>bjx/games/[id] (playing)</td><td><p>cards</p><p>bets</p><p>players</p><p>balances</p><p>hand
+                section). The following table lists all screen types with the corresponding
+                information and interaction. </p><p>
+                </p><div class="table"><a name="d5e547"></a><p class="title"><b>Table&nbsp;15.&nbsp;Model for View</b></p><div class="table-contents"><table class="table" summary="Model for View" border="1"><colgroup><col><col><col></colgroup><tbody><tr><td><span class="emphasis"><em>Screen</em></span></td><td><span class="emphasis"><em>Information</em></span></td><td><span class="emphasis"><em>Interaction</em></span></td></tr><tr><td>xforms-multiclient</td><td>&nbsp;</td><td><p>login</p><p>go to signup</p></td></tr><tr><td>xforms-multiclient/signup</td><td>&nbsp;</td><td><p>create</p><p>go to signin</p></td></tr><tr><td>xforms-multiclient (logged in)</td><td><p>name</p><p>balance</p></td><td><p>new game</p><p>join
+                                        game</p><p>highscore</p><p>logout</p></td></tr><tr><td>xforms-multiclient/games</td><td><p>games(id, state, players)</p></td><td><p>join game</p><p>new game</p><p>go
+                                        back</p><p>logout</p></td></tr><tr><td>xforms-multiclient/highscores</td><td><p>highscore(name, balance)</p></td><td><p>go back</p><p>logout</p></td></tr><tr><td>xforms-multiclient/games/[id] (join)</td><td><p>depending on game state</p></td><td><p>join</p><p>leave</p><p>chat</p></td></tr><tr><td>xforms-multiclient/games/[id] (betting)</td><td><p>balance</p><p>chat</p></td><td><p>bet</p><p>leave</p><p>chat</p></td></tr><tr><td>xforms-multiclient/games/[id] (playing)</td><td><p>cards</p><p>bets</p><p>players</p><p>balances</p><p>hand
                                         values</p><p>chat</p></td><td><p>game action(stand, hit, double,
-                                        insurance)</p><p>leave</p><p>chat</p></td></tr><tr><td>bjx/games/[id] (playing)</td><td><p>cards</p><p>bets</p><p>players</p><p>balances</p><p>hand
+                                        insurance)</p><p>leave</p><p>chat</p></td></tr><tr><td>xforms-multiclient/games/[id] (playing)</td><td><p>cards</p><p>bets</p><p>players</p><p>balances</p><p>hand
                                         values</p><p>result</p><p>chat</p></td><td><p>new
                                     round</p><p>leave</p><p>chat</p></td></tr></tbody></table></div></div><p><br class="table-break">
-            </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e632"></a>Implementing the component View</h3></div></div></div><p> The corresponding XSL-files for Lobby and Game create a XHTML page to display the
-                application in a Browser. As already stated before, the created page depends on the
-                current path but also the current state of Game and Player. </p><p> Based on the restriction to XHTML, we frequently use HTML tags such as button,
-                form, input, label and table. In order to customize the appearance, a global
+            </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e640"></a>Implementing the component View</h3></div></div></div><p> The corresponding XSL-files for Lobby and Game create an XHTML page to display
+                the application in a Browser. As already stated before, the created page depends on
+                the current path but also the current state of Game and Player. </p><p> Based on the restriction to XHTML, we frequently use HTML tags such as button,
+                form, input, label, and table. In order to customize the appearance, a global
                 Cascading Style Sheet(CSS) applies to all the created XHTML pages. The style.css
                 file can be found in the static/css folder. We make use of different CSS features
                 such as counters, advanced collectors, transitions and media queries. Through the
-                media queries we enable a responsive user experience. Depending on the screen size
+                media queries, we enable a responsive user experience. Depending on the screen size
                 elements can either be hidden like the chat for instance or displayed with a
-                different shape such as the tables. For the general layout we apply a basic and
-                minimalistic design that enables an uniform appearance across the whole application. </p><p> To enable the basic interaction, we use the submit type of the HTML buttons. On
-                click they create a GET/POST HTTP Request which in turn are handled and specified by
-                the API. Within the Lobby those buttons represent the central element. </p><p> On the starting screen, a player can either login or register for the game. Once
+                different shape such as the tables. For the general layout, we apply a basic and
+                minimalistic design that enables a uniform appearance across the whole application. </p><p> To enable the basic interaction, we use the submit type of the HTML buttons. On
+                click, they create a GET/POST HTTP Request which in turn are handled and specified
+                by the API. Within the Lobby, those buttons represent the central element. </p><p> On the starting screen, a player can either log in or register for the game. Once
                 logged in, his current balance is displayed as well as the different buttons to
                 create a new game, join an existing game, to see the highscore or to reset his
                 balance. While the new game button will simply create a new game, the join game and
-                highscore buttons lead to another screen including a HTML table with corresponding
+                highscore buttons lead to another screen including an HTML table with corresponding
                 information. The Player can join a displayed game by clicking on the corresponding
                 row. </p><p> The core element of the game is the table, which is implemented with SVG.
-                Depending on the current situation, the SVG includes corresponding cards, chips and
-                labels(including player name, balance and hand value). Concerning the game
-                interaction we implemented a dialog box placed below the table. A player can join
-                the game, place bets or is able to make context depending actions like hit, stand,
-                double or insurance. The dialog box is also used to display the results of a round,
-                informing the player about his wins or losses. In the bottom left hand corner the
-                chat is displayed. In order to display/hide the chat window, an intuitive toggle
-                mechanism was implemented. In the top left hand corner, a player has always the
-                possibility to leave the game and to go back to the lobby. </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e639"></a>The component Controller</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e641"></a>Modeling the component Controller</h3></div></div></div><p> The controller has the task to mediate between the data representation (view) and
+                Depending on the current situation, the SVG includes corresponding cards, chips, and
+                labels(including player name, balance, and hand value). Concerning the game
+                interaction, we implemented a dialog box placed below the table. A player can join
+                the game, place bets or make context dependent actions like hit, stand, double or
+                insurance. The dialog box is also used to display the results of a round, informing
+                the player about his wins or losses. In the bottom left-hand corner, the chat is
+                displayed. In order to display/hide the chat window, an intuitive toggle mechanism
+                was implemented. In the top left-hand corner, a player has always the possibility to
+                leave the game and to go back to the lobby. </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e647"></a>The component Controller</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e649"></a>Modeling the component Controller</h3></div></div></div><p> The controller has the task to mediate between the data representation (view) and
                 the data access (model). Therefore, the controller has to handle all requests of the
-                view concering the game, but also the establishment and teardown of the connection.
-            </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e644"></a>Implementing the component Controller</h3></div></div></div><p> Possible requests from the client are: bjx, signup, login, logout, setup, games,
+                view concerning the game, but also the establishment and teardown of the connection.
+            </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d5e652"></a>Implementing the component Controller</h3></div></div></div><p> Possible requests from the client are: menu, signup, login, logout, setup, games,
                 highscore, delete, join, leave, draw, bet, hit, stand, double, insurance, new round
                 and chat. These are either forwarded directly to the model or answered with static
-                html files. The requests bjx, signup, login, logout, highscore are used for the
+                Html files. The requests menu, signup, login, logout, highscore are used for the
                 account control and the displaying of the highscores. The remaining requests are
                 used to implement the game functionalities, including the group chat. </p><p>
                 
-            </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e648"></a>Collaboration</h2></div></div></div><p> The implementation of the web application was done as a group projoct with a group
-            size of 4. Git was used as a distributed version control system. Further, the issues
-            functionality of git was used to track and assign tasks and problems. Different branches
-            were utilized to test different possible implementations. </p><p> Regular meetings in person at the Informatik Faculty of the TUM and voice over ip
-            chats (TS3) were arranged using the messenger whats app regulary to coordinate the
+            </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e656"></a>Collaboration</h2></div></div></div><p> The implementation of the web application was done as a group project with a group
+            size of 4. Git was used as a distributed version control system. Further, the Github
+            Issues feature was used to track and assign tasks and problems. Different branches were
+            utilized to test different possible implementations. </p><p> Regular meetings in person at the Informatik Faculty of the TUM and Voice over IP
+            chats (TS3) were arranged using the messenger whats app regularly to coordinate the
             collaboration and progress. Visualizations of git concerning the issues and commits can
-            be seen below. </p><div class="figure"><a name="d5e652"></a><p class="title"><b>Figure&nbsp;4.&nbsp;Git Overview (Master).</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="50%"><tr><td><img src="../../diagrams/pulse.png" width="100%" alt="Git Overview (Master)."></td></tr></table></div></div></div><br class="figure-break"><div class="figure"><a name="d5e657"></a><p class="title"><b>Figure&nbsp;5.&nbsp;Code Frequencey (Master).</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="50%"><tr><td><img src="../../diagrams/code_freq.png" width="100%" alt="Code Frequencey (Master)."></td></tr></table></div></div></div><br class="figure-break"><div class="figure"><a name="d5e662"></a><p class="title"><b>Figure&nbsp;6.&nbsp;Contributions (Master).</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="50%"><tr><td><img src="../../diagrams/contributions.png" width="100%" alt="Contributions (Master)."></td></tr></table></div></div></div><br class="figure-break"></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e667"></a>Conclusions</h2></div></div></div></div><div class="bibliography"><div class="titlepage"><div><div><h2 class="title"><a name="d5e669"></a>Bibliography</h2></div></div></div><div class="biblioentry"><a name="BaseXHome"></a><p>[BaseX] <span class="bibliomisc">BaseX homepage. http://basex.org. Last accessed on 2019 June 16
+            be seen below. </p><div class="figure"><a name="d5e660"></a><p class="title"><b>Figure&nbsp;4.&nbsp;Git Overview (Master).</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="50%"><tr><td><img src="../../diagrams/pulse.png" width="100%" alt="Git Overview (Master)."></td></tr></table></div></div></div><br class="figure-break"><div class="figure"><a name="d5e665"></a><p class="title"><b>Figure&nbsp;5.&nbsp;Code Frequencey (Master).</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="50%"><tr><td><img src="../../diagrams/code_freq.png" width="100%" alt="Code Frequencey (Master)."></td></tr></table></div></div></div><br class="figure-break"><div class="figure"><a name="d5e670"></a><p class="title"><b>Figure&nbsp;6.&nbsp;Contributions (Master).</b></p><div class="figure-contents"><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" style="cellpadding: 0; cellspacing: 0;" width="50%"><tr><td><img src="../../diagrams/contributions.png" width="100%" alt="Contributions (Master)."></td></tr></table></div></div></div><br class="figure-break"></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e675"></a>Conclusions</h2></div></div></div></div><div class="bibliography"><div class="titlepage"><div><div><h2 class="title"><a name="d5e677"></a>Bibliography</h2></div></div></div><div class="biblioentry"><a name="BaseXHome"></a><p>[BaseX] <span class="bibliomisc">BaseX homepage. http://basex.org. Last accessed on 2019 June 16
+            . </span></p></div><div class="biblioentry"><a name="BaseXStomp"></a><p>[BaseXStomp] <span class="bibliomisc">BaseX with STOMP support, main repository.
+                https://github.com/BaseXdb/basex/tree/stomp. Last accessed on 2019 August 8
             . </span></p></div></div></div></body></html>
