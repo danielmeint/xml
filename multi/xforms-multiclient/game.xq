@@ -11,7 +11,7 @@ import module namespace chat="xforms/chat" at 'chat.xq';
 declare
 %updating
 function game:updateCreate() {
-  insert node game:newGame() into $api:db/games
+  insert node game:newGame() into $api:games
 };
 
 declare
@@ -49,8 +49,8 @@ function game:evaluate($self,$caller) {
 };
 
 declare function game:latestId() as xs:double {
-  if (exists($api:db/games/game)) 
-  then (max($api:db/games/game/@id)) 
+  if (exists($api:games/game)) 
+  then (max($api:games/game/@id)) 
   else (0)
 };
 

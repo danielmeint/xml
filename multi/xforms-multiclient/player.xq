@@ -13,7 +13,7 @@ import module namespace usr="xforms/usr" at 'usr.xq';
 declare
 %updating
 function player:joinGame($gameId as xs:integer, $name as xs:string) {
-  let $game := $api:db/games/game[@id=$gameId]
+  let $game := $api:games/game[@id=$gameId]
   let $user := $api:users/user[@name=$name]
   let $balance := $user/balance/text()
   let $newPlayer := player:setBalance(player:setName(player:newPlayer(), $name), $balance)
@@ -180,7 +180,7 @@ function player:evaluate($self,$caller){
         replace value of node $self/@state with hand:evaluate($hand,$game/dealer/hand/@value),
         replace value of node $self/profit with $floorBet,
         replace value of node $self/balance with $self/balance + $floorBet,
-        usr:win($user, $floorBet)
+        usr:deposit($user, $floorBet)
     )
 };
 

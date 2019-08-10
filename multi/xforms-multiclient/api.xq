@@ -15,8 +15,8 @@ import module namespace request = "http://exquery.org/ns/request";
 
 import module namespace session = "http://basex.org/modules/session";
 
-declare variable $api:db := db:open("xforms-games");
-declare variable $api:users := db:open("xforms-users");
+declare variable $api:games := db:open("xforms-games")/games;
+declare variable $api:users := db:open("xforms-users")/users;
 
 declare
 %rest:path("/xforms-multiclient")
@@ -27,19 +27,15 @@ function api:entry() {
   then (
     api:menu() 
   ) else (
-    api:login()
+    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
   )
 };
 
 declare function api:menu() {
   let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
-  let $games := $api:db/games
+  let $games := $api:games
   let $map := map{ "screen": "menu", "name": session:get("name") }
   return xslt:transform($games, $stylesheet, $map)
-};
-
-declare function api:login() {
-  html:login()
 };
 
 declare
@@ -52,6 +48,15 @@ function api:sign-up($error) {
 };
 
 declare
+%rest:GET
+%rest:path("xforms-multiclient/login")
+%output:method("html")
+%rest:query-param("error", "{$error}")
+function api:login($error) {
+    html:login($error)
+};
+
+declare
 %rest:POST
 %rest:path("/xforms-multiclient/signup")
 %rest:query-param("name", "{$name}")
@@ -61,29 +66,13 @@ function api:user-create(
   $name as xs:string,
   $pass as xs:string
 ) as empty-sequence() {
-  try {
-    if(user:exists($name)) then (
-      error((), "User already exists.")
-    ) else (
-      user:create($name, $pass, "none"),
-      usr:create($name)
-    ),
+  if (usr:exists($name))
+  then (
+    update:output(web:redirect("/xforms-multiclient/signup", map { "error": "User already exists." }))
+  ) else (
+    usr:create($name, $pass),
     update:output(web:redirect("/xforms-multiclient"))
-  } catch * {
-    update:output(web:redirect("/xforms-multiclient/signup", map { "error": $err:description }))
-  }
-};
-
-declare
-%rest:POST
-%rest:path("/xforms-multiclient/signup-check")
-%rest:query-param("name", "{$name}")
-%rest:query-param("pass", "{$pass}")
-function api:signup-check(
-  $name as xs:string,
-  $pass as xs:string
-) as element(rest:response) {
-  
+  )
 };
 
 declare
@@ -91,25 +80,17 @@ declare
 %rest:path("/xforms-multiclient/login")
 %rest:query-param("name", "{$name}")
 %rest:query-param("pass", "{$pass}")
-%updating
 function api:login-check(
   $name  as xs:string,
   $pass  as xs:string
-
 ) {
-  try {
-    let $u := user:check($name, $pass)
-    let $s := session:set("name", $name)
-    return (
-      if (not(usr:exists($name)))
-      then (
-        usr:create($name)
-      )
-    )
-  } catch user:* {
-    (: login fails: no session info is set :)
-  },
-  update:output(web:redirect("/xforms-multiclient"))
+  if (usr:check($name, $pass))
+  then (
+    session:set("name", $name),
+    web:redirect("/xforms-multiclient")
+  ) else (
+    web:redirect("/xforms-multiclient/login", map { "error": "Incorrect name or password." })
+  )
 };
 
 declare
@@ -120,7 +101,7 @@ function api:logout() as element(rest:response) {
   web:redirect("/xforms-multiclient")
 };
 
-declare function api:close($name  as  xs:string) as empty-sequence() {
+declare function api:close($name as xs:string) as empty-sequence() {
   for $wsId in ws:ids()
   where ws:get($wsId, "name") = $name
   return ws:close($wsId)
@@ -146,13 +127,13 @@ function api:accessGames() {
   then (
     api:games() 
   ) else (
-    api:login()
+    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
   )
 };
 
 declare function api:games() {
   let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
-  let $games := $api:db/games
+  let $games := $api:games
   let $map := map{ "screen": "games", "name": session:get("name") }
   return xslt:transform($games, $stylesheet, $map)
 };
@@ -166,14 +147,14 @@ function api:accessHighscores() {
   then (
     api:highscores() 
   ) else (
-    api:login()
+    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
   )
 };
 
 
 declare function api:highscores() {
   let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
-  let $games := $api:db/games
+  let $games := $api:games
   let $map := map{ "screen": "highscores", "name": session:get("name") }
   return xslt:transform($games, $stylesheet, $map)
 };
@@ -192,7 +173,7 @@ declare
 %rest:POST
 %updating
 function api:deleteGame($gameId as xs:integer) {
-    let $game := $api:db/games/game[@id = $gameId]
+    let $game := $api:games/game[@id = $gameId]
     return (
       game:delete($game),
       update:output(web:redirect("/xforms-multiclient/games"))
@@ -216,7 +197,7 @@ declare
 %rest:POST
 %updating
 function api:leaveGame($gameId as xs:integer) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $name := session:get("name")
   let $player := $game/player[@name = $name]
   return (
@@ -234,12 +215,12 @@ function api:accessGame($gameId) {
   then (
     api:getGame($gameId)
   ) else (
-    api:login()
+    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
   )
 };
 
 declare function api:getGame($gameId) {
-  if (exists($api:db/games/game[@id = $gameId]))
+  if (exists($api:games/game[@id = $gameId]))
   then (
     api:returnGame($gameId)
   ) else (
@@ -279,7 +260,7 @@ declare
 %rest:path("/xforms-multiclient/games/{$gameId}/draw")
 %rest:GET
 function api:drawGame($gameId) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $wsIds := ws:ids()
   return (
     for $wsId in $wsIds
@@ -309,7 +290,7 @@ declare
 %rest:form-param("bet", "{$bet}", 0) 
 %updating
 function api:betPlayer($gameId, $bet) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $player := $game/player[@state="active"]
   return (
     player:bet($player, $bet),
@@ -322,7 +303,7 @@ declare
 %rest:POST
 %updating
 function api:hitPlayer($gameId) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $player := $game/player[@state="active"]
   return (
     player:hit($player),
@@ -335,7 +316,7 @@ declare
 %rest:POST
 %updating
 function api:standPlayer($gameId) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $player := $game/player[@state="active"]
   return (
     player:stand($player),
@@ -348,7 +329,7 @@ declare
 %rest:POST
 %updating
 function api:doublePlayer($gameId) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $player := $game/player[@state="active"]
   return (
     player:double($player),
@@ -361,7 +342,7 @@ declare
 %rest:POST
 %updating
 function api:insurancePlayer($gameId) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $player := $game/player[@state="active"]
   return (
     player:insurance($player),
@@ -374,7 +355,7 @@ declare
 %rest:POST
 %updating
 function api:newRound($gameId) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   return (
     game:newRound($game),
     update:output(web:redirect(concat("/xforms-multiclient/games/", $gameId, "/draw")))
@@ -387,7 +368,7 @@ declare
 %rest:form-param("msg", "{$msg}")
 %updating
 function api:chat($gameId, $msg) {
-  let $game := $api:db/games/game[@id = $gameId]
+  let $game := $api:games/game[@id = $gameId]
   let $name := session:get("name")
   let $trace := trace("new message in chat")
   let $chat := $game/chat
