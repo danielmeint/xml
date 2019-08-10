@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.1">
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="5.1">
     <info>
         <title>XForms Multiclient Blackjack Documentation</title>
         <author>
@@ -30,21 +31,23 @@
         <title>Description of the case study</title>
         <!-- Daniel -->
         <para>We implement the popular casino game Blackjack as a multi-client web application.
-            Globally, there are a variety of rulesets with slight differences. We seek to present
-            the most universally accepted variation, commonly found in Las Vegas casinos.</para>
-        <para>Up to five <emphasis>players</emphasis> compete not against each other, but separately
-            against the <emphasis>dealer</emphasis>. The objective of each player is to draw cards
-            and maximize the sum of their respective values (<emphasis>hand value</emphasis>)
-            without exceeding a sum of 21 (<emphasis>bust</emphasis>).
+            [...]
+            <!-- multiclient web application, Firefox as browser, unlimited games in parallel, unlimited clients subscribed to single game, at most five of which are actively playing -->
         </para>
+        <para>Globally, there are a variety of rulesets with slight differences. We seek to present
+            the most universally accepted variation, commonly found in Las Vegas casinos. Up to five
+                <emphasis>players</emphasis> compete not against each other, but separately against
+            the <emphasis>dealer</emphasis>. The objective of each player is to draw cards and
+            maximize the sum of their respective values (<emphasis>hand value</emphasis>) without
+            exceeding a sum of 21 (<emphasis>bust</emphasis>).</para>
         <section>
             <title>Card values</title>
-            <para>The game is played with a single deck of french playing cards. Number cards are
+            <para>The game is played with a single deck of French playing cards. Number cards are
                 worth their value, e.g. the seven of hearts is worth seven points, face cards (Jack,
                 Queen, and King) are worth ten points, and an Ace can be counted as either one or
                 eleven, depending on what is more favorable in a specific situation. A hand
                 containing an Ace counted as eleven is referred to as a <emphasis>soft</emphasis>
-                hand, because the value of the Ace will change to a one to prevent the player from
+                hand because the value of the Ace will change to a one to prevent the player from
                 busting if he was to draw another card and otherwise exceed 21. A card's suit is
                 irrelevant in Blackjack.</para>
         </section>
@@ -74,7 +77,8 @@
                     <title>Possible player decisions.</title>
                     <mediaobject>
                         <imageobject>
-                            <imagedata width="100%" format="png" fileref="diagrams/decisions_activity.png"/>
+                            <imagedata width="100%" format="png"
+                                fileref="diagrams/decisions_activity.png"/>
                         </imageobject>
                     </mediaobject>
                 </figure>
@@ -109,15 +113,15 @@
                             <td>Insurance</td>
                             <td>The player puts a side-bet worth half his initial bet on the outcome
                                 that the dealer has a Blackjack</td>
-                            <td>Available if the player's hand value is less than 21, the first
-                                card of the dealer is an Ace, and the player only has his initial two
+                            <td>Available if the player's hand value is less than 21, the first card
+                                of the dealer is an Ace, and the player only has his initial two
                                 cards</td>
                         </tr>
                     </tbody>
                 </table>
                 <para>Playing double or insurance further assumes that the player has a sufficient
                     balance to cover the increased bet size.</para>
-                <para>After all players have finished their turn, the dealer plays in a
+                <para>After all of the players have finished their turn, the dealer plays in a
                     predetermined manner: He draws cards as long as his hand is worth less than 17
                     points and must stand on a soft 17 or better.</para>
             </section>
@@ -138,7 +142,7 @@
                     bet. If they win with <emphasis>blackjack</emphasis> (hand value of 21 with two
                     cards), they receive one and a half times their bet (3:2). Furthermore, in case
                     a player has decided to place the insurance bet and the dealer has indeed
-                    blackjack, this bet is payed out 2:1. A player winning a $5 insurance bet
+                    blackjack, this bet is paid out 2:1. A player winning a $5 insurance bet
                     receives back the $5 plus an additional $10 from the bank, for example.</para>
                 <para>If player and dealer have equal hands and did not bust, they tie, and the
                     player's bet is returned (also called <emphasis>push</emphasis>).</para>
@@ -149,42 +153,50 @@
     </section>
     <section>
         <title>Architecture</title>
-        <para>
-            As our Blackjack game is implemented as a web application, the basic architecture resembles a client-server model, where the client (front end) runs in a web browser and directly communicates with the server (back end). 
-            Due to the simplicity of our application and the utilization of XStack, we resided from using more sophisticated architectures, such as Client-Server-Broker or Client-Server-Dispatcher. 
+        <para> As our Blackjack game is implemented as a web application, the basic architecture
+            resembles a client-server model, where the client (front end) runs in a web browser and
+            directly communicates with the server (back end). Due to the simplicity of our
+            application and the utilization of XStack, we resided from using more sophisticated
+            architectures, such as Client-Server-Broker or Client-Server-Dispatcher. </para>
+        <para> The server-side Business Logic and Persistency Layers are realized using the XQuery
+            processor and XML database of BaseX. The content is rendered on the server-side using
+            an XSLT processor. </para>
+        <para> Communication using only HTTP requests and responses is not bidirectional. The client
+            can send stateless requests that are answered by the server with a response. The server
+            is not able to send requests to the client, as no active connection is maintained after
+            fulfilling a request. This kind of communication is sufficient in web applications
+            where the business logic is only based on the actions of the client. Applications in which the
+            server should be able to update the content of the client without any requests require
+            full-duplex communication. Examples for such applications are chat rooms and multiplayer video games. Bidirectional communication can
+            be realized using web sockets. Here, a Transmission Control Protocol (TCP) connection
+            between the client and the server is established and maintained until the client or
+            server closes the connection. Therefore, the server can send new content to the
+            client without incoming requests until the connection is closed. BaseX supports Web
+            Sockets, utilizing the Jetty's WebSocket servlet API. As we decided to implement a
+            distributed version of the game, allowing multiple clients to play together, we made use
+            of the WebSockets support of BaseX. <!-- STOMP protocol, STOMP server, ... -->
         </para>
-        <para>
-            The server side Business Logic and Persistentcy Layers are realized using the XQuery Processor of BaseX and a XML database. The content is rendered on the server side using a XSLT processor.
-        </para>
-        <para>
-            Communication using only HTTP requests and responses is not bidirectional. The client can send stateless requests that are answered by the server with a response. The server is not able to send requests to the client, as no active connection is maintained after fullfilling a request.
-            This kind of communication is sufficient in web applications where the business logic is only based on actions of the client. Applications, where the server should be able to update the content of the client without any requests,
-            requires a communication that is fully duplex. Examples for such applications include streaming services, voice over ip and online multiplayer games. 
-            A bidirectional communication can be realized using web sockets. Here a Transmission Control Protocol (TCP) connection between the client and the server is established and maintained until the client or server closes the connection.  
-            Therefore, the server is able to send new content to the client without incomming requests until the connection is closed.
-            BaseX supports Web Sockets, utilizing the Jetty's WebSocket servlet API.
-            
-            As we decided to implement a distributed version of the game, allowing multiple clients to play together, we made use of the websockets support of BaseX. 
-            
-        </para>
-        <para>
-            Further, we complied with the Model View Controller (MVC) architecture in order to enable seperation of concerns and increase the maintainability of the application by decoupling the data representation from the data access.
-            In MVC the system is seperated into 3 different subsystems: the model representing the data access, the view for the data presentation and the controller as a mediator between the data presentation and access. 
-            Implementations of MVC can be categorized as Push and Pull variants. In the Pull variant, the data is retrieved by the view from the model, while in the Push variant the model updates the view after changes to the data.
-            In our application, every player should see the current state of the game. Therefore, we chose the push variant.  
-           
-            The resulting architectural structure of our web application can be seen below.
-        </para>
+        <para> Further, our app complies with the Model View Controller (MVC) architecture to
+            enable separation of concerns and increase the maintainability of the application by
+            decoupling the data representation from the data access. In MVC, the system is separated
+            into 3 different subsystems: the model representing the data access, the view for
+            data presentation and the controller as a mediator between the data presentation and
+            access. Implementations of MVC can be categorized as Push and Pull variants. In the Pull
+            variant, the data is retrieved by the view from the model, while in the Push variant the
+            model updates the view after changes to the data. In our application, every player
+            should see the current state of the game. Therefore, we chose the push variant. The
+            resulting architectural structure of our web application can be seen below. </para>
         <figure>
             <title>Model of the Resulting Architecture.</title>
+            <!-- vielleicht noch xslt bei view -->
             <mediaobject>
                 <imageobject>
                     <imagedata width="75%" format="png" fileref="diagrams/architecture.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
-        
-        
+
+
     </section>
     <section>
         <title>The component model</title>
@@ -192,133 +204,142 @@
         <section>
             <title>Modeling the model</title>
             <para> In an MVC-architecture the model has the control of the application's logic.
-                Furthermore it is responsibel to store data, for example in a database. In order to maintain data,
-                several objects with unique functionality are needed. All these collaborating
-                objects provide different attributes and methods. In the following the data model
-                will be described at first. Thereon the design decisions will be discussed. The
-                second part consists of the implementation of the game, followed by a discussion on
-                implementation details and which problems were faced. </para>
-            <para> 
-                The model database <code>model.xml</code> consists of a list of games. For that a class
-                    <classname>Game</classname> is needed which stores every information about the
-                instance of a blackjack game. A game object needs an attribute to store its' id and another
-                attribute to store the current state of the game. Regarding <classname>Game</classname> functions, their main purpose
-                is constructing,initializing and resetting game objects. Because every game object
-                also stores all the attending players and a dealer, the functions essentially
-                execute operations on all players. In addition to the basic functions,
+                Furthermore, it is responsible to store data, for example in a database. In order to
+                maintain data, several objects with unique functionality are needed. All these
+                collaborating objects provide different attributes and methods. In the following, the
+                data model will be described first. Thereon the design decisions will be
+                discussed. The second part consists of the implementation of the game, followed by a
+                discussion on implementation details and which problems were faced. </para>
+            <para> The primary database <code>xforms-games</code> consists of a list of games. For that, a
+                class <classname>Game</classname> is needed which stores all information about the
+                instance of a blackjack game. A game object needs an attribute to store its' id and
+                another attribute to store the current state of the game. Regarding
+                    <classname>Game</classname> functions, their main purpose is
+                constructing, initializing and resetting game objects. Because every game object also
+                stores all the attending players and a dealer, the functions essentially execute
+                operations on all players. In addition to the basic functions,
                     <classname>Game</classname> must provide some function to evaluate the game.
-                However the logic of evaluating a player should be sourced to the
+                However, the logic of evaluating a player should be sourced to the
                     <classname>Player</classname> class. Another object stored in a game object is
                 the chat. </para>
-            <para>
-                The <classname>Player</classname> will need some attributes to store meta data like name, balance, bet and profit.
-                Furthermore this class has to hold a player's state and wether a player chose to take insurance in a round.
-                One more object stored inside the player is the players hand, which
-                holds the cards. As to the <classname>Player</classname> functions, contiguous to
-                the constructors and setters, there will be alot of functions that contain the game's
-                logic. Depending on the game's state, a player can take several actions, which will be
-                passed over to the <classname>Player</classname> class by the API. Alongside the playing functions, some helpers which provide
-                logic for finding the next player and joining or leaving a game are needed. Finally logic to evaluate a player must be integrated. </para>
+            <para> The <classname>Player</classname> will need some attributes to store metadata
+                like name, balance, bet, and profit. Furthermore, this class has to hold a player's
+                state and whether or not a player chooses to take insurance. One more object stored
+                inside the player is the player's hand, which holds the cards. As to the
+                    <classname>Player</classname> functions, contiguous to the constructors and
+                setters, there will be a lot of functions that contain the game's logic. Depending on
+                the game's state, a player can take several actions, which will be passed over to
+                the <classname>Player</classname> class by the API. Alongside the playing functions,
+                some helpers which provide logic for finding the next player and joining or leaving
+                a game are needed. Finally, logic to evaluate a player must be integrated. </para>
             <para> Since the players all play against the dealer, another class
-                    <classname>Dealer</classname> is required. It does not require any attributes, but it must store
-                the deck of the game and likewise the players a hand object. Concerning the
-                functions of the class, it should provide a helper function to help determining a player's profit, depending on their insurance state.
-                More logic to give every
-                player two cards and also draw for the dealer will be required. </para>
-            <para> The next class we need in our model is <classname>Hand</classname>. On one hand this class will provide helper
-                functions for evaluating a player's hand. On the other hand it will supply some function to calculate the optimal sum of a hand.
-                This is needed because the card Ace can have the value 1 and 11. </para>
-            <para> The <classname>Card</classname> class will provide two attributes to store a card's value and suit. 
-                Besides the constructor and setter functions there will be a getter function that returns a card's actual value,   
-            </para>
-            <para>
-                Inside the <classname>Chat</classname> class, the players' messages should be stored.
-            </para>
-            <para>
-                The last class in the model compoment is <classname>Usr</classname>.                
-                It has no functions other than a constructor and setters.
-                We store the usr's in another database <quote>users.xml</quote>.                
-            </para>            
-            <para>
-                The model is represented in the following class diagram. Helper functions and setters/getters/constructors are omitted for readability.
-            </para>
+                    <classname>Dealer</classname> is required. It does not require any attributes,
+                but it must store the deck of the game and a hand object similar to the player's.
+                Concerning the functions of the class, it should provide a helper function to help
+                to determine a player's profit, depending on their insurance state. More logic to
+                give every player two cards and also draw for the dealer will be required. </para>
+            <para> The next class we need in our model is <classname>Hand</classname>. On the one hand,
+                this class will provide helper functions for evaluating a player's hand. On the
+                other hand, it will supply some function to calculate the optimal sum of a hand. This
+                is needed because the card Ace can have the value 1 and 11. </para>
+            <para> The <classname>Card</classname> class will provide two attributes to store a
+                card's value and suit. Besides the constructor and setter functions, there will be a
+                getter function that returns a card's actual value, </para>
+            <para> Inside the <classname>Chat</classname> class, the players' messages should be
+                stored. </para>
+            <para> The last class in the model component is <classname>Usr</classname> (<classname>User</classname> is a reserved namespace in BaseX). It has no
+                functions other than a constructor and setters. Users are stored
+                database <quote>xforms-users</quote>. </para>
+            <para> The model is represented in the following class diagram. Helper functions and
+                setters/getters/constructors are omitted for readability. </para>
             <figure>
-            <title>Class diagrams for component Model.</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata width="75%" format="png"
-                        fileref="diagrams/UML.png"/>
-                </imageobject>
-            </mediaobject>
+                <title>Class diagrams for component Model.</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata width="75%" format="png" fileref="diagrams/UML.png"/>
+                    </imageobject>
+                </mediaobject>
             </figure>
         </section>
         <section>
             <title>Design decisions and discussion</title>
-            <para>Continuing the section about the modelling of the model, all the design decisions will be presented and discussed.</para>
-            <para>
-                One of the decisions was to implement a class that takes care of the players' and the dealer's cards, because we did not like storeing single card instances
-                inside a player or dealer element. We came up with the <classname>Hand</classname> class which is holding cards for the players and the dealer. It has the benefit
-                of getting their cards summed up value easily, as well as evaluating a player's hand. Another great advantage of implementing this class is that the feature <quote>split</quote>
-                could be added to our solution without the need to change other classes. In the real worlds game of blackjack players can decide to split their initial hand which allows them to play with two hands at one time.
-                Without the hand class, some other ideas would be needed to enable this feature. For example one could add another attribute to the <classname>Card</classname> class which indicates
-                to which hand it belongs. 
-            </para>
-            <para> 
-                Because we want to store the global balance of a player permamently, we introduced the <classname>Usr</classname> class. This way we can easily look up the player's highest achieved balance
-                for the highscore list in the lobby. For every game a Usr joins a new Player instance will be created with the balance of the Usr.
-            </para>  
-            <para> 
-                We choose to have the <classname>Deck</classname> as an extra class so that we can simply store all of the game's deck's cards in one single instance,
-                instead of having all of the cards inside the <classname>Dealer</classname> or <classname>Game</classname> object. This grants a better structure in the model and
-                simplifies functionality like shuffling the deck or drawing cards. When thinking about extending the game, this class can be helpful for example when one wants more than one
-                deck. (in some games of blackjack each player has their own deck)
-            </para>
-            <para> 
-                So why do we need <classname>Dealer</classname> instead of just having another player object? At first sight both classes may not differ alot
-                looking at what players and the dealer actually do in a game of blackjack. However, by closer inspection the dealer has alot of differences.
-                Starting with the attributes, a dealer does not need any meta information stored like a name or balance and the dealer does not place a bet each round either.
-                The only resemblance is that both objects store a hand object. Comparing the functions of the classes, the dealer has no choices to make, so none of the 
-                player's functions that are needed for a player's decision are required. Without the <classname>Dealer</classname> we would need another way to store the cards included in the game.
-                Altogether a dealer object is too unequal to just use another player object instead.             
-            </para>
-            <para>
-                Another question is How to deal with players that lost all their money? We decide that those players get set to spectating mode, where they can reset their balance. ???
-            </para>
-            <para> 
-                As an extra feature, we decide to implement a chat for the players. One reason for this is that we settle for the multiplayer version for local networks.
-                With the chat the players can communicate with each other which makes the game more vivid. Moreover when players leave or join the game a small information text will be inserted
-                into the chat so other players will know that someone joined/left their game.
-            </para>
-            <para>
-                In conclusion our main idea of modelling the model is to prevent writing the same code multiple times and segregating code by it's functionality. Instead of having a few 
-                huge classes with a big range of functions we rather want to have more but smaller classes that are not too complex. This way the model stays alot more readable
-                and it makes it more adjustable and integrating extensions easier.
-            </para>
+            <para>Continuing the section about the modeling of the model, all the design decisions
+                will be presented and discussed.</para>
+            <para> One of the decisions was to implement a class that takes care of the players' and
+                the dealer's cards because we did not like storing single card instances inside a
+                player or dealer element. We came up with the <classname>Hand</classname> class
+                which is holding cards for the players and the dealer. It has the benefit of getting
+                their cards summed up value easily, as well as evaluating a player's hand. Another
+                great advantage of implementing this class is that the feature <quote>split</quote>
+                could be added to our solution without the need to change other classes. In the real
+                worlds game of blackjack players can decide to split their initial hand which allows
+                them to play with two hands at one time. Without the hand class, some other ideas
+                would be needed to enable this feature. For example, one could add another attribute
+                to the <classname>Card</classname> class which indicates to which hand it belongs. </para>
+            <para> Because we want to store the global balance of a player permanently, we
+                introduced the <classname>Usr</classname> class. This way we can easily look up the
+                player's highest achieved balance for the highscore list in the lobby. For every
+                game a Usr joins, a new Player instance will be created with the balance of the Usr. </para>
+            <para> We choose to have the <classname>Deck</classname> as an extra class so that we
+                can simply store all of the game's deck's cards in one single instance, instead of
+                having all of the cards inside the <classname>Dealer</classname> or
+                    <classname>Game</classname> object. This grants a better structure in the model
+                and simplifies functionality like shuffling the deck or drawing cards. When thinking
+                about extending the game, this class can be helpful for example when one wants more
+                than one deck. (in some variants of blackjack, each player has a separate deck) </para>
+            <para> So why do we need <classname>Dealer</classname> instead of just having another
+                player object? At first, both classes may not differ a lot looking at what
+                players and the dealer do in a game of blackjack. However, by closer
+                inspection, one notices that the dealer has a lot of differences. Starting with the attributes, a
+                dealer does not need any meta information stored like a name or balance and the
+                dealer does not place a bet each round either. The only resemblance is that both
+                objects store a hand object. Comparing the functions of the classes, the dealer has
+                no choices to make, so none of the player's functions that are needed for a player's
+                decision are required. Without the <classname>Dealer</classname>, we would need
+                another way to store the cards included in the game. Altogether a dealer object is
+                too unequal to just use another player object instead. </para>
+            <para> Another question is how to deal with players that lost all their money? We decided
+                that those players get set to spectating mode and can deposit more money in the main menu </para>
+            <para> As an extra feature, we decide to implement a chat for the players. One reason
+                for this is that we settle for the multiplayer version for local networks. Players can communicate with each other through the chat, which makes the experience more social.
+                Moreover, when players leave or join the game a small information text will be
+                inserted into the chat so other players will know that someone joined/left their
+                game. </para>
+            <para> In conclusion, our main idea while modelling the model was to prevent writing the same
+                code multiple times and segregating code by its functionality. Instead of having a
+                few huge classes with a big range of functions we rather want to have more but
+                smaller classes that are not too complex. This way the model stays a lot more
+                readable and it makes it more adjustable and integrating extensions easier. </para>
         </section>
         <section>
             <title>Implementation</title>
-            <para>
-                The compoment model has the responsibility of holding data. Since we use an object-oriented approach, all implemented classes provide their own functionality and attributes.
-                So each class contains data which is alltogether stored in our BaseX database. The database also lets us query functions via <code>XQuery</code> and the <code>XQuery-Processor</code>, because of that
-                all of the compoment model's functions are written in <code>XQuery</code> and all the data is stored as <code>XML</code> elements.                                  
-                XQuery has a functional approach and was created to run queries on <code>XML</code> databases. One of the most importan highlights of the language are <code>FLOWR-expressions</code>. The name <code>FLOWR</code> contains the initials of <quote>for-let-order-where-return</quote>. 
-                For comparison, this is equivalent of the <quote>select from where</quote> queries of <code>SQL</code>. The object's function usually have a first parameter <code>self</code> which indicates
-                on which object the code should be executed. This ensures encapsulation.</para>
-            <para>
-                Because most of the classes have setters, getters and constructors and the implementation of these functions do not differ in comparison to other classes we don't describe the
-                implementation for every single class. In fact all the setter methods return a new element by calling the constructor with alternated parameters. All of the constructors
-                create <code>XML</code> elements depending on the attributes of a class.  
-            </para>
-            <para>
-                Beginning with <classname>Game</classname> class that has the following attributes and functions.
-                <table>
+            <para> The component model has the responsibility of holding data. Since we use an
+                object-oriented approach, all implemented classes provide their own functionality
+                and attributes. So each class contains data which is altogether stored in our BaseX
+                database. The database also lets us query functions via <code>XQuery</code> and the
+                    <code>XQuery-Processor</code> because of that all of the component model's
+                functions are written in <code>XQuery</code> and all the data is stored as
+                    <code>XML</code> elements. XQuery has a functional approach and was created to
+                run queries on <code>XML</code> databases. One of the most important concepts of
+                the language are <code>FLOWR-expressions</code>. The name <code>FLOWR</code>
+                contains the initials of <quote>for-let-order-where-return</quote> and can be regarded as the equivalent of <quote>select from where</quote> queries in
+                    <code>SQL</code>. The functions need an additional parameter
+                    <code>self</code> which indicates on which object the code should be executed to emulate object-oriented programming in XQuery.</para>
+            <para> Because most of the classes have setters, getters, and constructors and the
+                implementation of these functions do not differ in comparison to other classes we
+                don't describe the implementation for every single class. In fact, all setter
+                methods return a new element by calling the constructor with alternated parameters.
+                All of the constructors create <code>XML</code> elements depending on the attributes
+                of a class. </para>
+            <para> Beginning with <classname>Game</classname> class that has the following
+                attributes and functions. <table>
                     <caption>Game attributes</caption>
                     <thead>
                         <tr>
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
-                        </tr>                        
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -332,7 +353,7 @@
                             <td>stores the state of the game</td>
                         </tr>
                     </tbody>
-                </table>              
+                </table>
                 <table>
                     <caption>Game functions</caption>
                     <thead>
@@ -348,30 +369,37 @@
                             <td>evaluate</td>
                             <td>caller:integer</td>
                             <td>void</td>
-                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate for all players, uses caller to determine what action the last player took</td>
+                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate
+                                for all players, uses caller to determine what action the last
+                                player took</td>
                         </tr>
                         <tr>
                             <td>latestId</td>
                             <td>none</td>
                             <td>double ???</td>
-                            <td>returns the highest id of all games in the database, needed for new games since the id always gets incremented</td>
+                            <td>returns the highest id of all games in the database, needed for new
+                                games since the id always gets incremented</td>
                         </tr>
                         <tr>
                             <td>play</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>sets game's state to <quote>playing</quote>, sets all players besides the first player to inactive, the first one to active and finally calls dealer:deal</td>
-                        </tr>                                               
+                            <td>sets game's state to <quote>playing</quote>, sets all players
+                                besides the first player to inactive, the first one to active and
+                                finally calls dealer:deal</td>
+                        </tr>
                         <tr>
                             <td>reset</td>
                             <td>none</td>
                             <td><code>XML</code> element of game</td>
-                            <td>sets game to state <quote>betting</quote>, basically calls the classes constructor with all the players that have a balance > 0</td>
+                            <td>sets game to state <quote>betting</quote>, basically calls the
+                                classes constructor with all the players that have a balance >
+                                0</td>
                         </tr>
-                    </tbody>                    
+                    </tbody>
                 </table>
             </para>
-            <para>                         
+            <para>
                 <table>
                     <caption>Player attributes</caption>
                     <thead>
@@ -379,13 +407,13 @@
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
-                        </tr>                        
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>balance</td>
                             <td>integer</td>
-                            <td>store the balance of player</td>                            
+                            <td>store the balance of player</td>
                         </tr>
                         <tr>
                             <td>bet</td>
@@ -395,7 +423,7 @@
                         <tr>
                             <td>insurance</td>
                             <td>string</td>
-                            <td>stores wether or not a player took insurance</td>
+                            <td>stores whether or not a player took insurance</td>
                         </tr>
                         <tr>
                             <td>name</td>
@@ -411,10 +439,9 @@
                             <td>state</td>
                             <td>string</td>
                             <td>stores state of player</td>
-                        </tr>                                                                                            
+                        </tr>
                     </tbody>
                 </table>
-                
                 <table>
                     <caption>Player functions</caption>
                     <thead>
@@ -436,76 +463,82 @@
                             <td>double</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>updates the player's bet to two times of the amount of bet, calls game:evaluate if player is last otherwise player:next</td>
+                            <td>updates the player's bet to two times of the amount of bet, calls
+                                game:evaluate if player is last otherwise player:next</td>
                         </tr>
                         <tr>
                             <td>draw</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>calls deck:drawCard and hand:addCard to add a card to the player, updates the player's hand and the deck</td>
+                            <td>calls deck:drawCard and hand:addCard to add a card to the player,
+                                updates the player's hand and the deck</td>
                         </tr>
                         <tr>
                             <td>evaluate</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>calculates profit of player and updates self's balance accordingly, also updates user's balance accordingly</td>
+                            <td>calculates profit of player and updates self's balance accordingly,
+                                also updates user's balance accordingly</td>
                         </tr>
                         <tr>
                             <td>hit</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>calls helper player:draw, gives player another card and if they bust calls player:next or game:evaluate if they are the last player</td>
+                            <td>calls helper player:draw, gives player another card and if they bust
+                                calls player:next or game:evaluate if they are the last player</td>
                         </tr>
                         <tr>
                             <td>insurance</td>
                             <td>none</td>
                             <td>void</td>
                             <td>updates self insurance to <quote>true</quote></td>
-                        </tr>                        
+                        </tr>
                         <tr>
                             <td>isLast</td>
                             <td>none</td>
                             <td>boolean</td>
-                            <td>determines and returns wether player is last</td>
+                            <td>determines and returns whether player is last</td>
                         </tr>
                         <tr>
                             <td>joinGame</td>
                             <td>gameId:integer, name:string</td>
                             <td>void</td>
-                            <td>if it is the first player, creates a new game object with the new player, else just inserts the new player and adds an information to the chat about the player joining</td>
+                            <td>if it is the first player, creates a new game object with the new
+                                player, else just inserts the new player and adds an information to
+                                the chat about the player joining</td>
                         </tr>
                         <tr>
                             <td>leave</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>deletes self and calls player:next if self was active and there is more than one player, adds leave information to chat</td>
+                            <td>deletes self and calls player:next if self was active and there is
+                                more than one player, adds leave information to chat</td>
                         </tr>
                         <tr>
                             <td>next</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>sets self state to <quote>inactive</quote> and if there is a next player:nextPlayer to <quote>active</quote> else checks if game's state is <quote>betting</quote>
-                                then calls game:play otherwise game:evaluate
-                            </td>
+                            <td>sets self state to <quote>inactive</quote> and if there is a next
+                                player:nextPlayer to <quote>active</quote> else checks if game's
+                                state is <quote>betting</quote> then calls game:play otherwise
+                                game:evaluate </td>
                         </tr>
                         <tr>
                             <td>nextPlayer</td>
                             <td>none</td>
                             <td><code>XML</code> element player</td>
                             <td>determines and returns the next player</td>
-                        </tr>                                              
+                        </tr>
                         <tr>
                             <td>stand</td>
                             <td>none</td>
                             <td>void</td>
                             <td>calls player:next</td>
-                        </tr>                                                                                                                     
+                        </tr>
                     </tbody>
                 </table>
             </para>
-            <para>
-                The dealer has no attributes.
-                <table>
+            <para> The dealer has no attributes. <table>
                     <caption>Dealer functions</caption>
                     <thead>
                         <tr>
@@ -520,20 +553,21 @@
                             <td>deal</td>
                             <td>none</td>
                             <td>void</td>
-                            <td>firstly calls deck:drawTo17 for self, afterwards deals two cards for each player by adding cards of the deck to hand and removing them from the deck</td>
+                            <td>firstly calls deck:drawTo17 for self, afterwards deals two cards for
+                                each player by adding cards of the deck to hand and removing them
+                                from the deck</td>
                         </tr>
                         <tr>
                             <td>evaluateInsurance</td>
                             <td>playerIsInsurance:integer,bet:double,playerWon:integer</td>
                             <td>integer</td>
-                            <td>calculates a player's bonus depending on wether they have an insurance and if the dealer got a blackjack</td>
+                            <td>calculates a player's bonus depending on whether they have an
+                                insurance and if the dealer got a blackjack</td>
                         </tr>
                     </tbody>
                 </table>
             </para>
-            <para>       
-                The deck class has no attributes.           
-                <table>
+            <para> The deck class has no attributes. <table>
                     <caption>Deck functions</caption>
                     <thead>
                         <tr>
@@ -548,85 +582,94 @@
                             <td>drawCard</td>
                             <td>none</td>
                             <td>(<code>XML</code> element card,<code>XML</code> element deck)</td>
-                            <td>calls deck:getCard to get the topmost card and calls deck:removeCardAtIndex to remove topmost card to return the new deck</td>
+                            <td>calls deck:getCard to get the topmost card and calls
+                                deck:removeCardAtIndex to remove topmost card to return the new
+                                deck</td>
                         </tr>
                         <tr>
                             <td>drawTo17</td>
-                            <td>hand:<code>XML</code> element hand,deck:<code>XML</code> element deck</td>
+                            <td>hand:<code>XML</code> element hand,deck:<code>XML</code> element
+                                deck</td>
                             <td>(<code>XML</code> element hand,<code>XML</code> element deck)</td>
-                            <td>recursively draws cards from given deck to given hand until hand's value >= 17</td>
+                            <td>recursively draws cards from given deck to given hand until hand's
+                                value >= 17</td>
                         </tr>
                         <tr>
                             <td>removeCardAtIndex</td>
                             <td>index:integer</td>
                             <td><code>XML</code> element deck</td>
-                            <td>calls helper deck:removeCard that finds and removes the card at given index and returns a new deck without the card</td>
+                            <td>calls helper deck:removeCard that finds and removes the card at
+                                given index and returns a new deck without the card</td>
                         </tr>
                         <tr>
                             <td>shuffle</td>
                             <td>none</td>
                             <td><code>XML</code> element deck</td>
-                            <td>uses a random number generator to create a new deck with a random permutation of the cards</td>
-                        </tr>                                                
+                            <td>uses a random number generator to create a new deck with a random
+                                permutation of the cards</td>
+                        </tr>
                     </tbody>
                 </table>
             </para>
-           <para>
-               <table>
-                   <caption>Hand attributes</caption>
-                   <thead>
-                       <tr>
-                           <td>name</td>
-                           <td>type</td>
-                           <td>description</td>
-                       </tr>                        
-                   </thead>
-                   <tbody>
-                       <tr>
-                           <td>value</td>
-                           <td>integer</td>
-                           <td>stores the sum of the hand's card's value</td>
-                       </tr>
-                   </tbody>
-               </table>
-               <table>
-                   <caption>Hand functions</caption>
-                   <thead>
-                       <tr>
-                           <td>name</td>
-                           <td>parameter</td>
-                           <td>return value</td>
-                           <td>functionality</td>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       <tr>
-                           <td>addCard</td>
-                           <td>card:<code>XML</code> element hand</td>
-                           <td><code>XML</code> element hand</td>
-                           <td>adds the given card to given hand and returns new hand</td>                           
-                       </tr>
-                       <tr>
-                           <td>evaluate</td>
-                           <td>toBeat:integer</td>
-                           <td>string</td>
-                           <td>checks if player beats the dealer and returns a string accordingly</td>
-                       </tr>
-                       <tr>
-                           <td>evaluateToInt</td>
-                           <td>toBeat:integer</td>
-                           <td>integer</td>
-                           <td>checks if player beats the dealer and returns an integer accordingly, needed for player:evaluate</td>
-                       </tr>
-                       <tr>
-                           <td>getOptimalSum</td>
-                           <td>values:sequence of integers</td>
-                           <td>integer</td>
-                           <td>recursively calculates optimal sum in favor of player, replacing aces with value 1 if the sum of values > 21</td>
-                       </tr>                                             
-                   </tbody>
-               </table>
-           </para>
+            <para>
+                <table>
+                    <caption>Hand attributes</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>type</td>
+                            <td>description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>value</td>
+                            <td>integer</td>
+                            <td>stores the sum of the hand's card's value</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <caption>Hand functions</caption>
+                    <thead>
+                        <tr>
+                            <td>name</td>
+                            <td>parameter</td>
+                            <td>return value</td>
+                            <td>functionality</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>addCard</td>
+                            <td>card:<code>XML</code> element hand</td>
+                            <td><code>XML</code> element hand</td>
+                            <td>adds the given card to given hand and returns new hand</td>
+                        </tr>
+                        <tr>
+                            <td>evaluate</td>
+                            <td>toBeat:integer</td>
+                            <td>string</td>
+                            <td>checks if player beats the dealer and returns a string
+                                accordingly</td>
+                        </tr>
+                        <tr>
+                            <td>evaluateToInt</td>
+                            <td>toBeat:integer</td>
+                            <td>integer</td>
+                            <td>checks if player beats the dealer and returns an integer
+                                accordingly, needed for player:evaluate</td>
+                        </tr>
+                        <tr>
+                            <td>getOptimalSum</td>
+                            <td>values:sequence of integers</td>
+                            <td>integer</td>
+                            <td>recursively calculates optimal sum in favor of player, replacing
+                                aces with value 1 if the sum of values > 21</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </para>
             <para>
                 <table>
                     <caption>Card attributes</caption>
@@ -635,7 +678,7 @@
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
-                        </tr>                        
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -647,7 +690,7 @@
                             <td>value</td>
                             <td>integer</td>
                             <td>stores the value of the card</td>
-                        </tr>                        
+                        </tr>
                     </tbody>
                 </table>
                 <table>
@@ -663,9 +706,10 @@
                     <tbody>
                         <tr>
                             <td>equals</td>
-                            <td>card1:<code>XML</code> element card,card2:<code>XML</code> element deck</td>
+                            <td>card1:<code>XML</code> element card,card2:<code>XML</code> element
+                                deck</td>
                             <td>boolean</td>
-                            <td>checks if value and suit of both cards are equal</td>                           
+                            <td>checks if value and suit of both cards are equal</td>
                         </tr>
                         <tr>
                             <td>getNumericalValue</td>
@@ -676,7 +720,7 @@
                     </tbody>
                 </table>
             </para>
-            <para>                
+            <para>
                 <table>
                     <caption>Usr attributes</caption>
                     <thead>
@@ -684,9 +728,9 @@
                             <td>name</td>
                             <td>type</td>
                             <td>description</td>
-                        </tr>                        
+                        </tr>
                     </thead>
-                    <tbody>                      
+                    <tbody>
                         <tr>
                             <td>balance</td>
                             <td>integer</td>
@@ -719,85 +763,93 @@
                             <td>win</td>
                             <td>amount:integer</td>
                             <td>void</td>
-                            <td>updates user's balance and replaces user's highscore with balance if balance > highscore </td>                           
+                            <td>updates user's balance and replaces user's highscore with balance if
+                                balance > highscore </td>
                         </tr>
                     </tbody>
                 </table>
             </para>
-            <para>
-                The chat has no attributes.           
-                <table>                    
+            <para> The chat has no attributes. <table>
                     <caption>Chat functions</caption>
-                    <thead>                        
-                        <tr>                            
+                    <thead>
+                        <tr>
                             <td>name</td>
                             <td>parameter</td>
                             <td>return value</td>
                             <td>functionality</td>
                         </tr>
                     </thead>
-                    <tbody>                        
+                    <tbody>
                         <tr>
                             <td>addMessage</td>
                             <td>self,msg:string</td>
                             <td><code>XML</code> element chat</td>
-                            <td>adds given message to chat and returns new chat</td>                           
+                            <td>adds given message to chat and returns new chat</td>
                         </tr>
                     </tbody>
                 </table>
             </para>
         </section>
-        
+
         <section>
             <title>Implementation details, decisions and discussion</title>
-            <para>                
-                While implementing the model, we faced a few problems and the <quote>XQuery-Update-Facility</quote> because <code>XQuery</code> is <quote>READ-ONLY</quote>.
-                In this section some example will be illustrated where we had to rethink our attempts of implementing database updating logic. 
-                Also some interesting parts of our code will be discussed.
-            </para>
-            <para>
-                The first problem we faced was that one cannot replace the same node in one return statement more than one time. Because we want a comfortable game
-                that requires as few input from the user as possible, we make functions like player:hit automatically call player:next when the player busted. That way
-                the busted player stands and the next player can play without any further user input needed. So in our first attempts of implementing the dealer draw function,
-                we ran into the mentioned problem, because if the last player calls hit (which replaces the node of the deck) and busts at the same time, the dealer:draw 
-                function is called which also will try to replace the deck. A fast work around was found by not updating the deck in the dealer draw function since after the 
-                dealer has played the round is over and we don't need the deck anymore. However we decide to have the dealer draw in the begin of a round to avoid running
-                into this problem in the future.
-            </para>
-            <para>
-                As to the second problem, which has the same root as the first problem. Since player:double automatically calls game:evaluate if the player was the last one,
-                the database was not updated yet so evaluate would still operate on data pre the player:double call. This means that the last player's bet is not doubled and
-                their hand is still their initial hand. One solution to this could be to have another game state like <quote>toEvaluate</quote> after all players have played and the game is ready 
-                to be evaluated. However atleast one user input to have the game evaluated would be needed which interrupts the game flow. This problem also occurs 
-                when the last player busts. Our final solution is to add a parameter <code>caller</code> to game:evaluate so that the functions knows which action occured at last.
-                In case that <code>caller</code> equals 0 the last player decides to stand so no updates to the database are required. When <code>caller</code> equals 1 the last player busts,
-                so we need to make his profit negative. The third case is when <code>caller</code> equals 2, this means the last player doubles so we need to add one card to their hand 
-                and doubling their bet before evaluating the player's hand.
-            </para>
-            <para>
-                For the <classname>Deck</classname> implementation we decide to create a <quote>realistic</quote> deck since we don't like the idea of generating random cards each time a draw
-                occurs. Randomly generating cards would either face the problems of possibly having duplicate cards or needing to implement some code to check if a generated card already exists
-                and repeat generating a card until it is no longer a duplicate.
-            </para>
-            <para>
-                Like mentioned before, we want a comfortable experience for the player by always ending one's turn automatically if they choose to double or bust. To achieve this we implement
-                the function player:next, player:nextPlayer and player:isLast. Together these functions check if a player is the last one and help setting the next player to active otherwise.
-                This can be used in both game states where input of each player is required (betting,playing).
-            </para>                                                   
+            <para> While implementing the model, we faced a few problems and the
+                    <quote>XQuery-Update-Facility</quote> because <code>XQuery</code> is
+                    <quote>READ-ONLY</quote>. In this section, some examples will be illustrated where
+                we had to rethink our attempts of implementing database updating logic. Also, some
+                interesting parts of our code will be discussed. </para>
+            <para> The first problem we faced was that one cannot replace the same node in one
+                return statement more than one time. Because we want a comfortable game that
+                requires as few inputs from the user as possible, we make functions like player:hit
+                automatically call player:next when the player busted. That way the busted player
+                stands and the next player can play without any further user input needed. So in our
+                first attempts of implementing the dealer draw function, we ran into the mentioned
+                problem because if the last player calls hit (which replaces the node of the deck)
+                and busts at the same time, the dealer:draw function is called which also will try
+                to replace the deck. A quick workaround was found by not updating the deck in the
+                dealer draw function since after the dealer has played the round is over and we
+                don't need the deck anymore. However,we decide to have the dealer draw at the beginning
+                of a round to avoid running into this problem in the future. </para>
+            <para> As to the second problem, which has the same root as the first problem. Since
+                player:double automatically calls game:evaluate if the player was the last one, the
+                database was not updated yet so evaluate would still operate on data pre the
+                player:double call. This means that the last player's bet is not doubled and their
+                hand is still their initial hand. One solution to this could be to have another game
+                state like <quote>toEvaluate</quote> after all players have played and the game is
+                ready to be evaluated. However,at least one user input to have the game evaluated
+                would be needed which interrupts the game flow. This problem also occurs when the
+                last player busts. Our final solution is to add a parameter <code>caller</code> to
+                game:evaluate so that the function knows which action was just executed. In case that
+                    <code>caller</code> equals 0 the last player decides to stand so no updates to
+                the database are required. When <code>caller</code> equals 1 the last player busts,
+                so we need to make his profit negative. The third case is when <code>caller</code>
+                equals 2, this means the last player doubles so we need to add one card to their
+                hand and doubling their bet before evaluating the player's hand. </para>
+            <para> For the <classname>Deck</classname> implementation, we decide to create a
+                    <quote>realistic</quote> deck since we don't like the idea of generating random
+                cards each time a draw occurs. Randomly generating cards would either face the
+                problems of possibly having duplicate cards or needing to implement some code to
+                check if a generated card already exists and repeat generating a card until it is no
+                longer a duplicate. </para>
+            <para> Like mentioned before, we want a comfortable experience for the player by always
+                ending one's turn automatically if they choose to double or bust. To achieve this we
+                implement the function player:next, player:nextPlayer and player:isLast. Together
+                these functions check if a player is the last one and help to set the next player's state
+                to <quote>active</quote> otherwise. This can be used in both game states where inputs of all players
+                is required (betting and playing). </para>
         </section>
     </section>
     <section>
         <title>The component View</title>
         <section>
             <title>Modeling the component View</title>
-            <para>
-                The view within the MVC architecture is used
-                to display different kind of screens. The basic structure is divided into Lobby and
-                Game. While the Lobby is used for basic interaction of administrative nature, the Game
-                displays the actual Blackjack. The current view as well as the interaction of the view
-                is specified by the current path which is defined within the API controller (see Controller section). 
-                In the following table one can find the listed screen types with the corresponding Information and Interaction. 
-            </para>
+            <para> The view within the MVC architecture is used to display different kinds of
+                screens. The basic structure is divided into Lobby and Game. While the Lobby is used
+                for basic interaction of administrative nature, the Game displays the actual
+                Blackjack. The current view, as well as the interaction of the view, is specified by
+                the current path which is defined within the API controller (see Controller
+                section). The following table lists all screen types with the
+                corresponding information and interaction. </para>
             <para>
                 <table>
                     <title>Model for View</title>
@@ -808,59 +860,65 @@
                                 <entry><emphasis>Information</emphasis></entry>
                                 <entry><emphasis>Interaction</emphasis></entry>
                             </row>
-                            
-                            
+
+
                             <row rowsep="1">
-                                <entry>bjx</entry>
-                                <entry></entry>
-                                <entry><para>login</para><para>go to signup</para></entry>              
+                                <entry>xforms-multiclient</entry>
+                                <entry/>
+                                <entry><para>login</para><para>go to signup</para></entry>
                             </row>
-                            
+
                             <row rowsep="1">
-                                <entry>bjx/signup</entry>
-                                <entry></entry>
-                                <entry><para>create</para><para>go to signin</para></entry>              
+                                <entry>xforms-multiclient/signup</entry>
+                                <entry/>
+                                <entry><para>create</para><para>go to signin</para></entry>
                             </row>
-                            
+
                             <row rowsep="1">
-                                <entry>bjx (logged in)</entry>
+                                <entry>xforms-multiclient (logged in)</entry>
                                 <entry><para>name</para><para>balance</para></entry>
-                                <entry><para>new game</para><para>join game</para><para>highscore</para><para>logout</para></entry>              
+                                <entry><para>new game</para><para>join
+                                        game</para><para>highscore</para><para>logout</para></entry>
                             </row>
-                            
+
                             <row rowsep="1">
-                                <entry>bjx/games</entry>
+                                <entry>xforms-multiclient/games</entry>
                                 <entry><para>games(id, state, players)</para></entry>
-                                <entry><para>join game</para><para>new game</para><para>go back</para><para>logout</para></entry>              
+                                <entry><para>join game</para><para>new game</para><para>go
+                                        back</para><para>logout</para></entry>
                             </row>
-                            
+
                             <row rowsep="1">
-                                <entry>bjx/highscores</entry>
+                                <entry>xforms-multiclient/highscores</entry>
                                 <entry><para>highscore(name, balance)</para></entry>
-                                <entry><para>go back</para><para>logout</para></entry>              
+                                <entry><para>go back</para><para>logout</para></entry>
                             </row>
                             <row rowsep="1">
-                                <entry>bjx/games/[id] (join)</entry>
+                                <entry>xforms-multiclient/games/[id] (join)</entry>
                                 <entry><para>depending on game state</para></entry>
-                                <entry><para>join</para><para>leave</para><para>chat</para></entry>              
+                                <entry><para>join</para><para>leave</para><para>chat</para></entry>
                             </row>
-                            
+
                             <row rowsep="1">
-                                <entry>bjx/games/[id] (betting)</entry>
+                                <entry>xforms-multiclient/games/[id] (betting)</entry>
                                 <entry><para>balance</para><para>chat</para></entry>
-                                <entry><para>bet</para><para>leave</para><para>chat</para></entry>              
+                                <entry><para>bet</para><para>leave</para><para>chat</para></entry>
                             </row>
-                            
+
                             <row rowsep="1">
-                                <entry>bjx/games/[id] (playing)</entry>
-                                <entry><para>cards</para><para>bets</para><para>players</para><para>balances</para><para>hand values</para><para>chat</para></entry>
-                                <entry><para>game action(stand, hit, double, insurance)</para><para>leave</para><para>chat</para></entry>              
+                                <entry>xforms-multiclient/games/[id] (playing)</entry>
+                                <entry><para>cards</para><para>bets</para><para>players</para><para>balances</para><para>hand
+                                        values</para><para>chat</para></entry>
+                                <entry><para>game action(stand, hit, double,
+                                        insurance)</para><para>leave</para><para>chat</para></entry>
                             </row>
-                            
+
                             <row rowsep="1">
-                                <entry>bjx/games/[id] (playing)</entry>
-                                <entry><para>cards</para><para>bets</para><para>players</para><para>balances</para><para>hand values</para><para>result</para><para>chat</para></entry>
-                                <entry><para>new round</para><para>leave</para><para>chat</para></entry>              
+                                <entry>xforms-multiclient/games/[id] (playing)</entry>
+                                <entry><para>cards</para><para>bets</para><para>players</para><para>balances</para><para>hand
+                                        values</para><para>result</para><para>chat</para></entry>
+                                <entry><para>new
+                                    round</para><para>leave</para><para>chat</para></entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -869,60 +927,71 @@
         </section>
         <section>
             <title>Implementing the component View</title>
-            <para>
-                The corresponding XSL-files for Lobby and Game create a XHTML page to display the application in a Browser. As already stated before, the created page depends on the current path but also the current state of Game and Player.
-            </para>
-            <para>
-                Based on the restriction to XHTML, we frequently use HTML tags such as button, form, input, label and table. In order to customize the appearance, a global Cascading Style Sheet(CSS) applies to all the created XHTML pages. 
-                The style.css file can be found in the static/css folder. We make use of different CSS features such as counters, advanced collectors, transitions and media queries. Through the media queries we enable a responsive user experience. 
-                Depending on the screen size elements can either be hidden like the chat for instance or displayed with a different shape such as the tables. For the general layout we apply a basic and minimalistic design that enables an uniform appearance across the whole application. 
-            </para>   
-            <para>
-                To enable the basic interaction, we use the submit type of the HTML buttons. On click they create a GET/POST HTTP Request which in turn are handled and specified by the API. Within the Lobby those buttons represent the central element. 
-            </para> 
-            <para>
-                On the starting screen, a player can either login or register for the game. Once logged in, his current balance is displayed as well as the different buttons to create a new game, join an existing game, to see the highscore or to reset his balance. 
-                While the new game button will simply create a new game, the join game and highscore buttons lead to another screen including a HTML table with corresponding information. The Player can join a displayed game by clicking on the corresponding row. 
-            </para>
-            <para>
-                The core element of the game is the table, which is implemented with SVG. Depending on the current situation, the SVG includes corresponding cards, chips and labels(including player name, balance and hand value).
-                Concerning the game interaction we implemented a dialog box placed below the table. A player can join the game, place bets or is able to make context depending actions like hit, stand, double or insurance. 
-                The dialog box is also used to display the results of a round, informing the player about his wins or losses. 
-                In the bottom left hand corner the chat is displayed. In order to display/hide the chat window, an intuitive toggle mechanism was implemented.
-                In the top left hand corner, a player has always the possibility to leave the game and to go back to the lobby.
-            </para>
+            <para> The corresponding XSL-files for Lobby and Game create an XHTML page to display the
+                application in a Browser. As already stated before, the created page depends on the
+                current path but also the current state of Game and Player. </para>
+            <para> Based on the restriction to XHTML, we frequently use HTML tags such as button,
+                form, input, label, and table. In order to customize the appearance, a global
+                Cascading Style Sheet(CSS) applies to all the created XHTML pages. The style.css
+                file can be found in the static/css folder. We make use of different CSS features
+                such as counters, advanced collectors, transitions and media queries. Through the
+                media queries, we enable a responsive user experience. Depending on the screen size
+                elements can either be hidden like the chat for instance or displayed with a
+                different shape such as the tables. For the general layout, we apply a basic and
+                minimalistic design that enables a uniform appearance across the whole application. </para>
+            <para> To enable the basic interaction, we use the submit type of the HTML buttons. On
+                click, they create a GET/POST HTTP Request which in turn are handled and specified by
+                the API. Within the Lobby, those buttons represent the central element. </para>
+            <para> On the starting screen, a player can either log in or register for the game. Once
+                logged in, his current balance is displayed as well as the different buttons to
+                create a new game, join an existing game, to see the highscore or to reset his
+                balance. While the new game button will simply create a new game, the join game and
+                highscore buttons lead to another screen including an HTML table with corresponding
+                information. The Player can join a displayed game by clicking on the corresponding
+                row. </para>
+            <para> The core element of the game is the table, which is implemented with SVG.
+                Depending on the current situation, the SVG includes corresponding cards, chips, and
+                labels(including player name, balance, and hand value). Concerning the game
+                interaction, we implemented a dialog box placed below the table. A player can join
+                the game, place bets or make context dependent actions like hit, stand,
+                double or insurance. The dialog box is also used to display the results of a round,
+                informing the player about his wins or losses. In the bottom left-hand corner, the
+                chat is displayed. In order to display/hide the chat window, an intuitive toggle
+                mechanism was implemented. In the top left-hand corner, a player has always the
+                possibility to leave the game and to go back to the lobby. </para>
         </section>
     </section>
     <section>
         <title>The component Controller</title>
         <section>
             <title>Modeling the component Controller</title>
-            <para>
-            The controller has the task to mediate between the data representation (view) and the data access (model). Therefore, the controller has to handle all requests of the view concering the game, but also the establishment and teardown of the connection.
+            <para> The controller has the task to mediate between the data representation (view) and
+                the data access (model). Therefore, the controller has to handle all requests of the
+                view concerning the game, but also the establishment and teardown of the connection.
             </para>
         </section>
         <section>
             <title>Implementing the component Controller</title>
+            <para> Possible requests from the client are: menu, signup, login, logout, setup, games,
+                highscore, delete, join, leave, draw, bet, hit, stand, double, insurance, new round
+                and chat. These are either forwarded directly to the model or answered with static
+                Html files. The requests menu, signup, login, logout, highscore are used for the
+                account control and the displaying of the highscores. The remaining requests are
+                used to implement the game functionalities, including the group chat. </para>
             <para>
-                Possible requests from the client are: bjx, signup, login, logout, setup, games, highscore, delete, join, leave, draw, bet, hit, stand, double, insurance, new round and chat. These are either forwarded directly to the model or answered with static html files.
-                The requests bjx, signup, login, logout, highscore are used for the account control and the displaying of the highscores.
-                The remaining requests are used to implement the game functionalities, including the group chat.
-                
+                <!-- As XQuery functions are either querying or updating, we use the function <function>update</function> provided by <code>BaseX</code>. It grants mixed returns, for example when our 
+                <quote>API</quote> receives a call <quote>hit</quote> it on the one hand notices the model to update data accordingly, on the other hand makes sure that ....  folien E s.24 ff lösung der Constraints-->
             </para>
-            <para>
-               <!-- As XQuery functions are either querying or updating, we use the function <function>update</function> provided by <code>BaseX</code>. It grants mixed returns, for example when our 
-                <quote>API</quote> receives a call <quote>hit</quote> it on one hand notices the model to update data accordingly, on the other hand makes sure that ....  folien E s.24 ff lösung der Constraints-->
-            </para>
-        </section>        
+        </section>
     </section>
     <section>
         <title>Collaboration</title>
-        <para>
-        The implementation of the web application was done as a group projoct with a group size of 4. 
-        Git was used as a distributed version control system. Further, the issues functionality of git was used to track and assign tasks and problems. Different branches were utilized to test different possible implementations. 
-       </para>
-       <para> Regular meetings in person at the Informatik Faculty of the TUM and voice over ip
-            chats (TS3) were arranged using the messenger whats app regulary to coordinate the
+        <para> The implementation of the web application was done as a group project with a group
+            size of 4. Git was used as a distributed version control system. Further, the Github Issues
+            feature was used to track and assign tasks and problems. Different branches
+            were utilized to test different possible implementations. </para>
+        <para> Regular meetings in person at the Informatik Faculty of the TUM and Voice over IP
+            chats (TS3) were arranged using the messenger whats app regularly to coordinate the
             collaboration and progress. Visualizations of git concerning the issues and commits can
             be seen below. </para>
         <figure>
@@ -952,7 +1021,7 @@
     </section>
     <section>
         <title>Conclusions</title>
-        
+
     </section>
     <bibliography>
         <!-- Beispiel -->
