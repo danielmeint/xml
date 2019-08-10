@@ -25,17 +25,10 @@ declare
 function api:entry() {
   if (session:get("name"))
   then (
-    api:menu() 
+    html:menu() 
   ) else (
     web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
   )
-};
-
-declare function api:menu() {
-  let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
-  let $games := $api:games
-  let $map := map{ "screen": "menu", "name": session:get("name") }
-  return xslt:transform($games, $stylesheet, $map)
 };
 
 declare
@@ -101,6 +94,21 @@ function api:logout() as element(rest:response) {
   web:redirect("/xforms-multiclient")
 };
 
+declare
+%rest:path("/xforms-multiclient/balance")
+%rest:POST
+%output:method("html")
+%updating
+function api:deposit() {
+  let $name := session:get("name")
+  let $user := $api:users/user[@name=$name]
+  
+  return (
+    usr:deposit($user, 10),
+    update:output(web:redirect("/xforms-multiclient"))
+  )
+};
+
 declare function api:close($name as xs:string) as empty-sequence() {
   for $wsId in ws:ids()
   where ws:get($wsId, "name") = $name
@@ -125,17 +133,10 @@ declare
 function api:accessGames() {
   if (session:get("name"))
   then (
-    api:games() 
+    html:games() 
   ) else (
     web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
   )
-};
-
-declare function api:games() {
-  let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
-  let $games := $api:games
-  let $map := map{ "screen": "games", "name": session:get("name") }
-  return xslt:transform($games, $stylesheet, $map)
 };
 
 declare
@@ -145,18 +146,10 @@ declare
 function api:accessHighscores() {
   if (session:get("name"))
   then (
-    api:highscores() 
+    html:highscores() 
   ) else (
     web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
   )
-};
-
-
-declare function api:highscores() {
-  let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
-  let $games := $api:games
-  let $map := map{ "screen": "highscores", "name": session:get("name") }
-  return xslt:transform($games, $stylesheet, $map)
 };
 
 declare

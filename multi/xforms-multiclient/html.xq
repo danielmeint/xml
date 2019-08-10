@@ -1,5 +1,9 @@
 module namespace html = "xforms/html";
 
+import module namespace api="xforms/api" at "api.xq";
+
+import module namespace session = 'http://basex.org/modules/session';
+
 declare function html:wrap($content) {
 <html>
     <head>
@@ -14,6 +18,17 @@ declare function html:wrap($content) {
     </div>
     </body>
   </html>
+};
+
+declare function html:menu() {
+  let $name := session:get("name")
+  let $user := $api:users/user[@name=$name]
+  
+  let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
+  let $data := $api:games
+  let $map := map{ "screen": "menu", "name": $name, "balance": $user/balance }
+  
+  return xslt:transform($data, $stylesheet, $map)
 };
 
 declare function html:login($error) {
@@ -67,6 +82,29 @@ declare function html:signup($error) {
       </div>
   )
 };
+
+declare function html:games() {
+  let $name := session:get("name")
+  let $user := $api:users/user[@name=$name]
+  
+  let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
+  let $data := $api:games
+  let $map := map{ "screen": "games", "name": $name, "balance": $user/balance }
+  let $content := xslt:transform($data, $stylesheet, $map)
+  return xslt:transform($data, $stylesheet, $map)
+};
+
+declare function html:highscores() {
+  let $name := session:get('name')
+  let $user := $api:users/user[@name=$name]
+  
+  let $stylesheet := doc("../static/xforms-static/xslt/lobby.xsl")
+  let $data := $api:users
+  let $map := map{ "screen": "highscores", "name": $name, "balance": $user/balance }
+  let $content := xslt:transform($data, $stylesheet, $map)
+  return xslt:transform($data, $stylesheet, $map)
+};
+
 declare function html:gameNotFound() {
   html:wrap(
     <form action="/xforms-multiclient/games" method="post">

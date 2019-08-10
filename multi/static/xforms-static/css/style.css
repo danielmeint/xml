@@ -956,10 +956,9 @@ input:focus {
 
 
 /* table */
-.menutable table{ 
+.menutable table { 
     border-collapse: collapse;
     border-spacing: 0;
-    width: 90%;
     position: relative;
     margin: 0 auto;
     background: white;

@@ -4,6 +4,7 @@
     <xsl:param name="screen" />
     <xsl:param name="name" />
     <xsl:param name="balance" />
+    
     <xsl:template match="/">
         <html>
             <head>
@@ -34,9 +35,9 @@
                                 </form>
                                 <a href="/xforms-multiclient/games"><button>Join Game</button></a>
                                 <a href="/xforms-multiclient/highscores"><button>Highscores</button></a>
-                                <form class="join" action="/xforms-multiclient/games" method="post">
-                                    <a>&#x1F4B0; 100</a>
-                                    <button type="submit">Reset</button> 
+                                <form class="join" action="/xforms-multiclient/balance" method="post">
+                                    <a>&#x1F4B0; <xsl:value-of select="$balance"/></a>
+                                    <button type="submit">Rebuy</button>
                                 </form>
                             </xsl:when>
                             <xsl:when test="$screen = 'games'">
@@ -146,12 +147,13 @@
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Balance</th>
+                                                <th scope="col">Highscore</th>
+                                                <th scope="col">Current Balance</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <xsl:for-each select="games/game/player">
-                                                <xsl:sort select="balance" data-type="number" order="descending" />
+                                            <xsl:for-each select="/users/user">
+                                                <xsl:sort select="highscore" data-type="number" order="descending" />
                                                 <tr>
                                                     <td>
                                                         <xsl:choose>
@@ -166,7 +168,10 @@
                                                             </xsl:when>
                                                             <xsl:otherwise><xsl:value-of select="concat(position(), '. &#xa0;')" /></xsl:otherwise>
                                                         </xsl:choose>
-                                                        <xsl:value-of select="@name" /> (Game <xsl:value-of select="../@id" />) </td>
+                                                        <xsl:value-of select="@name" /></td>
+                                                    <td>
+                                                        <xsl:value-of select="highscore" />
+                                                    </td>
                                                     <td>
                                                         <xsl:value-of select="balance" />
                                                     </td>
