@@ -136,7 +136,14 @@
 									        <xsl:value-of select="balance"/>
 									    </xsl:when>
 									    <xsl:otherwise>
-									        <xsl:value-of select="balance - bet"/>
+									        <xsl:choose>
+    									        <xsl:when test="@insurance = 'true'">
+    									            <xsl:value-of select="balance - bet - ceiling(bet div 2)"/>
+    									        </xsl:when>
+    									        <xsl:otherwise>
+    									            <xsl:value-of select="balance - bet"/>
+    									        </xsl:otherwise>
+									        </xsl:choose>
 									    </xsl:otherwise>
 									</xsl:choose>
 								</text> 
