@@ -192,14 +192,14 @@
         <section>
             <title>Modeling the model</title>
             <para> In an MVC-architecture the model has the control of the application's logic.
-                Furthermore it is responsibel to store data in a database. In order to maintain data,
+                Furthermore it is responsibel to store data, for example in a database. In order to maintain data,
                 several objects with unique functionality are needed. All these collaborating
                 objects provide different attributes and methods. In the following the data model
                 will be described at first. Thereon the design decisions will be discussed. The
                 second part consists of the implementation of the game, followed by a discussion on
-                implementation details and what problems were faced. </para>
+                implementation details and which problems were faced. </para>
             <para> 
-                The model database consists of a list of games. For that a class
+                The model database <code>model.xml</code> consists of a list of games. For that a class
                     <classname>Game</classname> is needed which stores every information about the
                 instance of a blackjack game. A game object needs an attribute to store its' id and another
                 attribute to store the current state of the game. Regarding <classname>Game</classname> functions, their main purpose
@@ -237,7 +237,7 @@
             <para>
                 The last class in the model compoment is <classname>Usr</classname>.                
                 It has no functions other than a constructor and setters.
-                We store the usr's in another database <quote>users</quote>.                
+                We store the usr's in another database <quote>users.xml</quote>.                
             </para>            
             <para>
                 The model is represented in the following class diagram. Helper functions and setters/getters/constructors are omitted for readability.
@@ -749,7 +749,7 @@
         </section>
         
         <section>
-            <title>Implementation detail, decisions and discussion</title>
+            <title>Implementation details, decisions and discussion</title>
             <para>                
                 While implementing the model, we faced a few problems and the <quote>XQuery-Update-Facility</quote> because <code>XQuery</code> is <quote>READ-ONLY</quote>.
                 In this section some example will be illustrated where we had to rethink our attempts of implementing database updating logic. 
