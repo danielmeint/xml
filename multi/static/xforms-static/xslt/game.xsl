@@ -3,17 +3,12 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
 
     <xsl:param name="name"/>
+    <xsl:param name="balance"/>
     
     <xsl:variable name="self" select="/game/player[@name = $name]"/>
     <xsl:variable name="selfBalance" select="/game/player[@name = $name]/balance"/>
     <xsl:variable name="activePlayer" select="/game/player[@state = 'active']"/>
-	<xsl:variable name="activePlayerHandValue" select="/game/player[@state = 'active']/hand/@value"/>
-    
-    <xsl:variable name="activePlayerBet" select="/game/player[@state = 'active']/bet"/>
-    <xsl:variable name="activePlayerBalance" select="/game/player[@state = 'active']/balance"/>
-    <xsl:variable name="dealerCard" select="/game/dealer/hand/card[1]/@value"/>
-    <xsl:variable name="isInsurance" select="/game/player[@state = 'active']/@insurance"/>
-
+    <xsl:variable name="dealer" select="/game/dealer"/>
 
     <xsl:template match="/">
 
@@ -28,12 +23,12 @@
                                 <xsl:when test="game/@state = 'playing'">
                                     <!-- only show the dealer's first card -->
                                     <use
-                                        href="/static/xforms-static/svg/cards.svg#{game/dealer/hand/card[1]/@value}_{game/dealer/hand/card[1]/@suit}"/>
+                                        href="/static/xforms-static/svg/cards.svg#{$dealer/hand/card[1]/@value}_{$dealer/hand/card[1]/@suit}"/>
                                     <use href="/static/xforms-static/svg/cards.svg#back"
                                         style="transform: translate(20px, 4px)"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:for-each select="game/dealer/hand/card">
+                                    <xsl:for-each select="$dealer/hand/card">
                                         <use href="/static/xforms-static/svg/cards.svg#{@value}_{@suit}"
                                             style="transform: translate({(position() - 1) * 20}px, {(position() - 1) * 4}px)"
                                         />
@@ -41,7 +36,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </g>
-			<xsl:if test="/game/dealer/hand/card[1]/@value > 0">
+			<xsl:if test="$dealer/hand/card[1]/@value > 0">
                         <g class="label label-hand">
                             <rect x="10px" y="70px" rx="15" ry="15" width="80" height="50"/>
                             <text class="name" x="30px" y="85px">
@@ -51,10 +46,10 @@
                                 <xsl:choose>
                                     <xsl:when test="/game/@state = 'playing'">
                                         <!-- only show value of the visible card -->
-                                        <xsl:value-of select="/game/dealer/hand/card[1]/@value"/>
+                                        <xsl:value-of select="$dealer/hand/card[1]/@value"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="/game/dealer/hand/@value"/>
+                                        <xsl:value-of select="$dealer/hand/@value"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                                 
@@ -217,7 +212,7 @@
 									   </div>
 							           <div>									       
    									     <xsl:choose>
-                                                <xsl:when test="$activePlayerBet * 1.5 &gt; $activePlayerBalance or $dealerCard!='A' or $isInsurance='true'">
+   									         <xsl:when test="$activePlayer/bet * 1.5 &gt; $activePlayer/balance or $dealer/hand/card[1]/@value != 'A' or $activePlayer/@insurance ='true'">
                                                 </xsl:when>
                                                 <xsl:otherwise>
                                                    <form action="/xforms-multiclient/games/{/game/@id}/insurance" method="POST" target="hiddenFrame">

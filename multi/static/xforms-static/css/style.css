@@ -146,13 +146,6 @@ svg {
     flex-direction: column;
 }
 
-
-
-
-
-
-
-
 svg .label {
     fill: white;
     stroke: black;
@@ -869,6 +862,14 @@ g[id *= 'clubs'] text,
     background-color: white;
     color: darkgrey;
     box-shadow: var(--shadow);
+}
+
+.dialog#login .error {
+    color: red;
+}
+
+.dialog#register .error {
+    color: white;
 }
 
 .dialog form{

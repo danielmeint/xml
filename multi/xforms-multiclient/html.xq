@@ -38,8 +38,7 @@ declare function html:login($error) {
         Login
       </div>
       <form action="/xforms-multiclient/login" method="post">
-        <div class="input--advanced" id="menu">
-          <span>{$error}</span>
+        <div class="input--advanced" id="menu">          
           <label id="name">
             Name
           </label>
@@ -51,6 +50,7 @@ declare function html:login($error) {
           </label>
           <input type="password" name="pass" />
         </div>
+        <span class="error">{$error}</span>
         <button type="submit">Login</button>
       </form>
         <a href="/xforms-multiclient/signup"><button class="circular"><text>+</text></button></a>
@@ -76,6 +76,7 @@ declare function html:signup($error) {
           </label>
           <input type="password" name="pass" />
         </div>
+        <span class="error">{$error}</span>
         <button type="submit" class="menu">Create</button>
       </form>
         <a href="/xforms-multiclient"><button class="circular" id="animated"><text>+</text></button></a>

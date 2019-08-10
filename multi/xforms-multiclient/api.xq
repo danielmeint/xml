@@ -27,7 +27,7 @@ function api:entry() {
   then (
     html:menu() 
   ) else (
-    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
+    web:redirect("/xforms-multiclient/login", map { "error": "" })
   )
 };
 
@@ -135,7 +135,7 @@ function api:accessGames() {
   then (
     html:games() 
   ) else (
-    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
+    web:redirect("/xforms-multiclient/login", map { "error": "" })
   )
 };
 
@@ -148,7 +148,7 @@ function api:accessHighscores() {
   then (
     html:highscores() 
   ) else (
-    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
+    web:redirect("/xforms-multiclient/login", map { "error": "" })
   )
 };
 
@@ -208,7 +208,7 @@ function api:accessGame($gameId) {
   then (
     api:getGame($gameId)
   ) else (
-    web:redirect("/xforms-multiclient/login", map { "error": "Please enter your credentials." })
+    web:redirect("/xforms-multiclient/login", map { "error": "" })
   )
 };
 
@@ -262,7 +262,7 @@ function api:drawGame($gameId) {
     let $path := ws:get($wsId, "path")
     let $name := ws:get($wsId, "name")
     let $destinationPath := concat("/xforms-multiclient/", $path, "/", $gameId, "/", $name)
-    let $data := game:drawFull($game, $name)
+    let $data := game:draw($game, $name)
     return (
       trace(concat("xforms-multiclient: drawing game to destination path: ", $destinationPath)),
       ws:sendchannel(fn:serialize($data), $destinationPath)
@@ -485,7 +485,7 @@ function api:testGame() {
         <link rel="stylesheet" type="text/css" href="/static/xforms-static/css/style.css"/>
     </head>
     <body>
-      {game:drawFull($self, "1")}
+      {game:draw($self, "1")}
     </body>
   </html>
 };
