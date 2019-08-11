@@ -267,9 +267,17 @@
                             </div>
                             <a href="/xforms-multiclient"><button>◀ Leave</button></a>
                                 <xsl:choose>
-                                    <xsl:when test="false">
-                                        <!--test="game/player[@state = 'active']/balance = 0"> -->
-                                        <button id="disabled" type='submit'>no balance/></button>
+                                    <xsl:when test="$balance &lt; 1">
+                                        <!-- test="$balance &lt; 1" -->
+                                        <button id="disabled">Insufficient funds</button>
+                                    </xsl:when>
+                                    <xsl:when test="count(/game/player) &gt; 4">
+                                        <!-- test="count(/game/player) &gt; 4" -->
+                                        <button id="disabled">Game full</button>
+                                    </xsl:when>
+                                    <xsl:when test="/game/player[@name=$name]">
+                                        <!-- test="exists(/game/player[@name=$name])" -->
+                                        <button id="diabled">Player already exists in game</button>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <form class="join" action='/xforms-multiclient/games/{/game/@id}/join' method='POST' target="hiddenFrame">

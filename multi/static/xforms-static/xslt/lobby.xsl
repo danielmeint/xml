@@ -13,14 +13,11 @@
                 <div class="navbar" id="centered">
                     <h1>Hello&#xA0;<xsl:value-of select="$name"/>!</h1> 
                 </div>
-                <a href="/xforms-multiclient">
-                <xsl:if test="$screen = 'games'">
-                    <button class="menu top left">◀ Games</button>
+                <xsl:if test="$screen != 'menu'">
+                    <a href="/xforms-multiclient">
+                        <button class="menu top left">◀ Menu</button>
+                    </a>
                 </xsl:if>
-                <xsl:if test="$screen = 'highscores'">
-                    <button class="menu top left">◀ Highscore</button>
-                </xsl:if>
-                </a>
                 <a href="/xforms-multiclient/logout">
                     <button class = "menu top right">
                         Logout

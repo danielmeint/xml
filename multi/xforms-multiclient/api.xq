@@ -82,7 +82,7 @@ function api:login-check(
     session:set("name", $name),
     web:redirect("/xforms-multiclient")
   ) else (
-    web:redirect("/xforms-multiclient/login", map { "error": "Incorrect name or password." })
+    web:redirect("/xforms-multiclient/login", map { "error": "Incorrect name or password. Click the '+' to register." })
   )
 };
 
@@ -255,14 +255,19 @@ declare
 function api:drawGame($gameId) {
   let $game := $api:games/game[@id = $gameId]
   let $wsIds := ws:ids()
+  let $trace := trace("started draw function")
   return (
     for $wsId in $wsIds
-    where ws:get($wsId, "app") = "xforms-multiclient" and ws:get($wsId, "gameId") = $gameId
+    let $trace := trace(concat($wsId, " exists"))
+    where ws:get($wsId, "gameId") = $gameId
     (: might need another check for gameId:)
+    let $trace := trace(concat($wsId, " is subbed to game", $gameId))
     let $path := ws:get($wsId, "path")
     let $name := ws:get($wsId, "name")
     let $destinationPath := concat("/xforms-multiclient/", $path, "/", $gameId, "/", $name)
+    let $trace := trace(concat("destinationPath: ", $destinationPath))
     let $data := game:draw($game, $name)
+    let $trace := trace("succesfully generated game")
     return (
       trace(concat("xforms-multiclient: drawing game to destination path: ", $destinationPath)),
       ws:sendchannel(fn:serialize($data), $destinationPath)

@@ -108,12 +108,15 @@ declare function html:highscores() {
 
 declare function html:gameNotFound() {
   html:wrap(
-    <form action="/xforms-multiclient/games" method="post">
-    <a href="/xforms-multiclient">
-        <button class="menu top left">&lt; Menu</button>
-    </a>
+    <div>
       <p style="text-align: center">Game not found.</p>
-      <button class="btn" type="submit">New Game</button>
-    </form>
+      <form action="/xforms-multiclient/games" method="post">
+        <button class="btn" type="submit">New Game</button>
+      </form>
+      <a href="/xforms-multiclient">
+        <button class="btn">Back to Menu</button>
+      </a>
+    </div>
+
   )
 };
