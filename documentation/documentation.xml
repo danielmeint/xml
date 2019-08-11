@@ -53,10 +53,10 @@
         <para>The paper is structured as follows. The next section described the rules and
             conceptually analyses the various phases of the game. It is followed by a section on the
             high-level architecture of our system, which is based on the Model-View-Controller
-            pattern. Subsequently, three sections explain the components of an MVC architecture
-            both from a modeling and technical perspective. Finally, we dedicate one section to
-            reflect on the development methodologies we employed and the organization of the
-            practical course.</para>
+            pattern. Subsequently, three sections explain the components of an MVC architecture both
+            from a modeling and technical perspective. Finally, we dedicate one section to reflect
+            on the development methodologies we employed and the organization of the practical
+            course.</para>
     </section>
     <section>
         <title>Description of the Case Study</title>
@@ -329,15 +329,15 @@
             <para> Another question is how to deal with players that lost all their money? We
                 decided that those players get set to spectating mode and can deposit more money in
                 the main menu </para>
-            <para> As an extra feature, we decide to implement a chat for the players. One reason
-                for this is that we settle for the multiplayer version for local networks. Players
-                can communicate with each other through the chat, which makes the experience more
-                social. Moreover, when players leave or join the game a small information text will
-                be inserted into the chat so other players will know that someone joined/left their
-                game. </para>
+            <para> Since we built a multiplayer game which, in principle, could be played by clients
+                in distributed locations over the internet, we needed a way to let players communicate
+                with each other. We therefore decided to implement a chatting feature to make the
+                experience more social. Moreover, when players leave or join the game a small
+                information text will be inserted into the chat so other players will know that
+                someone joined/left their game. </para>
             <para> In conclusion, our main idea while modelling the model was to prevent writing the
                 same code multiple times and segregating code by its functionality. Instead of
-                having a few huge classes with a big range of functions we rather want to have more
+                having a few huge classes with a big range of functions we rather wanted to have more
                 but smaller classes that are not too complex. This way the model stays a lot more
                 readable and it makes it more adjustable and integrating extensions easier. </para>
         </section>
