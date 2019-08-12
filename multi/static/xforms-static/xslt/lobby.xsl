@@ -152,6 +152,9 @@
                                             <xsl:for-each select="/users/user">
                                                 <xsl:sort select="highscore" data-type="number" order="descending" />
                                                 <tr>
+                                                    <xsl:if test="@name = $name">
+                                                        <xsl:attribute name="class">self</xsl:attribute>
+                                                    </xsl:if>
                                                     <td>
                                                         <xsl:choose>
                                                             <xsl:when test="position() = 1">

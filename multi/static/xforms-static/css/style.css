@@ -165,6 +165,10 @@ svg .label > text.hand_value {
     font-size: 32px;
 }
 
+svg .label.self text {
+    stroke: var(--primary-color);
+}
+
 svg .active .card_group {
     filter: drop-shadow(0px 0px 8px #7d2e53);
     transform: scale(1.2);
@@ -437,30 +441,6 @@ form.form-menu {
 
 .hidden {
     display: none;
-}
-
-svg .label {
-    fill: white;
-    stroke: black;
-}
-
-svg .label.label-active {
-    animation: shadow-pulse 1s infinite;
-}
-
-svg .label > text {
-    fill: black;
-
-}
-
-svg .label > text.name {
-    font-size: 12px;
-    font-weight: lighter;
-}
-
-svg .label > text.hand_value {
-    font-size: 2rem;
-    font-style: italic;
 }
 
 .earnings.won {
@@ -1002,6 +982,14 @@ input:focus {
 
 #highscore-table tbody tr td {
     padding: var(--spacing) !important;
+}
+
+#highscore-table tr.self {
+    color: var(--primary-color);
+}
+
+#highscore-table tr.self * {
+    opacity: 1;
 }
 
 .menutable table tbody tr td a{
