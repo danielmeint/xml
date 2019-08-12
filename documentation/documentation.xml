@@ -778,6 +778,11 @@
                             <td>string</td>
                             <td>stores name of user</td>
                         </tr>
+			<tr>
+                            <td>password</td>
+                            <td>string</td>
+                            <td>stores password of user</td>
+                        </tr>
                     </tbody>
                 </table>
                 <table>
