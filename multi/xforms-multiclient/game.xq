@@ -80,13 +80,9 @@ declare function game:newGame() {
 };
 
 declare function game:draw($self, $name) {
-  let $trace := trace("before xsl")
   let $xsl := doc('../static/xforms-static/xslt/game.xsl')
-  let $trace := trace("before user")
   let $user := $api:users/user[@name=$name]
-  let $trace := trace("before map")
   let $map := map{ "name" : $name, "balance" : xs:integer($user/balance/text()) }
-  let $trace := trace(concat($name, xs:integer($user/balance/text())))
   return xslt:transform($self, $xsl, $map)
 };
 

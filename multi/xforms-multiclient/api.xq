@@ -255,19 +255,14 @@ declare
 function api:drawGame($gameId) {
   let $game := $api:games/game[@id = $gameId]
   let $wsIds := ws:ids()
-  let $trace := trace("started draw function")
   return (
     for $wsId in $wsIds
-    let $trace := trace(concat($wsId, " exists"))
     where ws:get($wsId, "gameId") = $gameId
     (: might need another check for gameId:)
-    let $trace := trace(concat($wsId, " is subbed to game", $gameId))
     let $path := ws:get($wsId, "path")
     let $name := ws:get($wsId, "name")
     let $destinationPath := concat("/xforms-multiclient/", $path, "/", $gameId, "/", $name)
-    let $trace := trace(concat("destinationPath: ", $destinationPath))
     let $data := game:draw($game, $name)
-    let $trace := trace("succesfully generated game")
     return (
       trace(concat("xforms-multiclient: drawing game to destination path: ", $destinationPath)),
       ws:sendchannel(fn:serialize($data), $destinationPath)
@@ -368,7 +363,6 @@ declare
 function api:chat($gameId, $msg) {
   let $game := $api:games/game[@id = $gameId]
   let $name := session:get("name")
-  let $trace := trace("new message in chat")
   let $chat := $game/chat
   
   return (
