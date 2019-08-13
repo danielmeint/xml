@@ -25,14 +25,14 @@
     <section>
         <title>Introduction</title>
         <!-- Daniel -->
-        <para> The so-called XStack allows us to build stable and highly performant multi-client
-            web applications using only XML technologies. This paper documents the design and
+        <para> The so-called XStack allows us to build stable and highly performant multi-client web
+            applications using only XML technologies. This paper documents the design and
             implementation of the popular casino game Blackjack as a browser-based online
-            multiplayer game and thereby demonstrates the XStack's capabilities. The entire system
-            is built exclusively with XML, XQuery, XSLT, HTML, and CSS and was developed during the
-            summer semester 2019 in the context of the practical course <emphasis>XML
-                Technology</emphasis> at the Technical University of Munich.
-            <!-- no data transformation, homogenous  -->
+            multiplayer game and thereby demonstrates the XStack's capabilities. The system was
+            developed during the summer semester 2019 in the context of the practical course
+                <emphasis>XML Technology</emphasis> at the Technical University of Munich and is
+            built only with the technologies and concepts introduced in the course.
+            <!-- no data transformation, no impedence mismatch, homogenous  -->
         </para>
 
         <para>The app is expected to run reasonably well in any modern browser with SVG support, but
@@ -40,7 +40,7 @@
             Furthermore, for server-side processing, a current version of the XML database system
             and XQuery processor <emphasis>BaseX</emphasis> with support for the STOMP protocol is
             needed. An installation guide can be found on Github [<xref linkend="BaseXHome"/>, <xref
-                linkend="BaseXStomp"/>]. The installation manual for our Blackjack application is
+                linkend="BaseXStomp"/>]. The installation manual for our blackjack application is
             part of this document.</para>
 
         <para> Our application can be used by any number of users and handles multiple games played
@@ -51,7 +51,7 @@
         </para>
 
         <para>The paper is structured as follows. The next section described the rules and
-            conceptually analyses the various phases of the game. It is followed by a section on the
+            conceptually analyses the various phases of a game of blackjack. It is followed by a section on the
             high-level architecture of our system, which is based on the Model-View-Controller
             pattern. Subsequently, three sections explain the components of an MVC architecture both
             from a modeling and technical perspective. Finally, we dedicate one section to reflect
@@ -76,7 +76,7 @@
                 containing an Ace counted as eleven is referred to as a <emphasis>soft</emphasis>
                 hand because the value of the Ace will change to a one to prevent the player from
                 busting if he was to draw another card and otherwise exceed 21. A card's suit is
-                irrelevant in Blackjack.</para>
+                irrelevant in blackjack.</para>
         </section>
         <section>
             <title>Course of a Round</title>
@@ -131,17 +131,17 @@
                             </row>
                             <row>
                                 <entry>Double</entry>
-                                <entry>The player doubles his bet and receives exactly one more card before
-                                    finishing his turn</entry>
+                                <entry>The player doubles his bet and receives exactly one more card
+                                    before finishing his turn</entry>
                                 <entry>Available as the player's first action</entry>
                             </row>
                             <row>
                                 <entry>Insurance</entry>
-                                <entry>The player puts a side-bet worth half his initial bet on the outcome
-                                    that the dealer has a Blackjack</entry>
-                                <entry>Available if the player's hand value is less than 21, the first card
-                                    of the dealer is an Ace, and the player only has his initial two
-                                    cards</entry>
+                                <entry>The player puts a side-bet worth half his initial bet on the
+                                    outcome that the dealer has a blackjack</entry>
+                                <entry>Available if the player's hand value is less than 21, the
+                                    first card of the dealer is an Ace, and the player only has his
+                                    initial two cards</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -180,7 +180,7 @@
     </section>
     <section>
         <title>Architecture</title>
-        <para> As our Blackjack game is implemented as a web application, the basic architecture
+        <para> As our blackjack game is implemented as a web application, the basic architecture
             resembles a client-server model, where the client (front end) runs in a web browser and
             directly communicates with the server (back end). Due to the simplicity of our
             application and the utilization of XStack, we resided from using more sophisticated
@@ -330,16 +330,17 @@
                 decided that those players get set to spectating mode and can deposit more money in
                 the main menu </para>
             <para> Since we built a multiplayer game which, in principle, could be played by clients
-                in distributed locations over the internet, we needed a way to let players communicate
-                with each other. We therefore decided to implement a chatting feature to make the
-                experience more social. Moreover, when players leave or join the game a small
-                information text will be inserted into the chat so other players will know that
-                someone joined/left their game. </para>
+                in distributed locations over the internet, we needed a way to let players
+                communicate with each other. We therefore decided to implement a chatting feature to
+                make the experience more social. Moreover, when players leave or join the game a
+                small information text will be inserted into the chat so other players will know
+                that someone joined/left their game. </para>
             <para> In conclusion, our main idea while modelling the model was to prevent writing the
                 same code multiple times and segregating code by its functionality. Instead of
-                having a few huge classes with a big range of functions we rather wanted to have more
-                but smaller classes that are not too complex. This way the model stays a lot more
-                readable and it makes it more adjustable and integrating extensions easier. </para>
+                having a few huge classes with a big range of functions we rather wanted to have
+                more but smaller classes that are not too complex. This way the model stays a lot
+                more readable and it makes it more adjustable and integrating extensions easier.
+            </para>
         </section>
         <section>
             <title>Implementation</title>
@@ -364,8 +365,7 @@
                 All of the constructors create <code>XML</code> elements depending on the attributes
                 of a class. </para>
             <para> Beginning with <classname>Game</classname> class that has the following
-                attributes and functions. 
-                <table>
+                attributes and functions. <table>
                     <title>Game attributes</title>
                     <tgroup cols="3">
                         <tbody>
@@ -401,32 +401,32 @@
                                 <entry>evaluate</entry>
                                 <entry>caller:integer</entry>
                                 <entry>void</entry>
-                                <entry>sets game's state to <quote>evaluated</quote>, calls player:evaluate
-                                    for all players, uses caller to determine what action the last
-                                    player took</entry>
+                                <entry>sets game's state to <quote>evaluated</quote>, calls
+                                    player:evaluate for all players, uses caller to determine what
+                                    action the last player took</entry>
                             </row>
                             <row>
                                 <entry>latestId</entry>
                                 <entry>none</entry>
                                 <entry>double ???</entry>
-                                <entry>returns the highest id of all games in the database, needed for new
-                                    games since the id always gets incremented</entry>
+                                <entry>returns the highest id of all games in the database, needed
+                                    for new games since the id always gets incremented</entry>
                             </row>
                             <row>
                                 <entry>play</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
                                 <entry>sets game's state to <quote>playing</quote>, sets all players
-                                    besides the first player to inactive, the first one to active and
-                                    finally calls dealer:deal</entry>
+                                    besides the first player to inactive, the first one to active
+                                    and finally calls dealer:deal</entry>
                             </row>
                             <row>
                                 <entry>reset</entry>
                                 <entry>none</entry>
                                 <entry><code>XML</code> element of game</entry>
-                                <entry>sets game to state <quote>betting</quote>, basically calls the
-                                    classes constructor with all the players that have a balance >
-                                    0</entry>
+                                <entry>sets game to state <quote>betting</quote>, basically calls
+                                    the classes constructor with all the players that have a balance
+                                    > 0</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -477,9 +477,6 @@
                 </table>
                 <table>
                     <title>Player functions</title>
-                    <thead>
-
-                    </thead>
                     <tgroup cols="4">
                         <tbody>
                             <row>
@@ -492,35 +489,38 @@
                                 <entry>bet</entry>
                                 <entry>bet:integer</entry>
                                 <entry>void</entry>
-                                <entry>updates self's bet by given parameter bet, calls player:next</entry>
+                                <entry>updates self's bet by given parameter bet, calls
+                                    player:next</entry>
                             </row>
                             <row>
                                 <entry>double</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
-                                <entry>updates the player's bet to two times of the amount of bet, calls
-                                    game:evaluate if player is last otherwise player:next</entry>
+                                <entry>updates the player's bet to two times of the amount of bet,
+                                    calls game:evaluate if player is last otherwise
+                                    player:next</entry>
                             </row>
                             <row>
                                 <entry>draw</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
-                                <entry>calls deck:drawCard and hand:addCard to add a card to the player,
-                                    updates the player's hand and the deck</entry>
+                                <entry>calls deck:drawCard and hand:addCard to add a card to the
+                                    player, updates the player's hand and the deck</entry>
                             </row>
                             <row>
                                 <entry>evaluate</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
-                                <entry>calculates profit of player and updates self's balance accordingly,
-                                    also updates user's balance accordingly</entry>
+                                <entry>calculates profit of player and updates self's balance
+                                    accordingly, also updates user's balance accordingly</entry>
                             </row>
                             <row>
                                 <entry>hit</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
-                                <entry>calls helper player:draw, gives player another card and if they bust
-                                    calls player:next or game:evaluate if they are the last player</entry>
+                                <entry>calls helper player:draw, gives player another card and if
+                                    they bust calls player:next or game:evaluate if they are the
+                                    last player</entry>
                             </row>
                             <row>
                                 <entry>insurance</entry>
@@ -538,25 +538,26 @@
                                 <entry>joinGame</entry>
                                 <entry>gameId:integer, name:string</entry>
                                 <entry>void</entry>
-                                <entry>if it is the first player, creates a new game object with the new
-                                    player, else just inserts the new player and adds an information to
-                                    the chat about the player joining</entry>
+                                <entry>if it is the first player, creates a new game object with the
+                                    new player, else just inserts the new player and adds an
+                                    information to the chat about the player joining</entry>
                             </row>
                             <row>
                                 <entry>leave</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
-                                <entry>deletes self and calls player:next if self was active and there is
-                                    more than one player, adds leave information to chat</entry>
+                                <entry>deletes self and calls player:next if self was active and
+                                    there is more than one player, adds leave information to
+                                    chat</entry>
                             </row>
                             <row>
                                 <entry>next</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
-                                <entry>sets self state to <quote>inactive</quote> and if there is a next
-                                    player:nextPlayer to <quote>active</quote> else checks if game's
-                                    state is <quote>betting</quote> then calls game:play otherwise
-                                    game:evaluate </entry>
+                                <entry>sets self state to <quote>inactive</quote> and if there is a
+                                    next player:nextPlayer to <quote>active</quote> else checks if
+                                    game's state is <quote>betting</quote> then calls game:play
+                                    otherwise game:evaluate </entry>
                             </row>
                             <row>
                                 <entry>nextPlayer</entry>
@@ -574,8 +575,7 @@
                     </tgroup>
                 </table>
             </para>
-            <para> The dealer has no attributes. 
-                <table>
+            <para> The dealer has no attributes. <table>
                     <title>Dealer functions</title>
                     <tgroup cols="4">
                         <tbody>
@@ -589,9 +589,9 @@
                                 <entry>deal</entry>
                                 <entry>none</entry>
                                 <entry>void</entry>
-                                <entry>firstly calls deck:drawTo17 for self, afterwards deals two cards for
-                                    each player by adding cards of the deck to hand and removing them
-                                    from the deck</entry>
+                                <entry>firstly calls deck:drawTo17 for self, afterwards deals two
+                                    cards for each player by adding cards of the deck to hand and
+                                    removing them from the deck</entry>
                             </row>
                             <row>
                                 <entry>evaluateInsurance</entry>
@@ -604,8 +604,7 @@
                     </tgroup>
                 </table>
             </para>
-            <para> The deck class has no attributes.
-                <table>
+            <para> The deck class has no attributes. <table>
                     <title>Deck functions</title>
                     <tgroup cols="4">
                         <tbody>
@@ -618,36 +617,38 @@
                             <row>
                                 <entry>drawCard</entry>
                                 <entry>none</entry>
-                                <entry>(<code>XML</code> element card,<code>XML</code> element deck)</entry>
+                                <entry>(<code>XML</code> element card,<code>XML</code> element
+                                    deck)</entry>
                                 <entry>calls deck:getCard to get the topmost card and calls
                                     deck:removeCardAtIndex to remove topmost card to return the new
                                     deck</entry>
                             </row>
                             <row>
                                 <entry>drawTo17</entry>
-                                <entry>hand:<code>XML</code> element hand,deck:<code>XML</code> element
-                                    deck</entry>
-                                <entry>(<code>XML</code> element hand,<code>XML</code> element deck)</entry>
-                                <entry>recursively draws cards from given deck to given hand until hand's
-                                    value >= 17</entry>
+                                <entry>hand:<code>XML</code> element hand,deck:<code>XML</code>
+                                    element deck</entry>
+                                <entry>(<code>XML</code> element hand,<code>XML</code> element
+                                    deck)</entry>
+                                <entry>recursively draws cards from given deck to given hand until
+                                    hand's value >= 17</entry>
                             </row>
                             <row>
                                 <entry>removeCardAtIndex</entry>
                                 <entry>index:integer</entry>
                                 <entry><code>XML</code> element deck</entry>
-                                <entry>calls helper deck:removeCard that finds and removes the card at
-                                    given index and returns a new deck without the card</entry>
+                                <entry>calls helper deck:removeCard that finds and removes the card
+                                    at given index and returns a new deck without the card</entry>
                             </row>
                             <row>
                                 <entry>shuffle</entry>
                                 <entry>none</entry>
                                 <entry><code>XML</code> element deck</entry>
-                                <entry>uses a random number generator to create a new deck with a random
-                                    permutation of the cards</entry>
+                                <entry>uses a random number generator to create a new deck with a
+                                    random permutation of the cards</entry>
                             </row>
                         </tbody>
                     </tgroup>
-                    
+
                 </table>
             </para>
             <para>
@@ -668,8 +669,6 @@
                         </tbody>
                     </tgroup>
                 </table>
-                
-                
                 <table>
                     <title>Hand functions</title>
                     <tgroup cols="4">
@@ -684,7 +683,8 @@
                                 <entry>addCard</entry>
                                 <entry>card:<code>XML</code> element hand</entry>
                                 <entry><code>XML</code> element hand</entry>
-                                <entry>adds the given card to given hand and returns new hand</entry>
+                                <entry>adds the given card to given hand and returns new
+                                    hand</entry>
                             </row>
                             <row>
                                 <entry>evaluate</entry>
@@ -704,8 +704,8 @@
                                 <entry>getOptimalSum</entry>
                                 <entry>values:sequence of integers</entry>
                                 <entry>integer</entry>
-                                <entry>recursively calculates optimal sum in favor of player, replacing
-                                    aces with value 1 if the sum of values > 21</entry>
+                                <entry>recursively calculates optimal sum in favor of player,
+                                    replacing aces with value 1 if the sum of values > 21</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -746,8 +746,8 @@
                             </row>
                             <row>
                                 <entry>equals</entry>
-                                <entry>card1:<code>XML</code> element card,card2:<code>XML</code> element
-                                    deck</entry>
+                                <entry>card1:<code>XML</code> element card,card2:<code>XML</code>
+                                    element deck</entry>
                                 <entry>boolean</entry>
                                 <entry>checks if value and suit of both cards are equal</entry>
                             </row>
@@ -755,7 +755,8 @@
                                 <entry>getNumericalValue</entry>
                                 <entry>none</entry>
                                 <entry>integer</entry>
-                                <entry>returns cards value, 10 for picture cards, 11 for Aces</entry>
+                                <entry>returns cards value, 10 for picture cards, 11 for
+                                    Aces</entry>
                             </row>
                         </tbody>
                     </tgroup>
@@ -808,15 +809,14 @@
                                 <entry>deposit</entry>
                                 <entry>amount:integer</entry>
                                 <entry>void</entry>
-                                <entry>updates user's balance and replaces user's highscore with balance if
-                                    balance > highscore</entry>
+                                <entry>updates user's balance and replaces user's highscore with
+                                    balance if balance > highscore</entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table>
             </para>
-            <para> The chat has no attributes.
-                <table>
+            <para> The chat has no attributes. <table>
                     <title>Chat functions</title>
                     <tgroup cols="4">
                         <tbody>
@@ -894,7 +894,7 @@
             <para> The view within the MVC architecture is used to display different kinds of
                 screens. The basic structure is divided into Lobby and Game. While the Lobby is used
                 for basic interaction of administrative nature, the Game displays the actual
-                Blackjack. The current view, as well as the interaction of the view, is specified by
+                playing environment. The current view, as well as the interaction of the view, is specified by
                 the current path which is defined within the API controller (see Controller
                 section). The following table lists all screen types with the corresponding
                 information and interaction. </para>
@@ -980,7 +980,7 @@
                 the current path but also the current state of Game and Player. </para>
             <para> Based on the restriction to XHTML, we frequently use HTML tags such as button,
                 form, input, label, and table. In order to customize the appearance, a global
-                Cascading Style Sheet(CSS) applies to all the created XHTML pages. The style.css
+                Cascading Style Sheet (CSS) applies to all the created XHTML pages. The style.css
                 file can be found in the static/css folder. We make use of different CSS features
                 such as counters, advanced collectors, transitions and media queries. Through the
                 media queries, we enable a responsive user experience. Depending on the screen size
