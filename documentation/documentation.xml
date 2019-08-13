@@ -25,10 +25,10 @@
     <section>
         <title>Introduction</title>
         <!-- Daniel -->
-        <para> The so-called X stack allows us to build stable and highly performant multi-client
+        <para> The so-called XStack allows us to build stable and highly performant multi-client
             web applications using only XML technologies. This paper documents the design and
             implementation of the popular casino game Blackjack as a browser-based online
-            multiplayer game and thereby demonstrates the X Stack's capabilities. The entire system
+            multiplayer game and thereby demonstrates the XStack's capabilities. The entire system
             is built exclusively with XML, XQuery, XSLT, HTML, and CSS and was developed during the
             summer semester 2019 in the context of the practical course <emphasis>XML
                 Technology</emphasis> at the Technical University of Munich.
@@ -110,43 +110,43 @@
                     </mediaobject>
                 </figure>
                 <table>
-                    <caption>Playing options explained.</caption>
-                    <thead>
-                        <tr>
-                            <td>Action</td>
-                            <td>Description</td>
-                            <td>Condition</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Stand</td>
-                            <td>Ends the player's turn</td>
-                            <td>Always possible and automatically performed when the player
-                                busts</td>
-                        </tr>
-                        <tr>
-                            <td>Hit</td>
-                            <td>The player receives another card from the deck</td>
-                            <td>Available if the player's hand value is less than 21</td>
-                        </tr>
-                        <tr>
-                            <td>Double</td>
-                            <td>The player doubles his bet and receives exactly one more card before
-                                finishing his turn</td>
-                            <td>Available as the player's first action</td>
-                        </tr>
-                        <tr>
-                            <td>Insurance</td>
-                            <td>The player puts a side-bet worth half his initial bet on the outcome
-                                that the dealer has a Blackjack</td>
-                            <td>Available if the player's hand value is less than 21, the first card
-                                of the dealer is an Ace, and the player only has his initial two
-                                cards</td>
-                        </tr>
-                    </tbody>
+                    <title>Playing options explained.</title>
+                    <tgroup cols="3">
+                        <tbody>
+                            <row rowsep="1">
+                                <entry><emphasis>Action</emphasis></entry>
+                                <entry><emphasis>Description</emphasis></entry>
+                                <entry><emphasis>Condition</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>Stand</entry>
+                                <entry>Ends the player's turn</entry>
+                                <entry>Always possible and automatically performed when the player
+                                    busts</entry>
+                            </row>
+                            <row>
+                                <entry>Hit</entry>
+                                <entry>The player receives another card from the deck</entry>
+                                <entry>Available if the player's hand value is less than 21</entry>
+                            </row>
+                            <row>
+                                <entry>Double</entry>
+                                <entry>The player doubles his bet and receives exactly one more card before
+                                    finishing his turn</entry>
+                                <entry>Available as the player's first action</entry>
+                            </row>
+                            <row>
+                                <entry>Insurance</entry>
+                                <entry>The player puts a side-bet worth half his initial bet on the outcome
+                                    that the dealer has a Blackjack</entry>
+                                <entry>Available if the player's hand value is less than 21, the first card
+                                    of the dealer is an Ace, and the player only has his initial two
+                                    cards</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
-                <para>Playing double or insurance further assumes that the player has a sufficient
+                <para>Playing double or insurance further requires that the player has a sufficient
                     balance to cover the increased bet size.</para>
                 <para>After all of the players have finished their turn, the dealer plays in a
                     predetermined manner: He draws cards as long as his hand is worth less than 17
@@ -364,466 +364,477 @@
                 All of the constructors create <code>XML</code> elements depending on the attributes
                 of a class. </para>
             <para> Beginning with <classname>Game</classname> class that has the following
-                attributes and functions. <table>
-                    <caption>Game attributes</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>type</td>
-                            <td>description</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>double</td>
-                            <td>to distinguish games</td>
-                        </tr>
-                        <tr>
-                            <td>state</td>
-                            <td>string</td>
-                            <td>stores the state of the game</td>
-                        </tr>
-                    </tbody>
+                attributes and functions. 
+                <table>
+                    <title>Game attributes</title>
+                    <tgroup cols="3">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Type</emphasis></entry>
+                                <entry><emphasis>Description</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>id</entry>
+                                <entry>double</entry>
+                                <entry>to distinguish games</entry>
+                            </row>
+                            <row>
+                                <entry>state</entry>
+                                <entry>string</entry>
+                                <entry>stores the state of the game</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
                 <table>
-                    <caption>Game functions</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>evaluate</td>
-                            <td>caller:integer</td>
-                            <td>void</td>
-                            <td>sets game's state to <quote>evaluated</quote>, calls player:evaluate
-                                for all players, uses caller to determine what action the last
-                                player took</td>
-                        </tr>
-                        <tr>
-                            <td>latestId</td>
-                            <td>none</td>
-                            <td>double ???</td>
-                            <td>returns the highest id of all games in the database, needed for new
-                                games since the id always gets incremented</td>
-                        </tr>
-                        <tr>
-                            <td>play</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>sets game's state to <quote>playing</quote>, sets all players
-                                besides the first player to inactive, the first one to active and
-                                finally calls dealer:deal</td>
-                        </tr>
-                        <tr>
-                            <td>reset</td>
-                            <td>none</td>
-                            <td><code>XML</code> element of game</td>
-                            <td>sets game to state <quote>betting</quote>, basically calls the
-                                classes constructor with all the players that have a balance >
-                                0</td>
-                        </tr>
-                    </tbody>
+                    <title>Game functions</title>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Parameter</emphasis></entry>
+                                <entry><emphasis>Return Value</emphasis></entry>
+                                <entry><emphasis>Functionality</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>evaluate</entry>
+                                <entry>caller:integer</entry>
+                                <entry>void</entry>
+                                <entry>sets game's state to <quote>evaluated</quote>, calls player:evaluate
+                                    for all players, uses caller to determine what action the last
+                                    player took</entry>
+                            </row>
+                            <row>
+                                <entry>latestId</entry>
+                                <entry>none</entry>
+                                <entry>double ???</entry>
+                                <entry>returns the highest id of all games in the database, needed for new
+                                    games since the id always gets incremented</entry>
+                            </row>
+                            <row>
+                                <entry>play</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>sets game's state to <quote>playing</quote>, sets all players
+                                    besides the first player to inactive, the first one to active and
+                                    finally calls dealer:deal</entry>
+                            </row>
+                            <row>
+                                <entry>reset</entry>
+                                <entry>none</entry>
+                                <entry><code>XML</code> element of game</entry>
+                                <entry>sets game to state <quote>betting</quote>, basically calls the
+                                    classes constructor with all the players that have a balance >
+                                    0</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
             </para>
             <para>
                 <table>
-                    <caption>Player attributes</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>type</td>
-                            <td>description</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>balance</td>
-                            <td>integer</td>
-                            <td>store the balance of player</td>
-                        </tr>
-                        <tr>
-                            <td>bet</td>
-                            <td>integer</td>
-                            <td>stores bet of a player</td>
-                        </tr>
-                        <tr>
-                            <td>insurance</td>
-                            <td>string</td>
-                            <td>stores whether or not a player took insurance</td>
-                        </tr>
-                        <tr>
-                            <td>name</td>
-                            <td>string</td>
-                            <td>stores name of player</td>
-                        </tr>
-                        <tr>
-                            <td>profit</td>
-                            <td>integer</td>
-                            <td>stores profit of a round</td>
-                        </tr>
-                        <tr>
-                            <td>state</td>
-                            <td>string</td>
-                            <td>stores state of player</td>
-                        </tr>
-                    </tbody>
+                    <title>Player attributes</title>
+                    <tgroup cols="3">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Type</emphasis></entry>
+                                <entry><emphasis>Description</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>balance</entry>
+                                <entry>integer</entry>
+                                <entry>store the balance of player</entry>
+                            </row>
+                            <row>
+                                <entry>bet</entry>
+                                <entry>integer</entry>
+                                <entry>stores bet of a player</entry>
+                            </row>
+                            <row>
+                                <entry>insurance</entry>
+                                <entry>string</entry>
+                                <entry>stores whether or not a player took insurance</entry>
+                            </row>
+                            <row>
+                                <entry>name</entry>
+                                <entry>string</entry>
+                                <entry>stores name of player</entry>
+                            </row>
+                            <row>
+                                <entry>profit</entry>
+                                <entry>integer</entry>
+                                <entry>stores profit of a round</entry>
+                            </row>
+                            <row>
+                                <entry>state</entry>
+                                <entry>string</entry>
+                                <entry>stores state of player</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
                 <table>
-                    <caption>Player functions</caption>
+                    <title>Player functions</title>
                     <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
+
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>bet</td>
-                            <td>bet:integer</td>
-                            <td>void</td>
-                            <td>updates self's bet by given parameter bet, calls player:next</td>
-                        </tr>
-                        <tr>
-                            <td>double</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>updates the player's bet to two times of the amount of bet, calls
-                                game:evaluate if player is last otherwise player:next</td>
-                        </tr>
-                        <tr>
-                            <td>draw</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>calls deck:drawCard and hand:addCard to add a card to the player,
-                                updates the player's hand and the deck</td>
-                        </tr>
-                        <tr>
-                            <td>evaluate</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>calculates profit of player and updates self's balance accordingly,
-                                also updates user's balance accordingly</td>
-                        </tr>
-                        <tr>
-                            <td>hit</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>calls helper player:draw, gives player another card and if they bust
-                                calls player:next or game:evaluate if they are the last player</td>
-                        </tr>
-                        <tr>
-                            <td>insurance</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>updates self insurance to <quote>true</quote></td>
-                        </tr>
-                        <tr>
-                            <td>isLast</td>
-                            <td>none</td>
-                            <td>boolean</td>
-                            <td>determines and returns whether player is last</td>
-                        </tr>
-                        <tr>
-                            <td>joinGame</td>
-                            <td>gameId:integer, name:string</td>
-                            <td>void</td>
-                            <td>if it is the first player, creates a new game object with the new
-                                player, else just inserts the new player and adds an information to
-                                the chat about the player joining</td>
-                        </tr>
-                        <tr>
-                            <td>leave</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>deletes self and calls player:next if self was active and there is
-                                more than one player, adds leave information to chat</td>
-                        </tr>
-                        <tr>
-                            <td>next</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>sets self state to <quote>inactive</quote> and if there is a next
-                                player:nextPlayer to <quote>active</quote> else checks if game's
-                                state is <quote>betting</quote> then calls game:play otherwise
-                                game:evaluate </td>
-                        </tr>
-                        <tr>
-                            <td>nextPlayer</td>
-                            <td>none</td>
-                            <td><code>XML</code> element player</td>
-                            <td>determines and returns the next player</td>
-                        </tr>
-                        <tr>
-                            <td>stand</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>calls player:next</td>
-                        </tr>
-                    </tbody>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Parameter</entry>
+                                <entry>Return Value</entry>
+                                <entry>Functionality</entry>
+                            </row>
+                            <row>
+                                <entry>bet</entry>
+                                <entry>bet:integer</entry>
+                                <entry>void</entry>
+                                <entry>updates self's bet by given parameter bet, calls player:next</entry>
+                            </row>
+                            <row>
+                                <entry>double</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>updates the player's bet to two times of the amount of bet, calls
+                                    game:evaluate if player is last otherwise player:next</entry>
+                            </row>
+                            <row>
+                                <entry>draw</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>calls deck:drawCard and hand:addCard to add a card to the player,
+                                    updates the player's hand and the deck</entry>
+                            </row>
+                            <row>
+                                <entry>evaluate</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>calculates profit of player and updates self's balance accordingly,
+                                    also updates user's balance accordingly</entry>
+                            </row>
+                            <row>
+                                <entry>hit</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>calls helper player:draw, gives player another card and if they bust
+                                    calls player:next or game:evaluate if they are the last player</entry>
+                            </row>
+                            <row>
+                                <entry>insurance</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>updates self insurance to <quote>true</quote></entry>
+                            </row>
+                            <row>
+                                <entry>isLast</entry>
+                                <entry>none</entry>
+                                <entry>boolean</entry>
+                                <entry>determines and returns whether player is last</entry>
+                            </row>
+                            <row>
+                                <entry>joinGame</entry>
+                                <entry>gameId:integer, name:string</entry>
+                                <entry>void</entry>
+                                <entry>if it is the first player, creates a new game object with the new
+                                    player, else just inserts the new player and adds an information to
+                                    the chat about the player joining</entry>
+                            </row>
+                            <row>
+                                <entry>leave</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>deletes self and calls player:next if self was active and there is
+                                    more than one player, adds leave information to chat</entry>
+                            </row>
+                            <row>
+                                <entry>next</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>sets self state to <quote>inactive</quote> and if there is a next
+                                    player:nextPlayer to <quote>active</quote> else checks if game's
+                                    state is <quote>betting</quote> then calls game:play otherwise
+                                    game:evaluate </entry>
+                            </row>
+                            <row>
+                                <entry>nextPlayer</entry>
+                                <entry>none</entry>
+                                <entry><code>XML</code> element player</entry>
+                                <entry>determines and returns the next player</entry>
+                            </row>
+                            <row>
+                                <entry>stand</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>calls player:next</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
             </para>
-            <para> The dealer has no attributes. <table>
-                    <caption>Dealer functions</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>deal</td>
-                            <td>none</td>
-                            <td>void</td>
-                            <td>firstly calls deck:drawTo17 for self, afterwards deals two cards for
-                                each player by adding cards of the deck to hand and removing them
-                                from the deck</td>
-                        </tr>
-                        <tr>
-                            <td>evaluateInsurance</td>
-                            <td>playerIsInsurance:integer,bet:double,playerWon:integer</td>
-                            <td>integer</td>
-                            <td>calculates a player's bonus depending on whether they have an
-                                insurance and if the dealer got a blackjack</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </para>
-            <para> The deck class has no attributes. <table>
-                    <caption>Deck functions</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>drawCard</td>
-                            <td>none</td>
-                            <td>(<code>XML</code> element card,<code>XML</code> element deck)</td>
-                            <td>calls deck:getCard to get the topmost card and calls
-                                deck:removeCardAtIndex to remove topmost card to return the new
-                                deck</td>
-                        </tr>
-                        <tr>
-                            <td>drawTo17</td>
-                            <td>hand:<code>XML</code> element hand,deck:<code>XML</code> element
-                                deck</td>
-                            <td>(<code>XML</code> element hand,<code>XML</code> element deck)</td>
-                            <td>recursively draws cards from given deck to given hand until hand's
-                                value >= 17</td>
-                        </tr>
-                        <tr>
-                            <td>removeCardAtIndex</td>
-                            <td>index:integer</td>
-                            <td><code>XML</code> element deck</td>
-                            <td>calls helper deck:removeCard that finds and removes the card at
-                                given index and returns a new deck without the card</td>
-                        </tr>
-                        <tr>
-                            <td>shuffle</td>
-                            <td>none</td>
-                            <td><code>XML</code> element deck</td>
-                            <td>uses a random number generator to create a new deck with a random
-                                permutation of the cards</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </para>
-            <para>
+            <para> The dealer has no attributes. 
                 <table>
-                    <caption>Hand attributes</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>type</td>
-                            <td>description</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>value</td>
-                            <td>integer</td>
-                            <td>stores the sum of the hand's card's value</td>
-                        </tr>
-                    </tbody>
+                    <title>Dealer functions</title>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Parameter</emphasis></entry>
+                                <entry><emphasis>Return Value</emphasis></entry>
+                                <entry><emphasis>Functionality</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>deal</entry>
+                                <entry>none</entry>
+                                <entry>void</entry>
+                                <entry>firstly calls deck:drawTo17 for self, afterwards deals two cards for
+                                    each player by adding cards of the deck to hand and removing them
+                                    from the deck</entry>
+                            </row>
+                            <row>
+                                <entry>evaluateInsurance</entry>
+                                <entry>playerIsInsurance:integer,bet:double,playerWon:integer</entry>
+                                <entry>integer</entry>
+                                <entry>calculates a player's bonus depending on whether they have an
+                                    insurance and if the dealer got a blackjack</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
+            </para>
+            <para> The deck class has no attributes.
                 <table>
-                    <caption>Hand functions</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>addCard</td>
-                            <td>card:<code>XML</code> element hand</td>
-                            <td><code>XML</code> element hand</td>
-                            <td>adds the given card to given hand and returns new hand</td>
-                        </tr>
-                        <tr>
-                            <td>evaluate</td>
-                            <td>toBeat:integer</td>
-                            <td>string</td>
-                            <td>checks if player beats the dealer and returns a string
-                                accordingly</td>
-                        </tr>
-                        <tr>
-                            <td>evaluateToInt</td>
-                            <td>toBeat:integer</td>
-                            <td>integer</td>
-                            <td>checks if player beats the dealer and returns an integer
-                                accordingly, needed for player:evaluate</td>
-                        </tr>
-                        <tr>
-                            <td>getOptimalSum</td>
-                            <td>values:sequence of integers</td>
-                            <td>integer</td>
-                            <td>recursively calculates optimal sum in favor of player, replacing
-                                aces with value 1 if the sum of values > 21</td>
-                        </tr>
-                    </tbody>
+                    <title>Deck functions</title>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Parameter</emphasis></entry>
+                                <entry><emphasis>Return Value</emphasis></entry>
+                                <entry><emphasis>Functionality</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>drawCard</entry>
+                                <entry>none</entry>
+                                <entry>(<code>XML</code> element card,<code>XML</code> element deck)</entry>
+                                <entry>calls deck:getCard to get the topmost card and calls
+                                    deck:removeCardAtIndex to remove topmost card to return the new
+                                    deck</entry>
+                            </row>
+                            <row>
+                                <entry>drawTo17</entry>
+                                <entry>hand:<code>XML</code> element hand,deck:<code>XML</code> element
+                                    deck</entry>
+                                <entry>(<code>XML</code> element hand,<code>XML</code> element deck)</entry>
+                                <entry>recursively draws cards from given deck to given hand until hand's
+                                    value >= 17</entry>
+                            </row>
+                            <row>
+                                <entry>removeCardAtIndex</entry>
+                                <entry>index:integer</entry>
+                                <entry><code>XML</code> element deck</entry>
+                                <entry>calls helper deck:removeCard that finds and removes the card at
+                                    given index and returns a new deck without the card</entry>
+                            </row>
+                            <row>
+                                <entry>shuffle</entry>
+                                <entry>none</entry>
+                                <entry><code>XML</code> element deck</entry>
+                                <entry>uses a random number generator to create a new deck with a random
+                                    permutation of the cards</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                    
                 </table>
             </para>
             <para>
                 <table>
-                    <caption>Card attributes</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>type</td>
-                            <td>description</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>suit</td>
-                            <td>string</td>
-                            <td>stores the suit of the card</td>
-                        </tr>
-                        <tr>
-                            <td>value</td>
-                            <td>integer</td>
-                            <td>stores the value of the card</td>
-                        </tr>
-                    </tbody>
+                    <title>Hand attributes</title>
+                    <tgroup cols="3">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Type</emphasis></entry>
+                                <entry><emphasis>Description</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>value</entry>
+                                <entry>integer</entry>
+                                <entry>stores the sum of the hand's card's value</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
+                
+                
                 <table>
-                    <caption>Card functions</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>equals</td>
-                            <td>card1:<code>XML</code> element card,card2:<code>XML</code> element
-                                deck</td>
-                            <td>boolean</td>
-                            <td>checks if value and suit of both cards are equal</td>
-                        </tr>
-                        <tr>
-                            <td>getNumericalValue</td>
-                            <td>none</td>
-                            <td>integer</td>
-                            <td>returns cards value, 10 for picture cards, 11 for Aces</td>
-                        </tr>
-                    </tbody>
+                    <title>Hand functions</title>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Parameter</emphasis></entry>
+                                <entry><emphasis>Return Value</emphasis></entry>
+                                <entry><emphasis>Functionality</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>addCard</entry>
+                                <entry>card:<code>XML</code> element hand</entry>
+                                <entry><code>XML</code> element hand</entry>
+                                <entry>adds the given card to given hand and returns new hand</entry>
+                            </row>
+                            <row>
+                                <entry>evaluate</entry>
+                                <entry>toBeat:integer</entry>
+                                <entry>string</entry>
+                                <entry>checks if player beats the dealer and returns a string
+                                    accordingly</entry>
+                            </row>
+                            <row>
+                                <entry>evaluateToInt</entry>
+                                <entry>toBeat:integer</entry>
+                                <entry>integer</entry>
+                                <entry>checks if player beats the dealer and returns an integer
+                                    accordingly, needed for player:evaluate</entry>
+                            </row>
+                            <row>
+                                <entry>getOptimalSum</entry>
+                                <entry>values:sequence of integers</entry>
+                                <entry>integer</entry>
+                                <entry>recursively calculates optimal sum in favor of player, replacing
+                                    aces with value 1 if the sum of values > 21</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
             </para>
             <para>
                 <table>
-                    <caption>Usr attributes</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>type</td>
-                            <td>description</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>balance</td>
-                            <td>integer</td>
-                            <td>store balance of user</td>
-                        </tr>
-                        <tr>
-                            <td>highscore</td>
-                            <td>integer</td>
-                            <td>store the all time highest balance of user</td>
-                        </tr>
-                        <tr>
-                            <td>name</td>
-                            <td>string</td>
-                            <td>stores name of user</td>
-                        </tr>
-			<tr>
-                            <td>password</td>
-                            <td>string</td>
-                            <td>stores password of user</td>
-                        </tr>
-                    </tbody>
+                    <title>Card attributes</title>
+                    <tgroup cols="3">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Type</emphasis></entry>
+                                <entry><emphasis>Description</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>suit</entry>
+                                <entry>string</entry>
+                                <entry>stores the suit of the card</entry>
+                            </row>
+                            <row>
+                                <entry>value</entry>
+                                <entry>integer</entry>
+                                <entry>stores the value of the card</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
                 <table>
-                    <caption>Usr functions</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>win</td>
-                            <td>amount:integer</td>
-                            <td>void</td>
-                            <td>updates user's balance and replaces user's highscore with balance if
-                                balance > highscore </td>
-                        </tr>
-                    </tbody>
+                    <title>Card functions</title>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Parameter</emphasis></entry>
+                                <entry><emphasis>Return Value</emphasis></entry>
+                                <entry><emphasis>Functionality</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>equals</entry>
+                                <entry>card1:<code>XML</code> element card,card2:<code>XML</code> element
+                                    deck</entry>
+                                <entry>boolean</entry>
+                                <entry>checks if value and suit of both cards are equal</entry>
+                            </row>
+                            <row>
+                                <entry>getNumericalValue</entry>
+                                <entry>none</entry>
+                                <entry>integer</entry>
+                                <entry>returns cards value, 10 for picture cards, 11 for Aces</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
                 </table>
             </para>
-            <para> The chat has no attributes. <table>
-                    <caption>Chat functions</caption>
-                    <thead>
-                        <tr>
-                            <td>name</td>
-                            <td>parameter</td>
-                            <td>return value</td>
-                            <td>functionality</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>addMessage</td>
-                            <td>self,msg:string</td>
-                            <td><code>XML</code> element chat</td>
-                            <td>adds given message to chat and returns new chat</td>
-                        </tr>
-                    </tbody>
+            <para>
+                <table>
+                    <title>Usr attributes</title>
+                    <tgroup cols="3">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Type</emphasis></entry>
+                                <entry><emphasis>Description</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>balance</entry>
+                                <entry>integer</entry>
+                                <entry>store balance of user</entry>
+                            </row>
+                            <row>
+                                <entry>highscore</entry>
+                                <entry>integer</entry>
+                                <entry>store the all time highest balance of user</entry>
+                            </row>
+                            <row>
+                                <entry>name</entry>
+                                <entry>string</entry>
+                                <entry>stores name of user</entry>
+                            </row>
+                            <row>
+                                <entry>password</entry>
+                                <entry>string</entry>
+                                <entry>stores password of user</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <table>
+                    <title>Usr functions</title>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Parameter</emphasis></entry>
+                                <entry><emphasis>Return Value</emphasis></entry>
+                                <entry><emphasis>Functionality</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>deposit</entry>
+                                <entry>amount:integer</entry>
+                                <entry>void</entry>
+                                <entry>updates user's balance and replaces user's highscore with balance if
+                                    balance > highscore</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+            <para> The chat has no attributes.
+                <table>
+                    <title>Chat functions</title>
+                    <tgroup cols="4">
+                        <tbody>
+                            <row>
+                                <entry><emphasis>Name</emphasis></entry>
+                                <entry><emphasis>Parameter</emphasis></entry>
+                                <entry><emphasis>Return Value</emphasis></entry>
+                                <entry><emphasis>Functionality</emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>addMessage</entry>
+                                <entry>self,msg:string</entry>
+                                <entry><code>XML</code> element chat</entry>
+                                <entry>adds given message to chat and returns new chat</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+
                 </table>
             </para>
         </section>
