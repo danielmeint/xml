@@ -51,16 +51,20 @@
         </para>
 
         <para>The paper is structured as follows. The next section described the rules and
-            conceptually analyses the various phases of a game of blackjack. It is followed by a section on the
-            high-level architecture of our system, which is based on the Model-View-Controller
-            pattern. Subsequently, three sections explain the components of an MVC architecture both
-            from a modeling and technical perspective. Finally, we dedicate one section to reflect
-            on the development methodologies we employed and the organization of the practical
-            course.</para>
+            conceptually analyses the various phases of a game of blackjack. It is followed by a
+            section on the high-level architecture of our system, which is based on the
+            Model-View-Controller pattern. Subsequently, three sections explain the components of an
+            MVC architecture both from a modeling and technical perspective. Finally, we dedicate
+            one section to reflect on the development methodologies we employed and the organization
+            of the practical course.</para>
     </section>
     <section>
-        <title>Description of the Case Study</title>
+        <title>Description of the case study</title>
         <!-- Daniel -->
+        <para>We follow a domain-driven design approach in the implementation of the web
+            application. Therefore, we want to focus on the core domain logic of blackjack in this
+            section. We explain the rules of the game and describe the order of events during a
+            single round of blackjack.</para>
         <para>Globally, there are a variety of rulesets with slight differences. We seek to present
             the most universally accepted variation, commonly found in Las Vegas casinos. Up to five
                 <emphasis>players</emphasis> compete not against each other, but separately against
@@ -82,7 +86,7 @@
             <title>Course of a Round</title>
             <para>Blackjack is round-based and each round consists of multiple stages. We
                 distinguish between the betting, playing, and evaluation phase. After the end of a
-                round, the next round can be initialized by any participating player. Players can
+                round, the next round can be initiated by any participating player. Players can
                 leave the table at any time.</para>
             <section>
                 <title>Betting</title>
@@ -146,7 +150,7 @@
                         </tbody>
                     </tgroup>
                 </table>
-                <para>Playing double or insurance further requires that the player has a sufficient
+                <para>Playing double or insurance further requires the player to have a sufficient
                     balance to cover the increased bet size.</para>
                 <para>After all of the players have finished their turn, the dealer plays in a
                     predetermined manner: He draws cards as long as his hand is worth less than 17
@@ -219,7 +223,7 @@
             <!-- vielleicht noch xslt bei view -->
             <mediaobject>
                 <imageobject>
-                    <imagedata width="75%" format="png" fileref="diagrams/architecture.png"/>
+                    <imagedata width="75%" format="png" fileref="diagrams/architecture_2.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -343,7 +347,7 @@
             </para>
         </section>
         <section>
-            <title>Implementation</title>
+            <title>Implementing the component Model</title>
             <para> The component model has the responsibility of holding data. Since we use an
                 object-oriented approach, all implemented classes provide their own functionality
                 and attributes. So each class contains data which is altogether stored in our BaseX
@@ -885,6 +889,20 @@
                 these functions check if a player is the last one and help to set the next player's
                 state to <quote>active</quote> otherwise. This can be used in both game states where
                 inputs of all players is required (betting and playing). </para>
+            <para> Lastly, at the end of each round, when players are informed about their profit,
+                any player can initiate the start of the next round without waiting for the other
+                players. An alternative behavior that we considered was to implement a
+                "Ready-Up"-functionality and, instead, wait for all currently participating clients to
+                confirm that they want to proceed before starting the next round. We finally decided
+                against a ready-up semantic for the following reasons: The final evaluation screen
+                informs the player about his profit with only a single number, so there is no reason
+                for the user to stay on this screen for a longer period of time. Nevertheless, we
+                found that, with a ready-up semantic and multiple participating clients, we noticed
+                that the flow of the game was constantly disrupted and players spent more time
+                waiting for others to ready up than playing. Also, users that do not want to take
+                part in another round can leave the table at any time during the betting or even the
+                playing phase. We, therefore, found that initiating another round by any player was
+                sufficient and creates a smoother experience overall.</para>
         </section>
     </section>
     <section>
@@ -893,9 +911,9 @@
             <title>Modeling the component View</title>
             <para> The view within the MVC architecture is used to display different kinds of
                 screens. The basic structure is divided into Lobby and Game. While the Lobby is used
-                for basic interaction of administrative nature, the Game displays the actual
-                playing environment. The current view, as well as the interaction of the view, is specified by
-                the current path which is defined within the API controller (see Controller
+                for basic interaction of administrative nature, the Game displays the actual playing
+                environment. The current view, as well as the interaction of the view, is specified
+                by the current path which is defined within the API controller (see Controller
                 section). The following table lists all screen types with the corresponding
                 information and interaction. </para>
             <para>
