@@ -892,17 +892,17 @@
             <para> Lastly, at the end of each round, when players are informed about their profit,
                 any player can initiate the start of the next round without waiting for the other
                 players. An alternative behavior that we considered was to implement a
-                "Ready-Up"-functionality and, instead, wait for all currently participating clients to
-                confirm that they want to proceed before starting the next round. We finally decided
-                against a ready-up semantic for the following reasons: The final evaluation screen
-                informs the player about his profit with only a single number, so there is no reason
-                for the user to stay on this screen for a longer period of time. Nevertheless, we
-                found that, with a ready-up semantic and multiple participating clients, we noticed
-                that the flow of the game was constantly disrupted and players spent more time
-                waiting for others to ready up than playing. Also, users that do not want to take
-                part in another round can leave the table at any time during the betting or even the
-                playing phase. We, therefore, found that initiating another round by any player was
-                sufficient and creates a smoother experience overall.</para>
+                "Ready-Up"-functionality and, instead, wait for all currently participating clients
+                to confirm that they want to proceed before starting the next round. We finally
+                decided against a ready-up semantic for the following reasons: The final evaluation
+                screen informs the player about his profit with only a single number, so there is no
+                reason for the user to stay on this screen for a longer period of time.
+                Nevertheless, we found that, with a ready-up semantic and multiple participating
+                clients, we noticed that the flow of the game was constantly disrupted and players
+                spent more time waiting for others to ready up than playing. Also, users that do not
+                want to take part in another round can leave the table at any time during the
+                betting or even the playing phase. We, therefore, found that initiating another
+                round by any player was sufficient and creates a smoother experience overall.</para>
         </section>
     </section>
     <section>
@@ -1017,14 +1017,18 @@
                 row. </para>
             <para> The core element of the game is the table, which is implemented with SVG.
                 Depending on the current situation, the SVG includes corresponding cards, chips, and
-                labels(including player name, balance, and hand value). Concerning the game
-                interaction, we implemented a dialog box placed below the table. A player can join
-                the game, place bets or make context dependent actions like hit, stand, double or
-                insurance. The dialog box is also used to display the results of a round, informing
-                the player about his wins or losses. In the bottom left-hand corner, the chat is
-                displayed. In order to display/hide the chat window, an intuitive toggle mechanism
-                was implemented. In the top left-hand corner, a player has always the possibility to
-                leave the game and to go back to the lobby. </para>
+                labels(including player name, balance, and hand value). Our graphics are
+                hierarchically structured to avoid redundancy. The graphic for a specific card (e.g.
+                the seven of hearts) is a specific instance of a more general <emphasis>suit
+                    card</emphasis> (e.g. the hearts card), which in turn is based on the empty
+                    <emphasis>base card</emphasis>.</para>
+            <para>Concerning the game interaction, we implemented a dialog box placed below the
+                table. A player can join the game, place bets or make context dependent actions like
+                hit, stand, double or insurance. The dialog box is also used to display the results
+                of a round, informing the player about his wins or losses. In the bottom left-hand
+                corner, the chat is displayed. In order to display/hide the chat window, an
+                intuitive toggle mechanism was implemented. In the top left-hand corner, a player
+                always has the ability to leave the game and to go back to the lobby. </para>
         </section>
     </section>
     <section>
@@ -1087,6 +1091,14 @@
     </section>
     <section>
         <title>Conclusions</title>
+        <para> We have described the implementation of a multi-client capable web application using
+            XStack technologies. Starting from a domain model of the game blackjack, we used a
+            domain-driven design approach to convert our conceptual model into a functional
+            programm. </para>
+        <para> Possible next steps for this project would be the deployment of the system to the
+            public internet and the integration of different or more extensive rule sets, e.g. the
+            implementation of the described split move available in some variants of
+            blackjack.</para>
 
     </section>
     <bibliography>
