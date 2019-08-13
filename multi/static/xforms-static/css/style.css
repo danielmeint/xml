@@ -216,6 +216,8 @@ form {
 
 .chat * {
     text-transform: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 @media (max-width: 1000px) {
@@ -227,16 +229,14 @@ form {
 }
 
 .chat tbody {
-    display: block;
+    display: flex;
+    flex-direction: column;
     max-height: calc(100vh - 150px);
-    overflow: scroll;
 }
 
 .chat td.msg {
-    max-width: 0;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    width: 50%;
 }
 
 .chat td.msg.msg-info {
@@ -246,7 +246,7 @@ form {
 
 .chat td.author {
     font-weight: bold;
-    width: 20%;
+    width: 40%;
     color: var(--primary-color);
 }
 
@@ -256,7 +256,7 @@ form {
 
 .chat tr:nth-last-child(-n+8) {
   /* Number of messages to display in chat, currently 8*/
-  display: block;
+  display: flex;
 }
 
 .chat table th, .chat table td {

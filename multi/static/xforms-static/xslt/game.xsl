@@ -212,7 +212,7 @@
                                                 method="POST" target="hiddenFrame">
                                                 <div class="input--advanced">
                                                   <input class="betting" type="number" name="bet"
-                                                  min="1" max="{$self/balance}" required=""/>
+                                                      min="1" max="{$self/balance}" required=""/>
                                                   <label id="balance"> &#x1F4B0; <xsl:value-of
                                                   select="$self/balance"/>
                                                   </label>
@@ -369,7 +369,7 @@
                         <form class="join" action="/xforms-multiclient/games/{/game/@id}/chat"
                             method="POST" target="hiddenFrame">
                             <input type="text" name="msg" placeholder="Chatting as {$name}"
-                                required=""/>
+                                required="" maxlength="18"/>
                             <button class="btn" type="submit">►</button>
                         </form>
                     </div>

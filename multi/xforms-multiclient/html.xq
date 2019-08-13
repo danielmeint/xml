@@ -68,7 +68,7 @@ declare function html:signup($error) {
           <label id="name">
             Name
           </label>
-          <input type="text" name="name" id="user" autofocus="" />
+          <input type="text" name="name" id="user" autofocus="" maxlength="12"/>
         </div>
         <div class="input--advanced" id="menu">
           <label id="name">
