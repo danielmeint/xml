@@ -7,7 +7,6 @@
             developed during the summer semester 2019 in the context of the practical course
                 <span class="emphasis"><em>XML Technology</em></span> at the Technical University of Munich and is
             built only with the technologies and concepts introduced in the course.
-            
         </p><p>The app is expected to run reasonably well in any modern browser with SVG support, but
             we strongly recommend to use a current version of <span class="emphasis"><em>Mozilla Firefox</em></span>.
             Furthermore, for server-side processing, a current version of the XML database system
@@ -17,7 +16,6 @@
             in simultaneously. A client can spectate a game or join as an actively participating
             player. Unlimited clients can be subscribed to a game as spectators, but only up to five
             can play on a single table, i.e. one instance of a game, at the same time.
-            
         </p><p>The paper is structured as follows. The next section describes the rules and
             conceptually analyses the various phases of a game of blackjack. It is followed by a
             section on the high-level architecture of our system, which is based on the
@@ -99,7 +97,6 @@
             connection is closed. BaseX supports Web Sockets, utilizing the Jetty's WebSocket
             servlet API. As we decided to implement a distributed version of the game, allowing
             multiple clients to play together, we made use of the WebSockets support of BaseX.
-            
         </p><p> Further, our app complies with the Model View Controller (MVC) architecture to enable
             separation of concerns and increase the maintainability of the application by decoupling
             the data representation from the data access. In MVC, the system is separated into 3
@@ -375,7 +372,6 @@
                 workaround, we use for our implementation, is the BaseX specific function
                 update:output(). This function returns the results of a query after all updates have
                 been applied.
-                
             </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e722"></a>Collaboration</h2></div></div></div><p> The implementation of the web application was done as a group project with a group
             size of 4. Git was used as a distributed version control system. Further, the Github
             Issues feature was used to track and assign tasks and problems. Different branches were

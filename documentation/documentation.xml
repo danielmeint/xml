@@ -24,7 +24,6 @@
     </info>
     <section>
         <title>Introduction</title>
-        <!-- Daniel -->
         <para> The so-called XStack allows us to build stable and highly performant multi-client web
             applications using only XML technologies. This paper documents the design and
             implementation of the popular casino game Blackjack as a browser-based online
@@ -32,7 +31,6 @@
             developed during the summer semester 2019 in the context of the practical course
                 <emphasis>XML Technology</emphasis> at the Technical University of Munich and is
             built only with the technologies and concepts introduced in the course.
-            <!-- no data transformation, no impedence mismatch, homogenous  -->
         </para>
 
         <para>The app is expected to run reasonably well in any modern browser with SVG support, but
@@ -47,7 +45,6 @@
             in simultaneously. A client can spectate a game or join as an actively participating
             player. Unlimited clients can be subscribed to a game as spectators, but only up to five
             can play on a single table, i.e. one instance of a game, at the same time.
-            <!-- multiclient web application, Firefox as browser, unlimited games in parallel, unlimited clients subscribed to single game, at most five of which are actively playing -->
         </para>
 
         <para>The paper is structured as follows. The next section describes the rules and
@@ -75,7 +72,6 @@
     </section>
     <section>
         <title>Description of the case study</title>
-        <!-- Daniel -->
         <para>We follow a domain-driven design approach in the implementation of the web
             application. Therefore, we want to focus on the core domain logic of blackjack in this
             section. We explain the rules of the game and describe the order of events during a
@@ -221,7 +217,6 @@
             connection is closed. BaseX supports Web Sockets, utilizing the Jetty's WebSocket
             servlet API. As we decided to implement a distributed version of the game, allowing
             multiple clients to play together, we made use of the WebSockets support of BaseX.
-            <!-- STOMP protocol, STOMP server, ... -->
         </para>
         <para> Further, our app complies with the Model View Controller (MVC) architecture to enable
             separation of concerns and increase the maintainability of the application by decoupling
@@ -235,7 +230,6 @@
             resulting architectural structure of our web application can be seen below. </para>
         <figure>
             <title>Model of the Resulting Architecture.</title>
-            <!-- vielleicht noch xslt bei view -->
             <mediaobject>
                 <imageobject>
                     <imagedata width="75%" format="png" fileref="diagrams/architecture.png"/>
@@ -247,7 +241,6 @@
     </section>
     <section>
         <title>The component model</title>
-        <!-- Max -->
         <section>
             <title>Modeling the model</title>
             <para> In an MVC-architecture the model has the control of the application's logic.
@@ -1068,8 +1061,6 @@
                 workaround, we use for our implementation, is the BaseX specific function
                 update:output(). This function returns the results of a query after all updates have
                 been applied.
-                <!-- As XQuery functions are either querying or updating, we use the function <function>update</function> provided by <code>BaseX</code>. It grants mixed returns, for example when our 
-                <quote>API</quote> receives a call <quote>hit</quote> it on the one hand notices the model to update data accordingly, on the other hand makes sure that ....  folien E s.24 ff lösung der Constraints-->
             </para>
         </section>
     </section>
@@ -1125,7 +1116,6 @@
 
     </section>
     <bibliography>
-        <!-- Beispiel -->
         <biblioentry xreflabel="BaseX" xml:id="BaseXHome">
             <bibliomisc>BaseX homepage. http://basex.org. Last accessed on 2019 June 16
             </bibliomisc>
