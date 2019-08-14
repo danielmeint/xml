@@ -108,8 +108,8 @@
                     <title>Possible player decisions.</title>
                     <mediaobject>
                         <imageobject>
-                            <imagedata width="100%" format="png"
-                                fileref="diagrams/decisions_activity.png"/>
+                            <imagedata width="75%" format="png"
+                                fileref="diagrams/player_decisions_portrait.png"/>
                         </imageobject>
                     </mediaobject>
                 </figure>
@@ -223,7 +223,7 @@
             <!-- vielleicht noch xslt bei view -->
             <mediaobject>
                 <imageobject>
-                    <imagedata width="75%" format="png" fileref="diagrams/architecture_2.png"/>
+                    <imagedata width="75%" format="png" fileref="diagrams/architecture.png"/>
                 </imageobject>
             </mediaobject>
         </figure>
