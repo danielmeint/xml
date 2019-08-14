@@ -50,13 +50,21 @@
             <!-- multiclient web application, Firefox as browser, unlimited games in parallel, unlimited clients subscribed to single game, at most five of which are actively playing -->
         </para>
 
-        <para>The paper is structured as follows. The next section described the rules and
+        <para>The paper is structured as follows. The next section describes the rules and
             conceptually analyses the various phases of a game of blackjack. It is followed by a
             section on the high-level architecture of our system, which is based on the
             Model-View-Controller pattern. Subsequently, three sections explain the components of an
             MVC architecture both from a modeling and technical perspective. Finally, we dedicate
             one section to reflect on the development methodologies we employed and the organization
             of the practical course.</para>
+        
+        <section>
+            <title>Installation</title>
+            <para>As already stated before, the application requires a running BaseXHTTP Server with a corresponding environment within the BaseX webapp folder.
+                One can then access <emphasis>localhost:8984/xforms-multiclient/setup</emphasis> using a web browser in order to initialize the database. 
+                Afterwards the game is ready for playing.
+            </para>
+        </section>
     </section>
     <section>
         <title>Description of the case study</title>
