@@ -1049,6 +1049,8 @@
                 account control and the displaying of the highscores. The remaining requests are
                 used to implement the game functionalities, including the group chat. </para>
             <para>
+                In XQuery functions are limited to either updating or querying the database. This is a problem when trying to modify objects and return them afterwards. 
+                The workaround, we use for our implementation, is the BaseX specific function update:output(). This function returns the results of a query after all updates have been applied.
                 <!-- As XQuery functions are either querying or updating, we use the function <function>update</function> provided by <code>BaseX</code>. It grants mixed returns, for example when our 
                 <quote>API</quote> receives a call <quote>hit</quote> it on the one hand notices the model to update data accordingly, on the other hand makes sure that ....  folien E s.24 ff lösung der Constraints-->
             </para>
@@ -1099,6 +1101,10 @@
             public internet and the integration of different or more extensive rule sets, e.g. the
             implementation of the described split move available in some variants of
             blackjack.</para>
+        <para>
+            Materials and support required for the implementation of the black jack game are all provided by the practical course over moodle. Additionally the exercises are a good guidance on how to implement the game.
+            Further personal support is offered by the course. 
+        </para>
 
     </section>
     <bibliography>
